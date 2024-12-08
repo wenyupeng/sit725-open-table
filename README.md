@@ -1,2 +1,2 @@
-# sit725-open-table
+# sit725-skipy
 deakin unit sit725 team project
