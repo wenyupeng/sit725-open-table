@@ -1,0 +1,26 @@
+{
+  "name": "sit725-skipy",
+  "version": "1.0.0",
+  "description": "deakin unit sit725 team project",
+  "main": "dbConnection.js",
+  "scripts": {
+    "test": "macha test",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wenyupeng/sit725-skipy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wenyupeng/sit725-skipy/issues"
+  },
+  "homepage": "https://github.com/wenyupeng/sit725-skipy#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mongodb": "^6.12.0",
+    "morgan": "^1.10.0"
+  }
+}

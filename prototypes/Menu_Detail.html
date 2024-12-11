@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://ai-public.mastergo.com/gen_page/tailwind-custom.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13,aspect-ratio@0.4.2,container-queries@0.1.1"></script>
+    <script src="https://ai-public.mastergo.com/gen_page/tailwind-config.min.js" data-color="#000000" data-border-radius="small"></script>
+    </head>
+  <body class="bg-gray-50">
+    <nav class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+      <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <button class="flex items-center space-x-2 text-gray-500">
+          <i class="hidden"></i>
+          <span>Home <i class="fas fa-chevron-right mx-2"></i> Restaurant Name <i class="fas fa-chevron-right mx-2"></i> <span class="text-custom">Menu</span></span>
+        </button>
+        <div class="font-[&#39;Pacifico&#39;] text-2xl text-custom">logo</div>
+        <button class="flex items-center space-x-2 bg-custom text-white px-4 py-2 !rounded-button">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Your Order</span>
+          <span class="bg-white text-custom rounded-full w-5 h-5 flex items-center justify-center text-sm">3</span>
+        </button>
+      </div>
+    </nav>
+    <div class="container mx-auto px-4 mt-20">
+      <div class="categories-scroll overflow-x-auto py-4 sticky top-16 bg-gray-50 z-40">
+        <div class="flex space-x-4 min-w-max">
+          <button class="px-6 py-2 bg-custom text-white !rounded-button">Appetizers</button>
+          <button class="px-6 py-2 bg-white hover:bg-gray-100 !rounded-button">Main Courses</button>
+          <button class="px-6 py-2 bg-white hover:bg-gray-100 !rounded-button">Seafood</button>
+          <button class="px-6 py-2 bg-white hover:bg-gray-100 !rounded-button">Desserts</button>
+          <button class="px-6 py-2 bg-white hover:bg-gray-100 !rounded-button">Beverages</button>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="https://ai-public.mastergo.com/ai/img_res/02a7539e09dbbe5d1e55be92037d3310.jpg" class="w-full h-48 object-cover" alt="Grilled Salmon"/>
+          <div class="p-4">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-lg font-semibold">Grilled Atlantic Salmon</h3>
+              <span class="text-xl font-bold text-custom">$28.99</span>
+            </div>
+            <p class="text-gray-600 text-sm mb-3">Fresh Atlantic salmon fillet grilled to perfection, served with seasonal vegetables and lemon butter sauce.</p>
+            <div class="flex items-center mb-3">
+              <div class="text-yellow-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+              <span class="ml-2 text-sm text-gray-600">(128 reviews)</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <button class="w-8 h-8 flex items-center justify-center border !rounded-button">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <span class="text-lg font-semibold">1</span>
+                <button class="w-8 h-8 flex items-center justify-center border !rounded-button">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <button class="bg-custom text-white px-4 py-2 !rounded-button">
+                Add to Order
+              </button>
+            </div>
+          </div>
+          <div class="border-t px-4 py-3">
+            <button class="text-custom w-full text-left flex items-center">
+              <span>View Details</span>
+              <i class="fas fa-chevron-down ml-2"></i>
+            </button>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="https://ai-public.mastergo.com/ai/img_res/a38c1ff75b852cb3dc0d28d822dcb978.jpg" class="w-full h-48 object-cover" alt="Beef Tenderloin"/>
+          <div class="p-4">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-lg font-semibold">Beef Tenderloin</h3>
+              <span class="text-xl font-bold text-custom">$34.99</span>
+            </div>
+            <p class="text-gray-600 text-sm mb-3">Premium cut tenderloin steak cooked to your preference, served with truffle mashed potatoes and red wine reduction.</p>
+            <div class="flex items-center mb-3">
+              <div class="text-yellow-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <span class="ml-2 text-sm text-gray-600">(156 reviews)</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <button class="w-8 h-8 flex items-center justify-center border !rounded-button">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <span class="text-lg font-semibold">1</span>
+                <button class="w-8 h-8 flex items-center justify-center border !rounded-button">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <button class="bg-custom text-white px-4 py-2 !rounded-button">
+                Add to Order
+              </button>
+            </div>
+          </div>
+          <div class="border-t px-4 py-3">
+            <button class="text-custom w-full text-left flex items-center">
+              <span>View Details</span>
+              <i class="fas fa-chevron-down ml-2"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8 bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold mb-4">Customer Reviews</h2>
+        <div class="space-y-4">
+          <div class="border-b pb-4">
+            <div class="flex items-center justify-between mb-2">
+              <div>
+                <span class="font-medium">Michael Thompson</span>
+                <span class="text-gray-500 text-sm ml-2">December 15, 2023</span>
+              </div>
+              <div class="text-yellow-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+            <p class="text-gray-600">The Grilled Atlantic Salmon was absolutely divine! The fish was perfectly cooked and the sauce complemented it beautifully. Will definitely order again!</p>
+          </div>
+          <div class="border-b pb-4">
+            <div class="flex items-center justify-between mb-2">
+              <div>
+                <span class="font-medium">Sarah Anderson</span>
+                <span class="text-gray-500 text-sm ml-2">December 14, 2023</span>
+              </div>
+              <div class="text-yellow-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+            </div>
+            <p class="text-gray-600">Great flavors and presentation. The portion size was generous and the service was excellent. Highly recommended!</p>
+          </div>
+        </div>
+        <button class="mt-4 text-custom font-medium">View All Reviews</button>
+      </div>
+    </div>
+    <button class="fixed bottom-6 right-6 bg-custom text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center !rounded-button">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+  
+</body></html>
