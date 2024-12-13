@@ -2,10 +2,11 @@
   "name": "sit725-skipy",
   "version": "1.0.0",
   "description": "deakin unit sit725 team project",
-  "main": "dbConnection.js",
+  "main": "server.js",
   "scripts": {
-    "test": "macha test",
-    "dev": "nodemon server.js"
+    "test": "SET NODE_ENV=development&& macha test",
+    "dev": "SET NODE_ENV=development&& nodemon server.js --mode development",
+    "start": "SET NODE_ENV=production&& node server.js --mode production"
   },
   "repository": {
     "type": "git",
@@ -19,8 +20,23 @@
   },
   "homepage": "https://github.com/wenyupeng/sit725-skipy#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "chalk": "^4.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "mongodb": "^6.12.0",
-    "morgan": "^1.10.0"
+    "express-async-errors": "^3.1.1",
+    "express-jwt": "^8.5.1",
+    "express-session": "^1.18.1",
+    "express-validator": "^6.15.0",
+    "jsonwebtoken": "^9.0.2",
+    "log4js": "^6.9.1",
+    "mongodb": "^5.1.0",
+    "mongoose": "^7.0.3",
+    "morgan": "^1.10.0",
+    "mount-routes": "^1.0.8",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   }
 }
