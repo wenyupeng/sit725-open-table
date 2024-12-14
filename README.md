@@ -53,6 +53,18 @@ npm run dev
 # branch management
 The base branch is main. All developers should create their development branches based on main. After completing their development, developers should raise a merge request to merge their updates into the main branch. Do not forget to update local branch before push your commits.
 
+## commit msg
+follow the format
+[initial] title: description or [i] title: description
+for example:
+```
+[i] README update: add commit msg format
+```
+[develop] title: content
+```
+[d] add register: finish the register functionality
+```
+
 # reference
 - Mongodb: https://www.mongodb.com/docs/drivers/node/current/
 - swagger: https://editor.swagger.io/
