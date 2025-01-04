@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= pageTitle %>
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Aum SIT725 - Applied Software Engineering T3 2024" />
+    <meta name="author" content="Aum" />
+    <meta name="robots" content="index, follow" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="msapplication-TileImage" content="assets/f/ms-icon-144x144.png" />
+
+    <meta property="og:title" content="Aum SIT725 T3 2024" />
+    <meta property="og:description" content="Aum SIT725 - Applied Software Engineering T3 2024" />
+    <meta property="og:image" content="path-to-your-image.jpg" />
+    <meta property="og:url" content="https://www.deaking.edu.au" />
+    <meta property="og:type" content="website" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/" />
+
+    <!-- Materialize CSS CDN -->
+    <!--Import & Compiled and minified CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet" />
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!--Import Google Font-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/home.css">
+
+</head>
+
+<body>
+    <header>
+        <!------Navigation container----->
+        <div>
+            <nav class="white">   
+                <% if (user) { %>               
+                        <div class="nav-wrapper">
+                            &&nbsp;&&nbsp;
+                            <a href="/" class="brand-logo"><span class="brand-logo black-text">Skipy</span></a>
+                            
+                            <a href="#" data-target="mobile-menu" class="sidenav-trigger black-text"><i class="material-icons">menu</i></a>
+                            
+                            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                                <li><a target="_self" href="/" class="black-text">Home</a></li>
+                                <li><a target="_self" href="/" class="black-text">About</a></li>
+                                <!-- Dropdown Trigger -->
+                                <li><a class="dropdown-trigger black-text" data-target="dropdown3">Merchants<i
+                                            class="material-icons right">arrow_drop_down</i></a></li>
+                                <!-- Dropdown Structure -->
+                                <ul id="dropdown3" class="dropdown-content">
+                                    <li><a class="black-text">Merchants</a>
+                                    <li><a target="_self" href="/api/restaurants/restaurants" class="black-text">All
+                                            Restaurants</a>
+                                    <li class="divider"></li>
+                                    <li><a target="_self" href="/api/restaurants/restaurant" class="black-text">Register
+                                            Restaurant</a></li>
+                                </ul>                                
+
+                                <!-- Dropdown Trigger -->
+                                <li><a class="dropdown-trigger black-text" data-target="dropdown4"><%= user.username %><i
+                                            class="material-icons right">arrow_drop_down</i></a></li>
+                                <!-- Dropdown Structure -->
+                                <ul id="dropdown4" class="dropdown-content">                                     
+                                    <li> <a class="black-text"><%= user.username %></a></li>                                   
+                                    <li class="divider"></li>
+                                    <li><a target="_self" href="/api/auth/logout" class="black-text">Log Out</a></li>
+                                </ul>
+                            </ul>
+                        </div>   
+                        <% } else { %>
+                            <div class="nav-wrapper">
+                                &&nbsp;&&nbsp;
+                                <a href="/" class="brand-logo"><span class="brand-logo black-text">Skipy</span></a>
+                                <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                                
+                                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                                    <li><a target="_self" href="/" class="black-text">Home</a></li>
+                                    <li><a target="_self" href="/" class="black-text">About</a></li>
+                                    <!-- Dropdown Trigger -->
+                                    <li><a class="dropdown-trigger black-text" data-target="dropdown3">Merchants<i
+                                                class="material-icons right">arrow_drop_down</i></a></li>
+                                    <!-- Dropdown Structure -->
+                                    <ul id="dropdown3" class="dropdown-content">
+                                        <li><a class="black-text">Merchants</a>
+                                        <li><a target="_self" href="/api/restaurants/restaurants" class="black-text">All
+                                                Restaurants</a>
+                                        <li class="divider"></li>
+                                        <li><a target="_self" href="/api/restaurants/restaurant" class="black-text">Register
+                                                Restaurant</a></li>
+                                    </ul>                                
+    
+                                    <!-- Dropdown Trigger -->
+                                    <li><a class="dropdown-trigger black-text" data-target="dropdown4">Sign In<i
+                                                class="material-icons right">arrow_drop_down</i></a></li>
+                                    <!-- Dropdown Structure -->
+                                    <ul id="dropdown4" class="dropdown-content">
+                                        <li><a target="_self" href="/api/auth/login" class="black-text">Sign In</a></li>                                    
+                                        <li class="divider"></li>
+                                        <li><a target="_self" href="/api/auth/register" class="black-text">Register</a></li>
+                                    </ul>
+                                </ul>
+                            </div>  
+                            <% } %>                  
+            </nav>
+        </div>
+    </header>

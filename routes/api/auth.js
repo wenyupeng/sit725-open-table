@@ -63,6 +63,7 @@ const AuthController = require('../../controllers/AuthController');
  *             schema:
  *               $ref: '#/components/schemas/RegisterUser'
  */
+router.get('/register', AuthController.renderRegister);
 router.post('/register', AuthController.register);
 
 /**
@@ -123,6 +124,8 @@ router.post('/register', AuthController.register);
  *             schema:
  *               $ref: '#/components/schemas/LoginSuccessUser'
  */
+router.get('/login', AuthController.renderLogin);
+router.get('/logout', AuthController.logout);
 router.post('/login', AuthController.login);
 
 module.exports = router;
