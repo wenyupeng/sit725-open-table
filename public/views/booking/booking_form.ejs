@@ -1,0 +1,271 @@
+<%- include('../partials/header') %>
+    <main>
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <h3 class="aum-extrabold aum-text-3xl font-Pacifico">
+                            <%= restaurant.restaurantName %>
+                        </h3>
+                        <p>
+                            <%= restaurant.address %>
+                        </p>
+                        <p>
+                            <%= restaurant.workingHours %>
+                        </p>
+                        <a class="waves-effect waves-light btn-small bg-gray"
+                            href="/api/restaurants/<%= restaurant._id %>"><i
+                                class="material-icons left">arrow_back</i>Back to Restaurant</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col s12">
+
+                        <form action="/api/bookings/<%= restaurant._id %>" method="POST">
+
+                            <div class="col s6">
+
+                                <div class="white aum-border-radius-8">
+                                    <div class="row">
+                                        <div class="col s12">
+
+                                            <div class="col s12">
+
+                                                <h3 class="aum-semibold aum-text-xl">Reservation Details</h3>
+
+                                                <input type="hidden" name="restaurantId" value="<%= restaurant._id %>">
+
+                                                <div class="col s12">
+                                                    <div class="card-panel lighten-5 z-depth-1">
+                                                        <div class="row valign-wrapper aum_mb_0">
+                                                            <div class="input-field col s12">
+                                                                <input id="restaurantName" type="text" class="validate"
+                                                                    name="restaurantName" disabled required
+                                                                    value="<%= restaurant.restaurantName %>">
+                                                                <label for="restaurantName">Restaurant Name</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col s12">
+                                                    <div class="card-panel lighten-5 z-depth-1">
+                                                        <div class="row valign-wrapper aum_mb_0">
+                                                            <div class="input-field col s12">
+                                                                <input id="datepicker" type="text" class="datepicker"
+                                                                    name="datepicker" required>
+                                                                <label for="datepicker">Reservation Date</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col s12">
+                                                    <div class="card-panel lighten-5 z-depth-1">
+                                                        <div class="row valign-wrapper aum_mb_0">
+                                                            <div class="input-field col s12">
+                                                                <div class="aum_mb_16"><label for="time">Available Time
+                                                                        Slots</label></div>
+
+                                                                <div class="row">
+                                                                    <div class="col s12">
+                                                                        <div class="btn-group" id="timeSlots">
+                                                                            <% timeSlots.forEach(time=> { %>
+                                                                                <button type="button"
+                                                                                    class="btn bg-gray col s3 waves-effect waves-light time-slot"
+                                                                                    data-time="<%= time %>">
+                                                                                    <%= time %>
+                                                                                </button>
+                                                                                <% }) %>
+                                                                        </div>
+                                                                        <input type="hidden" name="time"
+                                                                            id="selectedTime" required>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col s12">
+                                                    <div class="card-panel lighten-5 z-depth-1">
+                                                        <div class="row valign-wrapper aum_mb_0">
+                                                            <div class="col s12">
+                                                                <label for="guests">Number of Guests</label>
+                                                                <select id="guestSelect" name="guests" required
+                                                                    class="browser-default">
+                                                                    <% guestOptions.forEach(option=> { %>
+                                                                        <option value="<%= option %>">
+                                                                            <%= option %>
+                                                                        </option>
+                                                                        <% }) %>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% if (user) { %>
+                                                    <div class="col s12">
+                                                        <div class="card-panel lighten-5 z-depth-1">
+                                                            <div class="row valign-wrapper aum_mb_0">
+                                                                <div class="input-field col s12">
+                                                                    <input id="contactName" type="text" class="validate"
+                                                                        name="contactName" disabled required
+                                                                        value="<%= user.username %>">
+                                                                    <label for="contactName">Contact Name</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col s12">
+                                                        <div class="card-panel lighten-5 z-depth-1">
+                                                            <div class="row valign-wrapper aum_mb_0">
+                                                                <div class="input-field col s12">
+                                                                    <input id="contactPhone" type="text"
+                                                                        class="validate" name="contactPhone" disabled
+                                                                        required value="<%= user.phone %>">
+                                                                    <label for="contactPhone">Contact Phone</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <% } else { %>
+
+
+                                                        <% } %>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col s6">
+
+                                <div class="white aum-border-radius-8">
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <input type="hidden" name="menuItems" id="menuItemsInput">
+                                            <div class="col s12" id="menuItems">
+                                                <div class="flex items-center justify-between">
+                                                    <h3 class="aum-semibold aum-text-xl">Menu Items</h3>
+                                                    <p class="aum-semibold aum-text-xl aum_mt_total">Total: <span
+                                                            id="subTotal">$0.00</span></p>
+                                                </div>
+
+
+                                                <% activeMenuItems.forEach(item=> { %>
+                                                    <div class="col s12">
+                                                        <div class="card-panel grey lighten-5 z-depth-1">
+                                                            <div class="row valign-wrapper aum_mb_0">
+                                                                <div class="col s3">
+                                                                    <img src="<%= item.menuImageUrl %>"
+                                                                        alt="<%= item.name %>"
+                                                                        class="object-cover rounded-lg aum_w_24 aum_h_24">
+                                                                </div>
+                                                                <div class="col s9">
+                                                                    <span class="black-text">
+                                                                        <span class="title aum-semibold">
+                                                                            <%= item.name %>
+                                                                        </span>
+                                                                        <p>$<%= item.price.toFixed(2) %>
+                                                                        </p>
+                                                                        <div>
+                                                                            <button
+                                                                                class="waves-effect waves-light btn bg-gray aum_mr_8 quantity-btn decrease"
+                                                                                type="button" data-id="<%= item._id %>"
+                                                                                data-price="<%= item.price %>">-</button>
+                                                                            <span id="quantity-<%= item._id %>">0</span>
+                                                                            <button
+                                                                                class="waves-effect waves-light btn bg-gray aum_ml_8 quantity-btn increase"
+                                                                                type="button" data-id="<%= item._id %>"
+                                                                                data-price="<%= item.price %>">+</button>
+                                                                        </div>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <% }) %>
+
+                                                        <div class="col s12">
+                                                            <div class="card-panel grey lighten-5 z-depth-1">
+                                                                <div class="row valign-wrapper aum_mb_0">
+                                                                    <div class="input-field col s12">
+                                                                        <textarea id="specialRequest"
+                                                                            placeholder="Enter any special request or dietary ..."
+                                                                            class="materialize-textarea validate"
+                                                                            name="specialRequest"
+                                                                            data-length="120"></textarea>
+                                                                        <label for="specialRequest"
+                                                                            class="aum-semibold aum-text-3xl"><strong>Special
+                                                                                Request</strong></label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col s12">
+                                                            <div class="card-panel grey lighten-5 z-depth-1">
+                                                                <h3 class="aum-semibold aum-text-xl">Order Summary</h3>
+                                                                <div class="row valign-wrapper aum_mb_0">
+                                                                    <div class="col s12">
+                                                                        <div id="orderSummary"></div>
+
+                                                                        <div class="flex justify-between aum_mt_8">
+                                                                            <span>Subtotal:</span>
+                                                                            <span id="subTotal2">$0.00</span>
+                                                                        </div>
+
+                                                                        <div class="flex justify-between aum_mt_8">
+                                                                            <span>Service Fee (10%):</span>
+                                                                            <span id="serviceFee">$0.00</span>
+                                                                        </div>
+                                                                        <div class="border-t aum_mt_8 aum_pt_8">
+                                                                            <div
+                                                                                class="flex justify-between aum-semibold">
+                                                                                <span>Total Amount:</span>
+                                                                                <span
+                                                                                    id="totalPriceWithGST">$0.00</span>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                        <div class="aum_mt_16">
+                                                                            <button
+                                                                                class="waves-effect waves-light btn btn-large bg-gray col s12 aum_h_48"><strong>Confirm
+                                                                                    Reservation &
+                                                                                    Order</strong></button>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="center-align">
+                                    <a class="waves-effect waves-light btn btn-small bg-gray"
+                                        href="/api/restaurants/restaurants"><i
+                                            class="material-icons left">arrow_back</i>Back to Restaurants</a>
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+    <%- include('../partials/footer') %>

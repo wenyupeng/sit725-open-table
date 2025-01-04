@@ -1,0 +1,86 @@
+<%- include('../partials/header') %>
+    <main>
+        <!-- Restaurant Details -->
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <h3 class="aum-extrabold aum-text-3xl center-align">Update <%= menuItem.name %></h3>
+                    </div>
+                </div>
+            </div>
+            
+            <% if (menuItem) { %>
+            <div class="container">
+                <div class="row">
+                    <div class="col s12">
+                        <div class="col s8 offset-s2">
+                            <div class="container white aum-border-radius-12">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col s12">
+            
+                                            <form action="/api/restaurants/<%= restaurant._id %>/menu/<%= menuItem._id %>" method="POST">
+            
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input id="name" type="text" class="validate" name="name"
+                                                            required value="<%= menuItem.name %>">
+                                                        <label for="name">Menu Name</label>
+                                                    </div>
+                                                </div>
+            
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <textarea id="description"
+                                                            class="materialize-textarea validate" name="description"
+                                                            required><%= menuItem.description %></textarea>
+                                                        <label for="description">Description</label>
+                                                    </div>
+                                                </div>
+            
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input id="price" type="number" class="validate" step="0.01"
+                                                            name="price" required value="<%= menuItem.price.toFixed(2) %>">
+                                                        <label for="price">Price</label>
+                                                    </div>
+                                                </div>
+            
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input id="menuImageUrl" type="text" class="validate"
+                                                            name="menuImageUrl" required value="<%= menuItem.menuImageUrl %>">
+                                                        <label for="menuImageUrl">Image</label>
+                                                    </div>
+                                                </div>
+            
+                                                <div class="row">
+                                                    <div class="col s12">
+                                                        <button class="btn bg-gray col s12" type="submit">Update Menu
+                                                        </button>
+                                                    </div>
+                                                </div>
+            
+                                            </form>
+                                         
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                        
+                    </div>
+                    <div class="center-align">
+                        <a class="waves-effect waves-light btn btn-small bg-gray" href="/api/restaurants/<%= restaurant._id %>"><i class="material-icons left">arrow_back</i>Back to Restaurant</a>
+                    </div>
+                </div>
+            
+            </div>
+            <% } else { %>
+            <p>No result</p>
+                <% } %>
+        </section>
+    </main>
+    <%- include('../partials/footer') %>

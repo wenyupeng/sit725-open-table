@@ -1,0 +1,192 @@
+<%- include('../partials/header') %>
+    <main>
+        <!-- Restaurant Details -->
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <h3 class="aum-extrabold aum-text-3xl">
+                            <%= restaurant.restaurantName %>
+                        </h3>
+                        <p>
+                            <%= restaurant.description %>
+                        </p>
+
+                        <a class="waves-effect waves-light btn-small bg-gray" href="/api/restaurants/restaurants"><i
+                                class="material-icons left">arrow_back</i>Back to Restaurants</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col s12">
+                        <div class="col s8 offset-s2">
+                            <div class="container">
+                                <div class="col s12">
+                                    <img class="responsive-img aum-border-radius-12"
+                                        src="<%= restaurant.restaurantImageUrl %>">
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col s12 center-align aum_mt_8">
+                                        <a class="waves-effect waves-light btn bg-gray"
+                                            href="/api/bookings/<%= restaurant._id %>">Make a Reservation</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Restaurant MenuItem Details -->
+        <section>
+            <% if (activeMenu) { %>
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 center-align">
+                            <h3 class="aum-extrabold aum-text-3xl center-align">Menu Items</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="col s8 offset-s2">
+                                <ul class="collection">
+                                    <% activeMenu.forEach(item=> { %>
+                                        <li class="collection-item avatar">
+                                            <img src="<%= item.menuImageUrl %>" alt="" class="circle">
+                                            <span class="title">
+                                                <%= item.name %>
+                                            </span>
+                                            <p>$<%= item.price.toFixed(2) %>
+                                            </p>
+
+                                            <span class="secondary-content">
+                                                <form
+                                                    action="/api/restaurants/<%= restaurant._id %>/menu/<%= item._id %>/disable"
+                                                    method="POST" style="display: inline;">
+                                                    <input type="hidden" name="<%= restaurant._id %>"
+                                                        value="<%= restaurant._id %>">
+                                                    <input type="hidden" name="<%= item._id %>" value="<%= item._id %>">
+                                                    <input type="hidden" name="<%= item._name %>"
+                                                        value="<%= item._name %>">
+                                                    <input type="hidden" name="<%= item._description %>"
+                                                        value="<%= item._description %>">
+                                                    <input type="hidden" name="<%= item._menuImageUrl %>"
+                                                        value="<%= item._menuImageUrl %>">
+                                                    <input type="hidden" name="<%= item._price %>"
+                                                        value="<%= item._price %>">
+                                                    <button class="waves-effect waves-light btn red" type="submit"><i
+                                                            class="material-icons prefix">delete</i></button>
+                                                </form>
+
+                                                <!-- navigate to edit -->
+                                                <a class="waves-effect waves-light btn"
+                                                    href="/api/restaurants/<%= restaurant._id %>/menu/<%= item._id %>/edit"><i
+                                                        class="material-icons prefix">edit</i></a>
+
+                                            </span>
+                                        </li>
+
+                                        <% }) %>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } else { %>
+                    <p>No menu items</p>
+                    <% } %>
+        </section>
+
+        <!-- Add new Restaurant MenuItem -->
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <h3 class="aum-extrabold aum-text-3xl center-align">Add Menu Item</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col s12">
+
+                        <div class="col s8 offset-s2">
+
+                            <div class="container white aum-border-radius-12">
+
+                                <div class="container">
+
+                                    <div class="row">
+                                        <div class="col s12">
+
+                                            <form action="/api/restaurants/<%= restaurant._id %>/menu" method="POST">
+
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input id="name" type="text" class="validate" name="name"
+                                                            required>
+                                                        <label for="name">Menu Name</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <textarea id="description" class="materialize-textarea validate"
+                                                            name="description" required></textarea>
+                                                        <label for="description">Description</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input id="price" type="number" class="validate" step="0.01"
+                                                            name="price" required>
+                                                        <label for="price">Price</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input id="menuImageUrl" type="text" class="validate"
+                                                            name="menuImageUrl" required>
+                                                        <label for="menuImageUrl">Image</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col s12">
+                                                        <button class="btn bg-gray col s12" type="submit">Add Menu
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                    <a class="waves-effect waves-light btn btn-small bg-gray col s12"
+                                        href="/api/restaurants/restaurants"><i
+                                            class="material-icons left">arrow_back</i>Back to Restaurants</a>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <%- include('../partials/footer') %>
