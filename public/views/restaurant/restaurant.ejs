@@ -48,13 +48,14 @@
         <h2 class="custom-h2">Operating Hours</h2>
         <div class="content">
           <ul>
-            <li><span>Monday</span><span><%= restaurant.openHours.Monday %></span></li>
-            <li><span>Tuesday</span><span><%= restaurant.openHours.Tuesday %></span></li>
-            <li><span>Wednesday</span><span><%= restaurant.openHours.Wednesday %></span></li>
-            <li><span>Thursday</span><span><%= restaurant.openHours.Thursday %></span></li>
-            <li><span>Friday</span><span><%= restaurant.openHours.Friday %></span></li>
-            <li><span>Saturday</span><span><%= restaurant.openHours.Saturday %></span></li>
-            <li><span>Sunday</span><span><%= restaurant.openHours.Sunday %></span></li>
+            <% let openH=restaurant.openHours[0]; %>
+            <li><span>Monday</span><span><%= openH.Monday%></span></li>
+            <li><span>Tuesday</span><span><%= openH.Tuesday %></span></li>
+            <li><span>Wednesday</span><span><%= openH.Wednesday %></span></li>
+            <li><span>Thursday</span><span><%= openH.Thursday %></span></li>
+            <li><span>Friday</span><span><%= openH.Friday %></span></li>
+            <li><span>Saturday</span><span><%= openH.Saturday %></span></li>
+            <li><span>Sunday</span><span><%= openH.Sunday %></span></li>
           </ul>
         </div>
       </div>

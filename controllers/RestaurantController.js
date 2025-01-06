@@ -1,4 +1,4 @@
-const { PopularRestModel, FeaturedCollectionsModel } = require('../models');
+const { PopularRestModel, FeaturedCollectionsModel, RestaurantsModel } = require('../models');
 const log = require('../utils/utils.logger');
 
 /**
@@ -30,3 +30,19 @@ exports.featuredColletions =
             return [];
         }
     }
+
+/**
+ * get restaurant info by restaurantId
+ * @returns {Object} restaurant info
+ */
+exports.getRestaurantByRestaurantId =
+    async (restaurantId) => {
+        try {
+            return await RestaurantsModel.findById(restaurantId);;
+        } catch (err) {
+            console.log(err);
+            log.error(`featuredColletions error, ${JSON.stringify(err)}`);
+            return {};
+        }
+    }
+

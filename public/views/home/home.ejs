@@ -26,11 +26,10 @@
         <div class="row">
           <% popular_rest.forEach(p=>{ %>
           <div class="col s12 m4">
-            <div class="card">
+            <div class="card" value='<%= p.restaurantId %>'>
               <div class="card-image">
                 <img src='<%= p.img%>'>
               </div>
-              <input type="text" value='<%= p._id %>' hidden>
               <div class="card-content">
                 <span class="card-title"><strong>
                     <%= p.name %>
