@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 let types = mongoose.SchemaTypes;
 const PopularRestaurantsSchema = new mongoose.Schema({
-    id: {type: types.String, required: true},
+    restaurantId: {type: types.String, required: true},
     img: {type: types.String, required: true},
     name: {type: types.String, required: true},
     descriptions: {type: types.String, required: true},

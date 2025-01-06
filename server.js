@@ -7,7 +7,6 @@ const logger = require('morgan');
 const cors = require('cors');
 const mount = require('mount-routes');
 
-
 const apiResponse = require('./utils/utils.apiResponse');
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -69,6 +68,7 @@ mount(app, path.join(process.cwd(), '/routes'), isDev)
 app.all("*", function (req, res) {
     return apiResponse.notFoundResponse(res, "404 --- 接口不存在");
 });
+
 
 // unauthorized error
 app.use(function (err, req, res, next) {

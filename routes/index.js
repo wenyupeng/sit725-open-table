@@ -7,7 +7,6 @@ const { popularResutaurants, featuredColletions } = require('../controllers/Rest
 router.get('/', async function (req, res) {
     let popular_rest = await popularResutaurants();
     let featured_col = await featuredColletions();
-    console.log(featured_col)
 
     res.render('./home/home', {
         popular_rest: popular_rest,
