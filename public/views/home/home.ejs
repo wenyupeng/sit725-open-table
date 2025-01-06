@@ -1,0 +1,91 @@
+<%- include('../partials/top-a') -%>
+<link rel="stylesheet" href="../../css/base/header.css">
+<link rel="stylesheet" href="../../css/base/footer.css">
+<link rel="stylesheet" href="../../css/home.css">
+<%- include('../partials/top-b') -%>
+<%- include('../partials/header') -%>
+
+<main>
+  <section class="search-content">
+    <div>
+      <h1>Find your table for any occasion</h1>
+      <form class="search-form">
+        <div class="content">
+          <input type="text" id="search" placeholder="Location, Restaurant, or Cuisine">
+          <input type="date" id="date">
+          <a type="submit" class="btn waves-effect waves-light">Search</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="popular-res">
+    <div class="container">
+      <h2>Popular Restaurants</h2>
+      <div>
+        <div class="row">
+          <% popular_rest.forEach(p=>{ %>
+          <div class="col s12 m4">
+            <div class="card">
+              <div class="card-image">
+                <img src='<%= p.img%>'>
+              </div>
+              <input type="text" value='<%= p._id %>' hidden>
+              <div class="card-content">
+                <span class="card-title"><strong>
+                    <%= p.name %>
+                  </strong></span>
+                <p>
+                  <%= p.descriptions%>
+                </p>
+                <div>
+                  <div class="stars">
+                    <% for (let i=0; i < p.star; i++) { %>
+                    <% if (i+1> p.star ) { %>
+                    <% if (p.star % 1 !==0) { %>
+                    <i class="fas fa-star-half-alt"></i>
+                    <% }%>
+                    <% }else{ %>
+                    <i class="fas fa-star"></i>
+                    <% } %>
+                    <% } %>
+                  </div>
+                  <span>(<%= p.reviews%> reviews)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-col">
+    <div class="container">
+      <h2>Featured Collections</h2>
+      <div class="row">
+
+        <% featured_col.forEach(c => { %>
+        <div class="col s12 m3">
+          <div class="card">
+            <div class="card-image">
+              <img src='<%= c.img%>'>
+            </div>
+            <div class="title">
+              <h3><%= c.type  %></h3>
+              <p><%= c.description %></p>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+        
+      </div>
+    </div>
+  </section>
+  <%- include('../partials/footer') -%>
+</main>
+<%- include('../partials/bottom-a') -%>
+
+<script src="../../js/home.js"></script>
+<%- include('../partials/bottom-b') -%>

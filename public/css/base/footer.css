@@ -1,0 +1,15 @@
+.page-footer{
+    padding-bottom: 3rem;
+    background: black;
+    color: white;
+}
+
+.page-footer .row .col h5{
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.75rem;
+}
+
+.page-footer .row .col ul li a:hover{
+    color: black;
+}
