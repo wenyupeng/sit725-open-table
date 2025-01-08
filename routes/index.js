@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { popularResutaurants, featuredColletions } = require('../controllers/RestaurantController');
+const { popularMerchants, featuredColletions } = require('../controllers/MerchantController');
 
 
 
 router.get('/', async function (req, res) {
-    let popular_rest = await popularResutaurants();
+    let popular_mer = await popularMerchants();
     let featured_col = await featuredColletions();
 
     res.render('./home/home', {
-        popular_rest: popular_rest,
+        popular_mer: popular_mer,
         featured_col: featured_col
     });
 });

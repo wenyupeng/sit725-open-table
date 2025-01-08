@@ -1,17 +1,17 @@
-const { PopularRestModel, FeaturedCollectionsModel, RestaurantsModel } = require('../models');
+const { PopularMerModel, FeaturedCollectionsModel, MerchantsModel } = require('../models');
 const log = require('../utils/utils.logger');
 
 /**
- * get popular restaurants
- * @returns {Object} popular restaurants
+ * get popular merchants
+ * @returns {Object} popular merchants
  */
-exports.popularResutaurants =
+exports.popularMerchants =
     async () => {
         try {
-            return await PopularRestModel.find({});;
+            return await PopularMerModel.find({});;
         } catch (err) {
             console.log(err);
-            log.err(`popularResutaurants error, ${JSON.stringify(err)} `);
+            log.err(`popularMerchants error, ${JSON.stringify(err)} `);
             return [];
         }
     }
@@ -32,13 +32,13 @@ exports.featuredColletions =
     }
 
 /**
- * get restaurant info by restaurantId
- * @returns {Object} restaurant info
+ * get merchant info by merchantId
+ * @returns {Object} merchant info
  */
-exports.getRestaurantByRestaurantId =
-    async (restaurantId) => {
+exports.getMerchantByMerchantId =
+    async (merchantId) => {
         try {
-            return await RestaurantsModel.findById(restaurantId);;
+            return await MerchantsModel.findById(merchantId);;
         } catch (err) {
             console.log(err);
             log.error(`featuredColletions error, ${JSON.stringify(err)}`);

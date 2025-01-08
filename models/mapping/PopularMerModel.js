@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 let types = mongoose.SchemaTypes;
-const PopularRestaurantsSchema = new mongoose.Schema({
-    restaurantId: {type: types.String, required: true},
+const PopularMerchantsSchema = new mongoose.Schema({
+    merchantId: {type: types.String, required: true},
     img: {type: types.String, required: true},
     name: {type: types.String, required: true},
     descriptions: {type: types.String, required: true},
@@ -13,4 +13,4 @@ const PopularRestaurantsSchema = new mongoose.Schema({
     versionKey: false,
 });
 
-module.exports = mongoose.model('popular-restaurants', PopularRestaurantsSchema);
+module.exports = mongoose.model('popular-merchants', PopularMerchantsSchema);

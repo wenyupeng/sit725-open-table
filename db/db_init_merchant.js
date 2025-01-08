@@ -6,10 +6,11 @@ const uri = "mongodb+srv://wen0424068311:wen0424068311@cluster0.xo2dvru.mongodb.
 // Create a new client and connect to MongoDB
 const client = new MongoClient(uri);
 
-let restaurant = [{
+let merchant = [{
     _id: "1",
     backgroundImg: "https://ai-public.mastergo.com/ai/img_res/bfabcd58cd873e7a00f6b876a90e843f.jpg",
     name: "The Grand Bistro",
+    category: "restaurant",
     type: "Romantic Dining",
     description: "Fine Dining Excellence",
     location: "123 Gourmet Street, Culinary District",
@@ -34,11 +35,11 @@ let restaurant = [{
 async function run() {
     try {
         const database = client.db("sit725-skipy");
-        const popularRestCol = database.collection("restaurants");
+        const popularMerCol = database.collection("merchants");
 
         // Prevent additional documents from being inserted if one fails
         const options = { ordered: true };
-        const result1 = await popularRestCol.insertMany(restaurant, options);
+        const result1 = await popularMerCol.insertMany(merchant, options);
 
         // Print the results
         console.log(`${result1.insertedCount} documents were inserted`);

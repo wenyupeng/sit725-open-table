@@ -7,26 +7,30 @@
 
 <main>
   <section class="search-content">
-    <div>
-      <h1>Find your table for any occasion</h1>
-      <form class="search-form">
-        <div class="content">
-          <input type="text" id="search" placeholder="Location, Restaurant, or Cuisine">
-          <input type="date" id="date">
-          <a type="submit" class="btn waves-effect waves-light">Search</a>
-        </div>
-      </form>
+    <div class="container">
+      <div class="row">
+        <h1 class="col offset-s2 s8">Find your table for any occasion</h1>
+      </div>
+      <div class="row">
+        <form class="search-form col offset-s2 s8">
+          <div class="content row" style="margin-bottom: 0;">
+            <input class="col s12 m6 l6" type="text" id="search" placeholder="Location, Restaurant, or Cuisine">
+            <input class="col s12 m3 l3" type="date" id="date">
+            <a class="col s12 m1 l1 btn waves-effect waves-light" type="submit">Search</a>
+          </div>
+        </form>
+      </div>
     </div>
   </section>
 
-  <section class="popular-res">
+  <section class="popular-mer">
     <div class="container">
-      <h2>Popular Restaurants</h2>
+      <h2>Popular Merchants</h2>
       <div>
         <div class="row">
-          <% popular_rest.forEach(p=>{ %>
+          <% popular_mer.forEach(p=>{ %>
           <div class="col s12 m4">
-            <div class="card" value='<%= p.restaurantId %>'>
+            <div class="card" value='<%= p.merchantId %>'>
               <div class="card-image">
                 <img src='<%= p.img%>'>
               </div>
@@ -78,7 +82,7 @@
           </div>
         </div>
         <% }); %>
-        
+
       </div>
     </div>
   </section>

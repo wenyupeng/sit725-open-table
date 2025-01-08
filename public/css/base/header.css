@@ -1,35 +1,20 @@
-main {
-    margin-top: 64px;
-}
-
-.header {
+nav {
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
 }
 
-.header .nav-wrapper {
-    background-color: #fff;
-    padding: 0 16px;
-    display: flex;
-    justify-content: space-between;
+.container {
+    max-width: 80rem;
 }
 
-.header .brand-logo {
+nav .brand-logo {
     font-family: 'Pacifico';
     color: #000;
 }
 
-.header .nav-wrapper ul li a {
+nav a {
     color: #000;
 }
 
-.header .nav-wrapper .right{
-    display: flex;
-    align-items: center;
-}
-
-.header .nav-wrapper .sign-in{
-    background-color: #000;
+nav ul a {
+    color: #000;
 }
