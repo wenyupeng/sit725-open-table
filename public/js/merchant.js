@@ -10,5 +10,9 @@ $(document).ready(function () {
         $('.carousel.carousel-slider').carousel('next',1);
     }, 4000);
 
+    $('#homeBtn').click(()=>{
+        this.location.href = '/';
+    });
+
     console.log('ready');
 });

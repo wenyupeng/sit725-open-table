@@ -12,63 +12,56 @@
     line-height: 1;
     font-size: 3rem;
     font-weight: 700;
-    margin: 0 0 32px;
 }
 
-.search-content .search-form {
+.search-form {
     background-color: #ffffff;
     color: #000000;
     border-radius: 0.5rem;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    line-height: 1.5;
+    line-height: 2;
     margin: 0;
 }
 
-.search-content .search-form .content {
-    width: 722px;
-    height: 100px;
-    padding: 24px;
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+.search-form .content {
+    padding: 20px;
 }
 
-.search-content .search-form input:nth-child(1) {
+.search-form .content input{
     padding-left: 12px;
     border: 1px solid rgb(209, 213, 219);
     border-radius: 0.5rem;
-    height: 100%;
-    flex: 3.7;
+    margin-right: 1rem;
 }
 
-.search-content .search-form input:nth-child(2) {
-    padding-left: 12px;
-    border: 1px solid rgb(209, 213, 219);
-    border-radius: 0.5rem;
-    height: 100%;
-    flex: 1.6;
+.search-form .content input:nth-child(2){
+    padding: 0 12px;
 }
 
-.search-content .search-form a {
-    margin-top: -8px;
+.search-form a {
     border-radius: 4px;
     background-color: black;
     height: 100%;
     line-height: 50px;
-    flex: 1;
 }
 
-.popular-res {
+@media only screen and (min-width: 993px) {
+    .row .col.l1 {
+        width: 15%;
+    }
+}
+
+.popular-mer {
     padding: 4rem 0 3rem;
     /* background-color: pink; */
 }
 
-.popular-res .container {
+.popular-mer .container {
     padding: 0 auto;
     /* background-color: blue; */
 }
 
-.popular-res h2 {
+.popular-mer h2 {
     font-weight: 700;
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -76,18 +69,18 @@
     padding-left: 16px;
 }
 
-.popular-res .card {
+.popular-mer .card {
     overflow: hidden;
     border-radius: 0.5rem;
     box-shadow: 0 10px 18px -3px rgba(0, 0, 0, 0.2);
 }
 
-.popular-res .card:hover {
+.popular-mer .card:hover {
     transform: scale(1.1);
 }
 
 
-.popular-res .card .card-image img {
+.popular-mer .card .card-image img {
     height: 12rem;
 }
 
@@ -98,12 +91,11 @@
 
 .featured-col {
     padding: 64px 0;
-    /* background-color: yellowgreen; */
 }
 
-.featured-col .container {
-    /* background-color: blue; */
-}
+
+
+.featured-col .container {}
 
 .featured-col h2 {
     font-weight: 700;

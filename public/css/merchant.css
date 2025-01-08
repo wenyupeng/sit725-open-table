@@ -55,7 +55,7 @@
     align-items: center;
 }
 
-.info-bar .map-marker-alt,
+.map-marker-alt,
 .contact-marker-alt,
 .hours-marker-alt {
     font-weight: 900;
@@ -84,7 +84,6 @@
 
 .photo .carousel {
     overflow: hidden;
-    width: 1248px;
     height: 288px;
 }
 
@@ -103,13 +102,9 @@
 
 .openHoursAndLocation {
     margin-top: 3rem;
-    display: flex;
-    justify-content: space-between;
 }
 
 .openHoursAndLocation .content {
-    width: 608px;
-    height: 312px;
     padding: 1.5rem;
     background-color: white;
     border-radius: 0.5rem;
@@ -118,32 +113,19 @@
     overflow: hidden;
 }
 
-.openHoursAndLocation .openHours .content ul {
-    display: grid;
-    list-style-type: none;
-    gap: 16px;
+.openHoursAndLocation .content ul li {
+    padding-bottom: 40px;
 }
 
-.openHoursAndLocation .openHours .content ul li {
-    display: flex;
-    justify-content: space-between;
-}
-
-
-.openHoursAndLocation .location .content {
-    height: 300px;
-}
-
-.openHoursAndLocation .location .content img {
+.openHoursAndLocation .content img {
+    width: 560px;
+    height: 252px;
     border-radius: 0.5rem;
-    width: 100%;
-    height: 100%;
     object-fit: cover;
 }
 
 .dishes .carousel {
     overflow: hidden;
-    width: 1248px;
     height: 288px;
 }
 
@@ -162,9 +144,13 @@
     background-color: transparent;
 }
 
-.dishes .carousel a h3,
-p {
-    padding: 0;
+.dishes .carousel a h3{
+    padding: 0 15px;
+    color: black;
+}
+
+.dishes .carousel a p{
+    padding: 0 15px;
     color: black;
 }
 
@@ -176,20 +162,7 @@ p {
     margin: 0;
 }
 
-.r-outter{
-    width: 1248px;
-    height: 340px;
-    padding: 1.5rem;   
-    border-radius: 0.5rem;
-}
-
-.r-outter .content .top{
-    display: flex;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-.r-outter .content .top div{
+.reviews .content .top div{
     margin-right: 1rem;
 }
 

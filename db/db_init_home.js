@@ -6,9 +6,9 @@ const uri = "mongodb+srv://wen0424068311:wen0424068311@cluster0.xo2dvru.mongodb.
 // Create a new client and connect to MongoDB
 const client = new MongoClient(uri);
 
-let popular_rest = [
+let popular_mer = [
     {
-        restaurantId:1,
+        merchantId:1,
         img: "../../image/home/popular restaurant 1-5fbc8ba5752dea8c03dad9e1705cebc1.jpg",
         name: "The Grand Bistro",
         descriptions: "French • $$$ • Downtown",
@@ -16,7 +16,7 @@ let popular_rest = [
         reviews: 324
     },
     {
-        restaurantId:2,
+        merchantId:2,
         img: "../../image/home/popular restaurant 2-2aa05309b66e98a682252ee638d0b5bc.jpg",
         name: "Sakura Fusion",
         descriptions: "French • $$$ • Downtown",
@@ -24,7 +24,7 @@ let popular_rest = [
         reviews: 456
     },
     {
-        restaurantId:3,
+        merchantId:3,
         img: "../../image/home/popular restaurant 3-7e0258fd15b4cbad06dfa93e428249e5.jpg",
         name: "Bella Italia",
         descriptions: "Italian • $$ • West End",
@@ -60,12 +60,12 @@ let featured_col = [
 async function run() {
   try {
     const database = client.db("sit725-skipy");
-    const popularRestCol = database.collection("popular-restaurants");
+    const popularMerCol = database.collection("popular-merchants");
     const featuredCollection = database.collection("featured-collections");
 
     // Prevent additional documents from being inserted if one fails
     const options = { ordered: true };
-    const result1 = await popularRestCol.insertMany(popular_rest,options);
+    const result1 = await popularMerCol.insertMany(popular_mer,options);
     const result2 = await featuredCollection.insertMany(featured_col,options);
 
     // Print the results

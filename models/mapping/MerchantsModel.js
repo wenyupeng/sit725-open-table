@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 
 let types = mongoose.SchemaTypes;
-const RestaurantsSchema = new mongoose.Schema({
+const MerchantsSchema = new mongoose.Schema({
     _id: {type: types.String, required: false},
     merchantId: {type: types.String, required: true},
     backgroundImg: {type: types.String, required: true},
     name: {type: types.String, required: true},
+    category: {type: types.String, required: true},
     type: {type: types.String, required: true},
     description: {type: types.String, required: true},
     location: {type: types.String, required: true},
@@ -18,4 +19,4 @@ const RestaurantsSchema = new mongoose.Schema({
     versionKey: false,
 });
 
-module.exports = mongoose.model('restaurants', RestaurantsSchema);
+module.exports = mongoose.model('merchants', MerchantsSchema);
