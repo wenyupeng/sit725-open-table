@@ -15,11 +15,16 @@ const UserController = require('../../controllers/UserController');
  *       200:
  *         description: successful operation
  */
-router.get('/', UserController.userlist);
 
-/**
- * user delete
- */
+// User lsit
+router.get('/', UserController.userlist);
+// User delete
 router.delete('/', UserController.userDelete);
+// User Registration
+router.post('/register', userController.register);
+// User Login
+router.post('/login', userController.login);
+// User Update (Requires Authentication)
+router.put('/update/:id', authenticate, userController.update);
 
 module.exports = router;

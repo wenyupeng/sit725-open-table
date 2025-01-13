@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "SET NODE_ENV=development && npx macha ./test/**/*.test.js",
-    "dev": "SET NODE_ENV=development&& nodemon server.js --mode development",
+    "dev": "cross-env NODE_ENV=development nodemon server.js --mode development",
     "start": "SET NODE_ENV=production&& node server.js --mode production"
   },
   "repository": {
@@ -42,6 +42,7 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
-    "chai": "^4.3.10"
+    "chai": "^4.3.10",
+    "cross-env": "^7.0.3"
   }
 }
