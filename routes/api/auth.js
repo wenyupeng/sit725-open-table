@@ -123,6 +123,7 @@ router.post('/register', AuthController.register);
  *             schema:
  *               $ref: '#/components/schemas/LoginSuccessUser'
  */
+router.get('/login', AuthController.renderLogin);
 router.post('/login', AuthController.login);
 
 module.exports = router;

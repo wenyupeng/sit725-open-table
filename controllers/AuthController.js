@@ -120,3 +120,9 @@ exports.login = [
         }
     }
 ]
+
+exports.renderLogin = [
+    (req, res) => {
+      res.render("./auth/login", { pageTitle: "Login", message: null });
+    },
+  ];
