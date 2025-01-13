@@ -8,11 +8,16 @@ const appTypeMiddleware = require('./middlewares/app-type.middleware.js')
 const sessionAuth = require('./middlewares/session.middleware.js')
 
 const routes = require("./routes/index.js");
+const errorHandler = require("./middlewares/error.middleware.js");
+const responseFormatter = require("./middlewares/response-formatter.middleware.js");
+
+require('./db/index.js')
 
 // create express app
 const app = express();
 
 app.use(sessionAuth);
+app.use(responseFormatter)
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -23,8 +28,6 @@ app.use(bodyParser.json());
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
-require('./db/index.js')
-
 app.use(appTypeMiddleware)
 
 // Serve static files from public folder
@@ -34,6 +37,8 @@ app.use((req, res, next) => {
 })
 
 app.use(routes);
+
+app.use(errorHandler)
 
 // listen for requests
 const PORT = config.port;

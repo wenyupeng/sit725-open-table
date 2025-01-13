@@ -9,7 +9,7 @@ const authenticate = (role = 'customer') => {
         }
 
         try {
-            var decoded = jwt.verify(token, config.jwtSecret);
+            // var decoded = jwt.verify(token, config.jwtSecret);
         } catch(err) {
         // err
         }

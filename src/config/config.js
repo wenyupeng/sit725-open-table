@@ -2,7 +2,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 module.exports = {
-  dbUrl: process.env.MONGO_URI,
+  dbUrl: process.env.MONGO_URL,
   port: process.env.PORT || 3000,
 
   jwtSecret: process.env.JWT_SECRET,

@@ -25,4 +25,4 @@ const MerchantSchema = new mongoose.Schema({
     versionKey: false,
 });
 
-module.exports = mongoose.model('Merchant',MerchantSchema);
+module.exports = mongoose.model('Merchant', MerchantSchema);
