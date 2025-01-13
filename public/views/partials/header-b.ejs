@@ -1,17 +1,31 @@
 <nav>
-  <div class="container flex-between">
-    <div class="">
-      <a href="/" class="">Home</a>
-      <a href="#!" class="">Restaurant Name</a>
-      <a href="#!" class="">Menu</a>
+  <div class="container">
+    <a href="javascript:void(0);" data-target="mobileMenu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <div class="row">
+      <div class="col s6 nav-wrapper hide-on-med-and-down">
+        <a href="/" class="breadcrumb">Home</a>
+        <a href="#!" class="breadcrumb" id="merchantName">Restaurant Name</a>
+        <a href="#!" class="breadcrumb">Menu</a>
+      </div>
+      <div class="col s4">
+        <a href="/" class="brand-logo">Skipy</a>
+      </div>
+      <div class="col s2 shopping-cart">
+        <a class="btn-shopping-cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Your Order</span>
+          <span class="bg-white" id="orderCount">0</span>
+        </a>
+      </div>
     </div>
-    <div class="">
-      <a href="/" class="brand-logo">Skipy</a>
-    </div>
-    <button class="btn-shopping-cart">
-      <i class="fas fa-shopping-cart"></i>
-      <span>Your Order</span>
-      <span class="bg-white">0</span>
-    </button>
+    
+    <ul class="sidenav" id="mobileMenu" style="transform: translateX(-105%);">
+      <li class="">
+        <a class="nav-link " href="/">Home</a>
+      </li>
+      <li class="">
+        <a class="nav-link " href="/merchants">merchants</a>
+      </li>
+    </ul>
   </div>
 </nav>

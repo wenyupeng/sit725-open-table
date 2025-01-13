@@ -4,7 +4,7 @@
   "description": "deakin unit sit725 team project",
   "main": "server.js",
   "scripts": {
-    "test": "SET NODE_ENV=development && npx macha ./test/**/*.test.js",
+    "test": "SET NODE_ENV=development&& npx mocha ./test/**/*.test.js",
     "dev": "SET NODE_ENV=development&& nodemon server.js --mode development",
     "start": "SET NODE_ENV=production&& node server.js --mode production"
   },
@@ -42,6 +42,7 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
-    "chai": "^4.3.10"
+    "chai": "^4.3.10",
+    "mocha": "^10.2.0"
   }
 }

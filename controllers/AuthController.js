@@ -110,6 +110,8 @@ exports.login = [
                     { expiresIn: 3600 * 2 }
                 );
 
+                req.session.user = userData;
+
                 log.info(`user ${userInfo.username} login successfully`);
                 return apiResponse.successResponseWithData(res, 'login successfully', userData);
             }

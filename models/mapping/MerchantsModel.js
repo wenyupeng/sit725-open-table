@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 let types = mongoose.SchemaTypes;
 const MerchantsSchema = new mongoose.Schema({
     _id: {type: types.String, required: false},
-    merchantId: {type: types.String, required: true},
     backgroundImg: {type: types.String, required: true},
     name: {type: types.String, required: true},
     category: {type: types.String, required: true},
