@@ -1,11 +1,10 @@
-
 const mongoose = require("mongoose");
 
-const config = require('../config/config')
+const config = require("../config/config");
 
 mongoose.Promise = global.Promise;
 
-console.log('DB URL: ', config.dbUrl)
+console.log("DB URL: ", config.dbUrl);
 mongoose.connect(config.dbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -18,11 +17,11 @@ db.on("error", function (err) {
   mongoose.disconnect();
 });
 
-db.on('close', function () {
-    console.log('database disconnected, try reconnect again');
-    setTimeout(() => {
-        mongoose.connect(dbConfig.mongoUrl)
-    }, 3000)
+db.on("close", function () {
+  console.log("database disconnected, try reconnect again");
+  setTimeout(() => {
+    mongoose.connect(config.mongoUrl);
+  }, 3000);
 });
 
 db.once("open", function () {

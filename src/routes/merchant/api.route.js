@@ -4,6 +4,6 @@ const express = require("express");
 const router = express.Router();
 
 // Get all todos
-router.get("/", (req, res) => res.send('yes'));
+router.get("/", (req, res) => res.send("yes"));
 
 module.exports = router;
