@@ -51,12 +51,12 @@
             <div class="card-action">
               <div class="flex-between">
                 <div class="left">
-                  <i class="fas fa-minus margin-right-10" onclick="ModifyCount(-1,this, <%=card.foodId %>)"></i>
+                  <i class="fas fa-minus margin-right-10" onclick="ModifyCount(-1,this, '<%=card.foodId %>')"></i>
                   <span class="count margin-right-10">0</span>
-                  <i class="fas fa-plus margin-right-10" onclick="ModifyCount(1,this,<%=card.foodId %>)"></i>
+                  <i class="fas fa-plus margin-right-10" onclick="ModifyCount(1,this,'<%=card.foodId %>')"></i>
                 </div>
                 <div class="right">
-                  <a class="waves-effect waves-light btn" onclick="addToOrder(<%= JSON.stringify(card) %>)">Add to Order</a>
+                  <a class="waves-effect waves-light btn" onclick="addToOrder('<%= JSON.stringify(card) %>')">Add to Order</a>
                 </div>
               </div>
             </div>
