@@ -7,12 +7,23 @@ $(document).ready(function () {
     });
 
     setInterval(() => {
-        $('.carousel.carousel-slider').carousel('next',1);
+        $('.carousel.carousel-slider').carousel('next', 1);
     }, 4000);
 
-    $('#homeBtn').click(()=>{
+    $('#homeBtn').click(() => {
         this.location.href = '/';
     });
+
+    $('#makeReservationBtn').click(() => {
+        let merchantId = $('#merchantId').val();
+        this.location.href = '/menu?merchantId=' + merchantId;
+    });
+
+    let merchant ={
+        merchantId : $('#merchantId').val(),
+        merchantName : $('#merchantName').val()
+    };
+    sessionStorage.setItem("merchant",JSON.stringify(merchant));
 
     console.log('ready');
 });

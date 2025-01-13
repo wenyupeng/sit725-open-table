@@ -7,6 +7,8 @@
   <section>
     <div class="bg-img">
       <input type="text" value="<%= merchant.backgroundImg %>" hidden>
+      <input type="text" value="<%= merchant._id %>" hidden id="merchantId">
+      <input type="text" value="<%= merchant.name %>" hidden id="merchantName">
       <h1><%= merchant.name %></h1>
       <p><%= merchant.description%></p>
     </div>
