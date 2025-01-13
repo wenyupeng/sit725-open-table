@@ -1,4 +1,5 @@
-function addToOrder(card) {
+function addToOrder(cardStr) {
+    let card = JSON.parse(cardStr);
     let foodId = card.foodId;
     let count = sessionStorage.getItem(foodId);
     if (Object.is(count, null) || Object.is(count, undefined)) {
@@ -25,7 +26,6 @@ function addToOrder(card) {
 
     order.set(foodId, detail);
 
-    // sessionStorage.setItem('food_order', JSON.stringify(detail));
     sessionStorage.setItem('food_order', JSON.stringify(Array.from(order)));
     sessionStorage.removeItem(foodId);
 

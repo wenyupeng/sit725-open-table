@@ -16,7 +16,7 @@ $(document).ready(function () {
 
     $('#makeReservationBtn').click(() => {
         let merchantId = $('#merchantId').val();
-        this.location.href = '/menu?merchantId=' + merchantId;
+        this.location.href = '/merchant/' + merchantId + '/menu';
     });
 
     let merchant ={

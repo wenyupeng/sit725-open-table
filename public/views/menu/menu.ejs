@@ -9,16 +9,16 @@
     <div class="col s12">
       <ul class="tabs">
         <% menu.list.forEach(element => { %>
-        <% let originalKey = element[0]; %>
+        <% let originalKey = element.categoryName; %>
         <% key = originalKey.toString().replace(/\s+/gi,""); %>
         <li class="tab col s3"><a href="#<%= key%>"><%= originalKey %></a></li>
         <% }) %>
       </ul>
     </div>
     <% menu.list.forEach(element => { %>
-    <% let originalKey = element[0]; %>
+    <% let originalKey = element.categoryName; %>
     <% key = originalKey.toString().replace(/\s+/gi,""); %>
-    <% let values = element[1]; %>
+    <% let values = element.items; %>
     <div id="<%= key %>" class="col s12">
       <div class="row">
         <% values.forEach(card => { %>

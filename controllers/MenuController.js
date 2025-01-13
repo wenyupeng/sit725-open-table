@@ -2,13 +2,14 @@ const { MenuModel } = require('../models');
 const log = require('../utils/utils.logger');
 
 /**
- * get popular merchants
- * @returns {Object} popular merchants
+ * get menu by merchantId
+ * @returns {Object} menu info
  */
 exports.getMenuByMerchantId =
-    async () => {
+    async (merchantId) => {
         try {
-            return await MenuModel.find({});;
+            let menu = await MenuModel.findOne({ merchantId: merchantId.toString() }).exec();
+            return menu;
         } catch (err) {
             console.log(err);
             log.err(`popularMerchants error, ${JSON.stringify(err)} `);

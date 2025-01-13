@@ -8,7 +8,7 @@ const client = new MongoClient(uri);
 
 let popular_mer = [
     {
-        merchantId:1,
+        merchantId:"1",
         img: "../../image/home/popular restaurant 1-5fbc8ba5752dea8c03dad9e1705cebc1.jpg",
         name: "The Grand Bistro",
         descriptions: "French • $$$ • Downtown",
@@ -16,7 +16,7 @@ let popular_mer = [
         reviews: 324
     },
     {
-        merchantId:2,
+        merchantId: "1",
         img: "../../image/home/popular restaurant 2-2aa05309b66e98a682252ee638d0b5bc.jpg",
         name: "Sakura Fusion",
         descriptions: "French • $$$ • Downtown",
@@ -24,7 +24,7 @@ let popular_mer = [
         reviews: 456
     },
     {
-        merchantId:3,
+        merchantId: "1",
         img: "../../image/home/popular restaurant 3-7e0258fd15b4cbad06dfa93e428249e5.jpg",
         name: "Bella Italia",
         descriptions: "Italian • $$ • West End",
