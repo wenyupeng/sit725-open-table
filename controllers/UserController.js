@@ -4,7 +4,7 @@ const { UserModel } = require('../models');
 const authenticate = require('../middlewares/jwt');
 const apiResponse = require('../utils/utils.apiResponse');
 const permissions = require('../middlewares/permissions');
-const User = require('../models/mapping/user.model');
+const User = require('../models/mapping/UserModel.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 

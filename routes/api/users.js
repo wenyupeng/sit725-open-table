@@ -21,10 +21,10 @@ router.get('/', UserController.userlist);
 // User delete
 router.delete('/', UserController.userDelete);
 // User Registration
-router.post('/register', userController.register);
+router.post('/register', UserController.register);
 // User Login
-router.post('/login', userController.login);
-// User Update (Requires Authentication)
-router.put('/update/:id', authenticate, userController.update);
+router.post('/login', UserController.login);
+// User Update 
+router.put('/update/:id', UserController.update);
 
 module.exports = router;
