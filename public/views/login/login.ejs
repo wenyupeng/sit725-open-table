@@ -1,6 +1,4 @@
-<html>
-
-<head>
+<%- include('../partials/top-a') -%>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
   <style>
@@ -33,13 +31,13 @@
       box-shadow: none;
     }
   </style>
-</head>
+<%- include('../partials/top-b') -%>
+<%- include('../partials/header') -%>
 
-<body>
   <div class="section"></div>
   <main>
     <center>
-      <img class="responsive-img" style="width: 250px;" src="https://i.imgur.com/ax0NCsK.gif" />
+      <h1>ANIMATEG GIF - SKIPY LOGO ADD LATER</h1>
       <div class="section"></div>
 
       <h5 class="indigo-text">Please, login into your account</h5>
@@ -48,7 +46,7 @@
       <div class="container">
         <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-          <form class="col s12" method="post">
+          <form class="col s12" action="/api/auth/login" method="post">
             <div class='row'>
               <div class='col s12'>
               </div>
@@ -85,10 +83,12 @@
 
     <div class="section"></div>
     <div class="section"></div>
+
+    <%- include('../partials/footer') -%>
   </main>
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-</body>
-
-</html>
+  <%- include('../partials/bottom-a') -%>
+  <script src="../../js/menu.js"></script>
+  <%- include('../partials/bottom-b') -%>
