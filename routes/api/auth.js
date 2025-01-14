@@ -64,7 +64,7 @@ const AuthController = require('../../controllers/AuthController');
  *               $ref: '#/components/schemas/RegisterUser'
  */
 router.post('/register', AuthController.register);
-
+router.get('/register', AuthController.renderRegister);
 /**
  * @swagger
  * components:

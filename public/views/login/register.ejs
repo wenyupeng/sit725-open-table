@@ -10,11 +10,7 @@
 
         <div class="section"></div>
         <div class="section"></div>
-        <div class="section"></div>
-        <div class="section"></div>
-        <div class="section"></div>
-        <div class="section"></div>
-        <div class="section"></div>
+
 
             <div class="container col s8">
                 <div class="row">
@@ -27,70 +23,78 @@
                     </nav>
 
                 </div>
-                <form class="col s14">
+                <form class="col s14" action="/api/register" method="post">
                     <div class="row">
-                        <div class="input-field hoverable col s6">
-                            <i class="material-icons prefix">contacts</i>
-                            <input id="first_name" type="text" class="validate">
-                            <label for="first_name">First Name</label>
-                        </div>
-                        <div class="input-field hoverable col s6">
-                            <i class="material-icons prefix">contacts</i>
-                            <input id="last_name" type="text" class="validate">
-                            <label for="last_name">Last Name</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field hoverable col s6">
+                        <div class="input-field col s12">
                             <i class="material-icons prefix">account_circle</i>
-                            <input id="username" type="text" class="validate">
-                            <label for="username">Username</label>
-                        </div>
-                        <div class="input-field hoverable col s6">
-                            <i class="material-icons prefix">email</i>
-                            <input id="email" type="email" class="validate">
-                            <label for="email">Email</label>
+                            <input id="username" type="text" class="validate" name="username" required>
+                            <label for="username">Full Name</label>
                         </div>
                     </div>
+
                     <div class="row">
-                        <div class="input-field hoverable col s6">
-                            <i class="material-icons prefix">vpn_key</i>
-                            <input id="password" type="password" class="validate">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">phone</i>
+                            <input id="phone" type="tel" class="validate" name="phone" required>
+                            <label for="phone">Phone Number</label>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">email</i>
+                            <input id="email" type="email" class="validate" name="email" required>
+                            <label for="email">Email Address</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">lock</i>
+                            <input id="password" type="password" name="password" required>
                             <label for="password">Password</label>
                         </div>
-                        <div class="input-field hoverable col s6">
-                            <i class="material-icons prefix">replay</i>
-                            <input id="password2" type="password" class="validate">
-                            <label for="password2">Retype Password</label>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">lock</i>
+                            <input id="confirmPassword" type="password" name="confirmPassword" required>
+                            <label for="confirmPassword">Confirm Password</label>
                         </div>
                     </div>
-                    <a class="waves-effect waves-light btn right hoverable"><i
-                            class="large material-icons right">done</i>register</a>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button id="createAccount"
+                                class="btn waves-effect waves-light bg-gray col s12"
+                                type="submit">Create Account
+                            </button>
+                        </div>
+                    </div>
                 </form>
 
             </div>
-            <div class="section"></div>
-            <div class="section"></div>
-            <div class="section"></div>
-            <div class="section"></div>
+
             <div class="section"></div>
 
             <%- include('../partials/footer') -%>
                 </main>
                 <script>
-                    var password = document.getElementById("password")
-                        , password2 = document.getElementById("password2");
+                    // var password = document.getElementById("password")
+                    //     , password2 = document.getElementById("password2");
 
-                    function validatePassword() {
-                        if (password.value != password2.value) {
-                            password2.setCustomValidity("Passwords Don't Match");
-                        } else {
-                            password2.setCustomValidity('');
-                        }
-                    }
+                    // function validatePassword() {
+                    //     if (password.value != password2.value) {
+                    //         password2.setCustomValidity("Passwords Don't Match");
+                    //     } else {
+                    //         password2.setCustomValidity('');
+                    //     }
+                    // }
 
-                    password.onchange = validatePassword;
-                    password2.onkeydown = validatePassword;
+                    // password.onchange = validatePassword;
+                    // password2.onkeydown = validatePassword;
                 </script>
 
                 <script type="text/javascript"

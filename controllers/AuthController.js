@@ -124,6 +124,11 @@ exports.login = [
 exports.renderLogin = [
     (req, res) => {
       res.render("./auth/login", { pageTitle: "Login", message: null });
-    },
-    
+    },    
+  ];
+
+  exports.renderRegister = [
+    (req, res) => {
+      res.render("./auth/register", { pageTitle: "Register", message: null });
+    },    
   ];
