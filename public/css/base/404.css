@@ -1,0 +1,21 @@
+.error-title {
+    font-size: 90px;
+  }
+  .error-title .blink-infinite {
+    animation: infinite-blink 2s infinite;
+  }
+  
+  .skipy-text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  @keyframes infinite-blink {
+    60%, 80% {
+      color: #f44336;
+    }
+    70%, 100% {
+      color: #222223;
+    }
+  }
+

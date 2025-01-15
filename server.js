@@ -15,10 +15,11 @@ require('dotenv').config({path: isDev ? './.env.development' : './.env.productio
 require('express-async-errors');
 require('./db/index')
 
-const sessionAuth = require('./middlewares/session')
+const { sessionAuth, attachUserToLocals } = require("./middlewares/session");
 const app = express();
 
 app.use(sessionAuth);
+app.use(attachUserToLocals);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cors());
@@ -30,7 +31,11 @@ app.all('/api/*', function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Headers', 'X-Requested-With, token')
     res.header('Access-Control-Allow-Headers', 'X-Requested-With, Authorization')
-    res.header('Content-Type', 'application/json;charset=UTF-8')
+    if(req.accepts("html")) {        
+        res.set("Content-Type", "text/html"); 
+    }else{
+        res.header('Content-Type', 'application/json;charset=UTF-8');
+    }
     res.header('Access-Control-Allow-Headers', 'Content-Type,Content-Length, Authorization, Accept,X-Requested-With')
     res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS')
     if (req.method === 'OPTIONS') res.send(200)
@@ -66,7 +71,12 @@ mount(app, path.join(process.cwd(), '/routes'), isDev)
 
 //  throw 404 if URL not found
 app.all("*", function (req, res) {
+      // Check if the client expects text/html
+  if (req.accepts("text/html")) {
+    res.status(404).render("./error/404", { pageTitle: "404 Page Not Found" });
+  } else {
     return apiResponse.notFoundResponse(res, "404 --- 接口不存在");
+  }
 });
 
 

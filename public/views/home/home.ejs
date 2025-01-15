@@ -30,10 +30,10 @@
         <div class="row">
           <% popular_mer.forEach(p=>{ %>
           <div class="col s12 m4">
-            <div class="card" value='<%= p.merchantId %>'>
-              <div class="card-image">
-                <a href="/merchant/<%= p.merchantId %>">
-                  <img src='<%= p.img%>'>
+            <div class="card">
+              <div class="card-image waves-effect waves-block waves-light">
+                <a href="/merchant/<%= p._id %>">
+                  <img src='<%= p.backgroundImg%>'>
                 </a>
               </div>
               <div class="card-content">
@@ -75,7 +75,7 @@
         <div class="col s12 m3">
           <div class="card">
             <div class="card-image">
-              <img src='<%= c.img%>'>
+              <img src='<%= c.backgroundImg%>'>
             </div>
             <div class="title">
               <h3><%= c.type  %></h3>
