@@ -52,14 +52,12 @@ exports.register = [
                     role: 'user',
                     status: 1,
                 }
-
                 const addInfo = await UserModel.create(newUser);
                 if (addInfo) {
                     return apiResponse.successResponse(res, "registry successfully");
                 }
-
             }
-        } catch (err) {
+        }catch (err) {
             console.log(err);
             return apiResponse.ErrorResponse(res, err);
         }
