@@ -3,8 +3,8 @@
 logs/*.log
 
 /**/package.json
-*.env.development
-db.config.js
+/**/*.env.development
+/**/db.config.js
 
-db_init_home.js
-db_init_merchant.js
+/**/db_init_home.js
+/**/db_init_merchant.js
