@@ -4,6 +4,7 @@
 set -e 
 
 GITHUB_REPO_URL="https://github.com/wenyupeng/sit725-skipy.git" 
+PROJECT_DIR="/usr/local/sit725-skipy" 
 CLONE_DIR="/usr/local" 
 DOCKER_IMAGE_NAME="sit725-skipy-image" 
 DOCKER_CONTAINER_NAME="sit725-skipy" 
@@ -11,13 +12,13 @@ DOCKER_PORT_MAPPING="3000:3000"
 
 echo "Cloning repository from $GITHUB_REPO_URL"
 
-if [ -d "$CLONE_DIR" ]; then
-  echo "Directory $CLONE_DIR already exists. Pulling latest changes"
-  cd "$CLONE_DIR" && git pull
+if [ -d "$PROJECT_DIR" ]; then
+  echo "Directory $PROJECT_DIR already exists. Pulling latest changes"
+  cd "$PROJECT_DIR" && git pull
 else
-  echo "Cloning into $CLONE_DIR"
-  git clone "$GITHUB_REPO_URL" "$CLONE_DIR"
-  cd "$CLONE_DIR"
+  echo "Cloning into $PROJECT_DIR"
+  git clone "$GITHUB_REPO_URL" "$PROJECT_DIR"
+  cd "$PROJECT_DIR"
 fi
 
 if [ "$(docker images -q $DOCKER_IMAGE_NAME)" ]; then
