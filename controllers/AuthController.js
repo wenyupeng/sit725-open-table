@@ -4,6 +4,7 @@ const { UserModel } = require("../models");
 const apiResponse = require("../utils/utils.apiResponse");
 const { encryption, decryption } = require("../utils/utils.others");
 const log = require("../utils/utils.logger");
+const envConfig = require("../config/env.config");
 
 /**
  * User register
@@ -137,7 +138,7 @@ exports.login = [
         };
         userData.token =
           "Bearer " +
-          jwt.sign(userData, process.env.SIGN_KEY, { expiresIn: 3600 * 2 });
+          jwt.sign(userData, envConfig.jwtSecret, { expiresIn: 3600 * 2 });
 
         req.session.user = userData;
 

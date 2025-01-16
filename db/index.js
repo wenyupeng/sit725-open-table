@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const config = require("../config/env.config");
 const chalk = require("chalk");
 
-mongoose.connect(config.url);
+mongoose.connect(config.dbUrl);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 
@@ -25,9 +25,11 @@ db.on("error", function (error) {
 
 db.on("close", function () {
   console.log(
-    "***********database disconnected, try reconnect again************",
+    "*********** database disconnected, try reconnect again after 3 secs ************",
   );
-  mongoose.connect(config.url);
+  setTimeout(() => {
+    mongoose.connect(config.dbUrl);
+  }, 3000)
 });
 
 module.exports = db;

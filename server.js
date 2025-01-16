@@ -11,9 +11,7 @@ const apiResponse = require("./utils/utils.apiResponse");
 
 const isDev = process.env.NODE_ENV === "development";
 
-require("dotenv").config({
-  path: isDev ? "./.env.development" : "./.env.production",
-});
+require("dotenv")
 require("express-async-errors");
 require("./db/index");
 
@@ -59,6 +57,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const options = require("./config/swagger.config");
+const envConfig = require("./config/env.config");
 const swaggerSpec = swaggerJsdoc(options);
 var swaggerJson = function (req, res) {
   res.setHeader("Content-Type", "application/json");
@@ -83,15 +82,15 @@ app.use(function (err, req, res, next) {
   next(err);
 });
 
-app.listen(process.env.PORT, () => {
+app.listen(envConfig.port, () => {
   console.log(
     chalk.bold.green(
-      `project start http://${process.env.URL}:${process.env.PORT}/api`,
+      `project start http://${envConfig.appUrl}:${envConfig.port}/api`,
     ),
   );
   console.log(
     chalk.bold.green(
-      `swagger address http://${process.env.URL}:${process.env.PORT}/docs`,
+      `swagger address http://${envConfig.appUrl}:${envConfig.port}/docs`,
     ),
   );
 });
