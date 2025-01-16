@@ -52,6 +52,9 @@ exports.register = [
                     role: 'user',
                     status: 1,
                 }
+
+                res.status(200).redirect("/api/auth/login")
+
                 const addInfo = await UserModel.create(newUser);
                 if (addInfo) {
                     return apiResponse.successResponse(res, "registry successfully");
@@ -64,6 +67,11 @@ exports.register = [
     }
 ]
 
+exports.renderRegister = [
+    (req, res) => {
+      res.render("./login/register", { pageTitle: "Register", message: null });
+    },
+  ];
 /**
  * user login 
  * @param {string}  username username, email or phone
@@ -108,6 +116,8 @@ exports.login = [
                     { expiresIn: 3600 * 2 }
                 );
 
+                res.status(200).redirect("/");
+
                 log.info(`user ${userInfo.username} login successfully`);
                 return apiResponse.successResponseWithData(res, 'login successfully', userData);
             }
@@ -121,12 +131,6 @@ exports.login = [
 
 exports.renderLogin = [
     (req, res) => {
-      res.render("./auth/login", { pageTitle: "Login", message: null });
-    },    
-  ];
-
-  exports.renderRegister = [
-    (req, res) => {
-      res.render("./auth/register", { pageTitle: "Register", message: null });
+      res.render("./login/login", { pageTitle: "Login", message: null });
     },    
   ];

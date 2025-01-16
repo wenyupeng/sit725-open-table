@@ -54,8 +54,8 @@
 
             <div class='row'>
               <div class='input-field col s12'>
-                <input id="email" type="email" class="validate" name="email" required>
-                <label for="email">Email Address</label>
+                <input id="username" type="email" class="validate" name="username" required>
+                <label for="username">Email Address or username</label>
               </div>
             </div>
 
@@ -65,20 +65,20 @@
                 <label for="password">Password</label>
               </div>
               <label style='float: right;'>
-								<a class='pink-text' href='#!'><b>Forgot Password?</b></a>
+								<a class='pink-text'><b>Forgot Password?</b></a>
 							</label>
             </div>
 
             <br />
             <center>
               <div class='row'>
-                <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Login</button>
+                <button type='submit' class='col s12 btn btn-large waves-effect indigo'>Login</button>
               </div>
             </center>
           </form>
         </div>
       </div>
-      <a href="/register">Create account</a>
+      <a href="/api/auth/register">Create account</a>
     </center>
 
     <div class="section"></div>
@@ -89,6 +89,5 @@
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-  <%- include('../partials/bottom-a') -%>
-  <script src="../../js/menu.js"></script>
+  <%- include('../partials/bottom-a') -%>  
   <%- include('../partials/bottom-b') -%>
