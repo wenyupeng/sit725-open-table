@@ -24,21 +24,36 @@ exports.getMenuByMerchantId =
  * add menu
  * @returns {Object} 
  */
-exports.add=[
+exports.add = [
     authenticate,
     permissions,
-    async (req,res)=>{
+    async (req, res) => {
         let merchant = req.body;
         let merchantName = merchant.name;
         let phone = merchant.phone;
     }
 ]
 
-exports.queryPagination = [
+exports.queryPagenation = [
     authenticate,
     permissions,
-    async (req,res)=>{
+    async (req, res) => {
 
     }
 ]
 
+exports.delete =[
+    authenticate,
+    permissions,
+    async (req, res) => {
+
+    }
+]
+
+exports.updateById= [
+    authenticate,
+    permissions,
+    async (req, res) => {
+
+    }
+]

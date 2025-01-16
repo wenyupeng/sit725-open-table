@@ -3,6 +3,8 @@ const log = require('../utils/utils.logger');
 const authenticate = require('../middlewares/jwt');
 const apiResponse = require('../utils/utils.apiResponse');
 const permissions = require('../middlewares/permissions');
+const { body, validationResult } = require('express-validator');
+const { MerchantCategories } = require('../constant/constant')
 
 /**
  * get popular merchants
@@ -33,6 +35,42 @@ exports.featuredColletions =
             return [];
         }
     }
+
+/**
+ * merchant login
+ * @returns {Object} if login success return token, else return error message
+ */
+exports.login = [
+    [
+        body("phone").isLength({ min: 9 }).withMessage("name could not be empty or less than 9 character"),
+        body("pwd").notEmpty().withMessage("password could not be empty"),
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return apiResponse.validationErrorWithData(res, errors.array()[0].msg);
+        }
+
+        console.log(req.body)
+
+        let merchant = await MerchantsModel.findOne({ phone: req.body.phone, password: req.body.pwd });
+        if (!merchant) {
+            return apiResponse.unauthorizedResponse(res, 'Invalid phone or password');
+        }
+
+        console.log(merchant);
+
+
+        merchant.token = 'Bearer ' + jwt.sign(
+            merchant,
+            process.env.SIGN_KEY,
+            { expiresIn: 3600 * 2 }
+        );
+
+        req.session.merchant = merchant;
+        return apiResponse.successResponseWithData(res, 'Login Success', merchant);
+    }
+]
 
 /**
  * get merchant info by merchantId
@@ -81,7 +119,7 @@ exports.delete = [
 
 
 /**
- * add merchant
+ * add merchant 
  * @returns {Object} success message
  */
 exports.add = [
@@ -100,6 +138,20 @@ exports.add = [
             if (existingMerchant) {
                 return apiResponse.ErrorResponse(res, 'Merchant already exists');
             }
+
+            let obj = {
+                backgroundImg: "",
+                name: merchant.name,
+                category: merchant.category,
+                type: merchant.type,
+                description: merchant.description,
+                location: merchant.location,
+                contactPhone: contactPhone,
+                hours: merchant.hours,
+                photoGallery: merchant.photoGallery,
+                openHours: merchant.openHours,
+            }
+
 
             let flag = await MerchantsModel.save(merchant);
             if (!flag) {

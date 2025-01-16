@@ -60,5 +60,26 @@ router.delete('/:merchantId', MerchantController.delete);
  * 
  */
 router.post('/', MerchantController.add);
+/**
+ * @swagger
+ * /api/merchants/login:
+ *   post:
+ *     tags:
+ *      - Merchants
+ *     summary: Login a Merchant
+ *     produces:
+ *      - application/json
+ *     parameters:
+ *      - name: body
+ *        in: body
+ *        description: Merchant object that needs to be added
+ *        required: true
+ *        schema:
+ *          $ref: '#/definitions/Merchant'
+ *     responses:
+ *       200:
+ *         description: successful operation
+ */
+router.post('/login', MerchantController.login);
 
 module.exports = router;
