@@ -1,30 +1,66 @@
 <nav>
   <div class="container">
     <div class="nav-wrapper">
-      <a href="javascript:void(0);" data-target="mobileMenu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-      <a href="/" class="brand-logo">Skipy</a>
+      <% if (user) { %>
+        <a href="javascript:void(0);" data-target="mobileMenu" class="sidenav-trigger"><i
+            class="material-icons">menu</i></a>
+        <a href="/" class="brand-logo">Skipy</a>
 
-      <ul class="sidenav" id="mobileMenu" style="transform: translateX(-105%);">
-        <li class="">
-          <a class="nav-link " href="/">Home</a>
-        </li>
-        <li class="">
-          <a class="nav-link " href="/merchants">merchants</a>
-        </li>
-        <li class="">
-          <a class="nav-link " href="/about">About</a>
-        </li>
-        <li>
-          <a class="nav-link" href="/login">Sign In</a>
-        </li>
-      </ul>
+        <ul class="sidenav" id="mobileMenu" style="transform: translateX(-105%);">
+          <li class="">
+            <a class="nav-link " href="/">Home</a>
+          </li>
+          <li class="">
+            <a class="nav-link " href="/merchants">Merchants</a>
+          </li>
+          <li class="">
+            <a class="nav-link " href="/about">About</a>
+          </li>
+          <li> <a class="btn waves-effect hide-on-med-and-down">
+            <%= user.username %>
+          </a></li>
+          <li><a target="_self" href="/api/auth/logout">Log Out</a></li>
+        </ul>
 
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="/">Home</a></li>
-        <li><a href="/merchants">merchants</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/login" class="btn waves-effect hide-on-med-and-down">Sign In</a></li>
-      </ul>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/">Home</a></li>
+          <li><a href="/merchants">Merchants</a></li>
+          <li><a href="/about">About</a></li>
+          <li> <a class="btn waves-effect hide-on-med-and-down">
+              <%= user.username %>
+            </a></li>
+          <li><a href="/api/auth/logout">Log Out</a></li>
+        </ul>
+
+        <% } else { %>
+          <a href="javascript:void(0);" data-target="mobileMenu" class="sidenav-trigger"><i
+              class="material-icons">menu</i></a>
+          <a href="/" class="brand-logo">Skipy</a>
+
+          <ul class="sidenav" id="mobileMenu" style="transform: translateX(-105%);">
+            <li class="">
+              <a class="nav-link " href="/">Home</a>
+            </li>
+            <li class="">
+              <a class="nav-link " href="/merchants">Merchants</a>
+            </li>
+            <li class="">
+              <a class="nav-link " href="/about">About</a>
+            </li>
+            <li>
+            <li><a class="nav-link " href="/api/auth/login">Sign In</a></li>
+            </li>
+            <li><a class="nav-link " href="/api/auth/register">Register</a></li>
+          </ul>          
+
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/">Home</a></li>
+            <li><a href="/merchants">Merchants</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/api/auth/login" class="btn bg-gray waves-effect hide-on-med-and-down">Sign In</a></li>
+            <li><a href="/api/auth/register">Register</a></li>
+          </ul>
+          <% } %>
     </div>
   </div>
 </nav>

@@ -1,0 +1,350 @@
+<%- include('../partials/top-a') -%>
+    <link rel="stylesheet" href="../../css/base/header.css">
+    <link rel="stylesheet" href="../../css/base/footer.css">
+    <link rel="stylesheet" href="../../css/booking.css">
+    <%- include('../partials/top-b') -%>
+        <%- include('../partials/header') -%>
+            <main>
+                <!-- Booking section -->
+                <section>
+                    <!-- Selected merchant details section -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s12 center-align">
+                                <h3 class="skipy-extrabold skipy-text-3xl font-Pacifico">
+                                    <%= merchant.name %>
+                                </h3>
+                                <p>
+                                    <%= merchant.address %>
+                                </p>
+                                <p>
+                                    <%= merchant.workingHours %>
+                                </p>
+                                <a class="waves-effect waves-light btn-small bg-gray"
+                                    href="/merchant/<%= merchant._id %>"><i
+                                        class="material-icons left">arrow_back</i>Back to Merchant</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Booking Reservation Details Section -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s12">
+
+                                <form action="/booking/<%= merchant._id %>" method="POST">
+
+                                    <div class="col s6">
+
+                                        <div class="white skipy-border-radius-8">
+                                            <div class="row">
+                                                <div class="col s12">
+
+                                                    <div class="col s12">
+
+                                                        <h3 class="skipy-semibold skipy-text-xl">Reservation Details
+                                                        </h3>
+
+                                                        <input type="hidden" name="merchantId"
+                                                            value="<%= merchant._id %>">
+
+                                                        <div class="col s12">
+                                                            <div class="card-panel lighten-5 z-depth-1">
+                                                                <div class="row valign-wrapper skipy_mb_0">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="name" type="text" class="validate"
+                                                                            name="name" disabled required
+                                                                            value="<%= merchant.name %>">
+                                                                        <label for="name">Merchant
+                                                                            Name</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col s12">
+                                                            <div class="card-panel lighten-5 z-depth-1">
+                                                                <div class="row valign-wrapper skipy_mb_0">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="datepicker" type="text"
+                                                                            class="datepicker" name="datepicker"
+                                                                            required>
+                                                                        <label for="datepicker">Reservation Date</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col s12">
+                                                            <div class="card-panel lighten-5 z-depth-1">
+                                                                <div class="row valign-wrapper skipy_mb_0">
+                                                                    <div class="input-field col s12">
+                                                                        <div class="skipy_mb_16"><label
+                                                                                for="time">Available Time
+                                                                                Slots</label></div>
+
+                                                                        <div class="row">
+                                                                            <div class="col s12">
+                                                                                <div class="btn-group" id="timeSlots">
+                                                                                    <% timeSlots.forEach(time=> { %>
+                                                                                        <button type="button"
+                                                                                            class="btn bg-gray col s3 waves-effect waves-light time-slot"
+                                                                                            data-time="<%= time %>">
+                                                                                            <%= time %>
+                                                                                        </button>
+                                                                                        <% }) %>
+                                                                                </div>
+                                                                                <input type="hidden" name="time"
+                                                                                    id="selectedTime" required>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col s12">
+                                                            <div class="card-panel lighten-5 z-depth-1">
+                                                                <div class="row valign-wrapper skipy_mb_0">
+                                                                    <div class="col s12">
+                                                                        <label for="guests">Number of Guests</label>
+                                                                        <select id="guestSelect" name="guests" required
+                                                                            class="browser-default">
+                                                                            <% guestOptions.forEach(option=> { %>
+                                                                                <option value="<%= option %>">
+                                                                                    <%= option %>
+                                                                                </option>
+                                                                                <% }) %>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <% if (user) { %>
+                                                            <div class="col s12">
+                                                                <div class="card-panel lighten-5 z-depth-1">
+                                                                    <div class="row valign-wrapper skipy_mb_0">
+                                                                        <div class="input-field col s12">
+                                                                            <input id="contactName" type="text"
+                                                                                class="validate" name="contactName"
+                                                                                disabled required
+                                                                                value="<%= user.username %>">
+                                                                            <label for="contactName">Contact
+                                                                                Name</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col s12">
+                                                                <div class="card-panel lighten-5 z-depth-1">
+                                                                    <div class="row valign-wrapper skipy_mb_0">
+                                                                        <div class="input-field col s12">
+                                                                            <input id="contactPhone" type="text"
+                                                                                class="validate" name="contactPhone"
+                                                                                disabled required
+                                                                                value="<%= user.phone %>">
+                                                                            <label for="contactPhone">Contact
+                                                                                Phone</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <% } else { %>
+ 
+                                                                <% } %>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col s6">
+
+                                        <div class="white skipy-border-radius-8">
+                                            <div class="row">
+                                                <div class="col s12">
+                                                    <input type="hidden" name="menuItems" id="menuItemsInput">
+                                                    <div class="col s12" id="menuItems">
+                                                        <div class="flex items-center justify-between">
+                                                            <h3 class="skipy-semibold skipy-text-xl">Menu Items</h3>
+                                                            <p class="skipy-semibold skipy-text-xl skipy_mt_total">
+                                                                Total:
+                                                                <span id="subTotal">$0.00</span>
+                                                            </p>
+                                                        </div>
+                                                        <% if (menu.list) { %>
+                                                        <% menu.list.forEach(element=> { %>
+                                                            <% let values=element.items; %>
+                                                                <% values.forEach(item=> { %>
+                                                                    <div class="col s12">
+                                                                        <div
+                                                                            class="card-panel grey lighten-5 z-depth-1">
+                                                                            <div class="row valign-wrapper skipy_mb_0">
+
+                                                                                <div class="col s3">
+                                                                                    <img src="<%= item.img %>"
+                                                                                        alt="<%= item.name %>"
+                                                                                        class="object-cover rounded-lg skipy_w_24 skipy_h_24">
+                                                                                </div>
+                                                                                <div class="col s9">
+                                                                                    <span class="black-text">
+                                                                                        <span
+                                                                                            class="title skipy-semibold">
+                                                                                            <%= item.name %>
+                                                                                        </span>
+                                                                                        <p class="title skipy-semibold">
+                                                                                            $<%= item.price %>
+                                                                                        </p>
+                                                                                        <div>
+                                                                                            <button
+                                                                                                class="waves-effect waves-light btn bg-gray skipy_mr_8 quantity-btn decrease"
+                                                                                                type="button"
+                                                                                                data-id="<%= item._id %>"
+                                                                                                data-price="<%= item.price %>">-</button>
+                                                                                            <span
+                                                                                                id="quantity-<%= item._id %>">0</span>
+                                                                                            <button
+                                                                                                class="waves-effect waves-light btn bg-gray skipy_ml_8 quantity-btn increase"
+                                                                                                type="button"
+                                                                                                data-id="<%= item._id %>"
+                                                                                                data-price="<%= item.price %>">+</button>
+                                                                                        </div>
+                                                                                    </span>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <% }) %>
+                                                                        <% }) %>
+                                                                        <% } else { %>
+                                                                            <div class="col s12">
+                                                                                <div class="card-panel grey lighten-5 z-depth-1">
+                                                                                    <div class="row valign-wrapper skipy_mb_0">
+                                                                                        <div class="col s12">
+                                                                                            <span class="black-text">Sorry no items to select for <%= merchant.name %>. Please call <%= merchant.contactPhone %>. </span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>  
+                                                                            </div>    
+                                                                            <% } %>
+                                                                            <div class="col s12">
+                                                                                <div
+                                                                                    class="card-panel grey lighten-5 z-depth-1">
+                                                                                    <div
+                                                                                        class="row valign-wrapper skipy_mb_0">
+                                                                                        <div
+                                                                                            class="input-field col s12">
+                                                                                            <textarea
+                                                                                                id="specialRequest"
+                                                                                                placeholder="Enter any special request or dietary ..."
+                                                                                                class="materialize-textarea validate"
+                                                                                                name="specialRequest"
+                                                                                                data-length="120"></textarea>
+                                                                                            <label for="specialRequest"
+                                                                                                class="skipy-semibold skipy-text-3xl"><strong>Special
+                                                                                                    Request</strong></label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <% if (menu.list) { %>
+                                                                            <div class="col s12">
+                                                                                <div
+                                                                                    class="card-panel grey lighten-5 z-depth-1">
+                                                                                    <h3
+                                                                                        class="skipy-semibold skipy-text-xl">
+                                                                                        Order
+                                                                                        Summary</h3>
+                                                                                    <div
+                                                                                        class="row valign-wrapper skipy_mb_0">
+                                                                                        <div class="col s12">
+                                                                                            <div id="orderSummary">
+                                                                                            </div>
+
+                                                                                            <div
+                                                                                                class="flex justify-between skipy_mt_8">
+                                                                                                <span>Subtotal:</span>
+                                                                                                <span
+                                                                                                    id="subTotal2">$0.00</span>
+                                                                                            </div>
+
+                                                                                            <div
+                                                                                                class="flex justify-between skipy_mt_8">
+                                                                                                <span>Service Fee
+                                                                                                    (10%):</span>
+                                                                                                <span
+                                                                                                    id="serviceFee">$0.00</span>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="border-t skipy_mt_8 skipy_pt_8">
+                                                                                                <div
+                                                                                                    class="flex justify-between skipy-semibold">
+                                                                                                    <span>Total
+                                                                                                        Amount:</span>
+                                                                                                    <span
+                                                                                                        id="totalPriceWithGST">$0.00</span>
+                                                                                                </div>
+                                                                                            </div>
+
+
+                                                                                            <div class="skipy_mt_16">
+                                                                                                <!-- <p>You will receive a
+                                                                                                    confirmation text
+                                                                                                    message. Message &
+                                                                                                    data rates may
+                                                                                                    apply.</p>
+                                                                                                <p>By clicking “Complete
+                                                                                                    booking” you agree
+                                                                                                    to the Skipy Terms
+                                                                                                    of Use and Privacy
+                                                                                                    Policy.
+                                                                                                    Message & data rates
+                                                                                                    may apply. You can
+                                                                                                    opt out of receiving
+                                                                                                    text messages at any
+                                                                                                    time in
+                                                                                                    your account
+                                                                                                    settings or by
+                                                                                                    replying STOP.</p> -->
+                                                                                                <button
+                                                                                                    class="waves-effect waves-light btn btn-large bg-gray col s12 skipy_h_48"><strong>Confirm
+                                                                                                        Reservation &
+                                                                                                        Order</strong></button>
+                                                                                            </div>
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <% } else { %>
+                                                                                <% } %>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="center-align">
+                                            <a class="waves-effect waves-light btn btn-small bg-gray" href="/"><i
+                                                    class="material-icons left">arrow_back</i>Back to Homepage</a>
+                                        </div>
+
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+            </main>
+            <%- include('../partials/bottom-a') -%>
+
+                <script src="../../js/booking.js"></script>
+                <%- include('../partials/bottom-b') -%>
