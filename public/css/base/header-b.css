@@ -1,58 +1,58 @@
 nav {
-    background-color: #fff;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    z-index: 50;
+  background-color: #fff;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  z-index: 50;
 }
 
-.container{
-    width: 100%;
-    max-width: 1536px;
-    padding: 0;
+.container {
+  width: 100%;
+  max-width: 1536px;
+  padding: 0;
 }
 
-.flex-between{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.material-icons{
-    color: black;
+.material-icons {
+  color: black;
 }
 
-.nav-wrapper .breadcrumb::before{
-    color: black;
+.nav-wrapper .breadcrumb::before {
+  color: black;
 }
 
-.nav-wrapper .breadcrumb{
-    color: black;
+.nav-wrapper .breadcrumb {
+  color: black;
 }
 
-nav .brand-logo{
-    color: black;
-    font-family: 'Pacifico';
-    font-size: 1.5rem;
-    line-height: 2rem;
-    position: relative;
+nav .brand-logo {
+  color: black;
+  font-family: "Pacifico";
+  font-size: 1.5rem;
+  line-height: 2rem;
+  position: relative;
 }
 
-.btn-shopping-cart{
-    background-color: black;
-    color: #fff;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 160px;
-    height: 40px;
-    border-radius: 10px;
-    margin-top: 10px;
+.btn-shopping-cart {
+  background-color: black;
+  color: #fff;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 160px;
+  height: 40px;
+  border-radius: 10px;
+  margin-top: 10px;
 }
 
-.btn-shopping-cart i{
-    width: 18px;
-    height: 16px;
+.btn-shopping-cart i {
+  width: 18px;
+  height: 16px;
 }
