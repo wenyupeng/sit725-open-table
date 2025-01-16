@@ -1,0 +1,130 @@
+<%- include('../partials/top-a') -%>
+    <link rel="stylesheet" href="../../css/base/header.css">
+    <link rel="stylesheet" href="../../css/base/footer.css">
+    <link rel="stylesheet" href="../../css/merchant.css">
+    <%- include('../partials/top-b') -%>
+        <%- include('../partials/header') -%>
+            <main>
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 center-align">
+                            <h3 class="font-Pacifico skipy-extrabold skipy-text-3xl">Skipy</h3>
+                            <h3 class="skipy-extrabold skipy-text-3xl">Create Merchant</h3>
+                            <p>Already have an account? <a class="skipy-text-custom" target="_self"
+                                    href="/api/users/login">Sign in</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container ">
+                    <div class="row">
+                        <div class="col s8 offset-s2">
+                            <div class="container white skipy-border-radius-12">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <form name="form2" action="/merchant" method="POST">
+
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <i class="material-icons prefix">account_circle</i>
+                                                        <input id="name" type="text" class="validate" name="name"
+                                                            required>
+                                                        <label for="name">Full Name</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <i class="material-icons prefix">comment</i>
+                                                        <textarea id="description" class="materialize-textarea validate"
+                                                            name="description" required></textarea>
+                                                        <label for="description">Description</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <i class="material-icons prefix">map</i>
+                                                        <textarea id="location" class="materialize-textarea validate"
+                                                            name="location" required></textarea>
+                                                        <label for="location">Merchant Address</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <i class="material-icons prefix">phone</i>
+                                                        <input id="contactPhone" type="tel" class="validate"
+                                                            name="contactPhone" required>
+                                                        <label for="contactPhone">Phone Number</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <i class="material-icons prefix">business</i>
+                                                        <input id="type" class="validate" type="text" name="type"
+                                                            required>
+                                                        <label for="type">Merchant Type</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <i class="material-icons prefix">business_center</i>
+                                                        <input id="category" class="validate" type="text"
+                                                            name="category" required>
+                                                        <label for="category">Merchant Category</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <i class="material-icons prefix">watch</i>
+                                                        <input id="hours" class="validate" type="text" name="hours"
+                                                            required>
+                                                        <label for="hours">Working Hours</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <i class="material-icons prefix">image</i>
+                                                        <input id="backgroundImg" class="validate" type="text"
+                                                            name="backgroundImg" required>
+                                                        <label for="backgroundImg">Background Image</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col s12">
+                                                        <button class="btn bg-gray col s12" type="submit">Create
+                                                            Merchant
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <div>
+                                                <% if (message) { %>
+                                                    <p>
+                                                        <%= message %>
+                                                    </p>
+                                                    <% } %>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <%- include('../partials/footer') -%>
+            </main>
+            <%- include('../partials/bottom-a') -%>
+
+                <script src="../../js/merchant.js"></script>
+                <%- include('../partials/bottom-b') -%>

@@ -16,4 +16,3 @@ exports.getMenuByMerchantId =
             return [];
         }
     }
-

@@ -14,10 +14,10 @@ $(document).ready(function () {
         this.location.href = '/';
     });
 
-    $('#makeReservationBtn').click(() => {
-        let merchantId = $('#merchantId').val();
-        this.location.href = '/merchant/' + merchantId + '/menu';
-    });
+    // $('#makeReservationBtn').click(() => {
+    //     let merchantId = $('#merchantId').val();
+    //     this.location.href = '/merchant/' + merchantId + '/menu';
+    // });
 
     let merchant ={
         merchantId : $('#merchantId').val(),
