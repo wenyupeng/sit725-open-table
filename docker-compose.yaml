@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  web:
+    image: sit725-skipy-image:latest
+    container_name: sit725-skipy
+    ports:
+      - "80:3000"
+    environment:
+      - NODE_ENV=development
+      - DB_USERNAME= wen0424068311
+      - DB_PWD= wen0424068311
+      - DB_PORT=27017
+      - DB_NAME=sit725-skipy
+    depends_on:
+      - db
+    volumes:
+      - ./my-web-app:/app
+    command: ["npm", "server.js"]
+
+
+volumes:
+  db-data:

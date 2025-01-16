@@ -1,5 +1,8 @@
 const { MenuModel } = require('../models');
 const log = require('../utils/utils.logger');
+const authenticate = require('../middlewares/jwt');
+const apiResponse = require('../utils/utils.apiResponse');
+const permissions = require('../middlewares/permissions');
 
 /**
  * get menu by merchantId
@@ -16,4 +19,26 @@ exports.getMenuByMerchantId =
             return [];
         }
     }
+
+/**
+ * add menu
+ * @returns {Object} 
+ */
+exports.add=[
+    authenticate,
+    permissions,
+    async (req,res)=>{
+        let merchant = req.body;
+        let merchantName = merchant.name;
+        let phone = merchant.phone;
+    }
+]
+
+exports.queryPagination = [
+    authenticate,
+    permissions,
+    async (req,res)=>{
+
+    }
+]
 
