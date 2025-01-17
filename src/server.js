@@ -6,8 +6,11 @@ const bodyParser = require("body-parser");
 const logger = require("morgan");
 const cors = require("cors");
 const mount = require("mount-routes");
+const { createServer } = require('http')
 
 const apiResponse = require("./utils/utils.apiResponse");
+const SocketIOService = require("./services/socket.service");
+const routes = require('./routes/index');
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -17,8 +20,11 @@ require("./db/index");
 
 const { sessionAuth, attachUserToLocals } = require("./middlewares/session");
 const app = express();
-// const server = require('http').createServer(app);
-// const io = require('socket.io')(server);
+const httpServer = createServer(app);
+
+SocketIOService.instance().initialize(httpServer);
+const io = SocketIOService.instance().getServer();
+io.on('connection', SocketIOService.handleConnection)
 
 app.use(sessionAuth);
 app.use(attachUserToLocals);
@@ -74,7 +80,7 @@ var swaggerJson = function (req, res) {
 app.get("/swagger.json", swaggerJson);
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-mount(app, path.join(process.cwd(), "/src/routes"), isDev);
+app.use(routes)
 
 //  throw 404 if URL not found
 app.all("*", function (req, res) {
@@ -94,7 +100,7 @@ app.use(function (err, req, res, next) {
   next(err);
 });
 
-app.listen(envConfig.port, () => {
+httpServer.listen(envConfig.port, () => {
   console.log(
     chalk.bold.green(
       `project start http://${envConfig.appUrl}:${envConfig.port}/api`,

@@ -4,6 +4,7 @@ const { MerchantsModel, MenuModel, BookingModel } = require("../models");
 const log = require("../utils/utils.logger");
 
 const { getBookingsByMerchantId } = require("../services/booking.service");
+const SocketIOService = require('../services/socket.service');
 
 /**
  * [Features][Booking] Handle Create Booking
