@@ -1,0 +1,71 @@
+.fix-top {
+  padding-top: 80px;
+}
+
+.card {
+  border-radius: 10px;
+  max-height: 510px;
+  overflow: hidden;
+}
+
+.card .card-title {
+  white-space: nowrap;
+  overflow: hidden;
+  font-weight: 600;
+}
+
+.card .card-content .cardDesc {
+  height: 72px;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 900px) {
+  .card .card-title .cardName {
+    font-size: large;
+  }
+}
+
+.card .card-image img {
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.card-content p {
+  overflow: hidden;
+}
+
+.stars {
+  padding-top: 5px;
+}
+
+.stars i {
+  color: rgb(250, 204, 21);
+}
+
+.margin-right-10 {
+  margin-right: 10px;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card .card-action {
+  padding: 16px 24px 8px;
+}
+
+.card-action .left span {
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.card-action .left i {
+  width: 32px;
+  height: 32px;
+  border: 1px solid black;
+  text-align: center;
+  padding-top: 7px;
+}
