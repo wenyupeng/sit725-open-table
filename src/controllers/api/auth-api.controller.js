@@ -106,8 +106,6 @@ exports.login = [
   ],
   async (req, res) => {
     try {
-
-      const io = SocketIOService.instance();
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return apiResponse.validationErrorWithData(res, errors.array()[0].msg);
