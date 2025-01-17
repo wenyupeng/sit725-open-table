@@ -8,8 +8,8 @@ const {
   handleCreateMerchantPhotoGallery,
   renderCreateMerchantOpenHours,
   handleCreateMerchantOpenHours,
-} = require("../controllers/MerchantController");
-const { getMenuByMerchantId } = require("../controllers/MenuController");
+} = require("../controllers/merchant.controller");
+const { getMenuByMerchantId } = require("../controllers/menu.controller");
 
 // router.get("/:merchantId", async function (req, res) {
 //   let merchantId = req.params.merchantId;

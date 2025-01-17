@@ -1,9 +1,28 @@
 const express = require("express");
 const router = express.Router();
 
-const customerRouter = require("./pages/customer-pages.route.js");
+const apiRoute = require('./api/index');
 
-router.use("/merchant-dashboard", (_, res) => res.send("ok"));
-router.use(customerRouter);
+const homeRoute = require('./home.route');
+const authRoute = require('./auth.route');
+const bookingRoute = require('./booking.route');
+const merchantRoute = require('./merchant.route');
+
+const merchantDashboardRoute = require('./merchant-dashboard');
+const adminDashboardRoute = require('./admin-dashboard');
+
+router.use('/api', apiRoute)
+
+router.use('/home', homeRoute);
+router.use('/auth', authRoute);
+router.use('/booking', bookingRoute);
+router.use('/merchant', merchantRoute)
+
+// Merchant Dashboard
+router.use('/md', merchantDashboardRoute)
+
+// Admin Dashboard
+router.use('/ad', adminDashboardRoute)
+
 
 module.exports = router;
