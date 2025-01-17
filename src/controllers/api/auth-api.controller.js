@@ -5,6 +5,7 @@ const apiResponse = require("../../utils/utils.apiResponse");
 const { encryption, decryption } = require("../../utils/utils.others");
 const log = require("../../utils/utils.logger");
 const envConfig = require("../../config/env.config");
+const SocketIOService = require('../../services/socket.service');
 
 /**
  * User register
@@ -120,12 +121,10 @@ exports.login = [
         };
         const userInfo = await UserModel.findOne(query);
         if (!userInfo) {
-          req.flash("info", "Flash Message Added");
-          return res.render("./login/login", { pageTitle: "Login" });
-          // return apiResponse.unauthorizedResponse(
-          //   res,
-          //   "1: username or password is wrong",
-          // );
+          return apiResponse.unauthorizedResponse(
+            res,
+            "1: username or password is wrong",
+          );
         }
 
         let isPass = await decryption(req.body.password, userInfo.password);
