@@ -1,10 +1,9 @@
-/**/node_modules/**
+node_modules/
 /**/package-lock.json
-logs/*.log
+logs/
+.env
 
 /**/package.json
 /**/*.env.development
 /**/db.config.js
 
-/**/db_init_home.js
-/**/db_init_merchant.js
