@@ -121,7 +121,7 @@ exports.login = [
             { phone: inputUsername },
           ],
         };
-        const userInfo = await UserModel.findOne(query);
+        const userInfo = await UserModel.findOne(query).populate('merchant').lean();
         if (!userInfo) {
           return apiResponse.unauthorizedResponse(
             res,
@@ -139,22 +139,16 @@ exports.login = [
             "2: username or password is wrong",
           );
 
-        let userData = {
-          _id: userInfo._id,
-          username: userInfo.username,
-          email: userInfo.email,
-          phone: userInfo.phone,
-          role: userInfo.role,
-        };
-        userData.token =
+        delete userInfo.password;
+        userInfo.token =
           "Bearer " +
-          jwt.sign(userData, envConfig.jwtSecret, { expiresIn: 3600 * 2 });
+          jwt.sign(userInfo, envConfig.jwtSecret, { expiresIn: 3600 * 2 });
 
         log.info(`user ${userInfo.username} login successfully`);
 
         // Store user data in session
-        req.session.user = userData;
-        req.session.userId = userData._id; // Store user ID in session
+        req.session.user = userInfo;
+        req.session.userId = userInfo._id; // Store user ID in session
 
         // Redirect to the previous page or default to home
         let redirectTo = "/";
@@ -165,7 +159,7 @@ exports.login = [
         }
 
         console.log(
-          `[Login Attempt] Success: User ${userData.email} redirected to ${redirectTo}`,
+          `[Login Attempt] Success: User ${userInfo.email} redirected to ${redirectTo}`,
         );
         res.redirect(redirectTo);
       }

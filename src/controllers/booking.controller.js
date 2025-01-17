@@ -2,6 +2,7 @@ const { ObjectId } = require("mongodb");
 const { MerchantsModel, MenuModel, BookingModel } = require("../models");
 
 const log = require("../utils/logger.util");
+const renderView = require('../utils/render-view.util')
 
 const { getBookingsByMerchantId } = require("../services/booking.service");
 
@@ -114,7 +115,7 @@ const renderCreateBooking = async (req, res) => {
 
 const renderMerchantDashboardMyBooking = async (req, res) => {
   const bookings = await getBookingsByMerchantId;
-  res.render("./merchant-dashboard/bookings", { bookings });
+  return renderView("./merchant-dashboard/bookings", { bookings })(req, res)
 };
 
 module.exports = {

@@ -1,4 +1,6 @@
 const { Server } = require("socket.io");
+const jwt = require("jsonwebtoken");
+const envConfig = require("../config/env.config");
 
 class SocketIOService {
   constructor() {
@@ -15,7 +17,6 @@ class SocketIOService {
 
   initialize(httpServer, opts) {
     SocketIOService.server = new Server(httpServer, opts);
-
     return SocketIOService.server;
   }
 
@@ -27,7 +28,6 @@ class SocketIOService {
     if (!SocketIOService.server) {
       throw new Error("IO server requested before initialization");
     }
-
     return SocketIOService.server;
   }
 
@@ -44,23 +44,25 @@ class SocketIOService {
   }
 
   handleConnection(socket) {
-    console.log("a user connected");
+    const token = socket.handshake.query['token'];
+    let user;
+
+    // @TODO: check jwt in handshake layer, not here.
+    try {
+      user = jwt.verify(token, envConfig.jwtSecret);
+    } catch {
+      socket.disconnect();
+      return;
+    }
+
+    socket.join(`user:${user._id}`)
+    if (user.merchant?._id && user.role === 'merchant') {
+      socket.join(`merchant:${user._id}`)
+    }
 
     socket.on("disconnect", () => {
       console.log("user disconnected");
     });
-
-    socket.on("my message", (msg) => {
-      console.log("message: " + msg);
-    });
-
-    socket.on("room_update", (msg) => {
-      console.log("message: " + msg);
-    });
-
-    setInterval(() => {
-      socket.emit("number", parseInt(Math.random() * 10));
-    }, 1000);
   }
 }
 
