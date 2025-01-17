@@ -1,6 +1,6 @@
 const { ObjectId } = require("mongodb");
 const { MerchantsModel, MenuModel, BookingModel } = require("../models");
-
+const apiResponse = require("../utils/utils.apiResponse");
 const log = require("../utils/utils.logger");
 
 /**
@@ -24,25 +24,20 @@ exports.handleCreateBooking = async (req, res) => {
     const merchant = await MerchantsModel.findById(merchantId);
 
     if (!merchant) {
-      return res
-        .status(404)
-        .render("./error/404", { pageTitle: "Merchant Not Found" });
+      return apiResponse.notFoundResponse(res, "Merchant not found");
     } else {
-      const menu = await MenuModel.findOne({ merchantId: { $eq: merchantId } });
+      const menu = await MenuModel.find({ merchantId: { $eq: merchantId }, isActive: { $eq: true } });
 
       if (!menu) {
-        return res
-          .status(404)
-          .render("./error/404", { pageTitle: "No Menuitems Found" });
+        return apiResponse.notFoundResponse(res, "No Menuitems Found");
       }
       const { datepicker, time, menuItems, specialRequest, guests } = req.body;
+      console.log(req.body);
       // Validate inputs
       if (!datepicker || !time || !guests) {
-        return res.status(400).render("./booking/booking", {
-          pageTitle: "Booking",
-          message: "All fields are required.",
-        });
+        return apiResponse.validationErrorWithData(res, "All fields are required.")
       }
+
       const parsedMenuItems = JSON.parse(menuItems);
 
       const subTotal = parsedMenuItems.reduce(
@@ -63,15 +58,12 @@ exports.handleCreateBooking = async (req, res) => {
       });
 
       await booking.save();
-
+      
       res.redirect(`/merchant/${merchantId}`);
     }
   } catch (err) {
-    log.error(`Add Merchant error, ${JSON.stringify(err)}`);    
-    res.status(500).render("./booking/booking", {
-      pageTitle: "Booking",
-      message: "Error creating booking",
-    });
+    log.error(`Add Merchant error, ${JSON.stringify(err)}`);
+    return apiResponse.ErrorResponse(res, "Error creating booking" + err.message);
   }
 };
 
@@ -81,10 +73,12 @@ exports.handleCreateBooking = async (req, res) => {
  */
 exports.renderCreateBooking = async (req, res) => {
   const { merchantId } = req.params;
-
   const merchant = await MerchantsModel.findById(merchantId);
-  const menu = await MenuModel.findOne({ merchantId: { $eq: merchantId } });
-  
+  const menu = await MenuModel.find({
+    merchantId: { $eq: merchantId },
+    isActive: { $eq: true }
+  });
+
   res.render("./booking/booking", {
     pageTitle: `Book ${merchant.name}`,
     merchant: merchant,

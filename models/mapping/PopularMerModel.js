@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 let types = mongoose.SchemaTypes;
 const PopularMerchantsSchema = new mongoose.Schema({
-    merchantId: {type: types.String, required: true},
+    merchantId: {type: types.ObjectId, required: true},
     img: {type: types.String, required: true},
     name: {type: types.String, required: true},
     descriptions: {type: types.String, required: true},

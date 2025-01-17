@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 
 let types = mongoose.SchemaTypes;
-const FoodSchema = new mongoose.Schema({
-    // foodId: { type: types.String, required: true },
+
+const MenusSchema = new mongoose.Schema({
+    merchantId: { type: types.ObjectId, required: true },
+    categoryName: { type: types.String, required: true },
     img: { type: types.String, required: true },
     name: { type: types.String, required: true },
     price: { type: types.Number, required: true },
@@ -10,17 +12,6 @@ const FoodSchema = new mongoose.Schema({
     star: { type: types.Number, required: true },
     reviews: { type: types.String, required: true },
     isActive: { type: types.Boolean, default: true }
-});
-
-const CategorySchema = new mongoose.Schema({    
-    categoryName: { type: types.String, required: true },
-    items: [FoodSchema],
-});
-
-const MenusSchema = new mongoose.Schema({
-    merchantId: { type: types.ObjectId, required: true },
-    // merchantId: { type: types.String, required: true },
-    list: [CategorySchema],
 }, {
     timestamps: true,
     versionKey: false,

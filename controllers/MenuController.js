@@ -11,8 +11,28 @@ const permissions = require('../middlewares/permissions');
 exports.getMenuByMerchantId =
     async (merchantId) => {
         try {
-            let menu = await MenuModel.findOne({ merchantId: merchantId.toString() }).exec();
-            return menu;
+            let options = {
+                merchantId: merchantId,
+                isActive: true
+            }
+
+            let menu = await MenuModel.find(options);
+            if (!menu) {
+                return apiResponse.notFoundResponse('Menu not found');
+            }
+
+            let categoryMap = new Map();
+            menu.forEach(menuItem => {
+                categoryName = menuItem.categoryName;
+                let subMenu = categoryMap.get(categoryName);
+                if (!subMenu) {
+                    subMenu = [];
+                    categoryMap.set(categoryName, subMenu);
+                }
+                subMenu.push(menuItem);
+            });
+
+            return categoryMap;
         } catch (err) {
             console.log(err);
             log.err(`popularMerchants error, ${JSON.stringify(err)} `);
@@ -42,7 +62,7 @@ exports.queryPagenation = [
     }
 ]
 
-exports.delete =[
+exports.delete = [
     authenticate,
     permissions,
     async (req, res) => {
@@ -50,7 +70,7 @@ exports.delete =[
     }
 ]
 
-exports.updateById= [
+exports.updateById = [
     authenticate,
     permissions,
     async (req, res) => {

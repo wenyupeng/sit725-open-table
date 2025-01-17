@@ -332,15 +332,15 @@ exports.renderCreateMerchant = [
 exports.renderMerchantDetails = [
     async (req, res) => {
         const { merchantId } = req.params;
-
         const merchant = await MerchantsModel.findById(merchantId);
 
-        const menu = await MenuModel.findOne({ merchantId: { $eq: merchantId } });
+        if (!merchant) {
+            return apiResponse.renderNotFoundPage(res);
+        }
 
         res.render("./merchant/merchant", {
             pageTitle: "Merchant Details",
-            merchant: merchant,
-            menu: menu || []
+            merchant: merchant
         });
     },
 ];
@@ -433,6 +433,7 @@ exports.handleCreateMerchantOpenHours = async (req, res) => {
         });
     }
 };
+
 /**
  * Render a merchant openhours
  */

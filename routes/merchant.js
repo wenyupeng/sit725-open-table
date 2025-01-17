@@ -1,8 +1,6 @@
 const express = require("express");
-const express = require("express");
 const router = express.Router();
 const {
-  getMerchantByMerchantId,
   renderCreateMerchant,
   handleCreateMerchant,
   renderMerchantDetails,
@@ -13,35 +11,32 @@ const {
 } = require("../controllers/MerchantController");
 const { getMenuByMerchantId } = require("../controllers/MenuController");
 
-const {
-  renderCreateBooking,
-  handleCreateBooking,
-} = require("../controllers/BookingController");
-
-router.get('/register',async function (req,res) {
-  res.render('./merchant/register',{
-      
-  })
-})
-
-router.get('/login',async function (req,res) {
-  res.render('./merchant/login',{
+router.get('/register', async function (req, res) {
+  res.render('./merchant/register', {
 
   })
 })
+
+router.get('/login', async function (req, res) {
+  res.render('./merchant/login', {
+
+  })
+})
+
+// Render a merchant details routes
+router.get("/:merchantId", renderMerchantDetails);
 
 router.get("/:merchantId/menu", async function (req, res) {
   let merchantId = req.params.merchantId;
-  let menu = await getMenuByMerchantId(merchantId);
+  let categoryMap = await getMenuByMerchantId(merchantId);
+
 
   res.render("./menu/menu", {
-    menu: menu,
+    menu: categoryMap,
   });
 
 });
 
-// Render a merchant details routes
-router.get("/:merchantId", renderMerchantDetails);
 
 // Render create merchant routes
 router.get("/", renderCreateMerchant);
@@ -60,9 +55,6 @@ router.get("/:merchantId/hours", renderCreateMerchantOpenHours);
 
 // handle create merchant photogallery routes
 router.post("/:merchantId/hours", handleCreateMerchantOpenHours);
-
-// Render a merchant details routes
-router.get("/:merchantId", renderMerchantDetails);
 
 
 module.exports = router;

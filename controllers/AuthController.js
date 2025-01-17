@@ -85,12 +85,6 @@ exports.register = [
   },
 ];
 
-exports.renderRegister = [
-  (req, res) => {
-    res.render("./login/register", { pageTitle: "Register", message: null });
-  },
-];
-
 /**
  * user login
  * @param {string}  username username, email or phone
@@ -151,44 +145,13 @@ exports.login = [
 
         // Store user data in session
         req.session.user = userData;
-        req.session.userId = userData._id; // Store user ID in session
-        
-        // Redirect to the previous page or default to home
-        const redirectTo = req.session.returnTo || "/";
-        console.log(`[Login Attempt] Success: User ${userData.email} redirected to ${redirectTo}`);
-        //delete req.session.returnTo; // Remove returnTo after redirect
-        res.redirect(redirectTo);
 
-        return apiResponse.successResponseWithData(
-          res,
-          "login successfully",
-          userData
-        );
+        return apiResponse.successResponseWithData(res, "login successfully", userData);
       }
     } catch (err) {
       console.log(err);
       log.error(`login fail, ${req.body.username} ${JSON.stringify(err)}`);
       return apiResponse.ErrorResponse(res, err);
     }
-  },
-];
-
-/**
- * Render User login
- */
-exports.renderLogin = [
-  (req, res) => {
-    res.render("./login/login", { pageTitle: "Login", message: null });
-  },
-];
-
-/**
- * Handle User Logout
- */
-exports.logout = [
-  async (req, res) => {
-    req.session.destroy(() => {
-      res.redirect("/api/auth/login");
-    });
   },
 ];
