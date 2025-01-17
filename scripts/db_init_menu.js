@@ -1,7 +1,7 @@
 const { MongoClient, ObjectId } = require("mongodb");
 
 // Replace the uri string with your MongoDB deployment's connection string.
-const uri = "mongodb://127.0.0.1:27017"
+const uri = "mongodb://127.0.0.1:27017";
 
 // Create a new client and connect to MongoDB
 const client = new MongoClient(uri);

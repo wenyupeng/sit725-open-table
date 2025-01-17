@@ -3,6 +3,8 @@ const { MerchantsModel, MenuModel, BookingModel } = require("../models");
 
 const log = require("../utils/utils.logger");
 
+const { getBookingsByMerchantId } = require("../services/booking.service");
+
 /**
  * [Features][Booking] Handle Create Booking
  *
@@ -18,7 +20,7 @@ const log = require("../utils/utils.logger");
  * @param {Int32}   totalPriceWithGST totalPriceWithGST
  * @returns {Object} common response
  */
-exports.handleCreateBooking = async (req, res) => {
+const handleCreateBooking = async (req, res) => {
   try {
     const { merchantId } = req.params;
     const merchant = await MerchantsModel.findById(merchantId);
@@ -79,7 +81,7 @@ exports.handleCreateBooking = async (req, res) => {
  * [Features][Booking] Render Create Booking
  * @returns {Object} featured collections
  */
-exports.renderCreateBooking = async (req, res) => {
+const renderCreateBooking = async (req, res) => {
   const { merchantId } = req.params;
 
   const merchant = await MerchantsModel.findById(merchantId);
@@ -108,4 +110,15 @@ exports.renderCreateBooking = async (req, res) => {
     ],
     guestOptions: Array.from({ length: 10 }, (_, i) => i + 1),
   });
+};
+
+const renderMerchantDashboardMyBooking = async (req, res) => {
+  const bookings = await getBookingsByMerchantId;
+  res.render("./merchant-dashboard/bookings", { bookings });
+};
+
+module.exports = {
+  handleCreateBooking,
+  renderCreateBooking,
+  renderMerchantDashboardMyBooking,
 };

@@ -11,11 +11,8 @@ const sessionAuth = session({
 });
 
 const attachUserToLocals = async (req, res, next) => {
-  console.log("req.session.user:", req.session.user);
-
   if (req.session.user) {
     const user = req.session.user;
-    console.log("user from session:", user);
     res.locals.user = user ? user : null;
   } else {
     res.locals.user = null;

@@ -17,6 +17,8 @@ require("./db/index");
 
 const { sessionAuth, attachUserToLocals } = require("./middlewares/session");
 const app = express();
+// const server = require('http').createServer(app);
+// const io = require('socket.io')(server);
 
 app.use(sessionAuth);
 app.use(attachUserToLocals);

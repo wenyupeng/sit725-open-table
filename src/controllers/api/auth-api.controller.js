@@ -110,6 +110,7 @@ exports.login = [
         return apiResponse.validationErrorWithData(res, errors.array()[0].msg);
       } else {
         let inputUsername = req.body.username;
+        const type = req.query.type;
         let query = {
           $or: [
             { username: inputUsername },
@@ -118,11 +119,14 @@ exports.login = [
           ],
         };
         const userInfo = await UserModel.findOne(query);
-        if (!userInfo)
-          return apiResponse.unauthorizedResponse(
-            res,
-            "1: username or password is wrong",
-          );
+        if (!userInfo) {
+          req.flash("info", "Flash Message Added");
+          return res.render("./login/login", { pageTitle: "Login" });
+          // return apiResponse.unauthorizedResponse(
+          //   res,
+          //   "1: username or password is wrong",
+          // );
+        }
 
         let isPass = await decryption(req.body.password, userInfo.password);
         if (!isPass)
@@ -149,18 +153,17 @@ exports.login = [
         req.session.userId = userData._id; // Store user ID in session
 
         // Redirect to the previous page or default to home
-        const redirectTo = req.session.returnTo || "/";
+        let redirectTo = "/";
+        if (type === "merchant-dashboard") {
+          redirectTo = "/md/bookings";
+        } else if (type === "admin-dashboard") {
+          // @TODO: later
+        }
+
         console.log(
           `[Login Attempt] Success: User ${userData.email} redirected to ${redirectTo}`,
         );
-        //delete req.session.returnTo; // Remove returnTo after redirect
         res.redirect(redirectTo);
-
-        return apiResponse.successResponseWithData(
-          res,
-          "login successfully",
-          userData,
-        );
       }
     } catch (err) {
       console.log(err);

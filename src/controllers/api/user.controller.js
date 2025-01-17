@@ -3,7 +3,7 @@ const { validationResult } = require("express-validator");
 const { UserModel } = require("../../models");
 const authenticate = require("../../middlewares/jwt");
 const apiResponse = require("../../utils/utils.apiResponse");
-const permissions = require("../../middlewares/permissions");
+const permissions = require("../../middlewares/allowed-roles");
 
 /**
  * user list

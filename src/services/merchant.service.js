@@ -1,30 +1,12 @@
-const {
-  PopularMerModel,
-  FeaturedCollectionsModel,
-  MerchantsModel,
-} = require("../models");
+const { FeaturedCollectionsModel, MerchantsModel } = require("../models");
 
 const log = require("../utils/utils.logger");
-
-/**
- * get popular merchants
- * @returns {Object} popular merchants
- */
-exports.popularMerchants = async () => {
-  try {
-    return await PopularMerModel.find({});
-  } catch (err) {
-    console.log(err);
-    log.err(`popularMerchants error, ${JSON.stringify(err)} `);
-    return [];
-  }
-};
 
 /**
  * get featured collections
  * @returns {Object} featured collections
  */
-exports.featuredColletions = async () => {
+const getFeaturedColletions = async () => {
   try {
     return await FeaturedCollectionsModel.find({}).limit(Number(4));
   } catch (err) {
@@ -38,7 +20,7 @@ exports.featuredColletions = async () => {
  * get merchant info by merchantId
  * @returns {Object} merchant info
  */
-exports.getMerchantByMerchantId = async (merchantId) => {
+const getMerchantByMerchantId = async (merchantId) => {
   try {
     return await MerchantsModel.findById(merchantId);
   } catch (err) {
@@ -52,7 +34,7 @@ exports.getMerchantByMerchantId = async (merchantId) => {
  * get featured collections
  * @returns {Object} featured collections
  */
-exports.featuredMerchants = async () => {
+const getFeaturedMerchants = async () => {
   try {
     return await MerchantsModel.find({}).limit(Number(4));
   } catch (err) {
@@ -66,7 +48,7 @@ exports.featuredMerchants = async () => {
  * get popular merchants sorted by name
  * @returns {Object} popular merchants
  */
-exports.popularMerchants = async () => {
+const getPopularMerchants = async () => {
   try {
     return await MerchantsModel.find({}).sort({ name: -1 });
   } catch (err) {
@@ -74,4 +56,11 @@ exports.popularMerchants = async () => {
     log.error(`featuredMerchants error, ${JSON.stringify(err)}`);
     return [];
   }
+};
+
+module.exports = {
+  getFeaturedColletions,
+  getMerchantByMerchantId,
+  getFeaturedMerchants,
+  getPopularMerchants,
 };
