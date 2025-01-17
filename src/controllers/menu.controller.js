@@ -1,5 +1,5 @@
 const { MenuModel } = require("../models");
-const log = require("../utils/utils.logger");
+const log = require("../utils/logger.util");
 
 /**
  * get menu by merchantId

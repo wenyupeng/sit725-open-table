@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { validationResult } = require("express-validator");
 const { UserModel } = require("../../models");
 const authenticate = require("../../middlewares/jwt");
-const apiResponse = require("../../utils/utils.apiResponse");
+const apiResponse = require("../../utils/api-response.util");
 const permissions = require("../../middlewares/allowed-roles");
 
 /**
