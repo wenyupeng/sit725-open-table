@@ -38,3 +38,6 @@ Tasks to Do:
 
 1. Integrate relevant test functions to improve code quality.
 2. Identify and address any remaining gaps in functionality.
+
+# 18-01-2025
+Someone made significant changes without getting everyone's permission in a group project, which is unacceptable.
