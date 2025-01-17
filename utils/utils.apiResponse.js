@@ -65,3 +65,7 @@ exports.ErrorResponse = function (res, msg) {
     };
     return res.status(500).json(data);
 };
+
+exports.renderNotFoundPage = function (req, res) {
+    res.status(404).render("./error/404", { pageTitle: "404 Page Not Found" });
+};

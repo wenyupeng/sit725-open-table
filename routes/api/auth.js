@@ -64,7 +64,6 @@ const AuthController = require('../../controllers/AuthController');
  *               $ref: '#/components/schemas/RegisterUser'
  */
 router.post('/register', AuthController.register);
-router.get('/register', AuthController.renderRegister);
 
 /**
  * @swagger
@@ -125,7 +124,5 @@ router.get('/register', AuthController.renderRegister);
  *               $ref: '#/components/schemas/LoginSuccessUser'
  */
 router.post('/login', AuthController.login);
-router.get('/login', AuthController.renderLogin);
-router.get('/logout', AuthController.logout);
 
 module.exports = router;

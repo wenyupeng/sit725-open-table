@@ -1,6 +1,6 @@
 function addToOrder(cardStr) {
     let card = JSON.parse(cardStr);
-    let foodId = card.foodId;
+    let foodId = card._id;
     let count = sessionStorage.getItem(foodId);
     if (Object.is(count, null) || Object.is(count, undefined)) {
         return;
@@ -21,7 +21,7 @@ function addToOrder(cardStr) {
             count: count
         }
     } else {
-        detail.count = parseInt(detail.count) + parseInt(count);
+        detail.count = parseInt(count);
     }
 
     order.set(foodId, detail);
@@ -46,6 +46,15 @@ function ModifyCount(num, e, foodId) {
         originalVal = 0
     }
 
+  let order = sessionStorage.getItem('food_order');
+    if (originalVal ==0 && !Object.is(order, null) && !Object.is(order, undefined)) {
+        order = new Map(JSON.parse(order));
+        let detail = order.get(foodId);
+        if (detail !== 'undefined' && detail) {
+            originalVal = detail.count;
+        }
+    }
+
     let val = parseInt(originalVal) + parseInt(num);
     if (val < 0) {
         val = 0
@@ -57,6 +66,28 @@ function ModifyCount(num, e, foodId) {
 $(document).ready(function () {
     $('.sidenav').sidenav();
     $('.tabs').tabs();
+    
+    let merchantStr= sessionStorage.getItem('merchant');
+    let merchant;
+    if(merchantStr){
+        merchant= JSON.parse(merchantStr);
+        $('#merchantName').text(merchant.merchantName);
+        $('#merchantName').click(()=>{
+            window.location.href = `/merchant/${merchant.merchantId}`;
+        });
+    }
+    
+    $('#shoppingCartBtn').click(()=>{
+        let nextPage =`/booking/${merchant.merchantId}`;
+        sessionStorage.setItem('nextPage', nextPage);
 
+        let user = sessionStorage.getItem('user');
+        if(user){
+            window.location.href = nextPage;
+        }else{
+            window.location.href = `/user/login`;
+        }
+    });
+        
     console.log('ready');
 });

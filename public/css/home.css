@@ -27,14 +27,14 @@
     padding: 20px;
 }
 
-.search-form .content input{
+.search-form .content input {
     padding-left: 12px;
     border: 1px solid rgb(209, 213, 219);
     border-radius: 0.5rem;
     margin-right: 1rem;
 }
 
-.search-form .content input:nth-child(2){
+.search-form .content input:nth-child(2) {
     padding: 0 12px;
 }
 
@@ -46,8 +46,37 @@
 }
 
 @media only screen and (min-width: 993px) {
-    .row .col.l1 {
+    .row .col .l1 {
         width: 15%;
+    }
+}
+
+@media only screen and (min-width: 601px) {
+    .row .col.m1 {
+        width: 30%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+
+    .card .card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+@media only screen and (max-width: 840px) {
+    .card .card-title {
+        font-size: medium;
+    }
+
+    .featured-col .card .title h3 {
+        font-size: 1rem !important; 
+    }
+
+    .featured-col .card .title p {
+        font-size: 0.8rem !important;
     }
 }
 
@@ -107,7 +136,6 @@
 
 .featured-col .card {
     width: 100%;
-    height: 10rem;
     overflow: hidden;
     border-radius: 0.5rem;
     color: #ffffff;

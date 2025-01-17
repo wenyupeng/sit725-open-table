@@ -76,7 +76,6 @@
 
          
         <div class="row openHoursAndLocation">
-          <% if (merchant.openHours[0]) { %>
           <div class="col s12 m6 l6">
             <h2 class="custom-h2">Operating Hours</h2>
             <div class="content">
@@ -106,17 +105,7 @@
               </ul>
             </div>
           </div>
-          <% } else { %>
-            <div class="col s12 m6 l6">
-              <h2 class="custom-h2">Add Operating Hours</h2>
-              <div class="row">
-                    
-                <div class="col s6 center-align"><a class="waves-effect waves-light btn bg-gray"
-                    href="/merchant/<%= merchant._id %>/hours">Add Opening Hours</a></div>
-              </div>
-              </div>
-           
-            <% } %>
+
           <div class="col s12 m6 l6">
             <h2 class="custom-h2">Location</h2>
             <div class="content">
@@ -193,96 +182,10 @@
               <p>A true culinary gem! The truffle risotto was outstanding, and the wine selection is extensive. Perfect
                 for special occasions.</p>
             </div>
-            <div>
-            </div>
           </div>
         </div>
 
       </section>
-
-
-
-      <% if (menu.list) { %>
-        <section>
-          <div class="container">
-            <div class="row">
-              <div class="col s12">
-                <h2 class="custom-h2">Menu Items</h2>
-
-                <div class="fix-top  row">
-                  <div class="col s12">
-                    <ul class="tabs">
-                      <% menu.list.forEach(element=> { %>
-                        <% let originalKey=element.categoryName; %>
-                          <% key=originalKey.toString().replace(/\s+/gi,""); %>
-                            <li class="tab col s3"><a href="#<%= key%>">
-                                <%= originalKey %>
-                              </a></li>
-                            <% }) %>
-                    </ul>
-                  </div>
-                  <% menu.list.forEach(element=> { %>
-                    <% let originalKey=element.categoryName; %>
-                      <% key=originalKey.toString().replace(/\s+/gi,""); %>
-                        <% let values=element.items; %>
-                          <div id="<%= key %>" class="col s12">
-                            <div class="row">
-                              <% values.forEach(card=> { %>
-                                <div class="col s12 m6 l4">
-                                  <div class="card">
-                                    <div class="card-image">
-                                      <img src="<%= card.img %>">
-                                    </div>
-                                    <div class="card-content">
-                                      <span class="card-title">
-                                        <div class="row">
-                                          <div class="col s8 cardName">
-                                            <%= card.name %>
-                                          </div>
-                                          <div class="col s4">$<%= card.price %>
-                                          </div>
-                                        </div>
-                                      </span>
-                                      <p class="cardDesc">
-                                        <%= card.desc %>
-                                      </p>
-                                      <div class="stars">
-                                        <% for (let i=0; i < card.star; i++) { %>
-                                          <% if (i+1> card.star ) { %>
-                                            <% if (card.star % 1 !==0) { %>
-                                              <i class="fas fa-star-half-alt"></i>
-                                              <% }%>
-                                                <% }else{ %>
-                                                  <i class="fas fa-star"></i>
-                                                  <% } %>
-                                                    <% } %>
-                                                      <span>(<%= card.reviews%> reviews)</span>
-                                      </div>
-                                    </div>
-
-                                  </div>
-                                </div>
-                                <% }); %>
-                            </div>
-                          </div>
-                          <% }) %>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </section>
-        <% } else { %>
-          <section>
-            <div class="container">
-              <div class="row">
-                <div class="col s12">
-                  <h2 class="custom-h2">Add Menu Items</h2>
-                </div>
-              </div>
-            </div>
-          </section>
-          <% } %>
             <%- include('../partials/header-a') %>
     </main>
     <%- include('../partials/bottom-a') -%>
