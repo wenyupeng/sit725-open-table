@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-app.set("views", path.join(__dirname, "src/views"));
+app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 // @TODO: Is this all necessary?

@@ -1,15 +1,14 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 
 // Replace the uri string with your MongoDB deployment's connection string.
-const uri =
-  "mongodb+srv://wen0424068311:wen0424068311@cluster0.xo2dvru.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = "mongodb://127.0.0.1:27017"
 
 // Create a new client and connect to MongoDB
 const client = new MongoClient(uri);
 
 let menu = [
   {
-    merchantId: 1,
+    merchantId: new ObjectId("6789020bec1854748b5be089"),
     list: [
       {
         categoryName: "Appetizers",
@@ -96,7 +95,7 @@ let menu = [
 
 async function run() {
   try {
-    const database = client.db("sit725-skipy");
+    const database = client.db("skipy2025");
     const menuCollection = database.collection("menus");
 
     // Prevent additional documents from being inserted if one fails

@@ -13,7 +13,6 @@ const adminDashboardRoute = require('./admin-dashboard');
 
 router.use('/api', apiRoute)
 
-router.use('/home', homeRoute);
 router.use('/auth', authRoute);
 router.use('/booking', bookingRoute);
 router.use('/merchant', merchantRoute)
@@ -23,6 +22,8 @@ router.use('/md', merchantDashboardRoute)
 
 // Admin Dashboard
 router.use('/ad', adminDashboardRoute)
+
+router.use(homeRoute);
 
 
 module.exports = router;
