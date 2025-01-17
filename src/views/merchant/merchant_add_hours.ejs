@@ -1,0 +1,126 @@
+<%- include('../partials/top-a') -%>
+<link rel="stylesheet" href="/css/base/header.css">
+<link rel="stylesheet" href="/css/base/footer.css">
+<link rel="stylesheet" href="/css/merchant.css">
+<%- include('../partials/top-b') -%>
+    <%- include('../partials/header') -%>
+    <main>
+    <!-- Add new merchant Opening Hours -->
+ <section>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 center-align">
+                <h3 class="skipy-extrabold skipy-text-3xl center-align">Add Merchant OpenHours</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="co l s12">
+
+                <div class="col s8 offset-s2">
+
+                    <div class="container white skipy-border-radius-12">
+
+                        <div class="container">
+
+                            <div class="row">
+                                <div class="col s12">
+
+                                    <form action="/merchant/<%= merchant._id %>/hours" method="POST">
+                                        <input type="hidden" name="merchantId" value="<%= merchant._id %>">
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input id="name" type="text" class="validate" name="name"
+                                                    required value="<%= merchant.name %>" disable>
+                                                <label for="name">Merchant Name</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input id="mondayTime" type="text" class="validate"
+                                                    name="mondayTime" required>
+                                                <label for="mondayTime">Monday Time</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input id="tuesdayTime" type="text" class="validate"
+                                                    name="tuesdayTime" required>
+                                                <label for="tuesdayTime">Tuesday Time</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input id="wednesdayTime" type="text" class="validate"
+                                                    name="wednesdayTime" required>
+                                                <label for="wednesdayTime">Wednesday Time</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input id="thursdayTime" type="text" class="validate"
+                                                    name="thursdayTime" required>
+                                                <label for="thursdayTime">Thursday Time</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input id="fridayTime" type="text" class="validate"
+                                                    name="fridayTime" required>
+                                                <label for="fridayTime">Friday Time</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input id="saturdayTime" type="text" class="validate"
+                                                    name="saturdayTime" required>
+                                                <label for="saturdayTime">Saturday Time</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input id="sundayTime" type="text" class="validate"
+                                                    name="sundayTime" required>
+                                                <label for="sundayTime">Sunday Time</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col s12">
+                                                <button class="btn bg-gray col s12" type="submit">Add Open Hours
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                            </div>
+                            <a class="waves-effect waves-light btn btn-small bg-gray col s12"
+                                href="/merchant/<%= merchant._id %>"><i
+                                    class="material-icons left">arrow_back</i>Back to Merchant Details</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<%- include('../partials/footer') -%>
+</main>
+<%- include('../partials/bottom-a') -%>
+
+    <script src="/js/merchant.js"></script>
+    <%- include('../partials/bottom-b') -%>

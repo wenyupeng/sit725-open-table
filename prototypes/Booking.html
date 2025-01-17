@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,24 +13,35 @@
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13,aspect-ratio@0.4.2,container-queries@0.1.1"></script>
     <script
       src="https://ai-public.mastergo.com/gen_page/tailwind-config.min.js"
       data-color="#000000"
       data-border-radius="small"
     ></script>
-    </head>
+  </head>
   <body>
     <div class="min-h-screen bg-gray-50">
       <header class="bg-white shadow">
-        <div class="container mx-auto px-6 py-4 flex items-center justify-between">
-          <button class="flex items-center text-gray-600 hover:text-custom transition-colors mr-4">
+        <div
+          class="container mx-auto px-6 py-4 flex items-center justify-between"
+        >
+          <button
+            class="flex items-center text-gray-600 hover:text-custom transition-colors mr-4"
+          >
             <i class="fas fa-arrow-left mr-2"></i>Back to Home
           </button>
           <h1 class="text-3xl font-['Pacifico'] text-custom">Le Fantastique</h1>
           <div class="flex items-center space-x-3">
-            <img src="https://ui-avatars.com/api/?name=John+Doe" alt="User Avatar" class="w-8 h-8 rounded-full"/>
+            <img
+              src="https://ui-avatars.com/api/?name=John+Doe"
+              alt="User Avatar"
+              class="w-8 h-8 rounded-full"
+            />
             <span class="text-gray-700">John Doe</span>
           </div>
         </div>
@@ -42,33 +53,100 @@
             <h2 class="text-xl font-semibold mb-4">Reservation Details</h2>
             <div class="grid grid-cols-1 gap-4">
               <div class="mb-3">
-                <label class="block text-gray-700 text-sm font-medium mb-2">Restaurant Name</label>
-                <input type="text" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-custom focus:border-custom" value="Le Fantastique" disabled/>
+                <label class="block text-gray-700 text-sm font-medium mb-2"
+                  >Restaurant Name</label
+                >
+                <input
+                  type="text"
+                  class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-custom focus:border-custom"
+                  value="Le Fantastique"
+                  disabled
+                />
               </div>
               <div class="mb-3">
-                <label class="block text-gray-700 text-sm font-medium mb-2">Reservation Date</label>
-                <input type="date" id="reservation-date" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-custom focus:border-custom"/>
+                <label class="block text-gray-700 text-sm font-medium mb-2"
+                  >Reservation Date</label
+                >
+                <input
+                  type="date"
+                  id="reservation-date"
+                  class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-custom focus:border-custom"
+                />
               </div>
               <div class="mb-3">
-                <label class="block text-gray-700 text-sm font-medium mb-2">Available Time Slots</label>
+                <label class="block text-gray-700 text-sm font-medium mb-2"
+                  >Available Time Slots</label
+                >
                 <div class="grid grid-cols-3 gap-2" id="time-slots">
-                  <button class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom">11:30 AM</button>
-                  <button class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom">12:00 PM</button>
-                  <button class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom">12:30 PM</button>
-                  <button class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom">1:00 PM</button>
-                  <button class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom">1:30 PM</button>
-                  <button class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom">2:00 PM</button>
-                  <button class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom">6:00 PM</button>
-                  <button class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom">6:30 PM</button>
-                  <button class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom">7:00 PM</button>
-                  <button class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom">7:30 PM</button>
-                  <button class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom">8:00 PM</button>
-                  <button class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom">8:30 PM</button>
+                  <button
+                    class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom"
+                  >
+                    11:30 AM
+                  </button>
+                  <button
+                    class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom"
+                  >
+                    12:00 PM
+                  </button>
+                  <button
+                    class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom"
+                  >
+                    12:30 PM
+                  </button>
+                  <button
+                    class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom"
+                  >
+                    1:00 PM
+                  </button>
+                  <button
+                    class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom"
+                  >
+                    1:30 PM
+                  </button>
+                  <button
+                    class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom"
+                  >
+                    2:00 PM
+                  </button>
+                  <button
+                    class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom"
+                  >
+                    6:00 PM
+                  </button>
+                  <button
+                    class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom"
+                  >
+                    6:30 PM
+                  </button>
+                  <button
+                    class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom"
+                  >
+                    7:00 PM
+                  </button>
+                  <button
+                    class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom"
+                  >
+                    7:30 PM
+                  </button>
+                  <button
+                    class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom"
+                  >
+                    8:00 PM
+                  </button>
+                  <button
+                    class="time-slot !rounded-button p-2 border border-gray-300 text-sm text-gray-600 hover:border-custom hover:text-custom"
+                  >
+                    8:30 PM
+                  </button>
                 </div>
               </div>
               <div class="mb-3">
-                <label class="block text-gray-700 text-sm font-medium mb-2">Number of Guests</label>
-                <select class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-custom focus:border-custom">
+                <label class="block text-gray-700 text-sm font-medium mb-2"
+                  >Number of Guests</label
+                >
+                <select
+                  class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-custom focus:border-custom"
+                >
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>
@@ -80,12 +158,26 @@
                 </select>
               </div>
               <div class="mb-3">
-                <label class="block text-gray-700 text-sm font-medium mb-2">Contact Name</label>
-                <input type="text" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-custom focus:border-custom" value="John Doe" disabled/>
+                <label class="block text-gray-700 text-sm font-medium mb-2"
+                  >Contact Name</label
+                >
+                <input
+                  type="text"
+                  class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-custom focus:border-custom"
+                  value="John Doe"
+                  disabled
+                />
               </div>
               <div class="mb-3">
-                <label class="block text-gray-700 text-sm font-medium mb-2">Contact Phone</label>
-                <input type="tel" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-custom focus:border-custom" value="13800138000" disabled/>
+                <label class="block text-gray-700 text-sm font-medium mb-2"
+                  >Contact Phone</label
+                >
+                <input
+                  type="tel"
+                  class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-custom focus:border-custom"
+                  value="13800138000"
+                  disabled
+                />
               </div>
             </div>
           </div>
@@ -94,42 +186,101 @@
             <div class="bg-white rounded-lg shadow p-6">
               <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-semibold">Menu Items</h2>
-                <p class="text-lg font-semibold">Total: <span id="total-price">$0.00</span></p>
+                <p class="text-lg font-semibold">
+                  Total: <span id="total-price">$0.00</span>
+                </p>
               </div>
               <div class="space-y-4" id="menu-items">
                 <div class="flex items-center space-x-4 border-b pb-4">
-                  <img src="https://ai-public.mastergo.com/ai/img_res/80cb49181f2f1c2d4ed89c3828c8605b.jpg" alt="Grilled Salmon" class="w-24 h-24 object-cover rounded-lg"/>
+                  <img
+                    src="https://ai-public.mastergo.com/ai/img_res/80cb49181f2f1c2d4ed89c3828c8605b.jpg"
+                    alt="Grilled Salmon"
+                    class="w-24 h-24 object-cover rounded-lg"
+                  />
                   <div class="flex-1">
                     <h3 class="font-medium">Grilled Salmon</h3>
                     <p class="text-gray-600">$24.99</p>
                     <div class="flex items-center mt-2">
-                      <button class="quantity-btn decrease !rounded-button bg-gray-200 px-3 py-1" data-price="24.99">-</button>
-                      <input type="text" class="quantity w-12 text-center border-none mx-2" value="0" readonly/>
-                      <button class="quantity-btn increase !rounded-button bg-gray-200 px-3 py-1" data-price="24.99">+</button>
+                      <button
+                        class="quantity-btn decrease !rounded-button bg-gray-200 px-3 py-1"
+                        data-price="24.99"
+                      >
+                        -
+                      </button>
+                      <input
+                        type="text"
+                        class="quantity w-12 text-center border-none mx-2"
+                        value="0"
+                        readonly
+                      />
+                      <button
+                        class="quantity-btn increase !rounded-button bg-gray-200 px-3 py-1"
+                        data-price="24.99"
+                      >
+                        +
+                      </button>
                     </div>
                   </div>
                 </div>
                 <div class="flex items-center space-x-4 border-b pb-4">
-                  <img src="https://ai-public.mastergo.com/ai/img_res/5256c5bfecadf987cc595946953c7318.jpg" alt="Premium Steak" class="w-24 h-24 object-cover rounded-lg"/>
+                  <img
+                    src="https://ai-public.mastergo.com/ai/img_res/5256c5bfecadf987cc595946953c7318.jpg"
+                    alt="Premium Steak"
+                    class="w-24 h-24 object-cover rounded-lg"
+                  />
                   <div class="flex-1">
                     <h3 class="font-medium">Premium Steak</h3>
                     <p class="text-gray-600">$34.99</p>
                     <div class="flex items-center mt-2">
-                      <button class="quantity-btn decrease !rounded-button bg-gray-200 px-3 py-1" data-price="34.99">-</button>
-                      <input type="text" class="quantity w-12 text-center border-none mx-2" value="0" readonly/>
-                      <button class="quantity-btn increase !rounded-button bg-gray-200 px-3 py-1" data-price="34.99">+</button>
+                      <button
+                        class="quantity-btn decrease !rounded-button bg-gray-200 px-3 py-1"
+                        data-price="34.99"
+                      >
+                        -
+                      </button>
+                      <input
+                        type="text"
+                        class="quantity w-12 text-center border-none mx-2"
+                        value="0"
+                        readonly
+                      />
+                      <button
+                        class="quantity-btn increase !rounded-button bg-gray-200 px-3 py-1"
+                        data-price="34.99"
+                      >
+                        +
+                      </button>
                     </div>
                   </div>
                 </div>
                 <div class="flex items-center space-x-4 border-b pb-4">
-                  <img src="https://ai-public.mastergo.com/ai/img_res/f7940cfef1ebb309b30b27da016ed9bf.jpg" alt="Seafood Pasta" class="w-24 h-24 object-cover rounded-lg"/>
+                  <img
+                    src="https://ai-public.mastergo.com/ai/img_res/f7940cfef1ebb309b30b27da016ed9bf.jpg"
+                    alt="Seafood Pasta"
+                    class="w-24 h-24 object-cover rounded-lg"
+                  />
                   <div class="flex-1">
                     <h3 class="font-medium">Seafood Pasta</h3>
                     <p class="text-gray-600">$21.99</p>
                     <div class="flex items-center mt-2">
-                      <button class="quantity-btn decrease !rounded-button bg-gray-200 px-3 py-1" data-price="21.99">-</button>
-                      <input type="text" class="quantity w-12 text-center border-none mx-2" value="0" readonly/>
-                      <button class="quantity-btn increase !rounded-button bg-gray-200 px-3 py-1" data-price="21.99">+</button>
+                      <button
+                        class="quantity-btn decrease !rounded-button bg-gray-200 px-3 py-1"
+                        data-price="21.99"
+                      >
+                        -
+                      </button>
+                      <input
+                        type="text"
+                        class="quantity w-12 text-center border-none mx-2"
+                        value="0"
+                        readonly
+                      />
+                      <button
+                        class="quantity-btn increase !rounded-button bg-gray-200 px-3 py-1"
+                        data-price="21.99"
+                      >
+                        +
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -139,7 +290,10 @@
             <div class="bg-white rounded-lg shadow p-6">
               <div class="mb-4">
                 <h2 class="text-lg font-semibold mb-3">Special Requests</h2>
-                <textarea class="w-full h-32 p-3 border rounded-lg resize-none focus:ring-2 focus:ring-custom focus:border-custom" placeholder="Enter any special requests or dietary requirements..."></textarea>
+                <textarea
+                  class="w-full h-32 p-3 border rounded-lg resize-none focus:ring-2 focus:ring-custom focus:border-custom"
+                  placeholder="Enter any special requests or dietary requirements..."
+                ></textarea>
               </div>
             </div>
 
@@ -163,7 +317,10 @@
                   </div>
                 </div>
               </div>
-              <button id="confirm-order" class="w-full bg-custom text-white py-3 mt-6 font-medium !rounded-button hover:bg-opacity-90 transition-colors">
+              <button
+                id="confirm-order"
+                class="w-full bg-custom text-white py-3 mt-6 font-medium !rounded-button hover:bg-opacity-90 transition-colors"
+              >
                 Confirm Reservation & Order
               </button>
             </div>
@@ -173,40 +330,42 @@
     </div>
 
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const menuItems = document.getElementById('menu-items');
-        const subtotalEl = document.getElementById('subtotal');
-        const serviceFeeEl = document.getElementById('service-fee');
-        const finalTotalEl = document.getElementById('final-total');
-        const totalPriceEl = document.getElementById('total-price');
-        const confirmOrderBtn = document.getElementById('confirm-order');
-        const timeSlots = document.querySelectorAll('.time-slot');
-        const reservationDate = document.getElementById('reservation-date');
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuItems = document.getElementById("menu-items");
+        const subtotalEl = document.getElementById("subtotal");
+        const serviceFeeEl = document.getElementById("service-fee");
+        const finalTotalEl = document.getElementById("final-total");
+        const totalPriceEl = document.getElementById("total-price");
+        const confirmOrderBtn = document.getElementById("confirm-order");
+        const timeSlots = document.querySelectorAll(".time-slot");
+        const reservationDate = document.getElementById("reservation-date");
 
         const today = new Date();
         const maxDate = new Date();
         maxDate.setDate(today.getDate() + 30);
 
-        reservationDate.min = today.toISOString().split('T')[0];
-        reservationDate.max = maxDate.toISOString().split('T')[0];
-        reservationDate.value = today.toISOString().split('T')[0];
+        reservationDate.min = today.toISOString().split("T")[0];
+        reservationDate.max = maxDate.toISOString().split("T")[0];
+        reservationDate.value = today.toISOString().split("T")[0];
 
-        timeSlots.forEach(slot => {
-          slot.addEventListener('click', function() {
-            timeSlots.forEach(s => {
-              s.classList.remove('border-custom', 'text-custom', 'font-medium');
-              s.classList.add('border-gray-300', 'text-gray-600');
+        timeSlots.forEach((slot) => {
+          slot.addEventListener("click", function () {
+            timeSlots.forEach((s) => {
+              s.classList.remove("border-custom", "text-custom", "font-medium");
+              s.classList.add("border-gray-300", "text-gray-600");
             });
-            this.classList.remove('border-gray-300', 'text-gray-600');
-            this.classList.add('border-custom', 'text-custom', 'font-medium');
+            this.classList.remove("border-gray-300", "text-gray-600");
+            this.classList.add("border-custom", "text-custom", "font-medium");
           });
         });
 
         function updateTotals() {
           let subtotal = 0;
-          document.querySelectorAll('.quantity').forEach(input => {
+          document.querySelectorAll(".quantity").forEach((input) => {
             const quantity = parseInt(input.value);
-            const price = parseFloat(input.parentElement.querySelector('.increase').dataset.price);
+            const price = parseFloat(
+              input.parentElement.querySelector(".increase").dataset.price,
+            );
             subtotal += quantity * price;
           });
 
@@ -218,14 +377,14 @@
           totalPriceEl.textContent = `$${finalTotal.toFixed(2)}`;
         }
 
-        menuItems.addEventListener('click', function(e) {
-          if (e.target.classList.contains('quantity-btn')) {
-            const input = e.target.parentElement.querySelector('.quantity');
+        menuItems.addEventListener("click", function (e) {
+          if (e.target.classList.contains("quantity-btn")) {
+            const input = e.target.parentElement.querySelector(".quantity");
             let value = parseInt(input.value);
 
-            if (e.target.classList.contains('increase')) {
+            if (e.target.classList.contains("increase")) {
               value++;
-            } else if (e.target.classList.contains('decrease') && value > 0) {
+            } else if (e.target.classList.contains("decrease") && value > 0) {
               value--;
             }
             input.value = value;
@@ -233,20 +392,24 @@
           }
         });
 
-        confirmOrderBtn.addEventListener('click', function() {
-          const selectedTimeSlot = document.querySelector('.time-slot.border-custom');
+        confirmOrderBtn.addEventListener("click", function () {
+          const selectedTimeSlot = document.querySelector(
+            ".time-slot.border-custom",
+          );
           if (!selectedTimeSlot) {
-            alert('Please select a time slot for your reservation.');
+            alert("Please select a time slot for your reservation.");
             return;
           }
 
-          const total = parseFloat(finalTotalEl.textContent.replace('$', ''));
+          const total = parseFloat(finalTotalEl.textContent.replace("$", ""));
           if (total === 0) {
-            alert('Please select at least one item to proceed with booking.');
+            alert("Please select at least one item to proceed with booking.");
             return;
           }
-          
-          alert('Thank you for your booking! We will confirm your order shortly.');
+
+          alert(
+            "Thank you for your booking! We will confirm your order shortly.",
+          );
         });
       });
     </script>

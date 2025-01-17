@@ -1,67 +1,120 @@
-<!DOCTYPE html>
-<html lang="zh"><head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-    <link href="https://ai-public.mastergo.com/gen_page/tailwind-custom.css" rel="stylesheet"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&amp;display=swap" rel="stylesheet"/>
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://ai-public.mastergo.com/gen_page/tailwind-custom.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&amp;display=swap"
+      rel="stylesheet"
+    />
     <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13,aspect-ratio@0.4.2,container-queries@0.1.1"></script>
-    <script src="https://ai-public.mastergo.com/gen_page/tailwind-config.min.js" data-color="#000000" data-border-radius="small"></script>
-    </head>
+    <script
+      src="https://ai-public.mastergo.com/gen_page/tailwind-config.min.js"
+      data-color="#000000"
+      data-border-radius="small"
+    ></script>
+  </head>
   <body>
-    <div class="min-h-screen bg-gray-50 flex flex-col justify-center items-center px-4">
+    <div
+      class="min-h-screen bg-gray-50 flex flex-col justify-center items-center px-4"
+    >
       <div class="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
         <div class="text-center mb-8">
-          <h1 class="font-[&#39;Pacifico&#39;] text-3xl text-gray-900 mb-2">Logo</h1>
+          <h1 class="font-[&#39;Pacifico&#39;] text-3xl text-gray-900 mb-2">
+            Logo
+          </h1>
           <p class="text-gray-600 text-lg">Sign In</p>
         </div>
         <div class="space-y-6">
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Phone / Username</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Phone / Username</label
+            >
             <div class="relative">
-              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">
+              <span
+                class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500"
+              >
                 <i class="fas fa-user text-sm"></i>
               </span>
-              <input type="text" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-custom focus:border-transparent" placeholder="Enter phone number or username"/>
+              <input
+                type="text"
+                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-custom focus:border-transparent"
+                placeholder="Enter phone number or username"
+              />
             </div>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Password</label
+            >
             <div class="relative">
-              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">
+              <span
+                class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500"
+              >
                 <i class="fas fa-lock text-sm"></i>
               </span>
-              <input type="password" id="password" class="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-md text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-custom focus:border-transparent" placeholder="Enter password"/>              <button type="button" onclick="togglePassword()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
+              <input
+                type="password"
+                id="password"
+                class="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-md text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-custom focus:border-transparent"
+                placeholder="Enter password"
+              />
+              <button
+                type="button"
+                onclick="togglePassword()"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
+              >
                 <i class="fas fa-eye text-sm" id="toggleIcon"></i>
               </button>
             </div>
           </div>
-          <button class="w-full bg-custom text-white py-2 px-4 !rounded-button hover:bg-opacity-90 transition-colors">Sign In</button>
+          <button
+            class="w-full bg-custom text-white py-2 px-4 !rounded-button hover:bg-opacity-90 transition-colors"
+          >
+            Sign In
+          </button>
           <div class="flex justify-between text-sm">
-            <a href="#" class="text-custom hover:text-opacity-80">Forgot Password?</a>
-            <a href="#" class="text-custom hover:text-opacity-80">Create Account</a>
+            <a href="#" class="text-custom hover:text-opacity-80"
+              >Forgot Password?</a
+            >
+            <a href="#" class="text-custom hover:text-opacity-80"
+              >Create Account</a
+            >
           </div>
-          <div class="text-center text-sm text-gray-500">By signing in, you agree to our <a href="#" class="text-custom hover:text-opacity-80">Privacy Policy</a></div>
+          <div class="text-center text-sm text-gray-500">
+            By signing in, you agree to our
+            <a href="#" class="text-custom hover:text-opacity-80"
+              >Privacy Policy</a
+            >
+          </div>
         </div>
       </div>
     </div>
     <script>
       function togglePassword() {
-        const password = document.getElementById('password');
-        const toggleIcon = document.getElementById('toggleIcon');
-        
-        if (password.type === 'password') {
-          password.type = 'text';
-          toggleIcon.classList.remove('fa-eye');
-          toggleIcon.classList.add('fa-eye-slash');
+        const password = document.getElementById("password");
+        const toggleIcon = document.getElementById("toggleIcon");
+
+        if (password.type === "password") {
+          password.type = "text";
+          toggleIcon.classList.remove("fa-eye");
+          toggleIcon.classList.add("fa-eye-slash");
         } else {
-          password.type = 'password';
-          toggleIcon.classList.remove('fa-eye-slash');
-          toggleIcon.classList.add('fa-eye');
+          password.type = "password";
+          toggleIcon.classList.remove("fa-eye-slash");
+          toggleIcon.classList.add("fa-eye");
         }
       }
     </script>
-  
-</body></html>
+  </body>
+</html>
