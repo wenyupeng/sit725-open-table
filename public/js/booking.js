@@ -65,15 +65,21 @@ $(document).ready(function () {
     $.ajax({
       url: `/api/booking/${bookingDate.merchantId}`,
       type: 'POST',
+      headers: {
+        'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+      },
       contentType: 'application/json',
       data: JSON.stringify(bookingDate),
       success: function (res) {
-        M.toast({ html: 'Booking successful', classes: 'rounded' });
-        console.log(res);
+        
       },
       error: function (res) {
-        console.log(res);
-        M.toast({ html: 'Error occurred while booking', classes: 'rounded' });
+        if(res.status === 401){
+          M.toast({ html: 'Please login to continue', classes: 'rounded' });
+          window.location.href = '/user/login';
+        }else{
+          M.toast({ html: 'Error occurred while booking', classes: 'rounded' });
+        }
       }
     });
   });
