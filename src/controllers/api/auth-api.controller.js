@@ -1,11 +1,13 @@
 const { body, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const { UserModel } = require("../../models");
-const apiResponse = require("../../utils/utils.apiResponse");
-const { encryption, decryption } = require("../../utils/utils.others");
-const log = require("../../utils/utils.logger");
+const apiResponse = require("../../utils/api-response.util");
+const {
+  encryptPassword,
+  comparePassword,
+} = require("../../utils/password.util");
+const log = require("../../utils/logger.util");
 const envConfig = require("../../config/env.config");
-const SocketIOService = require('../../services/socket.service');
 
 /**
  * User register
@@ -63,7 +65,7 @@ exports.register = [
         // console.log(errors);
         return apiResponse.validationErrorWithData(res, errors.array()[0].msg);
       } else {
-        let encryptPwd = await encryption(req.body.password);
+        let encryptPwd = await encryptPassword(req.body.password);
         let newUser = {
           username: req.body.username,
           email: req.body.email,
@@ -127,7 +129,10 @@ exports.login = [
           );
         }
 
-        let isPass = await decryption(req.body.password, userInfo.password);
+        let isPass = await comparePassword(
+          req.body.password,
+          userInfo.password,
+        );
         if (!isPass)
           return apiResponse.unauthorizedResponse(
             res,

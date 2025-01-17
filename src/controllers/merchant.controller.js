@@ -2,7 +2,7 @@ const { body, validationResult } = require("express-validator");
 const { ObjectId } = require("mongodb");
 const { MerchantsModel, MenuModel } = require("../models");
 
-const log = require("../utils/utils.logger");
+const log = require("../utils/logger.util");
 
 /**
  * Create merchant

@@ -25,18 +25,18 @@ class SocketIOService {
 
   getServer() {
     if (!SocketIOService.server) {
-      throw new Error('IO server requested before initialization');
+      throw new Error("IO server requested before initialization");
     }
 
     return SocketIOService.server;
   }
 
   sendMessage(roomId, key, message) {
-    this.getServer().to(roomId).emit(key, message)
+    this.getServer().to(roomId).emit(key, message);
   }
 
   emitAll(key, message) {
-    this.getServer().emit(key, message)
+    this.getServer().emit(key, message);
   }
 
   getRooms() {
@@ -44,22 +44,22 @@ class SocketIOService {
   }
 
   handleConnection(socket) {
-    console.log('a user connected');
+    console.log("a user connected");
 
-    socket.on('disconnect', () => {
-      console.log('user disconnected');
+    socket.on("disconnect", () => {
+      console.log("user disconnected");
     });
-  
-    socket.on('my message', (msg) => {
-      console.log('message: ' + msg);
-    });
-  
-    socket.on('room_update', (msg) => {
-      console.log('message: ' + msg);
-    })
 
-    setInterval(()=>{
-      socket.emit('number', parseInt(Math.random()*10));
+    socket.on("my message", (msg) => {
+      console.log("message: " + msg);
+    });
+
+    socket.on("room_update", (msg) => {
+      console.log("message: " + msg);
+    });
+
+    setInterval(() => {
+      socket.emit("number", parseInt(Math.random() * 10));
     }, 1000);
   }
 }

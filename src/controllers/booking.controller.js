@@ -1,10 +1,9 @@
 const { ObjectId } = require("mongodb");
 const { MerchantsModel, MenuModel, BookingModel } = require("../models");
 
-const log = require("../utils/utils.logger");
+const log = require("../utils/logger.util");
 
 const { getBookingsByMerchantId } = require("../services/booking.service");
-const SocketIOService = require('../services/socket.service');
 
 /**
  * [Features][Booking] Handle Create Booking

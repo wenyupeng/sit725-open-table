@@ -5,12 +5,11 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const cors = require("cors");
-const mount = require("mount-routes");
-const { createServer } = require('http')
+const { createServer } = require("http");
 
-const apiResponse = require("./utils/utils.apiResponse");
+const apiResponse = require("./utils/api-response.util");
 const SocketIOService = require("./services/socket.service");
-const routes = require('./routes/index');
+const routes = require("./routes/index");
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -24,7 +23,7 @@ const httpServer = createServer(app);
 
 SocketIOService.instance().initialize(httpServer);
 const io = SocketIOService.instance().getServer();
-io.on('connection', SocketIOService.handleConnection)
+io.on("connection", SocketIOService.handleConnection);
 
 app.use(sessionAuth);
 app.use(attachUserToLocals);
@@ -80,7 +79,7 @@ var swaggerJson = function (req, res) {
 app.get("/swagger.json", swaggerJson);
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use(routes)
+app.use(routes);
 
 //  throw 404 if URL not found
 app.all("*", function (req, res) {
