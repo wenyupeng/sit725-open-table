@@ -12,7 +12,7 @@ $(document).ready(() => {
             data: JSON.stringify(loginData),
             success: (response) => {
                 let result = JSON.parse(response);
-                console.log(result);
+                
                 if (result.status === 1) {
                     let data = result.data;
                     let user ={
@@ -25,6 +25,7 @@ $(document).ready(() => {
                     sessionStorage.setItem("token", data.token);
 
                     let nextPage = sessionStorage.getItem("nextPage");
+                    sessionStorage.removeItem("nextPage");
                     if (nextPage) {
                         window.location.href = nextPage;
                     } else {

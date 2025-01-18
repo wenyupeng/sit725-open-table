@@ -1,6 +1,6 @@
-$(document).ready(function () {
-    $('#createMerchantBtn').click(function () {
-        var form = document.getElementById('merchantRegisterForm');
+$(document).ready(() => {
+    $('#createAccount').click(() => {
+        var form = document.getElementById('userRegisterForm');
         var formData = new FormData(form);
 
         let registerDate = {};
@@ -14,7 +14,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: '/api/merchant/register',
+            url: '/api/auth/register',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(registerDate),
@@ -22,7 +22,7 @@ $(document).ready(function () {
                 let resData = JSON.parse(res);
                 if(resData.status == '1'){
                     M.toast({ html: 'Account created successfully', classes: 'rounded' });
-                    window.location.href = '/merchant/login';
+                    window.location.href = '/user/login';
                 }else{
                     M.toast({ html: `Error creating account: ${resData.message}`, classes: 'rounded' });
                 }
@@ -37,4 +37,5 @@ $(document).ready(function () {
             }
         });
     });
-});     
+
+});

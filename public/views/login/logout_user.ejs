@@ -1,0 +1,30 @@
+<%- include('../partials/top-a') -%>
+<link rel="stylesheet" href="../../css/base/header.css">
+<link rel="stylesheet" href="../../css/base/footer.css">
+
+<%- include('../partials/top-b') -%>
+<%- include('../partials/header') -%>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 center-align">
+                <h3 class="aum-extrabold aum-text-3xl">Sign Out</h3>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col s12 center-align">
+                <p class="aum-text-lg">You have successfully signed out.</p>
+                <p class="aum-text-lg">Redirecting to home page...</p>
+                <a style="color: blue;" href="/" class="aum-btn aum-btn-secondary aum-btn-lg">Home</a>
+                <p class="aum-text-lg">Redirecting to sign in page...</p>
+                <a style="color: blue;" href="/login" class="aum-btn aum-btn-secondary aum-btn-lg">Sign In</a>
+            </div>
+        </div>
+    </div>
+</main>
+<%- include('../partials/bottom-a') -%>
+<script src="../../js/user.logout.js"></script>
+<%- include('../partials/bottom-b') -%>

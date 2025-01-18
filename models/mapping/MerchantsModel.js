@@ -13,6 +13,7 @@ const MerchantsSchema = new mongoose.Schema({
     hours: {type: types.String, required: true},
     photoGallery: {type: types.Array,required: true},
     openHours: {type: types.Array,required: true},
+    password: {type: types.String, required: true},
     isDeleted: {type: types.Boolean, required: true, default: false},
 }, {
     timestamps: true,
