@@ -55,7 +55,6 @@ exports.register = [
   ],
   async (req, res) => {
     try {
-      console.log(req.body);
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         // console.log(errors);
@@ -71,11 +70,11 @@ exports.register = [
           status: 1,
         };
 
-        res.status(200).redirect("/api/auth/login"); // aum code
-
-        const addInfo = await UserModel.create(newUser);
+        const addInfo = await UserModel.collection.insertOne(newUser);
         if (addInfo) {
           return apiResponse.successResponse(res, "registry successfully");
+        }else{
+          return apiResponse.validationErrorWithData(res, "registry fail, data save fail");
         }
       }
     } catch (err) {

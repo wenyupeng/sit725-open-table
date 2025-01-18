@@ -6,6 +6,7 @@ const apiResponse = require('../utils/utils.apiResponse');
 const permissions = require('../middlewares/permissions');
 const { body, validationResult } = require('express-validator');
 const { MerchantCategories } = require('../constant/constant')
+const { encryption, decryption } = require("../utils/utils.others");
 
 
 /**
@@ -37,6 +38,60 @@ exports.featuredColletions = async () => {
 };
 
 /**
+ * Create merchant 
+ */
+exports.register = [
+    [
+        body("name").notEmpty().withMessage("Name is required"),
+        body("description").notEmpty().withMessage("Description is required"),
+        body("location").notEmpty().withMessage("Address is required"),
+        body("contactPhone")
+            .isLength({ min: 6 })
+            .trim()
+            .withMessage("password could not be empty or less than 6 character"),
+    ],
+
+    async (req, res) => {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return apiResponse.validationErrorWithData(res, errors.array()[0].msg);
+            } else {
+
+                let existingMerchant = await MerchantsModel.findOne({ contactPhone: req.body.contactPhone, isDeleted: false });
+                if (existingMerchant) {
+                    return apiResponse.validationErrorWithData(res, 'Merchant already exists, use different contact phone to register');
+                }
+
+                let encryptPwd = await encryption(req.body.password);
+
+                const merchant = new MerchantsModel({
+                    name: req.body.name.replace(/[<>]/g, ""),
+                    description: req.body.description.replace(/[<>]/g, ""),
+                    location: req.body.location.replace(/[<>]/g, ""),
+                    contactPhone: req.body.contactPhone.replace(/[<>]/g, ""),
+                    type: req.body.type,
+                    category: req.body.category,
+                    backgroundImg: req.body.backgroundImg,
+                    hours: req.body.hours,
+                    photoGallery: req.body.photoGallery || [],
+                    openHours: req.body.openHours || [],
+                    password: encryptPwd,
+                });
+
+                await merchant.save();
+
+                return apiResponse.successResponse(res, "Merchant created successfully");
+            }
+        } catch (err) {
+            console.log(err);
+            log.error(`Add Merchant error, ${JSON.stringify(err)}`);
+            return apiResponse.ErrorResponse(res, { message: "Internal Server Error" });
+        }
+    },
+];
+
+/**
  * merchant login
  * @returns {Object} if login success return token, else return error message
  */
@@ -51,15 +106,22 @@ exports.login = [
             return apiResponse.validationErrorWithData(res, errors.array()[0].msg);
         }
 
-        console.log(req.body)
 
-        let merchant = await MerchantsModel.findOne({ phone: req.body.phone, password: req.body.pwd });
+        let merchant = await MerchantsModel.findOne({ phone: req.body.phone });
         if (!merchant) {
-            return apiResponse.unauthorizedResponse(res, 'Invalid phone or password');
+            return apiResponse.notFoundResponse(res, 'Merchant not found');
         }
 
-        console.log(merchant);
+        let password = new Buffer.from(req.body.pwd, "base64").toString();
 
+        let isPass = await decryption(password, merchant.password);
+        if (!isPass)
+            return apiResponse.unauthorizedResponse(
+                res,
+                "2: username or password is wrong"
+            );
+
+        console.log(merchant);
 
         merchant.token = 'Bearer ' + jwt.sign(
             merchant,
@@ -269,64 +331,6 @@ exports.queryPagenation = [
 
 ]
 
-/**
- * Create merchant 
- */
-exports.handleCreateMerchant = [
-    [
-        body("name").notEmpty().withMessage("Name is required"),
-        body("description").notEmpty().withMessage("Description is required"),
-        body("location").notEmpty().withMessage("Address is required"),
-        body("contactPhone")
-            .isLength({ min: 6 })
-            .trim()
-            .withMessage("password could not be empty or less than 6 character"),
-    ],
-
-    async (req, res) => {
-        try {
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                return res.render("./merchant/merchantAumCreate-form", {
-                    pageTitle: "Add Merchant",
-                    message: errors.array(),
-                });
-            } else {
-                const merchant = new MerchantsModel({
-                    name: req.body.name.replace(/[<>]/g, ""),
-                    description: req.body.description.replace(/[<>]/g, ""),
-                    location: req.body.location.replace(/[<>]/g, ""),
-                    contactPhone: req.body.contactPhone.replace(/[<>]/g, ""),
-                    type: req.body.type,
-                    category: req.body.category,
-                    backgroundImg: req.body.backgroundImg,
-                    hours: req.body.hours,
-                    photoGallery: req.body.photoGallery || [],
-                    openHours: req.body.openHours || [],
-                });
-                await merchant.save();
-                res.redirect("/");
-            }
-        } catch (err) {
-            log.error(`Add Merchant error, ${JSON.stringify(err)}`);
-
-            res.status(500).render("./merchant/merchantAumCreate-form", {
-                pageTitle: "Add Merchant",
-                message: err.message,
-            });
-        }
-    },
-];
-
-// Render create a merchant
-exports.renderCreateMerchant = [
-    (req, res) => {
-        res.render("./merchant/merchantAumCreate-form", {
-            pageTitle: "Merchant",
-            message: null,
-        });
-    },
-];
 
 // Render a merchant details
 exports.renderMerchantDetails = [

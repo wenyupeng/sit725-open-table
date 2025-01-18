@@ -38,28 +38,7 @@ router.get('/', MerchantController.queryPagenation);
  */
 router.delete('/:merchantId', MerchantController.delete);
 
-/**
- * @swagger
- * /api/merchants:
- *   post:
- *     tags:
- *      - Merchants
- *     summary: Add a Merchant
- *     produces:
- *      - application/json
- *     parameters:
- *      - name: body
- *        in: body
- *        description: Merchant object that needs to be added
- *        required: true
- *        schema:
- *          $ref: '#/definitions/Merchant'
- *     responses:
- *       200:
- *         description: successful operation
- * 
- */
-router.post('/', MerchantController.add);
+router.post("/register", MerchantController.register);
 /**
  * @swagger
  * /api/merchants/login:
