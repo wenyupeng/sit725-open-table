@@ -31,6 +31,6 @@ describe("Booking Controller", function () {
       merchantName: "Crown Restaurant",
     };
 
-    request.post("/bookings").send(mockRequest).expect(201);
+    request.post("/bookings").send(mockRequest).expect(201); // to be updated
   });
 });
