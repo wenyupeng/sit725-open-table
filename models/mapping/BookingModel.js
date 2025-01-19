@@ -17,6 +17,7 @@ const BookingSchema = new mongoose.Schema(
       {
         menuItemId: { type: types.ObjectId, ref: "Menu" },
         name: types.String,
+        img: types.String,
         quantity: types.Number,
         price: types.Number,
       },
@@ -27,7 +28,8 @@ const BookingSchema = new mongoose.Schema(
     bookingTime: { type: types.String, required: true },
     numberOfGuests: { type: types.Number, required: true },
     specialRequest: { type: types.String },
-    isActive: { type: types.Boolean, default: true }
+    isActive: { type: types.Boolean, default: true },
+    merchantName: { type: types.String },
   },
   {
     timestamps: true,

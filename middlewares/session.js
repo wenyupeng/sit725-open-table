@@ -11,16 +11,24 @@ const sessionAuth = session({
 });
 
 const attachUserToLocals = async (req, res, next) => {
-    // console.log("req.session.user:", req.session.user);
     
     if (req.session.user) {
         const user = req.session.user;
         // console.log("user from session:", user);
         res.locals.user = user? user : null;
     } else {
-        res.locals.user = null;
+        res.locals.user = null;        
     }
     next();
 };
 
-module.exports = {sessionAuth, attachUserToLocals};
+const ensureAuthenticated = (req, res, next) => {
+    if (!req.session.user || !req.session) {
+        console.log(`[Access Denied] Unauthenticated user tried to access: ${req.originalUrl}`);
+        return res.redirect('/user/login'); // Redirect to login if not authenticated
+    }
+    next(); // Proceed to the next middleware or route handler if authenticated
+};
+
+
+module.exports = {sessionAuth, attachUserToLocals, ensureAuthenticated};

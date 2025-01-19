@@ -14,11 +14,55 @@
       <div class="row">
         <form class="search-form col offset-s2 s8">
           <div class="content row" style="margin-bottom: 0;">
-            <input class="col s12 m6 l6" type="text" id="search" placeholder="Location, Restaurant, or Cuisine">
-            <input class="col s12 m3 l3" type="date" id="date">
-            <a class="col s12 m1 l1 btn waves-effect waves-light" type="submit">Search</a>
+            
+            <input class="col s9" type="text" id="search" placeholder="Location, Restaurant, or Cuisine">
+            <!-- <input class="col s12 m3 l3" type="date" id="date"> --> 
+            <a class="btn waves-effect waves-light" type="submit">Search</a>
           </div>
         </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="popular-mer">
+    <div class="container">
+      <h2>Merchants</h2>
+      <div>
+        <div class="row">
+          <% top_six_mer.forEach(p=>{ %>
+          <div class="col s12 m4">
+            <div class="card">
+              <div class="card-image waves-effect waves-block waves-light">
+                <a href="/merchant/<%= p._id %>">
+                  <img src='<%= p.backgroundImg%>'>
+                </a>
+              </div>
+              <div class="card-content">
+                <span class="card-title"><strong>
+                    <%= p.name %>
+                  </strong></span>
+                <p>
+                  <%= (p.description && p.description.split(' ').length > 7) ? p.description.split(' ').slice(0, 7).join(' ') + ' ...' : (p.description || 'No description available') %>
+                </p>
+                <div>
+                  <div class="stars">
+                    <% for (let i=0; i < p.star; i++) { %>
+                    <% if (i+1> p.star ) { %>
+                    <% if (p.star % 1 !==0) { %>
+                    <i class="fas fa-star-half-alt"></i>
+                    <% }%>
+                    <% }else{ %>
+                    <i class="fas fa-star"></i>
+                    <% } %>
+                    <% } %>
+                  </div>
+                  <span>(<%= p.reviews%> reviews)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+        </div>
       </div>
     </div>
   </section>
@@ -32,8 +76,8 @@
           <div class="col s12 m4">
             <div class="card">
               <div class="card-image waves-effect waves-block waves-light">
-                <a href="/merchant/<%= p.merchantId %>">
-                  <img src='<%= p.img%>'>
+                <a href="/merchant/<%= p._id %>">
+                  <img src='<%= p.backgroundImg%>'>
                 </a>
               </div>
               <div class="card-content">
@@ -41,7 +85,7 @@
                     <%= p.name %>
                   </strong></span>
                 <p>
-                  <%= p.descriptions%>
+                  <%= p.description%>
                 </p>
                 <div>
                   <div class="stars">
@@ -75,7 +119,7 @@
         <div class="col s12 m3">
           <div class="card">
             <div class="card-image">
-              <img src='<%= c.img%>'>
+              <img src='<%= c.backgroundImg%>'>
             </div>
             <div class="title">
               <h3><%= c.type  %></h3>
@@ -88,6 +132,7 @@
       </div>
     </div>
   </section>
+
   <%- include('../partials/footer') -%>
 </main>
 <%- include('../partials/bottom-a') -%>

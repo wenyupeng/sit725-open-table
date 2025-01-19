@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
   $(".datepicker").datepicker({
     format: "yyyy-mm-dd",
     minDate: new Date(),
@@ -8,20 +7,17 @@ $(document).ready(function () {
 
   $("select").formSelect();
   $("textarea#specialRequests").characterCounter();
-
-  // Time Slot Selection
-  $(".time-slot").click(function () {
-    $("#selectedTime").val($(this).data("time"));
-  });
-
+    
   // Quantity Buttons
   const quantities = {};
   $(".quantity-btn").click(function () {
     const id = $(this).data("id");
     const price = parseFloat($(this).data("price"));
+    const menuName = $(this).data("name");
+    const menuImg = $(this).data("img");
 
     if (!quantities[id]) {
-      quantities[id] = { quantity: 0, price };
+      quantities[id] = { quantity: 0, price, name: menuName, img: menuImg };
     }
 
     quantities[id].quantity += $(this).hasClass("increase") ? 1 : -1;
@@ -34,6 +30,8 @@ $(document).ready(function () {
         id: key,
         quantity: quantities[key].quantity,
         price: quantities[key].price,
+        name: quantities[key].name,
+        img: quantities[key].img,
       }))
       .filter((item) => item.quantity > 0);
 
@@ -47,41 +45,4 @@ $(document).ready(function () {
     $("#totalPriceWithGST").text((subtotal * 1.1).toFixed(2));
     $("#menuItemsInput").val(JSON.stringify(menuItems));
   });
-
-  $('#confirmBookingBtn').click(function () {
-    var form = document.getElementById('bookingForm');
-    var formData = new FormData(form);
-
-    let bookingDate = {};
-    for (var [key, value] of formData.entries()) {
-      bookingDate[key] = value;
-    }
-
-    if (!bookingDate.time) {
-      M.toast({ html: 'Please select a time slot', classes: 'rounded' });
-      return false;
-    }
-
-    $.ajax({
-      url: `/api/booking/${bookingDate.merchantId}`,
-      type: 'POST',
-      headers: {
-        'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-      },
-      contentType: 'application/json',
-      data: JSON.stringify(bookingDate),
-      success: function (res) {
-        
-      },
-      error: function (res) {
-        if(res.status === 401){
-          M.toast({ html: 'Please login to continue', classes: 'rounded' });
-          window.location.href = '/user/login';
-        }else{
-          M.toast({ html: 'Error occurred while booking', classes: 'rounded' });
-        }
-      }
-    });
-  });
-
-});  
+});

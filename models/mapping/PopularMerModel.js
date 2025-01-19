@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 
 let types = mongoose.SchemaTypes;
-const PopularMerchantsSchema = new mongoose.Schema({
-    merchantId: {type: types.ObjectId, required: true},
-    img: {type: types.String, required: true},
+const PopularMerchantsSchema = new mongoose.Schema({    
+    backgroundImg: {type: types.String, required: true},
     name: {type: types.String, required: true},
-    descriptions: {type: types.String, required: true},
+    description: {type: types.String, required: true},
     star: {type: types.Number, required: true},
     reviews: {type: types.Number, required: true, default: 5},
 }, {

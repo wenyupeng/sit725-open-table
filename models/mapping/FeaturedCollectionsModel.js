@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 let types = mongoose.SchemaTypes;
 const FeaturedCollectionsSchema = new mongoose.Schema({
-    img: { type: types.String, required: true },
+    backgroundImg: { type: types.String, required: true },
     type: { type: types.String, required: true },
     description: { type: types.String, required: true },
 }, {

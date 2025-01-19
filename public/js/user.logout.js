@@ -3,4 +3,5 @@ $(document).ready(() => {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('food_order');
     sessionStorage.removeItem('merchant');
+    window.location.href = '/'
 });

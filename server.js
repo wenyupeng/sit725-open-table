@@ -73,7 +73,7 @@ mount(app, path.join(process.cwd(), '/routes'), isDev)
 app.all("*", function (req, res) {
     // Check if the client expects text/html
     if (req.accepts("text/html")) {
-        return apiResponse.renderNotFoundPage(res);
+        res.status(404).render("./error/404", { pageTitle: "404 Page Not Found" });               
     } else {
         return apiResponse.notFoundResponse(res, "404 --- 接口不存在");
     }

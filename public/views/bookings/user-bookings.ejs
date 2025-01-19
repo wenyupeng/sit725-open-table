@@ -1,0 +1,169 @@
+<%- include('../partials/top-a') -%>
+    <link rel="stylesheet" href="/../../css/base/header.css">
+    <link rel="stylesheet" href="/../../css/base/footer.css">
+    <link rel="stylesheet" href="/../../css/booking.css">
+    <link rel="stylesheet" href="/../../css/base/components.css">
+    <%- include('../partials/top-b') -%>
+        <%- include('../partials/header') -%>
+            <main>
+                <!-- Booking section -->                 
+                <section>
+                    <% if (user) { %>
+                        <nav>
+                          <div class="nav-wrapper grey darken-4">
+                            <div class="col s12">
+                              <a href="/" class="breadcrumb skipy_ml_8 ">Home</a>                              
+                              <a class="breadcrumb">Bookings</a>                              
+                            </div>
+                          </div>
+                        </nav>
+                        <% } else { %>
+      
+                          <% } %>
+                    <!-- Selected merchant details section -->
+                    <div class="container">
+                        <div class="row">
+                            <% if (user) { %>
+                                <div class="col s12 center-align">
+
+                                    <h3 class="skipy-extrabold skipy-text-3xl">
+                                        Active Bookings
+                                    </h3>
+                                    <p>
+                                        <%= user.username %>
+                                    </p>
+                                    <p>
+                                        <%= user.phone %>
+                                    </p>
+                                    <p>
+                                        <%= user.email %>
+                                    </p>
+                                </div>
+                                <% } else { %>
+
+                                    <div class="col s12 center-align skipy_mt_16">
+
+                                        <div class="center-align">
+                                            <a class="waves-effect waves-light btn btn-small bg-gray" href="/"><i
+                                                    class="material-icons left">arrow_back</i>Back to Homepage</a>
+                                        </div>
+                                    </div>
+
+                                    <% } %>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s12">
+                                <div class="bg-white rounded-lg shadow-sm p-6">
+                                    <div class="flex justify-between items-center mb-6">
+
+                                        <table class="w-full responsive-table highlight">
+                                            <thead class="bg-gray-50">
+                                                <tr>
+                                                    <th class="px-4 py-3 text-left">Ordered Menu Items</th>
+                                                    <th class="px-4 py-3 text-left">Merchant</th>
+                                                    <th class="px-4 py-3 text-left">Date</th>
+                                                    <th class="px-4 py-3 text-left">Time</th>
+                                                    <th class="px-4 py-3 text-left">Order Date</th>
+                                                    <th class="px-4 py-3 text-left">Total Amount</th>
+                                                    <th class="px-4 py-3 text-left">Delete</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% bookings.forEach(booking=> { %>
+                                                    <tr class="border-b border-gray-200">
+                                                        <td class="px-4 py-4">
+                                                            <% booking.menuItems.forEach(menu=> { %>
+                                                                <div class="col s7">
+                                                                    <img src="<%= menu.img %>" alt="<%= menu.name %>"
+                                                                        class="object-cover rounded-lg skipy_w_16 skipy_h_16">
+                                                                </div>
+                                                                <div class="col s5">
+                                                                    <span class="black-text">
+                                                                        <span class="title skipy-semibold">
+                                                                            <%= menu.name %>
+                                                                        </span>
+                                                                        <p class="title skipy-semibold">
+                                                                            $<%= menu.price.toFixed(2) %> x <%= menu.quantity %>
+                                                                        </p>
+                                                                    </span>
+                                                                </div>
+
+                                                                <% }); %>
+                                                        </td>
+                                                        <td class="px-4 py-4">
+                                                            <%= booking.merchantName %>
+                                                        </td>
+                                                        <td class="px-4 py-4">
+                                                            <%= new Intl.DateTimeFormat("en-US",{ year: 'numeric' ,
+                                                                month: 'long' , day: '2-digit' }).format(new
+                                                                Date(booking.bookingDate))%>
+                                                        </td>
+                                                        <td class="px-4 py-4">
+                                                            <%= booking.bookingTime %>
+                                                        </td>
+
+                                                        <td class="px-4 py-4">
+                                                            <%= new Intl.DateTimeFormat("en-US",{ year: 'numeric' ,
+                                                                month: 'long' , day: '2-digit' }).format(new
+                                                                Date(booking.updatedAt))%>
+                                                        </td>
+                                                        <td class="px-4 py-4">$<%= booking.totalPriceWithGST.toFixed(2)
+                                                                %>
+                                                        </td>
+                                                        <td>
+                                                            <form
+                                                                action="/api/booking/<%= user._id %>/bookings/<%= booking._id %>/delete"
+                                                                method="POST" style="display: inline;">
+                                                                <input type="hidden" name="<%= booking._id %>"
+                                                                    value="<%= booking._id %>">
+                                                                <input type="hidden" name="<%= booking.merchantName %>"
+                                                                    value="<%= booking.merchantName %>">
+
+                                                                <button class="waves-effect waves-light btn red"
+                                                                    type="submit"><i
+                                                                        class="material-icons prefix">delete</i></button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                    <% }); %>
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                    <div class="flex justify-between items-center skipy_mt_4">
+                                        <div class="text-gray-600">Total <%= totalCount %> records</div>
+
+                                        <div lass="text-gray-600">
+                                            <% if (page> 1) { %>
+                                                <a class="btn-small waves-effect waves-light bg-gray"
+                                                    href="?page=<%= page - 1 %>&limit=<%= limit %>"><i
+                                                        class="material-icons">navigate_before</i></a>
+                                                <% } %>
+                                                    <span>Page <%= page %> of <%= Math.ceil(totalCount / limit) %></span>
+                                                    <% if (page * limit < totalCount) { %>
+                                                        <a class="btn-small waves-effect waves-light bg-gray"
+                                                            href="?page=<%= page + 1 %>&limit=<%= limit %>"><i
+                                                                class="material-icons">navigate_next</i></a>
+                                                        <% } %>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                </section>
+                <%- include('../partials/footer') -%>
+            </main>
+            <%- include('../partials/bottom-a') -%>
+
+                <script src="/../../js/booking.js"></script>
+                <%- include('../partials/bottom-b') -%>

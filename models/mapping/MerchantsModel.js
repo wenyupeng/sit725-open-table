@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 
 let types = mongoose.SchemaTypes;
-const MerchantsSchema = new mongoose.Schema({
-    // _id: {type: types.String, required: false},
+const MerchantsSchema = new mongoose.Schema({    
     backgroundImg: {type: types.String, required: true},
     name: {type: types.String, required: true},
     category: {type: types.String, required: true},
@@ -15,6 +14,8 @@ const MerchantsSchema = new mongoose.Schema({
     openHours: {type: types.Array,required: true},
     password: {type: types.String, required: true},
     isDeleted: {type: types.Boolean, required: true, default: false},
+    star: { type: types.Number },
+    reviews: {type: types.Number, default: 5},
 }, {
     timestamps: true,
     versionKey: false,

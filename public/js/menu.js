@@ -78,7 +78,7 @@ $(document).ready(function () {
     }
     
     $('#shoppingCartBtn').click(()=>{
-        let nextPage =`/booking/${merchant.merchantId}`;
+        let nextPage =`/api/booking/${merchant.merchantId}`;
         sessionStorage.setItem('nextPage', nextPage);
 
         let user = sessionStorage.getItem('user');
