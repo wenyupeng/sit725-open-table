@@ -51,7 +51,7 @@ exports.handleCreateBooking = [
         );
 
         const booking = new BookingModel({
-          userId: new ObjectId(req.session.userId),
+          userId: new ObjectId(req.session.user._id),
           merchantId: new ObjectId(merchantId),
           menuItems: parsedMenuItems,
           subTotal: subTotal,
@@ -64,9 +64,11 @@ exports.handleCreateBooking = [
         });
         
         await booking.save();
+        
+        return apiResponse.successResponseWithData(res, "Booking created successfully", res.redirect(`/api/booking/${booking.userId}/bookings`));
+        // res.redirect(`/api/booking/${booking.userId}/bookings`);      
+        // return apiResponse.successResponseWithData(res, "Booking created successfully", booking);
 
-        res.redirect(`/api/booking/${booking.userId}/bookings`);      
-        //return apiResponse.successResponseWithData(res, "Booking created successfully", booking);
       }
     } catch (err) {
       log.error(`Add Merchant error, ${JSON.stringify(err)}`);
