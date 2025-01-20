@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const UserController = require('../../controllers/UserController');
+const UserController = require("../../controllers/UserController");
 
 /**
  * @swagger
@@ -15,11 +15,11 @@ const UserController = require('../../controllers/UserController');
  *       200:
  *         description: successful operation
  */
-router.get('/', UserController.userlist);
+router.get("/", UserController.userlist);
 
 /**
  * user delete
  */
-router.delete('/', UserController.userDelete);
+router.delete("/", UserController.userDelete);
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { body, validationResult } = require("express-validator");
+const { validationResult } = require("express-validator");
 const { UserModel } = require("../models");
 const authenticate = require("../middlewares/jwt");
 const apiResponse = require("../utils/utils.apiResponse");
@@ -19,7 +19,7 @@ exports.userlist = [
         return apiResponse.validationErrorWithData(
           res,
           "Validation Error.",
-          errors.array()
+          errors.array(),
         );
 
       let query = {
@@ -41,7 +41,7 @@ exports.userlist = [
               pageSize: 20,
               total,
             }
-          : { result: [], total }
+          : { result: [], total },
       );
     } catch (err) {
       console.log(err);
@@ -61,7 +61,7 @@ exports.userDelete = [
       return apiResponse.validationErrorWithData(
         res,
         "Invalid Error.",
-        "the input id is not exist"
+        "the input id is not exist",
       );
 
     try {
@@ -69,7 +69,7 @@ exports.userDelete = [
         if (!user) {
           return apiResponse.notFoundResponse(
             res,
-            "user does not exist or have been deleted"
+            "user does not exist or have been deleted",
           );
         }
         apiResponse.successResponse(res, `user ${req.body.id} has been delete`);

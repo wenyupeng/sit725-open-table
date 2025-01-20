@@ -1,50 +1,50 @@
-.page-footer{
-    padding-bottom: 3rem;
-    background: black;
-    color: white;
+.page-footer {
+  padding-bottom: 3rem;
+  background: black;
+  color: white;
 }
 
-.page-footer .row .col h5{
-    font-size: 1.125rem;
-    font-weight: 700;
-    line-height: 1.75rem;
+.page-footer .row .col h5 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.75rem;
 }
 
-.page-footer .row .col ul li a:hover{
-    color: black;
+.page-footer .row .col ul li a:hover {
+  color: black;
 }
 
 /* 
   Social Link Widget
   ------------------------------------------------ */
-  .social-link {
-    margin-bottom: 0;
-  }
-  .social-link li {
-    display: inline-block;
-  }
-  .social-link li a i {
-    display: block;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    border-radius: 50%;
-  }
-  
-  .social-link li a i{
-    color: #fff;
-  }
-  
-  .social-link li a i:hover {
-    color: #03a9f4 ;
-    background: #fff;
-  }
-  
-  .social-link.dark li a i{
-    color: #202020;
-  }
-  .social-link.dark li a i:hover {
-    color: #fff ;
-    background: #03a9f4;
-  }
+.social-link {
+  margin-bottom: 0;
+}
+.social-link li {
+  display: inline-block;
+}
+.social-link li a i {
+  display: block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.social-link li a i {
+  color: #fff;
+}
+
+.social-link li a i:hover {
+  color: #03a9f4;
+  background: #fff;
+}
+
+.social-link.dark li a i {
+  color: #202020;
+}
+.social-link.dark li a i:hover {
+  color: #fff;
+  background: #03a9f4;
+}

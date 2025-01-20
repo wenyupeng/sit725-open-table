@@ -1,33 +1,31 @@
 $(document).ready(function () {
-    let bgImg = $('.bg-img input').val();
-    $('.bg-img').css("background-image", "url(" + bgImg + ")");
+  let bgImg = $(".bg-img input").val();
+  $(".bg-img").css("background-image", "url(" + bgImg + ")");
 
-    $('.carousel.carousel-slider').carousel({
-        fullWidth: true
-    });
+  $(".carousel.carousel-slider").carousel({
+    fullWidth: true,
+  });
 
-    setInterval(() => {
-        $('.carousel.carousel-slider').carousel('next', 1);
-    }, 4000);
+  setInterval(() => {
+    $(".carousel.carousel-slider").carousel("next", 1);
+  }, 4000);
 
-    $('#homeBtn').click(() => {
-        this.location.href = '/';
-    });
+  $("#homeBtn").click(() => {
+    this.location.href = "/";
+  });
 
-    $('#makeReservationBtn').click(() => {
-        let merchantId = $('#merchantId').val();
-        this.location.href = '/merchant/' + merchantId + '/menu';
-    });
+  $("#makeReservationBtn").click(() => {
+    let merchantId = $("#merchantId").val();
+    this.location.href = "/merchant/" + merchantId + "/menu";
+  });
 
-    let merchant ={
-        merchantId : $('#merchantId').val(),
-        merchantName : $('#merchantName').val()
-    };
-    sessionStorage.setItem("merchant",JSON.stringify(merchant));
+  let merchant = {
+    merchantId: $("#merchantId").val(),
+    merchantName: $("#merchantName").val(),
+  };
+  sessionStorage.setItem("merchant", JSON.stringify(merchant));
 
-    $('#createMerchantBtn').click(() => {
-        ;
-    });
+  $("#createMerchantBtn").click(() => {});
 
-    console.log('ready');
+  console.log("ready");
 });

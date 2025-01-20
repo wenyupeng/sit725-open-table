@@ -12,7 +12,7 @@ const BookingSchema = new mongoose.Schema(
       type: types.ObjectId,
       ref: "Merchant",
       required: true,
-    },    
+    },
     menuItems: [
       {
         menuItemId: { type: types.ObjectId, ref: "Menu" },
@@ -34,6 +34,6 @@ const BookingSchema = new mongoose.Schema(
   {
     timestamps: true,
     versionKey: false,
-  }
+  },
 );
 module.exports = mongoose.model("booking", BookingSchema);
