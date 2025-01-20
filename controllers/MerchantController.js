@@ -9,6 +9,7 @@ const log = require("../utils/utils.logger");
 const authenticate = require("../middlewares/jwt");
 const apiResponse = require("../utils/utils.apiResponse");
 const permissions = require("../middlewares/permissions");
+const jwt = require("jsonwebtoken");
 const { body, validationResult } = require("express-validator");
 const { MerchantCategories } = require("../constant/constant");
 const { encryption, decryption } = require("../utils/utils.others");
@@ -122,28 +123,43 @@ exports.login = [
       return apiResponse.validationErrorWithData(res, errors.array()[0].msg);
     }
 
-    let merchant = await MerchantsModel.findOne({ phone: req.body.phone });
-    if (!merchant) {
-      return apiResponse.notFoundResponse(res, "Merchant not found");
+    try {
+
+      let merchant = await MerchantsModel.findOne({ contactPhone: { $eq: req.body.phone } });
+      if (!merchant) {
+        return apiResponse.notFoundResponse(res, "Merchant not found");
+      }
+
+      let password = new Buffer.from(req.body.pwd, "base64").toString();
+
+      let isPass = await decryption(password, merchant.password);
+      if (!isPass)
+        return apiResponse.unauthorizedResponse(
+          res,
+          "2: username or password is wrong"
+        );
+
+      let payload = {
+        merchantId: merchant._id,
+        name: merchant.name,
+        contactPhone: merchant.contactPhone,
+        type: merchant.type,
+        category: merchant.category,
+      };
+
+      merchant.token =
+        "Bearer " +
+        jwt.sign(payload, process.env.SIGN_KEY, { expiresIn: 3600 * 2 });
+
+      req.session.merchant = merchant;
+      return apiResponse.successResponseWithData(res, "Login Success", merchant);
+    } catch (err) {
+      console.log(err);
+      log.error(`login error, ${JSON.stringify(err)}`);
+      return apiResponse.ErrorResponse(res, {
+        message: "Internal Server Error",
+      });
     }
-
-    let password = new Buffer.from(req.body.pwd, "base64").toString();
-
-    let isPass = await decryption(password, merchant.password);
-    if (!isPass)
-      return apiResponse.unauthorizedResponse(
-        res,
-        "2: username or password is wrong"
-      );
-
-    console.log(merchant);
-
-    merchant.token =
-      "Bearer " +
-      jwt.sign(merchant, process.env.SIGN_KEY, { expiresIn: 3600 * 2 });
-
-    req.session.merchant = merchant;
-    return apiResponse.successResponseWithData(res, "Login Success", merchant);
   },
 ];
 
@@ -407,7 +423,7 @@ exports.topMerchants = async () => {
   /**
    * Add photo to a merchant
    */
-exports.handleCreateMerchantPhotoGallery = [
+  exports.handleCreateMerchantPhotoGallery = [
     [body("ImageUrl").notEmpty().withMessage("Image Url is required")],
     async (req, res) => {
       try {

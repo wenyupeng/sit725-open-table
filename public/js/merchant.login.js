@@ -17,17 +17,30 @@ $(document).ready(function(){
             pwd: window.btoa(pwd)
         }
 
-        // console.log(loginObj);
+        console.log(loginObj);
 
         $.ajax({
             url: '/api/merchant/login',
-            type: 'post',
-            data: loginObj,
-            success: (result) => {
-                if (result.success) {
-                    console.log(result);
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(loginObj),
+            success: (res) => {
+                let resData = JSON.parse(res);
+                if(resData.status == '1'){
+                    M.toast({ html: 'login successfully', classes: 'rounded' });
+                    console.log(resData);
+                }else{
+                    M.toast({ html: `Error login: ${resData.message}`, classes: 'rounded' });
+                }
+            },
+            error: (xhr, status, error) => {
+                if(xhr.status == 400){
+                    let msg = JSON.parse(xhr.responseText).message;
+                    M.toast({ html: `Error login: ${msg}`, classes: 'rounded' });
+                }else{
+                    M.toast({ html: `Error login: ${xhr.responseText}`, classes: 'rounded' });
                 }
             }
-        })
+        });
     })
 })

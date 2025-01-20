@@ -25,9 +25,5 @@ $(document).ready(function () {
     };
     sessionStorage.setItem("merchant",JSON.stringify(merchant));
 
-    $('#createMerchantBtn').click(() => {
-        ;
-    });
-
     console.log('ready');
 });
