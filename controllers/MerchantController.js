@@ -395,9 +395,17 @@ exports.renderMerchantDetails = [
  * get top 6 Merchants
  * @returns {Object} top six merchants
  */
-exports.topMerchants = async () => {
+exports.topMerchants = async (searchQuery) => {
   try {
-    return await MerchantsModel.find({}).limit(Number(6)).sort({ _id: 0 });
+    const filter = searchQuery
+    ? {
+        $or: [
+          { name: { $regex: searchQuery, $options: "i" } },
+          { location: { $regex: searchQuery, $options: "i" } }
+        ]
+      }
+    : {};
+    return await MerchantsModel.find(filter).limit(6).sort({ _id: -1 });
   } catch (err) {
     console.log(err);
     log.error(`featuredMerchants error, ${JSON.stringify(err)}`);
