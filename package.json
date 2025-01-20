@@ -4,10 +4,10 @@
   "description": "deakin unit sit725 team project",
   "main": "server.js",
   "scripts": {
-    "test": "NODE_ENV=development mocha ./test/**/*.test.js",
-    "dev": "NODE_ENV=development nodemon server.js --mode development",
-    "start": "NODE_ENV=production node server.js --mode production",
-    "lint": "eslint --fix && prettier . --write"
+    "test": "cross-env NODE_ENV=development mocha ./test/**/*.test.js",
+    "dev": "cross-env NODE_ENV=development nodemon server.js --mode development",
+    "start": "cross-env NODE_ENV=production node server.js --mode production",
+    "lint": "cross-env eslint --fix && prettier . --write"
   },
   "repository": {
     "type": "git",
@@ -44,6 +44,7 @@
   "devDependencies": {
     "@eslint/js": "^9.18.0",
     "chai": "^4.3.10",
+    "cross-env": "^7.0.3",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "globals": "^15.14.0",
