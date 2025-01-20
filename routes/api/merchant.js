@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const MerchantController = require('../../controllers/MerchantController');
+const MerchantController = require("../../controllers/MerchantController");
 
 /**
  * @swagger

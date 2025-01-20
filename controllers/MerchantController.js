@@ -2,16 +2,15 @@ const {
   PopularMerModel,
   FeaturedCollectionsModel,
   MerchantsModel,
-  MenuModel,
 } = require("../models");
 const { ObjectId } = require("mongodb");
+const jwt = require("jsonwebtoken");
 const log = require("../utils/utils.logger");
 const authenticate = require("../middlewares/jwt");
 const apiResponse = require("../utils/utils.apiResponse");
 const permissions = require("../middlewares/permissions");
 const jwt = require("jsonwebtoken");
 const { body, validationResult } = require("express-validator");
-const { MerchantCategories } = require("../constant/constant");
 const { encryption, decryption } = require("../utils/utils.others");
 
 /**
@@ -69,7 +68,7 @@ exports.register = [
         if (existingMerchant) {
           return apiResponse.validationErrorWithData(
             res,
-            "Merchant already exists, use different contact phone to register"
+            "Merchant already exists, use different contact phone to register",
           );
         }
 
@@ -93,7 +92,7 @@ exports.register = [
 
         return apiResponse.successResponse(
           res,
-          "Merchant created successfully"
+          "Merchant created successfully",
         );
       }
     } catch (err) {
@@ -194,7 +193,7 @@ exports.delete = [
 
       let flag = await MerchantsModel.UpdateOne(
         { _id: merchantId },
-        { $set: { isDeleted: true } }
+        { $set: { isDeleted: true } },
       );
       if (!flag) {
         return apiResponse.ErrorResponse(res, "Internal Server Error");
@@ -229,25 +228,10 @@ exports.add = [
   async (req, res) => {
     try {
       let merchant = req.body;
-      let name = merchant.name;
-      let contactPhone = merchant.contactPhone;
-      let existingMerchant = await MerchantsModel.findOne({ _id: merchantId });
+      let existingMerchant = await MerchantsModel.findOne({ _id: merchant });
       if (existingMerchant) {
         return apiResponse.ErrorResponse(res, "Merchant already exists");
       }
-
-      let obj = {
-        backgroundImg: "",
-        name: merchant.name,
-        category: merchant.category,
-        type: merchant.type,
-        description: merchant.description,
-        location: merchant.location,
-        contactPhone: contactPhone,
-        hours: merchant.hours,
-        photoGallery: merchant.photoGallery,
-        openHours: merchant.openHours,
-      };
 
       let flag = await MerchantsModel.save(merchant);
       if (!flag) {
@@ -256,7 +240,7 @@ exports.add = [
       return apiResponse.successResponseWithData(
         res,
         "Merchant added successfully",
-        merchant
+        merchant,
       );
     } catch (err) {
       console.log(err);
@@ -284,12 +268,12 @@ exports.update = [
       let updatedMerchant = await MerchantsModel.findByIdAndUpdate(
         merchantId,
         req.body,
-        { new: true }
+        { new: true },
       );
       return apiResponse.successResponseWithData(
         res,
         "Merchant updated successfully",
-        updatedMerchant
+        updatedMerchant,
       );
     } catch (err) {
       console.log(err);
@@ -316,7 +300,7 @@ exports.updateById = [
     let updatedMerchant = await MerchantsModel.findByIdAndUpdate(
       merchantId,
       req.body,
-      { new: true }
+      { new: true },
     );
     if (!updatedMerchant) {
       return apiResponse.ErrorResponse(res, "Internal Server Error");
@@ -324,7 +308,7 @@ exports.updateById = [
     return apiResponse.successResponseWithData(
       res,
       "Merchant updated successfully",
-      updatedMerchant
+      updatedMerchant,
     );
   },
 ];
@@ -411,15 +395,23 @@ exports.renderMerchantDetails = [
  * get top 6 Merchants
  * @returns {Object} top six merchants
  */
-exports.topMerchants = async () => {
+(exports.topMerchants = async (searchQuery) => {
   try {
-    return await MerchantsModel.find({}).limit(Number(6)).sort({ _id: 0 });
+    const filter = searchQuery
+      ? {
+          $or: [
+            { name: { $regex: searchQuery, $options: "i" } },
+            { location: { $regex: searchQuery, $options: "i" } },
+          ],
+        }
+      : {};
+    return await MerchantsModel.find(filter).limit(6).sort({ _id: -1 });
   } catch (err) {
     console.log(err);
     log.error(`featuredMerchants error, ${JSON.stringify(err)}`);
     return [];
   }
-},
+}),
   /**
    * Add photo to a merchant
    */
@@ -437,7 +429,7 @@ exports.topMerchants = async () => {
         await MerchantsModel.findByIdAndUpdate(
           merchantId,
           { $push: { photoGallery: merchantImageUrl } },
-          { new: true }
+          { new: true },
         );
         res.redirect(`/merchant/${merchantId}`);
       } catch (err) {
@@ -447,7 +439,7 @@ exports.topMerchants = async () => {
         });
       }
     },
-  ];
+  ]);
 
 /**
  *  Render a merchant create photogallery
@@ -484,7 +476,7 @@ exports.handleCreateMerchantOpenHours = async (req, res) => {
     await MerchantsModel.findByIdAndUpdate(
       merchantId,
       { $push: { openHours: merchantOpenHours } },
-      { new: true }
+      { new: true },
     );
     res.redirect(`/merchant/${merchantId}`);
   } catch (err) {

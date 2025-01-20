@@ -9,17 +9,16 @@ const {
 } = require("../controllers/MerchantController");
 const { getMenuByMerchantId } = require("../controllers/MenuController");
 
-router.get('/register', async function (req, res) {
-  res.render('./merchant/merchant_register', {
+router.get("/register", async function (req, res) {
+  res.render("./merchant/merchant_register", {
     pageTitle: "Merchant",
     message: null,
   });
-})
+});
 
-router.get('/login', async function (req, res) {
-  res.render('./merchant/merchant_login', {})
-})
-
+router.get("/login", async function (req, res) {
+  res.render("./merchant/merchant_login", {});
+});
 
 // Render a merchant details routes
 router.get("/:merchantId", renderMerchantDetails);
@@ -33,8 +32,6 @@ router.get("/:merchantId/menu", async function (req, res) {
   });
 });
 
-
-
 // Render create merchant photogallery routes
 router.get("/:merchantId/photo", renderCreateMerchantPhotoGallery);
 
@@ -47,6 +44,4 @@ router.get("/:merchantId/hours", renderCreateMerchantOpenHours);
 // handle create merchant photogallery routes
 router.post("/:merchantId/hours", handleCreateMerchantOpenHours);
 
-
 module.exports = router;
-

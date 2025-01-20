@@ -1,8 +1,5 @@
-const chai = require("chai");
-const { expect } = require("chai");
 const supertest = require("supertest");
 const app = require("../server");
-const { MerchantsModel, MenuModel, BookingModel } = require("../models");
 const mongoose = require("mongoose");
 const { ObjectId } = require("mongodb");
 const request = supertest(app);
