@@ -4,10 +4,10 @@ const MerchantController = require("../../controllers/MerchantController");
 
 /**
  * @swagger
- * /api/merchants:
+ * /api/merchant:
  *   get:
  *     tags:
- *      - Merchants
+ *      - Merchant
  *     summary: Returns Merchant list
  *     produces:
  *      - application/json
@@ -15,36 +15,15 @@ const MerchantController = require("../../controllers/MerchantController");
  *       200:
  *         description: successful operation
  */
-router.get("/", MerchantController.queryPagenation);
-
-/**
- * @swagger
- * /api/merchants/:merchantId:
- *   delete:
- *     tags:
- *      - Merchants
- *     summary: Deletes a Merchant
- *     produces:
- *      - application/json
- *     parameters:
- *      - name: merchantId
- *        in: path
- *        description: ID of the Merchant to delete
- *        required: true
- *        type: string
- *     responses:
- *       200:
- *         description: successful operation
- */
-router.delete("/:merchantId", MerchantController.delete);
+router.get('/', MerchantController.queryPagenation);
 
 router.post("/register", MerchantController.register);
 /**
  * @swagger
- * /api/merchants/login:
+ * /api/merchant/login:
  *   post:
  *     tags:
- *      - Merchants
+ *      - Merchant
  *     summary: Login a Merchant
  *     produces:
  *      - application/json
@@ -59,6 +38,29 @@ router.post("/register", MerchantController.register);
  *       200:
  *         description: successful operation
  */
-router.post("/login", MerchantController.login);
+router.post('/login', MerchantController.login);
+
+/**
+ * @swagger
+ * /api/merchant/:merchantId:
+ *   delete:
+ *     tags:
+ *      - Merchant
+ *     summary: Deletes a Merchant
+ *     produces:
+ *      - application/json
+ *     parameters:
+ *      - name: merchantId
+ *        in: path
+ *        description: ID of the Merchant to delete
+ *        required: true
+ *        type: string
+ *     responses:
+ *       200:
+ *         description: successful operation
+ */
+router.delete('/:merchantId', MerchantController.delete);
+
+
 
 module.exports = router;

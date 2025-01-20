@@ -19,13 +19,11 @@ $(document).ready(function () {
     this.location.href = "/merchant/" + merchantId + "/menu";
   });
 
-  let merchant = {
-    merchantId: $("#merchantId").val(),
-    merchantName: $("#merchantName").val(),
-  };
-  sessionStorage.setItem("merchant", JSON.stringify(merchant));
+    let merchant ={
+        merchantId : $('#merchantId').val(),
+        merchantName : $('#merchantName').val()
+    };
+    sessionStorage.setItem("merchant",JSON.stringify(merchant));
 
-  $("#createMerchantBtn").click(() => {});
-
-  console.log("ready");
+    console.log('ready');
 });
