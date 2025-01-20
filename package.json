@@ -7,7 +7,7 @@
     "test": "NODE_ENV=development mocha ./test/**/*.test.js",
     "dev": "NODE_ENV=development nodemon server.js --mode development",
     "start": "NODE_ENV=production node server.js --mode production",
-    "lint": "eslint --fix && npx prettier . --write"
+    "lint": "eslint --fix && prettier . --write"
   },
   "repository": {
     "type": "git",
