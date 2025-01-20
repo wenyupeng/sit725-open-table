@@ -5,14 +5,16 @@ const { popularMerchants, featuredColletions, topMerchants } = require('../contr
 
 
 router.get('/', async function (req, res) {
-    let popular_mer = await popularMerchants();
-    let featured_col = await featuredColletions();
-    let top_six_mer = await topMerchants();
+    const searchQuery = req.query.q;
+    const popular_mer = await popularMerchants();
+    const featured_col = await featuredColletions();
+    const top_six_mer = await topMerchants(searchQuery);
 
     res.render('./home/home', {
         popular_mer: popular_mer,
         featured_col: featured_col,
-        top_six_mer: top_six_mer
+        top_six_mer: top_six_mer,
+        searchQuery
     });
 });
 
