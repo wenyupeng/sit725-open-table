@@ -26,11 +26,11 @@ exports.register = [
       .isEmail()
       .normalizeEmail()
       .withMessage("email format is wrong")
-      .custom((value, { req }) => {
+      .custom((value) => {
         return UserModel.findOne({ email: value }).then((user) => {
           if (user) {
             return Promise.reject(
-              `email ${user.email} has been used, please use another email`
+              `email ${user.email} has been used, please use another email`,
             );
           }
         });
@@ -39,11 +39,11 @@ exports.register = [
       .isLength({ min: 6 })
       .trim()
       .withMessage("password could not be empty or less than 6 character")
-      .custom((value, { req }) => {
+      .custom((value) => {
         return UserModel.findOne({ phone: value }).then((user) => {
           if (user) {
             return Promise.reject(
-              `phone number ${user.phone} has been used, please use another phone number`
+              `phone number ${user.phone} has been used, please use another phone number`,
             );
           }
         });
@@ -73,8 +73,11 @@ exports.register = [
         const addInfo = await UserModel.collection.insertOne(newUser);
         if (addInfo) {
           return apiResponse.successResponse(res, "registry successfully");
-        }else{
-          return apiResponse.validationErrorWithData(res, "registry fail, data save fail");
+        } else {
+          return apiResponse.validationErrorWithData(
+            res,
+            "registry fail, data save fail",
+          );
         }
       }
     } catch (err) {
@@ -119,14 +122,14 @@ exports.login = [
         if (!userInfo)
           return apiResponse.unauthorizedResponse(
             res,
-            "1: username or password is wrong"
+            "1: username or password is wrong",
           );
 
         let isPass = await decryption(req.body.password, userInfo.password);
         if (!isPass)
           return apiResponse.unauthorizedResponse(
             res,
-            "2: username or password is wrong"
+            "2: username or password is wrong",
           );
 
         let userData = {
@@ -145,7 +148,11 @@ exports.login = [
         // Store user data in session
         req.session.user = userData;
 
-        return apiResponse.successResponseWithData(res, "login successfully", userData);
+        return apiResponse.successResponseWithData(
+          res,
+          "login successfully",
+          userData,
+        );
       }
     } catch (err) {
       console.log(err);

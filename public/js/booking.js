@@ -7,7 +7,7 @@ $(document).ready(function () {
 
   $("select").formSelect();
   $("textarea#specialRequests").characterCounter();
-    
+
   // Quantity Buttons
   const quantities = {};
   $(".quantity-btn").click(function () {
@@ -37,7 +37,7 @@ $(document).ready(function () {
 
     const subtotal = menuItems.reduce(
       (sum, item) => sum + item.quantity * item.price,
-      0
+      0,
     );
     $("#subTotal").text(subtotal.toFixed(2));
     $("#subTotal2").text(subtotal.toFixed(2));

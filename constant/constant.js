@@ -1,7 +1,6 @@
 module.exports = {
-    MerchantCategories: {
-        RESTAURANT: "Restaurant",
-        HOTEL: "Hotel",
-    }
-
-}
+  MerchantCategories: {
+    RESTAURANT: "Restaurant",
+    HOTEL: "Hotel",
+  },
+};

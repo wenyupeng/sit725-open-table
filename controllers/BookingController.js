@@ -18,28 +18,30 @@ const log = require("../utils/utils.logger");
  * @returns {Object} common response
  */
 exports.handleCreateBooking = [
-
   async (req, res) => {
     try {
       const { merchantId } = req.params;
       const merchant = await MerchantsModel.findById(merchantId);
-      
+
       if (!merchant) {
         return apiResponse.notFoundResponse(res, "Merchant not found");
       } else {
-         const menus = await MenuModel.find({ merchantId: { $eq: merchantId }, isActive: { $eq: true } });
-        
+        const menus = await MenuModel.find({
+          merchantId: { $eq: merchantId },
+          isActive: { $eq: true },
+        });
+
         if (!menus) {
           return apiResponse.notFoundResponse(res, "No Menuitems Found");
         }
 
-        const { datepicker, time, menuItems, specialRequest, guests } = req.body;
-        
+        const { datepicker, time, menuItems, guests } = req.body;
+
         // Validate inputs
         if (!datepicker || !time || !guests) {
           return apiResponse.validationErrorWithData(
             res,
-            "All fields are required."
+            "All fields are required.",
           );
         }
 
@@ -47,7 +49,7 @@ exports.handleCreateBooking = [
 
         const subTotal = parsedMenuItems.reduce(
           (sum, item) => sum + item.quantity * item.price,
-          0
+          0,
         );
 
         const booking = new BookingModel({
@@ -62,24 +64,30 @@ exports.handleCreateBooking = [
           numberOfGuests: parseInt(req.body.guests, 10),
           merchantName: merchant.name,
         });
-        
-        await booking.save();
-        
-        return apiResponse.successResponseWithData(res, "Booking created successfully", res.redirect(`/api/booking/${booking.userId}/bookings`));
-        // res.redirect(`/api/booking/${booking.userId}/bookings`);      
-        // return apiResponse.successResponseWithData(res, "Booking created successfully", booking);
 
+        await booking.save();
+
+        return apiResponse.successResponseWithData(
+          res,
+          "Booking created successfully",
+          res.redirect(`/api/booking/${booking.userId}/bookings`),
+        );
+        // res.redirect(`/api/booking/${booking.userId}/bookings`);
+        // return apiResponse.successResponseWithData(res, "Booking created successfully", booking);
       }
     } catch (err) {
       log.error(`Add Merchant error, ${JSON.stringify(err)}`);
-      return apiResponse.ErrorResponse(res, "Error creating booking" + err.message);
+      return apiResponse.ErrorResponse(
+        res,
+        "Error creating booking" + err.message,
+      );
     }
   },
 ];
 
 /**
  * [Features][Booking] Render Create Booking
- * 
+ *
  * */
 exports.renderCreateBooking = async (req, res) => {
   const { merchantId } = req.params;
@@ -118,19 +126,21 @@ exports.renderCreateBooking = async (req, res) => {
 
 // Get all bookings for the logged-in user with pagination
 exports.getLoggedInUserBookings = async (req, res) => {
- try {
-
+  try {
     const { page = 1, limit = 3 } = req.query; // Pagination parameters
     const userId = req.session.user._id;
-    const totalCount = await BookingModel.countDocuments({userId: userId, isActive: true });
+    const totalCount = await BookingModel.countDocuments({
+      userId: userId,
+      isActive: true,
+    });
 
     // Retrieve bookings for the logged-in user
-    const bookings = await BookingModel.find({userId: userId, isActive: true})
+    const bookings = await BookingModel.find({ userId: userId, isActive: true })
       .populate()
       .skip((page - 1) * limit)
       .limit(parseInt(limit))
       .sort({ bookingDate: -1 }); // Sort by date (most recent first)
-    
+
     res.render("./bookings/user-bookings", {
       pageTitle: "My Bookings",
       bookings: bookings,
@@ -143,7 +153,7 @@ exports.getLoggedInUserBookings = async (req, res) => {
     log.error(`Get Bookings error, ${JSON.stringify(err)}`);
     return apiResponse.ErrorResponse(
       res,
-      "Error creating booking" + err.message
+      "Error creating booking" + err.message,
     );
   }
 };
@@ -155,7 +165,7 @@ exports.deleteBooking = async (req, res) => {
     const disabledBooking = await BookingModel.findByIdAndUpdate(
       bookingId,
       { isActive: false },
-      { new: true }
+      { new: true },
     );
 
     if (!disabledBooking) {
@@ -167,7 +177,7 @@ exports.deleteBooking = async (req, res) => {
     log.error(`Delete Bookings error, ${JSON.stringify(err)}`);
     return apiResponse.ErrorResponse(
       res,
-      "Error deleting booking" + err.message
+      "Error deleting booking" + err.message,
     );
   }
 };

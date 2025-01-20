@@ -1,206 +1,205 @@
 .bg-img {
-    margin: 0;
-    width: 100%;
-    height: 700px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.5);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+  margin: 0;
+  width: 100%;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .bg-img h1 {
-    font-size: 3rem;
-    line-height: 1;
-    font-family: 'Pacifico';
-    margin-bottom: 1rem;
+  font-size: 3rem;
+  line-height: 1;
+  font-family: "Pacifico";
+  margin-bottom: 1rem;
 }
 
 .bg-img p {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .info-bar {
-    margin-top: -4rem;
-    padding: 1.5rem;
-    background-color: white;
-    border-radius: 0.5rem;
-    gap: 2rem;
-    box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, .2);
-    display: flex;
-    justify-content: space-between;
+  margin-top: -4rem;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  gap: 2rem;
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
 }
 
 .info-bar div h3 {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 1;
-    margin: 0;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1;
+  margin: 0;
 }
 
 .info-bar i {
-    font-style: normal;
+  font-style: normal;
 }
 
 .info-bar .map,
 .contact,
 .hours {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .map-marker-alt,
 .contact-marker-alt,
 .hours-marker-alt {
-    font-weight: 900;
-    font-size: 1.25rem;
-    font-family: "Font Awesome 6 Free";
-    margin-right: 1rem;
+  font-weight: 900;
+  font-size: 1.25rem;
+  font-family: "Font Awesome 6 Free";
+  margin-right: 1rem;
 }
 
 .info-bar .map .map-marker-alt::before {
-    content: "\f3c5";
-
+  content: "\f3c5";
 }
 
 .info-bar .contact .contact-marker-alt::before {
-    content: "\f095";
+  content: "\f095";
 }
 
 .info-bar .hours .hours-marker-alt::before {
-    content: "\f017";
+  content: "\f017";
 }
 
 .photo,
 .dishes {
-    margin-top: 3rem;
+  margin-top: 3rem;
 }
 
 .photo .carousel {
-    overflow: hidden;
-    height: 288px;
+  overflow: hidden;
+  height: 288px;
 }
 
 .custom-h2 {
-    font-weight: 600;
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-    margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  margin-bottom: 1.5rem;
 }
 
 .photo .carousel a img {
-    height: 288px;
-    border-radius: 1rem;
-    border: 1px solid rgba(0, 0, 0, .2);
+  height: 288px;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .openHoursAndLocation {
-    margin-top: 3rem;
+  margin-top: 3rem;
 }
 
 .openHoursAndLocation .content {
-    padding: 1.5rem;
-    background-color: white;
-    border-radius: 0.5rem;
-    border: 0.5rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .2);
-    overflow: hidden;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  border: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
 .openHoursAndLocation .content ul li {
-    padding-bottom: 40px;
+  padding-bottom: 40px;
 }
 
 .openHoursAndLocation .content img {
-    width: 100%;
-    height: 252px;
-    border-radius: 0.5rem;
-    object-fit: cover;
+  width: 100%;
+  height: 252px;
+  border-radius: 0.5rem;
+  object-fit: cover;
 }
 
 .dishes .carousel {
-    overflow: hidden;
-    height: 288px;
+  overflow: hidden;
+  height: 288px;
 }
 
 .dishes h2 {
-    font-weight: 600;
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-    margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  margin-bottom: 1.5rem;
 }
 
 .dishes .carousel a img {
-    padding: 0 10px;
-    height: 200px;
-    border-radius: 1rem;
-    border: 0px solid rgba(0, 0, 0, .2);
-    background-color: transparent;
+  padding: 0 10px;
+  height: 200px;
+  border-radius: 1rem;
+  border: 0px solid rgba(0, 0, 0, 0.2);
+  background-color: transparent;
 }
 
 .dishes .carousel a h3 {
-    padding: 0 15px;
-    color: black;
+  padding: 0 15px;
+  color: black;
 }
 
 .dishes .carousel a p {
-    padding: 0 15px;
-    color: black;
+  padding: 0 15px;
+  color: black;
 }
 
 .dishes .carousel a h3 {
-    color: black;
-    font-weight: 600;
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-    margin: 0;
+  color: black;
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  margin: 0;
 }
 
 .reviews {
-    margin-top: 2rem;
-    margin-bottom: 3rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
 }
 
 .reviews .content .top div {
-    margin-right: 1rem;
+  margin-right: 1rem;
 }
 
 .point {
-    font-weight: 700;
-    font-size: 1.5rem;
-    line-height: 2rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .fa-star,
 .fa-star-half-alt {
-    color: rgba(250, 204, 21, 1);
+  color: rgba(250, 204, 21, 1);
 }
 
 .r-img img {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 9999px;
-    margin-right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  margin-right: 1rem;
 }
 
 .r-info {
-    display: flex;
+  display: flex;
 }
 
 .r-nameAndStar h4 {
-    font-weight: 600;
-    font-size: 16px;
-    margin: 0;
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0;
 }
 
 .r-person {
-    padding-bottom: 1.5rem;
-    border-bottom-width: 2px;
-    border-color: black;
+  padding-bottom: 1.5rem;
+  border-bottom-width: 2px;
+  border-color: black;
 }

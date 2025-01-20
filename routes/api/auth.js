@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const AuthController = require('../../controllers/AuthController');
+const AuthController = require("../../controllers/AuthController");
 
 /**
  * @swagger
@@ -39,7 +39,7 @@ const AuthController = require('../../controllers/AuthController');
  *         role:
  *           type: string
  *           example: user
-*/
+ */
 
 /**
  * @swagger
@@ -63,7 +63,7 @@ const AuthController = require('../../controllers/AuthController');
  *             schema:
  *               $ref: '#/components/schemas/RegisterUser'
  */
-router.post('/register', AuthController.register);
+router.post("/register", AuthController.register);
 
 /**
  * @swagger
@@ -123,6 +123,6 @@ router.post('/register', AuthController.register);
  *             schema:
  *               $ref: '#/components/schemas/LoginSuccessUser'
  */
-router.post('/login', AuthController.login);
+router.post("/login", AuthController.login);
 
 module.exports = router;
