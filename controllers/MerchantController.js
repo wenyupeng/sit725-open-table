@@ -9,7 +9,6 @@ const log = require("../utils/utils.logger");
 const authenticate = require("../middlewares/jwt");
 const apiResponse = require("../utils/utils.apiResponse");
 const permissions = require("../middlewares/permissions");
-const jwt = require("jsonwebtoken");
 const { body, validationResult } = require("express-validator");
 const { encryption, decryption } = require("../utils/utils.others");
 
@@ -439,7 +438,7 @@ exports.renderMerchantDetails = [
         });
       }
     },
-  ]);
+  ];
 
 /**
  *  Render a merchant create photogallery
