@@ -1,0 +1,68 @@
+<%- include('../partials/top-a') -%>
+<%- include('../partials/top-b') -%>
+
+<%- include('../partials/user-data') -%>
+
+<div class="row">
+  <aside class="col s12 m3 l2 z-depth-1 full-height">
+    <div class="section">
+      <h3 class="brand-logo" style="font-family: 'Pacifico'; text-align: center;">Skipy</h3>
+    </div>
+    <ul class="collection">
+      <li class="collection-item">
+        <i class="fas fa-users left"></i>
+        Bookings
+      </li>
+      <li class="collection-item">
+        <i class="fas fa-store left"></i>
+        Menu
+      </li>
+      <li class="collection-item">
+        <i class="fas fa-gear left"></i>
+        Settings
+      </li>
+    </ul>
+    <!-- Bottom Section -->
+    <div class="bottom-section">
+      <p class="center-align"><%= user.username %></p>
+      <a href="/merchant-dashboard/logout" class="btn waves-effect waves-light red full-width">Logout</a>
+    </div>
+  </aside>
+  <main class="col s12 m9 l10">
+    <div class="section">
+      <h2 class="header"><%= user.merchant?.name %></h2>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Upcoming Bookings</span>
+        <div class="responsive-table">
+          <table class="highlight">
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Booking Date Time</th>
+                <th>No. of Guests</th>
+                <th>Special Request</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% upcomingBookings.forEach(booking=> { %>
+                <tr>
+                  <td><%= booking.user?.username %></td>
+                  <td><%= booking.displayedBookingDateTime %></td>
+                  <td><%= booking.numberOfGuests %></td>
+                  <td><%= booking.specialRequest %></td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<%- include('../partials/bottom-a') -%>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/merchant-dashboard/socket-handler.js"></script>
+<%- include('../partials/bottom-b') -%>

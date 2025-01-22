@@ -17,7 +17,7 @@ router.get("/register", async function (req, res) {
 });
 
 router.get("/login", async function (req, res) {
-  res.render("./merchant/merchant_login", {});
+  res.render("./merchant-dashboard/merchant_login", {});
 });
 
 // Render a merchant details routes
