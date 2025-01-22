@@ -1,0 +1,148 @@
+<%- include('../partials/top-a') -%>
+<link rel="stylesheet" href="../../css/admin.css">
+<%- include('../partials/top-b') -%>
+
+
+<main>
+
+    <nav class="blue">
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo center">Admin Dashboard</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/">Home</a></li><!--Link to home.ejs-->
+            <li><a href="#stats">Platform Usage</a></li>
+            <li><a href="#comments">Comments</a></li>
+            <li><a href="#manage">Manage Users</a></li>
+          </ul>
+          <!-- Mobile Menu (Hamburger) -->
+          <ul id="mobile-menu" class="sidenav">
+            <li><a href="#stats">Platform Usage</a></li>
+            <li><a href="#comments">Comments</a></li>
+            <li><a href="#manage">Manage Users</a></li>
+          </ul>
+          <a href="#" data-target="mobile-menu" class="sidenav-trigger">
+            <i class="material-icons">menu</i>
+          </a>
+        </div>
+      </nav>
+
+<!-- Platform Stats Section -->
+<div class="container section" id="stats">
+    <h4 class="center-align">Platform Usage</h4>
+    <div class="row">
+      <div class="col s12 m4">
+        <div class="stats-card" style="background-image: url('/image/user.png');">
+          <div>
+            <span>1,205</span>
+            <p>Active Users This Week</p>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m4">
+        <div class="stats-card" style="background-image: url('/image/merchant.jpg');">
+          <div>
+            <span>347</span>
+            <p>Merchant Reservations</p>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m4">
+        <div class="stats-card" style="background-image: url('/image/user2.jpg');">
+          <div>
+            <span>756</span>
+            <p>User Comments This Week</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trending Items Section -->
+  <div class="container section trending-section" id="comments">
+    <h4 class="center-align">Filter by Review Sentiment</h4>
+    <div class="trending-item" onclick="filterComments('Good')">Good Reviews</div>
+    <div class="trending-item" onclick="filterComments('Fair')">Fair Reviews</div>
+    <div class="trending-item" onclick="filterComments('Bad')">Bad Reviews</div>
+    
+    <h4 class="center-align">User Comments</h4>
+    <table class="highlight responsive-table" id="comments-table">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Merchant</th>
+          <th>Comment</th>
+          <th>Review Sentiment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Dynamic comments will be displayed here -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Manage Users and Merchants Section -->
+  <div class="container section" id="manage">
+    <h4 class="center-align">Manage Platform</h4>
+    <div class="row">
+      <!-- Block User -->
+      <div id="blockUserSection">
+        <h5>Block a User</h5>
+        <form id="blockUserForm">
+          <label for="userId">Enter User ID</label>
+          <input type="text" id="userId" placeholder="User ID" required />
+          <button type="submit" class="btn red darken-1">Block User</button>
+        </form>
+      </div>
+      
+  
+      <!-- Manage Merchant -->
+      <div id="manageMerchantSection">
+        <h5>Manage a Merchant</h5>
+        <form id="manageMerchantForm">
+          <label for="merchantId">Enter Merchant ID</label>
+          <input type="text" id="merchantId" placeholder="Merchant ID" required />
+          <button type="submit" class="btn blue darken-2">Manage Merchant</button>
+        </form>
+      </div>
+      
+</main>
+<%- include('../partials/bottom-a') -%>
+<script>
+    // Sample data for comments with sentiment classification
+    const commentsData = {
+      "Good": [
+        { user: "John Doe", merchant: "The Grand Bistro", comment: "Excellent service!", sentiment: "Good" },
+        { user: "Alice Brown", merchant: "Tech Hub", comment: "Amazing experience, highly recommend!", sentiment: "Good" }
+      ],
+      "Fair": [
+        { user: "Jane Smith", merchant: "Sakura Fusion", comment: "Delicious food but a bit pricey.", sentiment: "Fair" },
+        { user: "Bob White", merchant: "Eco Shop", comment: "Good selection, but the staff was a bit slow.", sentiment: "Fair" }
+      ],
+      "Bad": [
+        { user: "Charlie Black", merchant: "Cafe Mocha", comment: "The service was really bad, waited too long.", sentiment: "Bad" },
+        { user: "Dana Blue", merchant: "Pet Care", comment: "My pet was not treated well, I would not recommend.", sentiment: "Bad" }
+      ]
+    };
+
+    // Function to filter comments based on selected review sentiment
+    function filterComments(sentiment) {
+      const tableBody = document.querySelector('#comments-table tbody');
+      tableBody.innerHTML = ''; // Clear existing rows
+
+      const filteredComments = commentsData[sentiment];
+      
+      filteredComments.forEach(comment => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${comment.user}</td>
+          <td>${comment.merchant}</td>
+          <td>${comment.comment}</td>
+          <td>${comment.sentiment}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+  </script>
+<script src="../../js/admin.js"></script>
+
+<%- include('../partials/bottom-b') -%>
