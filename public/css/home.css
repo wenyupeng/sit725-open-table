@@ -47,13 +47,13 @@
   line-height: 50px;
 }
 
-.card-title{
-    white-space: nowrap;
-    overflow: hidden;
+.card-title {
+  white-space: nowrap;
+  overflow: hidden;
 }
 .card .card-content p {
-    white-space: nowrap;
-    overflow: hidden;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media only screen and (min-width: 993px) {

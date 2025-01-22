@@ -1,7 +1,11 @@
 const { ObjectId } = require("mongodb");
+const moment = require("moment");
 const { MerchantsModel, MenuModel, BookingModel } = require("../models");
 const apiResponse = require("../utils/utils.apiResponse");
 const log = require("../utils/utils.logger");
+const {
+  getUpcomingBookingsByMerchantId,
+} = require("../services/booking.service");
 
 /**
  * [Features][Booking] Handle Create Booking
@@ -52,6 +56,10 @@ exports.handleCreateBooking = [
           0,
         );
 
+        const bookingDateTime = moment(
+          `${moment(req.body.datepicker).format("YYYY-MM-DD")} ${req.body.time}`,
+          "YYYY-MM-DD HH:mm A",
+        );
         const booking = new BookingModel({
           userId: new ObjectId(req.session.user._id),
           merchantId: new ObjectId(merchantId),
@@ -60,6 +68,7 @@ exports.handleCreateBooking = [
           totalPriceWithGST: subTotal * 1.1,
           bookingDate: req.body.datepicker,
           bookingTime: req.body.time,
+          bookingDateTime,
           specialRequest: req.body.specialRequest.replace(/[<>]/g, ""),
           numberOfGuests: parseInt(req.body.guests, 10),
           merchantName: merchant.name,
@@ -178,6 +187,23 @@ exports.deleteBooking = async (req, res) => {
     return apiResponse.ErrorResponse(
       res,
       "Error deleting booking" + err.message,
+    );
+  }
+};
+
+exports.renderMerchantDashboardBookingsPage = async (req, res) => {
+  try {
+    const merchantId = req.session.user.merchant?._id;
+    const upcomingBookings = await getUpcomingBookingsByMerchantId(merchantId);
+    console.log("UPCOMING BOOKINGS", upcomingBookings);
+    res.render("./merchant-dashboard/bookings", {
+      message: null,
+      upcomingBookings,
+    });
+  } catch (err) {
+    return apiResponse.ErrorResponse(
+      res,
+      "Error rendering bookings page " + err.message,
     );
   }
 };

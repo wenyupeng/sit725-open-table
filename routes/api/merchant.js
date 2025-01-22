@@ -15,7 +15,7 @@ const MerchantController = require("../../controllers/MerchantController");
  *       200:
  *         description: successful operation
  */
-router.get('/', MerchantController.queryPagenation);
+router.get("/", MerchantController.queryPagenation);
 
 router.post("/register", MerchantController.register);
 /**
@@ -38,7 +38,7 @@ router.post("/register", MerchantController.register);
  *       200:
  *         description: successful operation
  */
-router.post('/login', MerchantController.login);
+router.post("/login", MerchantController.login);
 
 /**
  * @swagger
@@ -59,8 +59,6 @@ router.post('/login', MerchantController.login);
  *       200:
  *         description: successful operation
  */
-router.delete('/:merchantId', MerchantController.delete);
-
-
+router.delete("/:merchantId", MerchantController.delete);
 
 module.exports = router;
