@@ -25,10 +25,11 @@ $(document).ready(() => {
         let resData = JSON.parse(res);
         if (resData.status == "1") {
           Materialize.toast({
-            html: "Account created successfully",
+            html: "Account created successfully, redirecting you back to the login page....",
             classes: "rounded",
           });
-          window.location.href = "/user/login";
+          document.getElementById("userRegisterForm").reset(); // Clear form
+          setTimeout(() => (window.location.href = "/user/login"), 2000);
         } else {
           Materialize.toast({
             html: `Error creating account: ${resData.message}`,
