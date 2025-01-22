@@ -1,4 +1,21 @@
 const session = require("express-session");
+const {createClient} = require("redis");
+const {RedisStore} = require("connect-redis")
+
+const config = require('../config/db.config')
+
+
+let redisStore;
+if (config.redisUrl) {
+  const redisClient = createClient({
+    url: config.redisUrl
+  })
+  redisClient.connect().catch(console.error)
+  redisStore =  new RedisStore({
+    client: redisClient,
+    prefix: "skipysession:",
+  })
+}
 
 const sessionAuth = session({
   secret: "sit725", // encrypt cookie
@@ -8,6 +25,10 @@ const sessionAuth = session({
   cookie: {
     maxAge: 5 * 60 * 1000, // expired time
   },
+  ...(redisStore
+    ? { store: redisStore }
+    : {}
+  )
 });
 
 const attachUserToLocals = async (req, res, next) => {

@@ -26,6 +26,7 @@ const BookingSchema = new mongoose.Schema(
     totalPriceWithGST: { type: types.Number },
     bookingDate: { type: types.Date, required: true },
     bookingTime: { type: types.String, required: true },
+    bookingDateTime: { type: types.Date, required: true },
     numberOfGuests: { type: types.Number, required: true },
     specialRequest: { type: types.String },
     isActive: { type: types.Boolean, default: true },
