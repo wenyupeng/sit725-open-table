@@ -23,7 +23,7 @@ const sessionAuth = session({
   resave: false,
   rolling: false,
   cookie: {
-    maxAge: 5 * 60 * 1000, // expired time
+    maxAge: 60 * 60 * 1000, // expired time
   },
   ...(redisStore
     ? { store: redisStore }
@@ -52,4 +52,14 @@ const ensureAuthenticated = (req, res, next) => {
   next(); // Proceed to the next middleware or route handler if authenticated
 };
 
-module.exports = { sessionAuth, attachUserToLocals, ensureAuthenticated };
+const ensureMerchantAuthenticated = (req, res, next) => {
+  if (!req.session?.user?.merchant) {
+    console.log(
+      `[Access Denied] Unauthenticated user tried to access: ${req.originalUrl}`,
+    );
+    return res.redirect("/merchant-dashboard/login");
+  }
+  next();
+};
+
+module.exports = { sessionAuth, attachUserToLocals, ensureAuthenticated, ensureMerchantAuthenticated };

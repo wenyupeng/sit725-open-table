@@ -6,8 +6,10 @@ const bodyParser = require("body-parser");
 const logger = require("morgan");
 const cors = require("cors");
 const mount = require("mount-routes");
+const { createServer } = require("http");
 
 const apiResponse = require("./utils/utils.apiResponse");
+const SocketIOService = require("./services/socket.service");
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -19,6 +21,11 @@ require("./db/index");
 
 const { sessionAuth, attachUserToLocals } = require("./middlewares/session");
 const app = express();
+const httpServer = createServer(app);
+
+SocketIOService.instance().initialize(httpServer);
+const io = SocketIOService.instance().getServer();
+io.on("connection", SocketIOService.handleConnection);
 
 app.use(sessionAuth);
 app.use(attachUserToLocals);
@@ -97,7 +104,7 @@ app.use(function (err, req, res, next) {
   next(err);
 });
 
-app.listen(process.env.PORT, () => {
+httpServer.listen(process.env.PORT, () => {
   console.log(
     chalk.bold.green(
       `project start http://${process.env.URL}:${process.env.PORT}/api`,

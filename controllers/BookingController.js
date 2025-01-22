@@ -188,10 +188,9 @@ exports.deleteBooking = async (req, res) => {
 
 exports.renderMerchantDashboardBookingsPage = async (req, res) => {
   try {
-    console.log('REQ SESSION: ', req.session)
     const merchantId = req.session.user.merchant?._id;
     const upcomingBookings = await getUpcomingBookingsByMerchantId(merchantId)
-    console.log('>>> upcomingBookings', upcomingBookings)
+    console.log('UPCOMING BOOKINGS', upcomingBookings)
     res.render("./merchant-dashboard/bookings", { message: null, upcomingBookings });
   } catch (err) {
     return apiResponse.ErrorResponse(
