@@ -1,6 +1,8 @@
 const express = require("express");
-const { renderMerchantDashboardBookingsPage } = require('../controllers/BookingController')
-const { ensureMerchantAuthenticated } = require('../middlewares/session')
+const {
+  renderMerchantDashboardBookingsPage,
+} = require("../controllers/BookingController");
+const { ensureMerchantAuthenticated } = require("../middlewares/session");
 
 const router = express.Router();
 
@@ -10,9 +12,13 @@ router.get("/login", async function (req, res) {
 
 router.get("/logout", async (req, res) => {
   req.session.destroy();
-  res.redirect('/merchant-dashboard/login')
+  res.redirect("/merchant-dashboard/login");
 });
 
-router.get("/bookings", ensureMerchantAuthenticated, renderMerchantDashboardBookingsPage);
+router.get(
+  "/bookings",
+  ensureMerchantAuthenticated,
+  renderMerchantDashboardBookingsPage,
+);
 
 module.exports = router;

@@ -122,8 +122,9 @@ exports.login = [
     }
 
     try {
-
-      let merchant = await MerchantsModel.findOne({ contactPhone: { $eq: req.body.phone } });
+      let merchant = await MerchantsModel.findOne({
+        contactPhone: { $eq: req.body.phone },
+      });
       if (!merchant) {
         return apiResponse.notFoundResponse(res, "Merchant not found");
       }
@@ -134,7 +135,7 @@ exports.login = [
       if (!isPass)
         return apiResponse.unauthorizedResponse(
           res,
-          "2: username or password is wrong"
+          "2: username or password is wrong",
         );
 
       let payload = {
@@ -150,7 +151,11 @@ exports.login = [
         jwt.sign(payload, process.env.SIGN_KEY, { expiresIn: 3600 * 2 });
 
       req.session.merchant = merchant;
-      return apiResponse.successResponseWithData(res, "Login Success", merchant);
+      return apiResponse.successResponseWithData(
+        res,
+        "Login Success",
+        merchant,
+      );
     } catch (err) {
       console.log(err);
       log.error(`login error, ${JSON.stringify(err)}`);
@@ -414,7 +419,7 @@ exports.renderMerchantDetails = [
   /**
    * Add photo to a merchant
    */
-  exports.handleCreateMerchantPhotoGallery = [
+  (exports.handleCreateMerchantPhotoGallery = [
     [body("ImageUrl").notEmpty().withMessage("Image Url is required")],
     async (req, res) => {
       try {
@@ -438,7 +443,7 @@ exports.renderMerchantDetails = [
         });
       }
     },
-  ];
+  ]);
 
 /**
  *  Render a merchant create photogallery

@@ -15,7 +15,7 @@ $(document).ready(() => {
         url: "/api/auth/login",
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(loginData)
+        data: JSON.stringify(loginData),
       });
       const result = response ? JSON.parse(response) : null;
       if (result.status === 1) {
@@ -40,9 +40,8 @@ $(document).ready(() => {
         Materialize.toast({ html: "login failed, please try again" });
       }
     } catch (err) {
-      console.error(err.responseText)
+      console.error(err.responseText);
       Materialize.toast({ html: "login failed, please try again" });
     }
-    
   });
 });

@@ -1,20 +1,19 @@
 const session = require("express-session");
-const {createClient} = require("redis");
-const {RedisStore} = require("connect-redis")
+const { createClient } = require("redis");
+const { RedisStore } = require("connect-redis");
 
-const config = require('../config/db.config')
-
+const config = require("../config/db.config");
 
 let redisStore;
 if (config.redisUrl) {
   const redisClient = createClient({
-    url: config.redisUrl
-  })
-  redisClient.connect().catch(console.error)
-  redisStore =  new RedisStore({
+    url: config.redisUrl,
+  });
+  redisClient.connect().catch(console.error);
+  redisStore = new RedisStore({
     client: redisClient,
     prefix: "skipysession:",
-  })
+  });
 }
 
 const sessionAuth = session({
@@ -25,10 +24,7 @@ const sessionAuth = session({
   cookie: {
     maxAge: 60 * 60 * 1000, // expired time
   },
-  ...(redisStore
-    ? { store: redisStore }
-    : {}
-  )
+  ...(redisStore ? { store: redisStore } : {}),
 });
 
 const attachUserToLocals = async (req, res, next) => {
@@ -62,4 +58,9 @@ const ensureMerchantAuthenticated = (req, res, next) => {
   next();
 };
 
-module.exports = { sessionAuth, attachUserToLocals, ensureAuthenticated, ensureMerchantAuthenticated };
+module.exports = {
+  sessionAuth,
+  attachUserToLocals,
+  ensureAuthenticated,
+  ensureMerchantAuthenticated,
+};

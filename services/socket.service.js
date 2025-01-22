@@ -43,7 +43,7 @@ class SocketIOService {
   }
 
   handleConnection(socket) {
-    const token = socket.handshake.query['token'];
+    const token = socket.handshake.query["token"];
     let user;
 
     // @TODO: check jwt in handshake layer, not here.
@@ -54,9 +54,9 @@ class SocketIOService {
       return;
     }
 
-    socket.join(`user:${user._id}`)
-    if (user.merchant?._id && user.role === 'merchant') {
-      socket.join(`merchant:${user.merchant._id}`)
+    socket.join(`user:${user._id}`);
+    if (user.merchant?._id && user.role === "merchant") {
+      socket.join(`merchant:${user.merchant._id}`);
     }
 
     socket.on("disconnect", () => {

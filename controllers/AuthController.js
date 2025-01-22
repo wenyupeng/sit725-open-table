@@ -118,7 +118,7 @@ exports.login = [
             { phone: inputUsername },
           ],
         };
-        const userInfo = await UserModel.findOne(query).populate('merchant');
+        const userInfo = await UserModel.findOne(query).populate("merchant");
         if (!userInfo)
           return apiResponse.unauthorizedResponse(
             res,
@@ -138,7 +138,7 @@ exports.login = [
           email: userInfo.email,
           phone: userInfo.phone,
           role: userInfo.role,
-          merchant: userInfo.merchant
+          merchant: userInfo.merchant,
         };
         userData.token =
           "Bearer " +
