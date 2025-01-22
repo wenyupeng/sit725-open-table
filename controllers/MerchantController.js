@@ -321,6 +321,58 @@ exports.updateById = [
  * get merchant list
  * @returns {Object} merchant list
  */
+exports.queryPagenationForPage = async (req) => {
+  let pageNo = req.query.pageNo || 1;
+  let pageSize = req.query.pageSize || 6;
+  let query = req.query.query || "";
+  let sort = req.query.sort || "createdAt";
+  let order = req.query.order || "desc";
+
+  let skip = (pageNo - 1) * pageSize;
+  let limit = pageSize;
+
+  let queryObj = {};
+  if (query) {
+    queryObj = {
+      $or: [
+        { name: { $regex: query, $options: "i" } },
+        { description: { $regex: query, $options: "i" } },
+        { category: { $regex: query, $options: "i" } },
+        { address: { $regex: query, $options: "i" } },
+        { phone: { $regex: query, $options: "i" } },
+        { email: { $regex: query, $options: "i" } },
+      ],
+      isDeleted: { $ne: true },
+    };
+  }
+
+  let sortObj = {};
+  if (sort) {
+    sortObj = { [sort]: order };
+  }
+  let result = {};
+
+  try {
+    let merchants = await MerchantsModel.find(queryObj)
+      .sort(sortObj)
+      .skip(skip)
+      .limit(limit);
+    let totalCount = await MerchantsModel.countDocuments(queryObj);
+    result = {
+      merchants: merchants,
+      totalCount: totalCount,
+      totalPages: Math.ceil(totalCount / pageSize),
+      pageNo: pageNo,
+      pageSize: pageSize,
+    };
+
+    return result;
+  } catch (err) {
+    console.log(err);
+    log.error(`queryPagenation error, ${JSON.stringify(err)}`);
+    return result;
+  }
+};
 
 exports.queryPagenation = async (req, res) => {
   let pageNo = req.query.pageNo || 1;
@@ -361,12 +413,12 @@ exports.queryPagenation = async (req, res) => {
     let result = {
       merchants: merchants,
       totalCount: totalCount,
-      totalPage: Math.ceil(totalCount / pageSize),
+      totalPages: Math.ceil(totalCount / pageSize),
       pageNo: pageNo,
       pageSize: pageSize,
     };
 
-    return apiResponse.successResponseWithData(res, result);
+    return apiResponse.successResponseWithData(res,"queryPagenation success", result);
   } catch (err) {
     console.log(err);
     log.error(`queryPagenation error, ${JSON.stringify(err)}`);

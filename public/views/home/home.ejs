@@ -14,9 +14,9 @@
       <div class="row">
         <form class="search-form col offset-s2 s8" onsubmit="return false;">
           <div class="content row" style="margin-bottom: 0;">
-            
-            <input class="col s9" type="text" id="search" name="q" value="<%= searchQuery %>" placeholder="Location, Restaurant, or Cuisine">
-            <!-- <input class="col s12 m3 l3" type="date" id="date"> --> 
+
+            <input class="col s9" type="text" id="search" name="q" placeholder="Location, Restaurant, or Cuisine">
+            <!-- <input class="col s12 m3 l3" type="date" id="date"> -->
             <a class="btn waves-effect waves-light" id="searchBtn">Search</a>
           </div>
         </form>
@@ -27,9 +27,9 @@
   <section class="popular-mer">
     <div class="container">
       <h2>Merchants</h2>
-      <div id="top-six-mer">
-        <div class="row">
-          <% top_six_mer.forEach(p=>{ %>
+      <div>
+        <div class="row" id="top-six-mer">
+          <% top_six_mer.merchants.forEach(p=>{ %>
           <div class="col s12 m4">
             <div class="card">
               <div class="card-image waves-effect waves-block waves-light">
@@ -62,6 +62,44 @@
             </div>
           </div>
           <% }) %>
+        </div>
+        <div class="row">
+          <ul class="col s12 pagination" style="text-align: center;" id="merchant-pagination">
+            <% if (top_six_mer.pageNo > 1) { %>
+            <li class="waves-effect"><a href="#!" onclick="toPage('<%= parseInt(top_six_mer.pageNo)-1 %>')">
+                <% } else { %>
+            <li class="disabled"><a href="#!">
+                <% } %>
+                <i class="material-icons">chevron_left</i></a>
+            </li>
+
+            <% if(top_six_mer.totalPages < 6) { %>
+            <% for(let i=1; i<top_six_mer.totalPages+1; i++) { %>
+            <% if(i === top_six_mer.pageNo) { %>
+            <li class="active"><a href="#!"><%= i %></a></li>
+            <% }else{%>
+            <li class="waves-effect"><a href="#!" onclick="toPage('<%= i %>')"><%= i %></a></li>
+            <% } %>
+            <% } %>
+            <% }else{ %>
+            <% for(let i= top_six_mer.pageNo-2; i<top_six_mer.pageNo+3; i++) { %>
+            <% if(i === top_six_mer.pageNo) { %>
+            <li class="active"><a href="#!"><%= i %></a></li>
+            <% }else{%>
+            <li class="waves-effect"><a href="#!" onclick="toPage('<%= i %>')"><%= i %></a></li>
+            <% } %>
+            <% } %>
+            <% } %>
+
+            <% if(top_six_mer.pageNo < top_six_mer.totalPages) { %>
+            <li class="waves-effect">
+              <a href="#!" onclick="toPage('<%= parseInt(top_six_mer.pageNo) +1 %>')">
+                <% } else { %>
+            <li class="disabled"><a href="#!">
+                <% } %>
+                <i class="material-icons">chevron_right</i></a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
