@@ -1,0 +1,183 @@
+sit725-skipy
+├── .dockerignore
+├── .env.development
+├── .env.production
+├── .gitignore
+├── .idea
+│   ├── .gitignore
+│   ├── misc.xml
+│   ├── modules.xml
+│   ├── sit725-skipy.iml
+│   └── vcs.xml
+├── .vscode
+│   └── settings.json
+├── Dockerfile
+├── LICENSE
+├── README.md
+├── backlog.md
+├── config
+│   ├── db.config.js
+│   └── swagger.config.js
+├── constant
+│   └── constant.js
+├── controllers
+│   ├── AuthController.js
+│   ├── BookingController.js
+│   ├── MenuController.js
+│   ├── MerchantController.js
+│   └── UserController.js
+├── db
+│   ├── bookings.sql
+│   ├── featured-collections.sql
+│   ├── index.js
+│   ├── menus.sql
+│   ├── merchants.sql
+│   ├── popular-merchants.sql
+│   └── users.sql
+├── deploy.sh
+├── docker-compose.yaml
+├── eslint.config.js
+├── logs
+│   ├── error.log
+│   └── info.log
+├── middlewares
+│   ├── jwt.js
+│   ├── permissions.js
+│   └── session.js
+├── models
+│   ├── index.js
+│   └── mapping
+│       ├── BookingModel.js
+│       ├── FeaturedCollectionsModel.js
+│       ├── MenuModel.js
+│       ├── MerchantsModel.js
+│       ├── PopularMerModel.js
+│       ├── ReviewsModel.js
+│       └── UserModel.js
+│ 
+├── node_modules
+│
+├── package-lock.json
+├── package.json
+├── prototypes
+│   ├── Admin_management.html
+│   ├── Booking.html
+│   ├── Forget_Password.html
+│   ├── Home.html
+│   ├── Login.html
+│   ├── Menu_Detail.html
+│   ├── Merchant_management.html
+│   ├── Registry.html
+│   └── Restaurant_Detail.html
+├── public
+│   ├── css
+│   │   ├── admin.css
+│   │   ├── base
+│   │   │   ├── 404.css
+│   │   │   ├── base.css
+│   │   │   ├── components.css
+│   │   │   ├── footer.css
+│   │   │   ├── header-a.css
+│   │   │   ├── header-b.css
+│   │   │   └── header.css
+│   │   ├── booking.css
+│   │   ├── home.css
+│   │   ├── menu.css
+│   │   ├── merchant.css
+│   │   ├── merchant.login.css
+│   │   └── merchant.register.css
+│   ├── favicon.ico
+│   ├── image
+│   │   ├── admin.jpg
+│   │   ├── home
+│   │   │   ├── Best Brunch-bb33baa494f153f2dc78fbfad0ed92b9.jpg
+│   │   │   ├── Chefs table-e0981a413a5461b1ae818f27125425fb.jpg
+│   │   │   ├── Outdoor-Dining-ad12dfa5120aedec19caaacececfed67.jpg
+│   │   │   ├── Romantic Dining-b3908f65073954273dedfc7b5db75d6e.jpg
+│   │   │   ├── bg-search-bar-2ffedb743966429f931afc87b8e2706d.jpg
+│   │   │   ├── popular restaurant 1-5fbc8ba5752dea8c03dad9e1705cebc1.jpg
+│   │   │   ├── popular restaurant 2-2aa05309b66e98a682252ee638d0b5bc.jpg
+│   │   │   ├── popular restaurant 3-7e0258fd15b4cbad06dfa93e428249e5.jpg
+│   │   │   └── skipylogo.png
+│   │   ├── merchant.jpg
+│   │   ├── user.png
+│   │   └── user2.jpg
+│   ├── js
+│   │   ├── admin.js
+│   │   ├── admin.login.js
+│   │   ├── booking.js
+│   │   ├── header.js
+│   │   ├── home.js
+│   │   ├── menu.js
+│   │   ├── merchant-dashboard
+│   │   │   ├── login.js
+│   │   │   └── socket-handler.js
+│   │   ├── merchant.js
+│   │   ├── merchant.login.js
+│   │   ├── merchant.register.js
+│   │   ├── user.login.js
+│   │   ├── user.logout.js
+│   │   └── user.register.js
+│   └── views
+│       ├── admin
+│       │   ├── admin.ejs
+│       │   └── login_admin.ejs
+│       ├── booking
+│       │   └── booking.ejs
+│       ├── bookings
+│       │   └── user-bookings.ejs
+│       ├── error
+│       │   └── 404.ejs
+│       ├── home
+│       │   └── home.ejs
+│       ├── login
+│       │   ├── login_user.ejs
+│       │   ├── logout_user.ejs
+│       │   └── register_user.ejs
+│       ├── menu
+│       │   └── menu.ejs
+│       ├── merchant
+│       │   ├── merchant.ejs
+│       │   ├── merchant_add_hours.ejs
+│       │   ├── merchant_add_photo.ejs
+│       │   └── merchant_register.ejs
+│       ├── merchant-dashboard
+│       │   ├── bookings.ejs
+│       │   └── merchant_login.ejs
+│       ├── partials
+│       │   ├── bottom-a.ejs
+│       │   ├── bottom-b.ejs
+│       │   ├── footer.ejs
+│       │   ├── header-a.ejs
+│       │   ├── header-b.ejs
+│       │   ├── header.ejs
+│       │   ├── top-a.ejs
+│       │   ├── top-b.ejs
+│       │   └── user-data.ejs
+│       └── template.ejs
+├── routes
+│   ├── admin.js
+│   ├── api
+│   │   ├── admin.js
+│   │   ├── auth.js
+│   │   ├── booking.js
+│   │   ├── index.js
+│   │   ├── menu.js
+│   │   ├── merchant.js
+│   │   └── users.js
+│   ├── index.js
+│   ├── merchant-dashboard.js
+│   ├── merchant.js
+│   └── user.js
+├── server.js
+├── services
+│   ├── booking.service.js
+│   └── socket.service.js
+├── test
+│   ├── booking.test.js
+│   └── merchant.test.js
+└── utils
+    ├── utils.apiResponse.js
+    ├── utils.logger.js
+    ├── utils.others.js
+    └── utils.roles.js
