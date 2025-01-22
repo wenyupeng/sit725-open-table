@@ -1,0 +1,27 @@
+<%- include('../partials/top-a') -%>
+  <link rel="stylesheet" href="../../css/base/header.css">
+  <link rel="stylesheet" href="../../css/base/footer.css">
+
+  <%- include('../partials/top-b') -%>
+    <%- include('../partials/header') -%>
+      <h1>User List</h1>
+      <table border="1" id="userTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="userTableBody"></tbody>
+      </table>
+      <div id="pagination">
+        <button id="prevPage" disabled>Previous</button>
+        <span id="currentPage">1</span>
+        <button id="nextPage">Next</button>
+      </div>
+      <%- include('../partials/footer') -%>
+        <%- include('../partials/bottom-a') -%>
+          <script src="/js/user.list.js"></script>
+          <%- include('../partials/bottom-b') -%>
