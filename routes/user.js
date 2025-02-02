@@ -14,4 +14,8 @@ router.get("/logout", async (req, res) => {
   res.render("./login/logout_user", { pageTitle: "LogOut", message: null });
 });
 
+router.get("/forgot", async (req, res) => {
+  res.render("./login/forgot_password", { pageTitle: "forgotpassword", message: null });
+});
+
 module.exports = router;
