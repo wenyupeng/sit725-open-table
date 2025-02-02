@@ -8,3 +8,4 @@ logs/*.log
 /**/config/**
 /**/db/**
 /**/logs/**
+config/db.config.js
