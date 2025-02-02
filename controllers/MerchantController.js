@@ -67,7 +67,7 @@ exports.register = [
         if (existingMerchant) {
           return apiResponse.validationErrorWithData(
             res,
-            "Merchant already exists, use different contact phone to register",
+            "Merchant already exists, use different contact phone to register"
           );
         }
 
@@ -91,7 +91,7 @@ exports.register = [
 
         return apiResponse.successResponse(
           res,
-          "Merchant created successfully",
+          "Merchant created successfully"
         );
       }
     } catch (err) {
@@ -135,7 +135,7 @@ exports.login = [
       if (!isPass)
         return apiResponse.unauthorizedResponse(
           res,
-          "2: username or password is wrong",
+          "2: username or password is wrong"
         );
 
       let payload = {
@@ -154,7 +154,7 @@ exports.login = [
       return apiResponse.successResponseWithData(
         res,
         "Login Success",
-        merchant,
+        merchant
       );
     } catch (err) {
       console.log(err);
@@ -197,7 +197,7 @@ exports.delete = [
 
       let flag = await MerchantsModel.UpdateOne(
         { _id: merchantId },
-        { $set: { isDeleted: true } },
+        { $set: { isDeleted: true } }
       );
       if (!flag) {
         return apiResponse.ErrorResponse(res, "Internal Server Error");
@@ -244,7 +244,7 @@ exports.add = [
       return apiResponse.successResponseWithData(
         res,
         "Merchant added successfully",
-        merchant,
+        merchant
       );
     } catch (err) {
       console.log(err);
@@ -272,12 +272,12 @@ exports.update = [
       let updatedMerchant = await MerchantsModel.findByIdAndUpdate(
         merchantId,
         req.body,
-        { new: true },
+        { new: true }
       );
       return apiResponse.successResponseWithData(
         res,
         "Merchant updated successfully",
-        updatedMerchant,
+        updatedMerchant
       );
     } catch (err) {
       console.log(err);
@@ -304,7 +304,7 @@ exports.updateById = [
     let updatedMerchant = await MerchantsModel.findByIdAndUpdate(
       merchantId,
       req.body,
-      { new: true },
+      { new: true }
     );
     if (!updatedMerchant) {
       return apiResponse.ErrorResponse(res, "Internal Server Error");
@@ -312,7 +312,7 @@ exports.updateById = [
     return apiResponse.successResponseWithData(
       res,
       "Merchant updated successfully",
-      updatedMerchant,
+      updatedMerchant
     );
   },
 ];
@@ -418,7 +418,11 @@ exports.queryPagenation = async (req, res) => {
       pageSize: pageSize,
     };
 
-    return apiResponse.successResponseWithData(res,"queryPagenation success", result);
+    return apiResponse.successResponseWithData(
+      res,
+      "queryPagenation success",
+      result
+    );
   } catch (err) {
     console.log(err);
     log.error(`queryPagenation error, ${JSON.stringify(err)}`);
@@ -451,11 +455,11 @@ exports.topMerchants = async (searchQuery) => {
   try {
     const filter = searchQuery
       ? {
-        $or: [
-          { name: { $regex: searchQuery, $options: "i" } },
-          { location: { $regex: searchQuery, $options: "i" } },
-        ],
-      }
+          $or: [
+            { name: { $regex: searchQuery, $options: "i" } },
+            { location: { $regex: searchQuery, $options: "i" } },
+          ],
+        }
       : {};
     return await MerchantsModel.find(filter).limit(6).sort({ _id: -1 });
   } catch (err) {
@@ -463,91 +467,4 @@ exports.topMerchants = async (searchQuery) => {
     log.error(`featuredMerchants error, ${JSON.stringify(err)}`);
     return [];
   }
-};
-/**
- * Add photo to a merchant
- */
-exports.handleCreateMerchantPhotoGallery = [
-  [body("ImageUrl").notEmpty().withMessage("Image Url is required")],
-  async (req, res) => {
-    try {
-      const { merchantId } = req.params;
-
-      const merchantImageUrl = {
-        _id: new ObjectId(),
-        imageUrl: req.body.ImageUrl,
-      };
-
-      await MerchantsModel.findByIdAndUpdate(
-        merchantId,
-        { $push: { photoGallery: merchantImageUrl } },
-        { new: true },
-      );
-      res.redirect(`/merchant/${merchantId}`);
-    } catch (err) {
-      res.status(500).render("./merchant/merchant_add_photo", {
-        pageTitle: "Add Merchant Photo Gallery",
-        message: err.message,
-      });
-    }
-  },
-];
-
-/**
- *  Render a merchant create photogallery
- *
- */
-exports.renderCreateMerchantPhotoGallery = async (req, res) => {
-  const { merchantId } = req.params;
-  const merchant = await MerchantsModel.findById(merchantId);
-  console.log("merchant", merchant);
-  res.render("./merchant/merchant_add_photo", {
-    pageTitle: "Add Merchant Photo Gallery",
-    merchant: merchant,
-  });
-};
-
-/**
- * Add OpenHours to a merchant
- */
-exports.handleCreateMerchantOpenHours = async (req, res) => {
-  try {
-    const { merchantId } = req.params;
-
-    const merchantOpenHours = {
-      _id: new ObjectId(),
-      Monday: req.body.mondayTime,
-      Tuesday: req.body.tuesdayTime,
-      Wednesday: req.body.wednesdayTime,
-      Thursday: req.body.thursdayTime,
-      Friday: req.body.fridayTime,
-      Saturday: req.body.saturdayTime,
-      Sunday: req.body.sundayTime,
-    };
-
-    await MerchantsModel.findByIdAndUpdate(
-      merchantId,
-      { $push: { openHours: merchantOpenHours } },
-      { new: true },
-    );
-    res.redirect(`/merchant/${merchantId}`);
-  } catch (err) {
-    res.status(500).render("./merchant/merchant_add_hours", {
-      pageTitle: "Add Merchant Open Hours",
-      message: err.message,
-    });
-  }
-};
-
-/**
- * Render a merchant openhours
- */
-exports.renderCreateMerchantOpenHours = async (req, res) => {
-  const { merchantId } = req.params;
-  const merchant = await MerchantsModel.findById(merchantId);
-  console.log("merchant", merchant);
-  res.render("./merchant/merchant_add_hours", {
-    pageTitle: "Add Merchant OpenHours",
-    merchant: merchant,
-  });
 };

@@ -84,7 +84,19 @@ $(document).ready(function () {
     });
   }
 
-  $("#shoppingCartBtn").click(() => {
+  // $("#shoppingCartBtn").click(() => {
+  //   let nextPage = `/api/booking/${merchant.merchantId}`;
+  //   sessionStorage.setItem("nextPage", nextPage);
+
+  //   let user = sessionStorage.getItem("user");
+  //   if (user) {
+  //     window.location.href = nextPage;
+  //   } else {
+  //     window.location.href = `/user/login`;
+  //   }
+  // });
+
+  $("#makeReservationBtn").click(() => {
     let nextPage = `/api/booking/${merchant.merchantId}`;
     sessionStorage.setItem("nextPage", nextPage);
 

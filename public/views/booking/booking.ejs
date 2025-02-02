@@ -30,14 +30,14 @@
                                 <h3 class="skipy-extrabold skipy-text-3xl font-Pacifico">
                                     <%= merchant.name %>
                                 </h3>
-                                <p>
-                                    <%= merchant.address %>
-                                </p>
-                                <p>
-                                    <%= merchant.workingHours %>
-                                </p>
-
-
+                                <% if (merchant.location) { %>
+                                    <p>
+                                      <%= merchant.location[0].address %>, <%= merchant.location[0].suburb %>, <%=
+                                            merchant.location[0].state %>, <%= merchant.location[0].postCode %>
+                                    </p>
+                                    <% } else { %>
+                                      <% } %>
+                               
                             </div>
 
                         </div>
@@ -61,7 +61,7 @@
                                                         <h3 class="skipy-semibold skipy-text-xl">Reservation Details
                                                         </h3>
 
-                                                        <input type="hidden" name="<%= merchant._id %>"
+                                                        <input type="hidden" name="merchantId"
                                                             value="<%= merchant._id %>">
 
                                                         <div class="col s12">
@@ -343,5 +343,5 @@
             </main>
             <%- include('../partials/bottom-a') -%>
 
-                <script src="/../../js/booking.js"></script>
+                <script src="/../../js/booking.js"></script>                
                 <%- include('../partials/bottom-b') -%>

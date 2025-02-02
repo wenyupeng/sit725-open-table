@@ -1,6 +1,6 @@
 <%- include('../partials/top-a') -%>
 <link rel="stylesheet" href="../../css/base/header-b.css">
-
+<link rel="stylesheet" href="/../../css/base/footer.css">
 <link rel="stylesheet" href="../../css/menu.css">
 <%- include('../partials/top-b') -%>
 <%- include('../partials/header-b') -%>
@@ -48,7 +48,7 @@
                   <span>(<%= card.reviews%> reviews)</span>
                 </div>
               </div>
-              <div class="card-action">
+              <!-- <div class="card-action">
                 <div class="flex-between">
                   <div class="left">
                     <i class="fas fa-minus margin-right-10" onclick="ModifyCount(-1,this, '<%=card._id %>')"></i>
@@ -59,7 +59,7 @@
                     <a class="waves-effect waves-light btn" onclick="addToOrder('<%= JSON.stringify(card) %>')">Add to Order</a>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
           <%    }); %>
@@ -67,7 +67,7 @@
       </div>
     <% }); %>
   </div>
-  
+ 
 </main>
 <%- include('../partials/bottom-a') -%>
 
