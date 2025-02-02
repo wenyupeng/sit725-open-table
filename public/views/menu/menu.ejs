@@ -9,19 +9,19 @@
   <div class="fix-top  row">
     <div class="col s12">
       <ul class="tabs">
-        <% menu.keys().forEach(element => { %>
+        <% Object.keys(menu).forEach(element => { %>
         <% let originalKey = element; %>
         <% key = originalKey.toString().replace(/\s+/gi,""); %>
         <li class="tab col s3"><a href="#<%= key%>"><%= originalKey %></a></li>
         <% }) %>
       </ul>
     </div>
-    <% menu.entries().forEach(entry => { %>
-      <% let originalKey = entry[0]; %>
+    <% Object.keys(menu).forEach(entry => { %>
+      <% let originalKey = entry; %>
       <% key = originalKey.toString().replace(/\s+/gi,""); %>
       <div id="<%= key %>" class="col s12">
         <div class="row">
-          <% entry[1].forEach(card => { %>
+          <% menu[entry]?.forEach(card => { %>
           <div class="col s12 m6 l4">
             <div class="card">
               <div class="card-image">
