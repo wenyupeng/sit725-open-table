@@ -1,6 +1,7 @@
 const express = require("express");
 const {
   renderMerchantDashboardBookingsPage,
+  renderMerchantDashboardSettingsPage,
 } = require("../controllers/BookingController");
 const { ensureMerchantAuthenticated } = require("../middlewares/session");
 
@@ -19,6 +20,12 @@ router.get(
   "/bookings",
   ensureMerchantAuthenticated,
   renderMerchantDashboardBookingsPage,
+);
+
+router.get(
+  "/settings",
+  ensureMerchantAuthenticated,
+  renderMerchantDashboardSettingsPage,
 );
 
 module.exports = router;

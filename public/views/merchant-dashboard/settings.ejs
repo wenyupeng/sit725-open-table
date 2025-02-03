@@ -1,0 +1,125 @@
+<%- include('../partials/top-a') -%>
+<%- include('../partials/top-b') -%>
+
+<%- include('../partials/user-data') -%>
+
+<style>
+    body {
+        background: #f4f4f4;
+        padding: 20px;
+    }
+    .container {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+    }
+    .btn-small {
+        margin-top: 5px;
+    }
+
+    #menu-nav {
+        color: black
+    }
+
+    
+</style>
+
+<div class="row">
+  <aside class="col s12 m3 l2 z-depth-1 full-height">
+    <div class="section">
+      <h3 class="brand-logo" style="font-family: 'Pacifico'; text-align: center;">Skipy</h3>
+    </div>
+    <ul class="collection">
+      <li class="collection-item">
+        <a id="menu-nav" href="/merchant-dashboard/bookings">
+            <i class="fas fa-users left"></i>
+            Bookings
+        </a>  
+      </li>
+      <li class="collection-item">
+        <i class="fas fa-store left"></i>
+        Menu
+      </li>
+      <li class="collection-item">
+        <a id="menu-nav" href="/merchant-dashboard/settings">
+            <i class="fas fa-users left"></i>
+            Settings
+        </a> 
+      </li>
+    </ul>
+    <!-- Bottom Section -->
+    <div class="bottom-section">
+      <p class="center-align"><%= user.username %></p>
+      <a href="/merchant-dashboard/logout" class="btn waves-effect waves-light red full-width">Logout</a>
+    </div>
+  </aside>
+  <main class="col s12 m9 l10">
+    <h4 class="center">Merchant Dashboard</h4>
+        
+        <!-- Merchant Info -->
+        <div class="card-panel">
+            <h5>Merchant Information</h5>
+            <form id="merchantForm">
+                <div class="input-field">
+                    <input type="text" id="merchantName" name="name" required>
+                    <label for="merchantName">Merchant Name</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" id="merchantCategory" name="category" required>
+                    <label for="merchantCategory">Category</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" id="merchantPhone" name="contactPhone" required>
+                    <label for="merchantPhone">Phone</label>
+                </div>
+                <button class="btn waves-effect waves-light blue" type="submit">Save Details</button>
+            </form>
+        </div>
+
+        <!-- Open Hours Management -->
+        <div class="card-panel">
+            <h5>Manage Open Hours</h5>
+            <form id="openHoursForm">
+                <div class="input-field">
+                    <select id="daySelect">
+                        <option value="" selected>Choose a day</option>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
+                    <label for="daySelect">Select Day</label>
+                </div>
+
+                <div class="input-field">
+                    <input type="time" id="timeInput">
+                    <label for="timeInput">Time</label>
+                </div>
+
+                <div class="input-field">
+                    <input type="number" id="slotInput" min="1" required>
+                    <label for="slotInput">Available Slots</label>
+                </div>
+
+                <button type="button" id="addOpenHour" class="btn waves-effect green">Add Open Hour</button>
+            </form>
+
+            <ul class="collection" id="openHoursList">
+                <!-- Open Hours List -->
+            </ul>
+
+            <button class="btn red darken-1 waves-effect" id="saveOpenHours">Save Open Hours</button>
+        </div>
+    </main>
+</div>
+
+<div id="merchant-data" value="<%= JSON.stringify(merchant) %>"></div>
+
+<%- include('../partials/bottom-a') -%>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/merchant-dashboard/socket-handler.js"></script>
+<script src="/js/merchant-dashboard/settings.js"></script>
+<%- include('../partials/bottom-b') -%>

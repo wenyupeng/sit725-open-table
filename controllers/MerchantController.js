@@ -468,3 +468,30 @@ exports.topMerchants = async (searchQuery) => {
     return [];
   }
 };
+
+exports.updateOpenHours = async (req, res) => {
+  try {
+      const { merchantId, openHours } = req.body;
+
+      // Validate required fields
+      if (!merchantId || !openHours || !Array.isArray(openHours)) {
+          return res.status(400).json({ error: "Invalid request data" });
+      }
+
+      // Find and update merchant's open hours
+      const updatedMerchant = await MerchantsModel.findByIdAndUpdate(
+          merchantId,
+          { openHours: openHours },
+          { new: true, runValidators: true } // Return updated doc and validate schema
+      );
+
+      if (!updatedMerchant) {
+          return res.status(404).json({ error: "Merchant not found" });
+      }
+
+      res.json({ message: "Open hours updated successfully!", data: updatedMerchant.openHours });
+  } catch (error) {
+      console.error("Error updating open hours:", error);
+      res.status(500).json({ error: "Internal server error" });
+  }
+}

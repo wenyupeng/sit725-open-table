@@ -225,6 +225,22 @@ exports.renderMerchantDashboardBookingsPage = async (req, res) => {
   }
 };
 
+exports.renderMerchantDashboardSettingsPage = async (req, res) => {
+  try {
+    const merchantId = req.session.user.merchant?._id;
+    const merchant = await MerchantsModel.findById(merchantId).lean()
+    res.render("./merchant-dashboard/settings", {
+      message: null,
+      merchant
+    });
+  } catch (err) {
+    return apiResponse.ErrorResponse(
+      res,
+      "Error rendering settings page " + err.message
+    );
+  }
+}
+
 //Validate Timeslot and Booking Availability
 const validateTimeslot = (merchant, datepicker, time) => {
 
