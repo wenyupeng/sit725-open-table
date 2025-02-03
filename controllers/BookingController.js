@@ -100,7 +100,7 @@ exports.handleCreateBooking = [
 
         await booking.save();
 
-        SocketIOService.sendMessage(`merchant:${merchantId}`, 'new-booking', booking.toJSON())
+        SocketIOService.sendMessage(`merchant-${merchantId}`, 'new-booking', booking.toJSON())
 
         res.redirect(`/api/booking/${booking.userId}/bookings`);        
         // return apiResponse.successResponseWithData(

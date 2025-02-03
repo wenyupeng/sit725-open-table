@@ -31,7 +31,7 @@ class SocketIOService {
   }
 
   sendMessage(roomId, key, message) {
-    console.log(`[SocketIOService] sendMessage to room: ${roomId} key: ${key} message: ${JSON.stringify(message)} `)
+    console.log(`[SocketIOService] sendMessage to room: ${roomId} key: ${key} message: ${JSON.stringify(message)}`)
     this.getServer().to(roomId).emit(key, JSON.stringify(message));
   }
 
