@@ -3,6 +3,8 @@ const moment = require("moment");
 const { MerchantsModel, MenuModel, BookingModel } = require("../models");
 const apiResponse = require("../utils/utils.apiResponse");
 const log = require("../utils/utils.logger");
+const SocketIOService = require("../services/socket.service");
+
 const {
   getUpcomingBookingsByMerchantId,
 } = require("../services/booking.service");
@@ -76,16 +78,23 @@ exports.handleCreateBooking = [
 
         await booking.save();
 
-        return apiResponse.successResponseWithData(
-          res,
-          "Booking created successfully",
-          res.redirect(`/api/booking/${booking.userId}/bookings`),
-        );
-        // res.redirect(`/api/booking/${booking.userId}/bookings`);
+        console.log('HAHAHAHHA')
+        const rooms = SocketIOService.getRooms();
+        console.log('ROOMS >> ', rooms)
+        SocketIOService.sendMessage(`merchant:${merchantId}`, 'new-booking', booking.toJSON())
+        console.log('HIHIHI')
+
+        // return apiResponse.successResponseWithData(
+        //   res,
+        //   "Booking created successfully",
+        //   res.redirect(`/api/booking/${booking.userId}/bookings`),
+        // );
+        res.redirect(`/api/booking/${booking.userId}/bookings`);
         // return apiResponse.successResponseWithData(res, "Booking created successfully", booking);
       }
     } catch (err) {
-      log.error(`Add Merchant error, ${JSON.stringify(err)}`);
+      console.log('Add Merchant error', err)
+      // log.error(`Add Merchant error, ${JSON.stringify(err)}`);
       return apiResponse.ErrorResponse(
         res,
         "Error creating booking" + err.message,

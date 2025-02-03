@@ -8,16 +8,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     socket.on("connect", () => {
       console.log("socket connected");
-    });
 
-    socket.on(`user:${user._id}`, (message) => {
-      console.log("receive user room: ", message);
-    });
-
-    if (user.merchant) {
-      socket.on(`merchant:${user.merchant._id}`, (message) => {
-        console.log("receive merchant room: ", message);
+      socket.on(`user-${user._id}`, (message) => {
+        console.log("receive user room: ", message);
       });
-    }
+  
+      if (user.merchant) {
+        console.log(`[socket-handler] listen to new-booking`)
+        socket.on('new-booking', (message) => {
+          console.log("receive merchant room: ", message);
+        });
+      }
+    });
   }
 });
