@@ -13,24 +13,26 @@ const {
  * [Features][Booking] Handle Create Booking
  *
  * @param {ObjectId}  userId  userId
- * @param {ObjectId}  mechantId  restaurantId
- * @param {string}  bookingDate bookingDate
- * @param {string}  bookingTime bookingTime
- * @param {string}  specialRequest specialRequest
+ * @param {ObjectId}  merchantId  merchantId
+ * @param {String}  merchantName  merchantName
+ * @param {Date}  bookingDate bookingDate
+ * @param {String}  bookingTime bookingTime
+ * @param {String}  specialRequest specialRequest
  * @param {Array}   menuItems menuItems
  * @param {Int32}   numberOfGuests numberOfGuests
  * @param {Int32}   subTotal subTotal
+ * @param {Boolean} isActive  isActive
  * @param {Int32}   totalPriceWithGST totalPriceWithGST
  * @returns {Object} common response
  */
 exports.handleCreateBooking = [
   async (req, res) => {
-    try {
+    try {   
       const { merchantId } = req.params;
-      const merchant = await MerchantsModel.findById(merchantId);
-
+      const merchant = await MerchantsModel.findById(merchantId);  
+     
       if (!merchant) {
-        return apiResponse.notFoundResponse(res, "Merchant not found");
+        return apiResponse.notFoundResponse(res, "Merchant not found");          
       } else {
         const menus = await MenuModel.find({
           merchantId: { $eq: merchantId },
@@ -44,24 +46,44 @@ exports.handleCreateBooking = [
         const { datepicker, time, menuItems, guests } = req.body;
 
         // Validate inputs
-        if (!datepicker || !time || !guests) {
-          return apiResponse.validationErrorWithData(
-            res,
-            "All fields are required.",
-          );
+        if (!datepicker || !time || !guests ) {
+          return apiResponse.validationErrorWithData(res,"All fields are required.");         
+        }
+
+        const bookingAvailability = validateTimeslot(merchant, datepicker, time);
+        console.log("bookingAvailability:", bookingAvailability);  
+ 
+        // Get total number of guests already booked for this timeslot
+        const existingBookings = await BookingModel.find({ merchantId, bookingDate: datepicker, isActive: true, bookingTime: time.trim() });
+        
+        console.log("existingBookings", existingBookings);      
+        
+        const totalGuests = existingBookings.reduce((sum, booking) => sum + booking.numberOfGuests, 0);
+
+        console.log("totalGuests:", totalGuests); 
+
+        console.log("totalGuests + parseInt(req.body.guests):", totalGuests + parseInt(req.body.guests));
+
+        console.log("result:", parseInt(bookingAvailability)); 
+
+        // Check if adding the new booking would exceed available slots
+        if (totalGuests + parseInt(req.body.guests) > parseInt(bookingAvailability)) {
+          console.log(`Booking exceeds available slots. Only ${bookingAvailability - totalGuests} seats left.`);
+          return apiResponse.ErrorResponse(res, `Booking exceeds available slots. Only ${bookingAvailability - totalGuests} seats left.` );
         }
 
         const parsedMenuItems = JSON.parse(menuItems);
 
         const subTotal = parsedMenuItems.reduce(
           (sum, item) => sum + item.quantity * item.price,
-          0,
+          0
         );
 
         const bookingDateTime = moment(
           `${moment(req.body.datepicker).format("YYYY-MM-DD")} ${req.body.time}`,
-          "YYYY-MM-DD HH:mm A",
+          "YYYY-MM-DD HH:mm A"
         );
+
         const booking = new BookingModel({
           userId: new ObjectId(req.session.user._id),
           merchantId: new ObjectId(merchantId),
@@ -69,8 +91,8 @@ exports.handleCreateBooking = [
           subTotal: subTotal,
           totalPriceWithGST: subTotal * 1.1,
           bookingDate: req.body.datepicker,
-          bookingTime: req.body.time,
-          bookingDateTime,
+          bookingTime: req.body.time.trim(),
+          bookingDateTime: bookingDateTime,
           specialRequest: req.body.specialRequest.replace(/[<>]/g, ""),
           numberOfGuests: parseInt(req.body.guests, 10),
           merchantName: merchant.name,
@@ -78,27 +100,18 @@ exports.handleCreateBooking = [
 
         await booking.save();
 
-        console.log('HAHAHAHHA')
-        const rooms = SocketIOService.getRooms();
-        console.log('ROOMS >> ', rooms)
         SocketIOService.sendMessage(`merchant:${merchantId}`, 'new-booking', booking.toJSON())
-        console.log('HIHIHI')
 
+        res.redirect(`/api/booking/${booking.userId}/bookings`);        
         // return apiResponse.successResponseWithData(
-        //   res,
-        //   "Booking created successfully",
-        //   res.redirect(`/api/booking/${booking.userId}/bookings`),
-        // );
-        res.redirect(`/api/booking/${booking.userId}/bookings`);
+        //   res, "Booking created successfully",
+        //   res.redirect(`/api/booking/${booking.userId}/bookings`)
+        // );        
         // return apiResponse.successResponseWithData(res, "Booking created successfully", booking);
       }
     } catch (err) {
-      console.log('Add Merchant error', err)
-      // log.error(`Add Merchant error, ${JSON.stringify(err)}`);
-      return apiResponse.ErrorResponse(
-        res,
-        "Error creating booking" + err.message,
-      );
+      log.error(`Add Booking error, ${JSON.stringify(err)}`);
+      return apiResponse.ErrorResponse(res, "Error creating booking " + err.message);      
     }
   },
 ];
@@ -111,6 +124,17 @@ exports.renderCreateBooking = async (req, res) => {
   const { merchantId } = req.params;
   const user = req.session.user;
   const merchant = await MerchantsModel.findById(merchantId);
+  const timeSlots = [
+    "09:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00",
+  ];
   const menus = await MenuModel.find({
     merchantId: { $eq: merchantId },
     isActive: { $eq: true },
@@ -121,23 +145,7 @@ exports.renderCreateBooking = async (req, res) => {
     merchant: merchant,
     menus: menus,
     user: user,
-    timeSlots: [
-      "11:30 AM",
-      "12:00 PM",
-      "12:30 PM",
-      "13:00 PM",
-      "13:30 PM",
-      "14:00 PM",
-      "14:30 PM",
-      "15:00 PM",
-      "15:30 PM",
-      "16:00 PM",
-      "16:30 PM",
-      "17:00 PM",
-      "17:30 PM",
-      "18:00 PM",
-      "18:30 PM",
-    ],
+    timeSlots: timeSlots,
     guestOptions: Array.from({ length: 10 }, (_, i) => i + 1),
   });
 };
@@ -171,7 +179,7 @@ exports.getLoggedInUserBookings = async (req, res) => {
     log.error(`Get Bookings error, ${JSON.stringify(err)}`);
     return apiResponse.ErrorResponse(
       res,
-      "Error creating booking" + err.message,
+      "Error creating booking" + err.message
     );
   }
 };
@@ -182,8 +190,8 @@ exports.deleteBooking = async (req, res) => {
   try {
     const disabledBooking = await BookingModel.findByIdAndUpdate(
       bookingId,
-      { isActive: false },
-      { new: true },
+      { isActive: false, status: "Cancelled" },
+      { new: true }
     );
 
     if (!disabledBooking) {
@@ -195,7 +203,7 @@ exports.deleteBooking = async (req, res) => {
     log.error(`Delete Bookings error, ${JSON.stringify(err)}`);
     return apiResponse.ErrorResponse(
       res,
-      "Error deleting booking" + err.message,
+      "Error deleting booking" + err.message
     );
   }
 };
@@ -212,7 +220,32 @@ exports.renderMerchantDashboardBookingsPage = async (req, res) => {
   } catch (err) {
     return apiResponse.ErrorResponse(
       res,
-      "Error rendering bookings page " + err.message,
+      "Error rendering bookings page " + err.message
     );
+  }
+};
+
+//Validate Timeslot and Booking Availability
+const validateTimeslot = (merchant, datepicker, time) => {
+
+  const selectedDay = new Date(datepicker).toLocaleString("en-us", { weekday: "long" });
+
+  // Find the open hour for the selected day
+  const openHourDay = merchant.openHours.find(hour => hour.day === selectedDay);
+
+  if (!openHourDay) {
+      console.log(`No available slots for ${selectedDay}.`);
+      return null;
+  }
+
+  // Find the matching time slot
+  const foundTime = openHourDay.time.split(", ").find(ptime => ptime === time.trim());
+
+  if (foundTime) {
+      console.log(`Time slot ${foundTime} is available. Total ${openHourDay.availableSlots} seats.`);
+      return openHourDay.availableSlots ;
+  } else {
+      console.log(`Time ${time} is not available.`);
+      return null;
   }
 };
