@@ -3,10 +3,11 @@ const moment = require("moment");
 const { MerchantsModel, MenuModel, BookingModel } = require("../models");
 const apiResponse = require("../utils/utils.apiResponse");
 const log = require("../utils/utils.logger");
+const SocketIOService = require("../services/socket.service");
+
 const {
   getUpcomingBookingsByMerchantId,
 } = require("../services/booking.service");
-const { trusted } = require("mongoose");
 
 /**
  * [Features][Booking] Handle Create Booking
@@ -98,6 +99,9 @@ exports.handleCreateBooking = [
         });
 
         await booking.save();
+
+        SocketIOService.sendMessage(`merchant-${merchantId}`, 'new-booking', booking.toJSON())
+
         res.redirect(`/api/booking/${booking.userId}/bookings`);        
         // return apiResponse.successResponseWithData(
         //   res, "Booking created successfully",
@@ -220,6 +224,22 @@ exports.renderMerchantDashboardBookingsPage = async (req, res) => {
     );
   }
 };
+
+exports.renderMerchantDashboardSettingsPage = async (req, res) => {
+  try {
+    const merchantId = req.session.user.merchant?._id;
+    const merchant = await MerchantsModel.findById(merchantId).lean()
+    res.render("./merchant-dashboard/settings", {
+      message: null,
+      merchant
+    });
+  } catch (err) {
+    return apiResponse.ErrorResponse(
+      res,
+      "Error rendering settings page " + err.message
+    );
+  }
+}
 
 //Validate Timeslot and Booking Availability
 const validateTimeslot = (merchant, datepicker, time) => {
