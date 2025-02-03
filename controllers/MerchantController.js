@@ -2,6 +2,7 @@ const {
   PopularMerModel,
   FeaturedCollectionsModel,
   MerchantsModel,
+  ReviewsModel,
 } = require("../models");
 const { ObjectId } = require("mongodb");
 const jwt = require("jsonwebtoken");
@@ -439,6 +440,7 @@ exports.renderMerchantDetails = [
     res.render("./merchant/merchant", {
       pageTitle: "Merchant Details",
       merchant: merchant,
+      reviews: [],
     });
   },
 ];
