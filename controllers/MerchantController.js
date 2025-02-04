@@ -65,6 +65,7 @@ exports.register = [
           contactPhone: req.body.contactPhone,
           isDeleted: false,
         });
+
         if (existingMerchant) {
           return apiResponse.validationErrorWithData(
             res,
@@ -212,6 +213,18 @@ exports.delete = [
     }
   },
 ];
+
+exports.deleteByName = async (req, res) => {
+  try {
+    let name = "test";
+    await MerchantsModel.deleteMany({ name: name });
+    return apiResponse.successResponse(res, "Merchant deleted successfully");
+  } catch (err) {
+    console.log(err);
+    log.error(`deleteByName error, ${JSON.stringify(err)}`);
+    return apiResponse.ErrorResponse(res, "Internal Server Error");
+  }
+};
 
 /**
  * add merchant
@@ -402,7 +415,7 @@ exports.queryPagenation = async (req, res) => {
 
   let sortObj = {};
   if (sort) {
-    sortObj = { [sort]: order };
+    sortObj = { name: 1 };
   }
 
   try {
@@ -419,7 +432,7 @@ exports.queryPagenation = async (req, res) => {
       pageSize: pageSize,
     };
 
-    return apiResponse.successResponseWithData(res,"queryPagenation success", result);
+    return apiResponse.successResponseWithData(res, "queryPagenation success", result);
   } catch (err) {
     console.log(err);
     log.error(`queryPagenation error, ${JSON.stringify(err)}`);

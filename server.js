@@ -102,6 +102,7 @@ app.use(function (err, req, res, next) {
   }
   
   if (err.name === "TypeError") {
+    console.log(err.message);
     return apiResponse.ErrorResponse(res, "Invalid data type");
   }
   next(err);

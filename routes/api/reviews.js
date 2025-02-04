@@ -77,4 +77,8 @@ router.post("/", ReviewsController.addReview);
  */
 router.get("/:merchantId", ReviewsController.getReviews);
 
+router.put("/:reviewId", ReviewsController.updateReview);
+
+router.delete("/:merhcantId", ReviewsController.deleteReview);
+
 module.exports = router;

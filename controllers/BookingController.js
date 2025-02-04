@@ -30,6 +30,12 @@ exports.handleCreateBooking = [
       if (!merchant) {
         return apiResponse.notFoundResponse(res, "Merchant not found");
       } else {
+
+        let slots =merchant.slots;
+        if(parseInt(slots)<1){
+          return apiResponse.notFoundResponse(res, "No slots available");
+        }
+
         const menus = await MenuModel.find({
           merchantId: { $eq: merchantId },
           isActive: { $eq: true },
@@ -60,6 +66,27 @@ exports.handleCreateBooking = [
           `${moment(req.body.datepicker).format("YYYY-MM-DD")} ${req.body.time}`,
           "YYYY-MM-DD HH:mm A",
         );
+
+        console.log("check booking is already exists or not");
+        const existingBooking = await BookingModel.findOne({
+          userId: { $eq: new ObjectId(req.session.user._id) },
+          merchantId: { $eq: merchantId },
+          bookingDate: { $eq: req.body.datepicker },
+          bookingTime: { $eq: req.body.time },
+          isActive: { $eq: true },
+        });
+
+        if (existingBooking) {
+          return apiResponse.validationErrorWithData(
+            res,
+            "Booking already exists for this date and time.",
+          );
+        }
+
+        console.log("update merchant booking slots");
+        await MerchantsModel.updateOne({merchantId: merchantId},{$set: {slots: slots-1}});
+
+        console.log("create new booking");
         const booking = new BookingModel({
           userId: new ObjectId(req.session.user._id),
           merchantId: new ObjectId(merchantId),
@@ -85,7 +112,8 @@ exports.handleCreateBooking = [
         // return apiResponse.successResponseWithData(res, "Booking created successfully", booking);
       }
     } catch (err) {
-      log.error(`Add Merchant error, ${JSON.stringify(err)}`);
+      console.log(err);
+      log.error(`Add Booking error, ${err.message}`);
       return apiResponse.ErrorResponse(
         res,
         "Error creating booking" + err.message,

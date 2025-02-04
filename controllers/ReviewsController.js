@@ -31,3 +31,38 @@ exports.addReview = [
             return apiResponse.ErrorResponse(res, err.message);
         }
     }];
+
+exports.updateReview = [
+    authenticate,
+    permissions,
+    async (req, res) => {
+        let reviewId = req.params.reviewId;
+        try {
+            let review = await ReviewsModel.findByIdAndUpdate(
+                reviewId,
+                req.body,
+                { new: true }
+            );
+            if (!review) {
+                return apiResponse.notFoundResponse(res, "Review not found");
+            }
+            return apiResponse.successResponse(res, "Review updated successfully");
+        } catch (err) {
+            log.error(err);
+            return apiResponse.ErrorResponse(res, err.message);
+        }
+    }];
+
+exports.deleteReview = [
+    authenticate,
+    permissions,
+    async (req, res) => {
+        let merchantId = req.params.merchantId;
+        try {
+            await ReviewsModel.deleteMany({ merchantId: merchantId });
+            return apiResponse.successResponse(res, "Review deleted successfully");
+        } catch (err) {
+            log.error(err);
+            return apiResponse.ErrorResponse(res, err.message);
+        }
+    }];
