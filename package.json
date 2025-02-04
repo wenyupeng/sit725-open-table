@@ -48,12 +48,12 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
-    "chai": "^4.3.10",
+    "chai": "^4.5.0",
     "cross-env": "^7.0.3",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "globals": "^15.14.0",
-    "mocha": "^10.2.0",
+    "mocha": "^10.8.2",
     "nodemon": "^3.1.9",
     "prettier": "3.4.2",
     "supertest": "^7.0.0"

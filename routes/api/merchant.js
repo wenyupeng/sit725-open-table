@@ -62,4 +62,7 @@ router.delete("/test", MerchantController.deleteByName);
  */
 router.delete("/:merchantId", MerchantController.delete);
 
+
+router.post("/update-open-hours", MerchantController.updateOpenHours);
+
 module.exports = router;

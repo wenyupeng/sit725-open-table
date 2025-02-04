@@ -21,13 +21,13 @@ exports.getMenuByMerchantId = async (merchantId) => {
       return apiResponse.notFoundResponse("Menu not found");
     }
 
-    let categoryMap = new Map();
+    let categoryMap = {};
     menu.forEach((menuItem) => {
       const categoryName = menuItem.categoryName;
-      let subMenu = categoryMap.get(categoryName);
+      let subMenu = categoryMap[categoryName];
       if (!subMenu) {
         subMenu = [];
-        categoryMap.set(categoryName, subMenu);
+        categoryMap[categoryName] = subMenu;
       }
       subMenu.push(menuItem);
     });

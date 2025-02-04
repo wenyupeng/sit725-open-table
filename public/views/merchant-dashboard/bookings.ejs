@@ -3,6 +3,12 @@
 
 <%- include('../partials/user-data') -%>
 
+<style>
+  #menu-nav {
+        color: black
+    }
+</style>
+
 <div class="row">
   <aside class="col s12 m3 l2 z-depth-1 full-height">
     <div class="section">
@@ -10,16 +16,20 @@
     </div>
     <ul class="collection">
       <li class="collection-item">
-        <i class="fas fa-users left"></i>
-        Bookings
+        <a id="menu-nav" href="/merchant-dashboard/bookings">
+            <i class="fas fa-users left"></i>
+            Bookings
+        </a>  
       </li>
       <li class="collection-item">
         <i class="fas fa-store left"></i>
         Menu
       </li>
       <li class="collection-item">
-        <i class="fas fa-gear left"></i>
-        Settings
+        <a id="menu-nav" href="/merchant-dashboard/settings">
+            <i class="fas fa-users left"></i>
+            Settings
+        </a> 
       </li>
     </ul>
     <!-- Bottom Section -->

@@ -26,6 +26,7 @@ exports.successResponseWithData = function (res, msg, data) {
     data: data,
     time: Date.now(),
   };
+  console.log('successResponseWithData', resData)
   return res.status(200).json(resData);
 };
 

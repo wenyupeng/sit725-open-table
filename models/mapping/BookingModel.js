@@ -10,7 +10,7 @@ const BookingSchema = new mongoose.Schema(
     },
     merchantId: {
       type: types.ObjectId,
-      ref: "Merchant",
+      ref: "Merchants",
       required: true,
     },
     menuItems: [
@@ -31,10 +31,12 @@ const BookingSchema = new mongoose.Schema(
     specialRequest: { type: types.String },
     isActive: { type: types.Boolean, default: true },
     merchantName: { type: types.String },
+    status: { type: String, enum: ["Pending", "Confirmed", "Cancelled"], default: "Pending" },
   },
   {
     timestamps: true,
     versionKey: false,
   },
 );
-module.exports = mongoose.model("booking", BookingSchema);
+
+module.exports = mongoose.model("Booking", BookingSchema);

@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 function addToOrder(cardStr) {
+  console.log('>>> ADD TO ORDER >>>', cardStr)
   let card = JSON.parse(cardStr);
   let foodId = card._id;
   let count = sessionStorage.getItem(foodId);
@@ -84,7 +85,19 @@ $(document).ready(function () {
     });
   }
 
-  $("#shoppingCartBtn").click(() => {
+  // $("#shoppingCartBtn").click(() => {
+  //   let nextPage = `/api/booking/${merchant.merchantId}`;
+  //   sessionStorage.setItem("nextPage", nextPage);
+
+  //   let user = sessionStorage.getItem("user");
+  //   if (user) {
+  //     window.location.href = nextPage;
+  //   } else {
+  //     window.location.href = `/user/login`;
+  //   }
+  // });
+
+  $("#makeReservationBtn").click(() => {
     let nextPage = `/api/booking/${merchant.merchantId}`;
     sessionStorage.setItem("nextPage", nextPage);
 

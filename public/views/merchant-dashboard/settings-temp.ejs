@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merchant Dashboard</title>
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <style>
+        body {
+            background: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .btn-small {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h4 class="center">Merchant Dashboard</h4>
+        
+        <!-- Merchant Info -->
+        <div class="card-panel">
+            <h5>Merchant Information</h5>
+            <form id="merchantForm">
+                <div class="input-field">
+                    <input type="text" id="merchantName" name="name" required>
+                    <label for="merchantName">Merchant Name</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" id="merchantCategory" name="category" required>
+                    <label for="merchantCategory">Category</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" id="merchantPhone" name="contactPhone" required>
+                    <label for="merchantPhone">Phone</label>
+                </div>
+                <button class="btn waves-effect waves-light blue" type="submit">Save Details</button>
+            </form>
+        </div>
+
+        <!-- Open Hours Management -->
+        <div class="card-panel">
+            <h5>Manage Open Hours</h5>
+            <form id="openHoursForm">
+                <div class="input-field">
+                    <select id="daySelect">
+                        <option value="" disabled selected>Choose a day</option>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
+                    <label>Select Day</label>
+                </div>
+
+                <div class="input-field">
+                    <input type="time" id="timeInput">
+                    <label for="timeInput">Time</label>
+                </div>
+
+                <div class="input-field">
+                    <input type="number" id="slotInput" min="1" required>
+                    <label for="slotInput">Available Slots</label>
+                </div>
+
+                <button type="button" id="addOpenHour" class="btn waves-effect green">Add Open Hour</button>
+            </form>
+
+            <ul class="collection" id="openHoursList">
+                <!-- Open Hours List -->
+            </ul>
+
+            <button class="btn red darken-1 waves-effect" id="saveOpenHours">Save Open Hours</button>
+        </div>
+    </div>
+</body>
+</html>
