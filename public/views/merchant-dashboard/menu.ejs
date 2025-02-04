@@ -1,0 +1,97 @@
+<%- include('../partials/top-a') -%>
+<%- include('../partials/top-b') -%>
+
+<%- include('../partials/user-data') -%>
+
+<style>
+  #menu-nav {
+        color: black
+    }
+</style>
+
+<div class="row">
+  <aside class="col s12 m3 l2 z-depth-1 full-height">
+    <div class="section">
+      <h3 class="brand-logo" style="font-family: 'Pacifico'; text-align: center;">Skipy</h3>
+    </div>
+    <ul class="collection">
+      <li class="collection-item">
+        <a id="menu-nav" href="/merchant-dashboard/bookings">
+            <i class="fas fa-users left"></i>
+            Bookings
+        </a>  
+      </li>
+      <li class="collection-item">
+        <a id="menu-nav" href="/merchant-dashboard/menu">
+            <i class="fas fa-users left"></i>
+            Menu
+        </a> 
+      </li>
+      <li class="collection-item">
+        <a id="menu-nav" href="/merchant-dashboard/settings">
+            <i class="fas fa-users left"></i>
+            Settings
+        </a> 
+      </li>
+    </ul>
+    <!-- Bottom Section -->
+    <div class="bottom-section">
+      <p class="center-align"><%= user.username %></p>
+      <a href="/merchant-dashboard/logout" class="btn waves-effect waves-light red full-width">Logout</a>
+    </div>
+  </aside>
+  <main class="col s12 m9 l10">
+    <h4 class="center">Manage Menus</h4>
+
+        <!-- Form to Add/Edit Menu -->
+        <div class="card-panel">
+            <h5 id="form-title">Add New Menu</h5>
+            <form id="menuForm">
+                <input type="hidden" id="menuId"> <!-- Hidden field for edit -->
+                
+                <div class="input-field">
+                    <input type="text" id="menuName" required>
+                    <label for="menuName">Menu Name</label>
+                </div>
+
+                <div class="input-field">
+                    <input type="text" id="menuCategory" required>
+                    <label for="menuCategory">Category</label>
+                </div>
+
+                <div class="input-field">
+                    <input type="number" id="menuPrice" required>
+                    <label for="menuPrice">Price ($)</label>
+                </div>
+
+                <div class="input-field">
+                    <textarea id="menuDesc" class="materialize-textarea" required></textarea>
+                    <label for="menuDesc">Description</label>
+                </div>
+
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>Upload Image</span>
+                        <input type="file" id="menuImage">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Upload an image">
+                    </div>
+                </div>
+
+                <img id="previewImage" class="menu-img" style="display:none; width: 100px;">
+
+                <button class="btn waves-effect waves-light green" type="submit">Save Menu</button>
+            </form>
+        </div>
+
+        <!-- Menu List -->
+        <ul class="collection" id="menuList"></ul>
+  </main>
+</div>
+
+<%- include('../partials/bottom-a') -%>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/merchant-dashboard/socket-handler.js"></script>
+<script src="/js/merchant-dashboard/menu.js"></script>
+<%- include('../partials/bottom-b') -%>

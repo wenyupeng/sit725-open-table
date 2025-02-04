@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const MenuController = require("../../controllers/MenuController");
+const { MenuModel } = require("../../models");
 
 /**
  * @swagger
@@ -133,5 +134,15 @@ router.post("/", MenuController.add);
  *         description: Internal Server Error
  */
 router.put("/:menuId", MenuController.updateById);
+
+router.get("/md/menus/:merchantId", MenuController.listAllMenusByMerchantId);
+
+router.post("/md/menus", MenuController.createMenu);
+
+router.put("/md/menus/:menuId", MenuController.editMenu);
+
+router.delete("/md/menus/:menuId", MenuController.deleteMenu);
+
+router.get("/md/menus/item/:menuId", MenuController.getMenuById);
 
 module.exports = router;
