@@ -90,25 +90,6 @@ exports.handleCreateBooking = [
           "YYYY-MM-DD HH:mm A"
         );
 
-        console.log("check booking is already exists or not");
-        const existingBooking = await BookingModel.findOne({
-          userId: { $eq: new ObjectId(req.session.user._id) },
-          merchantId: { $eq: merchantId },
-          bookingDate: { $eq: req.body.datepicker },
-          bookingTime: { $eq: req.body.time },
-          isActive: { $eq: true },
-        });
-
-        if (existingBooking) {
-          return apiResponse.validationErrorWithData(
-            res,
-            "Booking already exists for this date and time.",
-          );
-        }
-
-        console.log("update merchant booking slots");
-        await MerchantsModel.updateOne({merchantId: merchantId},{$set: {slots: slots-1}});
-
         console.log("create new booking");
         const booking = new BookingModel({
           userId: new ObjectId(req.session.user._id),

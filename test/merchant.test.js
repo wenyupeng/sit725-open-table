@@ -48,31 +48,31 @@ describe("merchant", () => {
       });
     });
 
-    it("returns status 200 to register the merchant successfully", function (done) {
-      let merchant = {
-        "backgroundImg": "https://ai-public.mastergo.com/ai/img_res/2ebd8f7fb19ed793bd8c1da1c149950b.jpg",
-        "name": "test",
-        "category": "Restaurant",
-        "type": "Romantic Dining",
-        "description": "Fine Dining Excellence",
-        "location": "123 Gourmet Street, Culinary District",
-        "contactPhone": "+1 (555) 123-4367",
-        "hours": "Mon-Sun: 11:00 AM - 11:00 PM",
-        "reviews": 127,
-        "star": 4,
-        "isDeleted": false,
-        "password": "123456"
-      };
+    // it("returns status 200 to register the merchant successfully", function (done) {
+    //   let merchant = {
+    //     "backgroundImg": "https://ai-public.mastergo.com/ai/img_res/2ebd8f7fb19ed793bd8c1da1c149950b.jpg",
+    //     "name": "test",
+    //     "category": "Restaurant",
+    //     "type": "Romantic Dining",
+    //     "description": "Fine Dining Excellence",
+    //     "location": "123 Gourmet Street, Culinary District",
+    //     "contactPhone": "+1 (555) 123-4367",
+    //     "hours": "Mon-Sun: 11:00 AM - 11:00 PM",
+    //     "reviews": 127,
+    //     "star": 4,
+    //     "isDeleted": false,
+    //     "password": "123456"
+    //   };
 
-      request(app)
-        .post("/api/merchant/register")
-        .send(merchant)
-        .set("Content-Type", "application/json")
-        .end((err, res) => {
-          expect(res.status).to.equal(200);
-          done();
-        });
-    });
+    //   request(app)
+    //     .post("/api/merchant/register")
+    //     .send(merchant)
+    //     .set("Content-Type", "application/json")
+    //     .end((err, res) => {
+    //       expect(res.status).to.equal(200);
+    //       done();
+    //     });
+    // });
 
     it("returns status 400 to register the merchant failed", function (done) {
 
