@@ -37,9 +37,10 @@ router.post("/register", MerchantController.register);
  *     responses:
  *       200:
  *         description: successful operation
- */
+*/
 router.post("/login", MerchantController.login);
 
+router.delete("/test", MerchantController.deleteByName);
 /**
  * @swagger
  * /api/merchant/:merchantId:

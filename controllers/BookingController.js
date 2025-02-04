@@ -34,6 +34,12 @@ exports.handleCreateBooking = [
       if (!merchant) {
         return apiResponse.notFoundResponse(res, "Merchant not found");          
       } else {
+
+        let slots =merchant.slots;
+        if(parseInt(slots)<1){
+          return apiResponse.notFoundResponse(res, "No slots available");
+        }
+
         const menus = await MenuModel.find({
           merchantId: { $eq: merchantId },
           isActive: { $eq: true },
@@ -84,6 +90,7 @@ exports.handleCreateBooking = [
           "YYYY-MM-DD HH:mm A"
         );
 
+        console.log("create new booking");
         const booking = new BookingModel({
           userId: new ObjectId(req.session.user._id),
           merchantId: new ObjectId(merchantId),
@@ -110,8 +117,12 @@ exports.handleCreateBooking = [
         // return apiResponse.successResponseWithData(res, "Booking created successfully", booking);
       }
     } catch (err) {
-      log.error(`Add Booking error, ${JSON.stringify(err)}`);
-      return apiResponse.ErrorResponse(res, "Error creating booking " + err.message);      
+      console.log(err);
+      log.error(`Add Booking error, ${err.message}`);
+      return apiResponse.ErrorResponse(
+        res,
+        "Error creating booking" + err.message,
+      );
     }
   },
 ];

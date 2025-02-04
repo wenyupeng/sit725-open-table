@@ -8,7 +8,6 @@ router.get("/", async function (req, res) {
   const featured_col = await MerchantController.featuredColletions();
   const pagination = await MerchantController.queryPagenationForPage(req);
 
-  console.log(pagination);
   res.render("./home/home", {
     popular_mer: popular_mer,
     featured_col: featured_col,

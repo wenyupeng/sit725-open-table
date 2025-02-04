@@ -87,20 +87,24 @@ app.all("*", function (req, res) {
   if (req.accepts("text/html")) {
     res.status(404).render("./error/404", { pageTitle: "404 Page Not Found" });
   } else {
-    return apiResponse.notFoundResponse(res, "404 --- 接口不存在");
+    return apiResponse.notFoundResponse(res, "404 --- api not found");
   }
 });
 
 // unauthorized error
 app.use(function (err, req, res, next) {
   if (err.name === "UnauthorizedError") {
-    return apiResponse.unauthorizedResponse(res, "token不存在或已过期");
+    return apiResponse.unauthorizedResponse(res, "token expired or invalid");
   }
 
   if (err.name === "Error") {
     return apiResponse.ErrorResponse(res, err.message);
   }
-
+  
+  if (err.name === "TypeError") {
+    console.log(err.message);
+    return apiResponse.ErrorResponse(res, "Invalid data type");
+  }
   next(err);
 });
 

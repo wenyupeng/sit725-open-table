@@ -1,4 +1,0 @@
-INSERT INTO featured-collections (_id, img, type, description) VALUES ('{"$oid":"677bd941a552b83046fd02cd"}', '../../image/home/Romantic Dining-b3908f65073954273dedfc7b5db75d6e.jpg', 'Romantic Dining', 'Perfect for date night');
-INSERT INTO featured-collections (_id, img, type, description) VALUES ('{"$oid":"677bd941a552b83046fd02d0"}', '../../image/home/Chefs table-e0981a413a5461b1ae818f27125425fb.jpg', 'Chef''s Table', 'Unique experiences');
-INSERT INTO featured-collections (_id, img, type, description) VALUES ('{"$oid":"677bd941a552b83046fd02ce"}', '../../image/home/Outdoor-Dining-ad12dfa5120aedec19caaacececfed67.jpg', 'Outdoor Dining', 'Best all fresco spots');
-INSERT INTO featured-collections (_id, img, type, description) VALUES ('{"$oid":"677bd941a552b83046fd02cf"}', '../../image/home/Best Brunch-bb33baa494f153f2dc78fbfad0ed92b9.jpg', 'Best Brunch', 'Weekend favorites');

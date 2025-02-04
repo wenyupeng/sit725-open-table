@@ -24,7 +24,7 @@ const sessionAuth = session({
   cookie: {
     maxAge: 60 * 60 * 1000, // expired time
   },
-  ...(redisStore ? { store: redisStore } : {}),
+  //...(redisStore ? { store: redisStore } : {}),
 });
 
 const attachUserToLocals = async (req, res, next) => {
