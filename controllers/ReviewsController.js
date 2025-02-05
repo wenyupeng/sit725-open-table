@@ -3,11 +3,21 @@ const authenticate = require("../middlewares/jwt");
 const apiResponse = require("../utils/utils.apiResponse");
 const permissions = require("../middlewares/permissions");
 const { ReviewsModel } = require("../models");
+const { ObjectId } = require("mongodb");
 
 exports.getReviews = async (req, res) => {
     let merchantId = req.params.merchantId;
     try {
-        let reviews = await ReviewsModel.find({ merchantId: merchantId }).limit(2);
+        let reviews = await ReviewsModel.aggregate([
+            { $match: { merchantId: new ObjectId(merchantId) } },
+            { $sort: { createdAt: -1 } },
+            { $limit: 2 },
+            {$group: {
+                _id: "$userId",
+                reviews: { $push: "$$ROOT" }
+            }}
+        ]);
+
         if (reviews.length === 0) {
             return apiResponse.notFoundResponse(res, "No reviews found");
         }

@@ -10,14 +10,16 @@
                 <!-- Booking section -->
                 <section>
                   <% if (user) { %>
-                  <nav>
-                    <div class="nav-wrapper grey darken-4">
-                      <div class="col s12">
-                        <a href="/" class="breadcrumb skipy_ml_8 ">Home</a>
-                        <a href="/merchant/<%= merchant._id %>" class="breadcrumb"><%= merchant.name %></a>
-                        <a href="/api/booking/<%= user._id %>/bookings" class="breadcrumb">Bookings</a>
-                        <a class="breadcrumb">Reservation</a>
-                      </div>
+                  <nav style="background-color: #212121; height: auto;">
+                    <div class="container">
+                        <div class="nav-wrapper grey darken-4">
+                            <div class="col s12">
+                                <a href="/" class="breadcrumb skipy_ml_8 ">Home</a>
+                                <a href="/merchant/<%= merchant._id %>" class="breadcrumb"><%= merchant.name %></a>
+                                <a href="/api/booking/<%= user._id %>/bookings" class="breadcrumb">Bookings</a>
+                                <a class="breadcrumb">Reservation</a>
+                            </div>
+                        </div>
                     </div>
                   </nav>
                   <% } else { %>
