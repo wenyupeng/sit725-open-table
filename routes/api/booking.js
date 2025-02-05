@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const BookingController = require("../../controllers/BookingController");
+const BookingService = require("../../controllers/BookingService");
 const { ensureAuthenticated } = require("../../middlewares/session");
 /**
  * @swagger
@@ -42,27 +42,27 @@ const { ensureAuthenticated } = require("../../middlewares/session");
 router.post(
   "/:merchantId",
   ensureAuthenticated,
-  BookingController.handleCreateBooking,
+  BookingService.handleCreateBooking,
 );
 
 // Render create booking routes
 router.get(
   "/:merchantId",
   ensureAuthenticated,
-  BookingController.renderCreateBooking,
+  BookingService.renderCreateBooking,
 );
 
 // Render List of bookings for current user
 router.get(
   "/:userId/bookings",
   ensureAuthenticated,
-  BookingController.getLoggedInUserBookings,
+  BookingService.getLoggedInUserBookings,
 );
 
 router.post(
   "/:userId/bookings/:bookingId/delete",
   ensureAuthenticated,
-  BookingController.deleteBooking,
+  BookingService.deleteBooking,
 );
 
 module.exports = router;
