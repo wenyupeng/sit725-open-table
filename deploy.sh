@@ -21,7 +21,7 @@ else
   cd "$PROJECT_DIR"
 fi
 
-if [ "$(docker ps -q -f name=$DOCKER_CONTAINER_NAME)" ]; then
+if [ "$(docker ps -a -q -f name=$DOCKER_CONTAINER_NAME)" ]; then
   echo "Stopping and removing existing container $DOCKER_CONTAINER_NAME"
   docker stop "$DOCKER_CONTAINER_NAME"
   docker rm "$DOCKER_CONTAINER_NAME"
