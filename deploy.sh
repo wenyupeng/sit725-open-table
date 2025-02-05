@@ -21,6 +21,14 @@ else
   cd "$PROJECT_DIR"
 fi
 
+if [ "$(docker ps -q -f name=$DOCKER_CONTAINER_NAME)" ]; then
+  echo "Stopping and removing existing container $DOCKER_CONTAINER_NAME"
+  docker stop "$DOCKER_CONTAINER_NAME"
+  docker rm "$DOCKER_CONTAINER_NAME"
+fi
+echo "Running Docker container $DOCKER_CONTAINER_NAME"
+
+
 if [ "$(docker images -q $DOCKER_IMAGE_NAME)" ]; then
   echo "Removing existing Docker image $DOCKER_IMAGE_NAME"
   docker rmi "$DOCKER_IMAGE_NAME" || true
@@ -29,13 +37,6 @@ fi
 echo "Building Docker image $DOCKER_IMAGE_NAME"
 docker build -t "$DOCKER_IMAGE_NAME" .
 
-if [ "$(docker ps -q -f name=$DOCKER_CONTAINER_NAME)" ]; then
-  echo "Stopping and removing existing container $DOCKER_CONTAINER_NAME"
-  docker stop "$DOCKER_CONTAINER_NAME"
-  docker rm "$DOCKER_CONTAINER_NAME"
-fi
-
-echo "Running Docker container $DOCKER_CONTAINER_NAME"
 docker run -d --name "$DOCKER_CONTAINER_NAME" -p "$DOCKER_PORT_MAPPING" "$DOCKER_IMAGE_NAME"
 
 echo "Deployment complete. The application is running in container $DOCKER_CONTAINER_NAME"
