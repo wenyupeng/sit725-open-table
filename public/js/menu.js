@@ -85,18 +85,6 @@ $(document).ready(function () {
     });
   }
 
-  // $("#shoppingCartBtn").click(() => {
-  //   let nextPage = `/api/booking/${merchant.merchantId}`;
-  //   sessionStorage.setItem("nextPage", nextPage);
-
-  //   let user = sessionStorage.getItem("user");
-  //   if (user) {
-  //     window.location.href = nextPage;
-  //   } else {
-  //     window.location.href = `/user/login`;
-  //   }
-  // });
-
   $("#makeReservationBtn").click(() => {
     let nextPage = `/api/booking/${merchant.merchantId}`;
     sessionStorage.setItem("nextPage", nextPage);
@@ -105,6 +93,8 @@ $(document).ready(function () {
     if (user) {
       window.location.href = nextPage;
     } else {
+      sessionStorage.removeItem("user");
+      sessionStorage.removeItem("token");
       window.location.href = `/user/login`;
     }
   });

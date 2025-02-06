@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const UserController = require("../../controllers/UserController");
+const userService = require("../../services/user.service");
 
 /**
  * @swagger
@@ -15,11 +15,13 @@ const UserController = require("../../controllers/UserController");
  *       200:
  *         description: successful operation
  */
-router.get("/", UserController.userlist);
+router.get("/", userService.userlist);
 
 /**
  * user delete
  */
-router.delete("/", UserController.userDelete);
+router.delete("/", userService.userDelete);
+
+// router.checkStatus('/status', authenticate, permissions, userService.checkStatus);
 
 module.exports = router;

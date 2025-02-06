@@ -1,6 +1,7 @@
 $(document).ready(() => {
   $(".sidenav").sidenav();
 
+  sessionStorage.removeItem("nextPage");
   $("#searchBtn").click(() => {
     let searchText = $("#search").val();
 

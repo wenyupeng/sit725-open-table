@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const MenuService = require("../../controllers/MenuService");
-const { MenuModel } = require("../../models");
+const menuService = require("../../services/menu.service");
 
 /**
  * @swagger
@@ -30,7 +29,7 @@ const { MenuModel } = require("../../models");
  *       500:
  *         description: Internal Server Error
  */
-router.get("/", MenuService.queryPagenation);
+router.get("/", menuService.queryPagenation);
 
 /**
  * @swagger
@@ -61,7 +60,7 @@ router.get("/", MenuService.queryPagenation);
  *       500:
  *         description: Internal Server Error
  */
-router.delete("/:menuId", MenuService.delete);
+router.delete("/:menuId", menuService.delete);
 
 /**
  * @swagger
@@ -95,7 +94,7 @@ router.delete("/:menuId", MenuService.delete);
  *       500:
  *         description: Internal Server Error
  */
-router.post("/", MenuService.add);
+router.post("/", menuService.add);
 /**
  * @swagger
  * /api/menu/{menuId}:
@@ -133,16 +132,16 @@ router.post("/", MenuService.add);
  *       500:
  *         description: Internal Server Error
  */
-router.put("/:menuId", MenuService.updateById);
+router.put("/:menuId", menuService.updateById);
 
-router.get("/md/menus/:merchantId", MenuService.listAllMenusByMerchantId);
+router.get("/md/menus/:merchantId", menuService.listAllMenusByMerchantId);
 
-router.post("/md/menus", MenuService.createMenu);
+router.post("/md/menus", menuService.createMenu);
 
-router.put("/md/menus/:menuId", MenuService.editMenu);
+router.put("/md/menus/:menuId", menuService.editMenu);
 
-router.delete("/md/menus/:menuId", MenuService.deleteMenu);
+router.delete("/md/menus/:menuId", menuService.deleteMenu);
 
-router.get("/md/menus/item/:menuId", MenuService.getMenuById);
+router.get("/md/menus/item/:menuId", menuService.getMenuById);
 
 module.exports = router;
