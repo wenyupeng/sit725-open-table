@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const ReviewsController = require("../../controllers/ReviewsController");
+const ReviewController = require("../../controllers/review.controller");
 
 /**
  * @swagger
@@ -47,7 +47,7 @@ const ReviewsController = require("../../controllers/ReviewsController");
  *       200:
  *         description: Review added successfully
  */
-router.post("/", ReviewsController.addReview);
+router.post("/", ReviewController.addReview);
 /**
  * @swagger
  * /api/reviews/{merchantId}:
@@ -75,7 +75,7 @@ router.post("/", ReviewsController.addReview);
  *       404:
  *         description: Reviews not found
  */
-router.get("/:merchantId", ReviewsController.getReviews);
+router.get("/:merchantId", ReviewController.getReviews);
 
 /**
  * @swagger
@@ -129,7 +129,7 @@ router.get("/:merchantId", ReviewsController.getReviews);
  *       200:
  *         description: Review updated successfully
  */
-router.put("/:reviewId", ReviewsController.updateReview);
+router.put("/:reviewId", ReviewController.updateReview);
 
 /**
  * @swagger
@@ -150,6 +150,6 @@ router.put("/:reviewId", ReviewsController.updateReview);
  *       200:
  *         description: Reviews deleted successfully
  */
-router.delete("/:merhcantId", ReviewsController.deleteReview);
+router.delete("/:merhcantId", ReviewController.deleteReview);
 
 module.exports = router;

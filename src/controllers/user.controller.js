@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const { validationResult } = require("express-validator");
 const { UserModel } = require("../models");
-const authenticate = require("../middlewares/jwt");
+const authenticate = require("../middlewares/jwt.middleware");
 const apiResponse = require("../utils/utils.apiResponse");
-const permissions = require("../middlewares/permissions");
+const permissions = require("../middlewares/permission.middleware");
 const nodemailer = require("nodemailer");
 const envConfig = require("../config/env.config");
 

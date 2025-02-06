@@ -1,13 +1,13 @@
 const {
-  PopularMerModel,
-  FeaturedCollectionsModel,
+  PopularMerchantModel,
+  FeaturedCollectionModel,
   MerchantsModel,
 } = require("../models");
 const jwt = require("jsonwebtoken");
 const log = require("../utils/utils.logger");
-const authenticate = require("../middlewares/jwt");
+const authenticate = require("../middlewares/jwt.middleware");
 const apiResponse = require("../utils/utils.apiResponse");
-const permissions = require("../middlewares/permissions");
+const permissions = require("../middlewares/permission.middleware");
 const { body, validationResult } = require("express-validator");
 const { encryption, decryption } = require("../utils/utils.others");
 const envConfig = require("../config/env.config");
@@ -18,7 +18,7 @@ const envConfig = require("../config/env.config");
  */
 exports.popularMerchants = async () => {
   try {
-    return await PopularMerModel.find({}).sort({ name: -1 });
+    return await PopularMerchantModel.find({}).sort({ name: -1 });
   } catch (err) {
     console.log(err);
     log.err(`popularMerchants error, ${JSON.stringify(err)} `);
@@ -32,7 +32,7 @@ exports.popularMerchants = async () => {
  */
 exports.featuredColletions = async () => {
   try {
-    return await FeaturedCollectionsModel.find({}).limit(Number(4));
+    return await FeaturedCollectionModel.find({}).limit(Number(4));
   } catch (err) {
     console.log(err);
     log.error(`featuredColletions error, ${JSON.stringify(err)}`);

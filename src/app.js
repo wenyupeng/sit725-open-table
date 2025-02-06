@@ -18,7 +18,10 @@ const isDev = envConfig.nodeEnv === "development";
 require("express-async-errors");
 require("./db/index");
 
-const { sessionAuth, attachUserToLocals } = require("./middlewares/session");
+const {
+  sessionAuth,
+  attachUserToLocals,
+} = require("./middlewares/session.middleware");
 const app = express();
 const httpServer = createServer(app);
 
