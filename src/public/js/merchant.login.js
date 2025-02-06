@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-undef
 const Materialize = M;
 
 $(document).ready(function () {

@@ -30,22 +30,23 @@ describe("merchant", () => {
         .set("Content-Type", "application/json")
         .end((err, res) => {
           expect(res.status).to.equal(200);
-          expect(JSON.parse(res.text).data.merchants.length).to.be.greaterThan(0);
+          expect(JSON.parse(res.text).data.merchants.length).to.be.greaterThan(
+            0,
+          );
           done();
         });
     });
   });
 
   describe("merchant register", function () {
-
     before(function (done) {
       request(app)
-      .delete("/api/merchant/test")
-      .set('Content-Type', 'application/json')
-      .end((err, res) => {
-        expect(res.status).to.equal(200);
-        done();
-      });
+        .delete("/api/merchant/test")
+        .set("Content-Type", "application/json")
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          done();
+        });
     });
 
     // it("returns status 200 to register the merchant successfully", function (done) {
@@ -75,19 +76,19 @@ describe("merchant", () => {
     // });
 
     it("returns status 400 to register the merchant failed", function (done) {
-
       let merchant = {
-        "backgroundImg": "https://ai-public.mastergo.com/ai/img_res/2ebd8f7fb19ed793bd8c1da1c149950b.jpg",
-        "category": "Restaurant",
-        "type": "Romantic Dining",
-        "description": "Fine Dining Excellence",
-        "location": "123 Gourmet Street, Culinary District",
-        "contactPhone": "+1 (555) 123-4567",
-        "hours": "Mon-Sun: 11:00 AM - 11:00 PM",
-        "reviews": 127,
-        "star": 4,
-        "isDeleted": false,
-        "password": "123456"
+        backgroundImg:
+          "https://ai-public.mastergo.com/ai/img_res/2ebd8f7fb19ed793bd8c1da1c149950b.jpg",
+        category: "Restaurant",
+        type: "Romantic Dining",
+        description: "Fine Dining Excellence",
+        location: "123 Gourmet Street, Culinary District",
+        contactPhone: "+1 (555) 123-4567",
+        hours: "Mon-Sun: 11:00 AM - 11:00 PM",
+        reviews: 127,
+        star: 4,
+        isDeleted: false,
+        password: "123456",
       };
 
       request(app)

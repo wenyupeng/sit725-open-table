@@ -3,7 +3,7 @@ const envConfig = require("../config/env.config");
 
 const secret = envConfig.signKey;
 
-console.log('SECRET >>> ', secret)
+console.log("SECRET >>> ", secret);
 
 const authenticate = jwt({
   secret: secret,

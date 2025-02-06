@@ -32,7 +32,9 @@ class SocketIOService {
   }
 
   sendMessage(roomId, key, message) {
-    console.log(`[SocketIOService] sendMessage to room: ${roomId} key: ${key} message: ${JSON.stringify(message)}`)
+    console.log(
+      `[SocketIOService] sendMessage to room: ${roomId} key: ${key} message: ${JSON.stringify(message)}`,
+    );
     this.getServer().to(roomId).emit(key, JSON.stringify(message));
   }
 
@@ -56,10 +58,10 @@ class SocketIOService {
       return;
     }
 
-    console.log(`[SocketIOService] join user-${user._id}`)
+    console.log(`[SocketIOService] join user-${user._id}`);
     socket.join(`user-${user._id}`);
     if (user.merchant?._id && user.role === "merchant") {
-      console.log(`[SocketIOService] join merchant-${user.merchant._id}`)
+      console.log(`[SocketIOService] join merchant-${user.merchant._id}`);
       socket.join(`merchant-${user.merchant._id}`);
     }
 

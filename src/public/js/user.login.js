@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-undef
 const Materialize = M;
 
 $(document).ready(() => {
@@ -23,7 +22,8 @@ $(document).ready(() => {
       contentType: "application/json; charset=utf-8",
       data: JSON.stringify(loginData),
       success: (response) => {
-        let result = typeof response === "string" ? JSON.parse(response) : response;
+        let result =
+          typeof response === "string" ? JSON.parse(response) : response;
 
         if (result.status === 1) {
           let data = result.data;
@@ -40,12 +40,17 @@ $(document).ready(() => {
           sessionStorage.removeItem("nextPage");
           window.location.href = nextPage ? nextPage : "/";
         } else {
-          Materialize.toast({ html: "Login failed: " + (result.message || "please try again") });
+          Materialize.toast({
+            html: "Login failed: " + (result.message || "please try again"),
+          });
         }
       },
-      error: (xhr, status, error) => {
+      error: (xhr) => {
         const response = xhr.responseJSON;
-        const message = response && response.message ? response.message : "An unexpected error occurred. Please login with the right credentials";
+        const message =
+          response && response.message
+            ? response.message
+            : "An unexpected error occurred. Please login with the right credentials";
         Materialize.toast({ html: message });
       },
       complete: () => {

@@ -1,4 +1,4 @@
-require("dotenv").config()
+require("dotenv").config();
 const chalk = require("chalk");
 const express = require("express");
 const path = require("path");
@@ -8,7 +8,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const mount = require("mount-routes");
 const { createServer } = require("http");
-const envConfig = require('./config/env.config')
+const envConfig = require("./config/env.config");
 
 const apiResponse = require("./utils/utils.apiResponse");
 const SocketIOService = require("./services/socket.service");
@@ -99,7 +99,7 @@ app.use(function (err, req, res, next) {
   if (err.name === "Error") {
     return apiResponse.ErrorResponse(res, err.message);
   }
-  
+
   if (err.name === "TypeError") {
     console.log(err.message);
     return apiResponse.ErrorResponse(res, "Invalid data type");

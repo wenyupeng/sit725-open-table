@@ -4,11 +4,11 @@ let types = mongoose.SchemaTypes;
 
 const locationSchema = new mongoose.Schema({
   address: { type: types.String, required: true },
-  suburb: { type: types.String, required: true },  
+  suburb: { type: types.String, required: true },
   state: { type: types.String, required: true },
-  postCode: { type: types.Number, required: true }, 
-  lat: { type: types.Number }, 
-  long: { type: types.Number },     
+  postCode: { type: types.Number, required: true },
+  lat: { type: types.Number },
+  long: { type: types.Number },
 });
 
 const OpenHourSchema = new mongoose.Schema({
@@ -25,8 +25,8 @@ const OpenHourSchema = new mongoose.Schema({
     ],
     required: true,
   },
-time: { type: types.String, required: true, }, 
-availableSlots: { type: types.Number, required: true, min: 0 }  
+  time: { type: types.String, required: true },
+  availableSlots: { type: types.Number, required: true, min: 0 },
 });
 
 const MerchantsSchema = new mongoose.Schema(
@@ -36,7 +36,7 @@ const MerchantsSchema = new mongoose.Schema(
     category: { type: types.String, required: true },
     type: { type: types.String, required: true },
     description: { type: types.String, required: true },
-    
+
     location: [locationSchema], // Contact address required for map API
     openHours: [OpenHourSchema], // Opening hours with timeslots,
 
@@ -51,7 +51,7 @@ const MerchantsSchema = new mongoose.Schema(
   {
     timestamps: true,
     versionKey: false,
-  }
+  },
 );
 
 module.exports = mongoose.model("merchants", MerchantsSchema);

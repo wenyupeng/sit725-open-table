@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 function addToOrder(cardStr) {
-  console.log('>>> ADD TO ORDER >>>', cardStr)
+  console.log(">>> ADD TO ORDER >>>", cardStr);
   let card = JSON.parse(cardStr);
   let foodId = card._id;
   let count = sessionStorage.getItem(foodId);

@@ -37,7 +37,7 @@ router.post("/register", MerchantService.register);
  *     responses:
  *       200:
  *         description: successful operation
-*/
+ */
 router.post("/login", MerchantService.login);
 
 router.delete("/test", MerchantService.deleteByName);
@@ -61,7 +61,6 @@ router.delete("/test", MerchantService.deleteByName);
  *         description: successful operation
  */
 router.delete("/:merchantId", MerchantService.delete);
-
 
 router.post("/update-open-hours", MerchantService.updateOpenHours);
 

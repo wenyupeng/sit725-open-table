@@ -31,7 +31,11 @@ const BookingSchema = new mongoose.Schema(
     specialRequest: { type: types.String },
     isActive: { type: types.Boolean, default: true },
     merchantName: { type: types.String },
-    status: { type: String, enum: ["Pending", "Confirmed", "Cancelled"], default: "Pending" },
+    status: {
+      type: String,
+      enum: ["Pending", "Confirmed", "Cancelled"],
+      default: "Pending",
+    },
   },
   {
     timestamps: true,

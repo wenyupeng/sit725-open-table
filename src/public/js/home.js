@@ -12,15 +12,17 @@ $(document).ready(() => {
         let res = JSON.parse(response);
         if (res.status === 1) {
           renderMerchantDetails(res.data.merchants);
-          renderPagination(parseInt(res.data.pageNo), parseInt(res.data.totalPages));
+          renderPagination(
+            parseInt(res.data.pageNo),
+            parseInt(res.data.totalPages),
+          );
         } else {
-          M.toast({ html: res.message, classes: 'rounded', color });
+          M.toast({ html: res.message, classes: "rounded" });
         }
-
       },
       error: (xhr, status, error) => {
         console.error(error);
-      }
+      },
     });
   });
 });
@@ -28,26 +30,39 @@ $(document).ready(() => {
 function renderMerchantDetails(data) {
   let topSixMerEL = document.getElementById("top-six-mer");
   if (data.length < 1) {
-    topSixMerEL.innerHTML = "<h5 style='text-align:center'>No results found</h5>";
+    topSixMerEL.innerHTML =
+      "<h5 style='text-align:center'>No results found</h5>";
   } else {
     let content = ``;
 
-    data.forEach(merchant => {
-      let description = (merchant.description && merchant.description.split(' ').length > 7) ? merchant.description.split(' ').slice(0, 7).join(' ') + ' ...' : (merchant.description || 'No description available');
-      let cardEL = `
+    data.forEach((merchant) => {
+      let description =
+        merchant.description && merchant.description.split(" ").length > 7
+          ? merchant.description.split(" ").slice(0, 7).join(" ") + " ..."
+          : merchant.description || "No description available";
+      let cardEL =
+        `
         <div class="col s12 m4">
             <div class="card">
               <div class="card-image waves-effect waves-block waves-light">
-                <a href="/merchant/`+ merchant._id + `">
-                <img src='`+ merchant.backgroundImg + `'>
+                <a href="/merchant/` +
+        merchant._id +
+        `">
+                <img src='` +
+        merchant.backgroundImg +
+        `'>
                 </a>
               </div>
               <div class="card-content">
                 <span class="card-title"><strong>
-                    `+ merchant.name + `
+                    ` +
+        merchant.name +
+        `
                   </strong></span>
                 <p>
-                `+ description + `
+                ` +
+        description +
+        `
                 </p>
                 <div>
                   <div class="stars">
@@ -62,9 +77,12 @@ function renderMerchantDetails(data) {
         }
       }
 
-      cardEL += `
+      cardEL +=
+        `
                   </div>
-                  <span>( ` + merchant.reviews + ` reviews)</span>
+                  <span>( ` +
+        merchant.reviews +
+        ` reviews)</span>
                 </div>
               </div>
             </div>
@@ -85,7 +103,10 @@ function renderPagination(pageNo, totalPages) {
   }
   let contentEL = ``;
   if (pageNo > 1) {
-    contentEL += `<li class="waves-effect"><a href="#!" onclick="toPage('` + (parseInt(pageNo) - 1) + `')">`;
+    contentEL +=
+      `<li class="waves-effect"><a href="#!" onclick="toPage('` +
+      (parseInt(pageNo) - 1) +
+      `')">`;
   } else {
     contentEL += `<li class="disabled"><a href="#!">`;
   }
@@ -96,7 +117,12 @@ function renderPagination(pageNo, totalPages) {
       if (i === parseInt(pageNo)) {
         contentEL += `<li class="active"><a href="#!">` + i + `</a></li>`;
       } else {
-        contentEL += `<li class="waves-effect"><a href="#!" onclick="toPage('` + i + `')">` + i + `</a></li>`;
+        contentEL +=
+          `<li class="waves-effect"><a href="#!" onclick="toPage('` +
+          i +
+          `')">` +
+          i +
+          `</a></li>`;
       }
     }
   } else {
@@ -105,7 +131,12 @@ function renderPagination(pageNo, totalPages) {
         if (i === pageNo) {
           contentEL += `<li class="active"><a href="#!">` + i + `</a></li>`;
         } else {
-          contentEL += `<li class="waves-effect"><a href="#!" onclick="toPage('` + i + `')">` + i + `</a></li>`;
+          contentEL +=
+            `<li class="waves-effect"><a href="#!" onclick="toPage('` +
+            i +
+            `')">` +
+            i +
+            `</a></li>`;
         }
       }
     } else if (pageNo >= totalPages - 2) {
@@ -113,7 +144,12 @@ function renderPagination(pageNo, totalPages) {
         if (i === pageNo) {
           contentEL += `<li class="active"><a href="#!">` + i + `</a></li>`;
         } else {
-          contentEL += `<li class="waves-effect"><a href="#!" onclick="toPage('` + i + `')">` + i + `</a></li>`;
+          contentEL +=
+            `<li class="waves-effect"><a href="#!" onclick="toPage('` +
+            i +
+            `')">` +
+            i +
+            `</a></li>`;
         }
       }
     } else {
@@ -121,14 +157,22 @@ function renderPagination(pageNo, totalPages) {
         if (i === pageNo) {
           contentEL += `<li class="active"><a href="#!">` + i + `</a></li>`;
         } else {
-          contentEL += `<li class="waves-effect"><a href="#!" onclick="toPage('` + i + `')">` + i + `</a></li>`;
+          contentEL +=
+            `<li class="waves-effect"><a href="#!" onclick="toPage('` +
+            i +
+            `')">` +
+            i +
+            `</a></li>`;
         }
       }
     }
   }
 
   if (pageNo < totalPages) {
-    contentEL += `<li class="waves-effect"><a href="#!" onclick="toPage('` + (parseInt(pageNo) + 1) + `')">`;
+    contentEL +=
+      `<li class="waves-effect"><a href="#!" onclick="toPage('` +
+      (parseInt(pageNo) + 1) +
+      `')">`;
   } else {
     contentEL += `<li class="disabled"><a href="#!">`;
   }
@@ -137,6 +181,7 @@ function renderPagination(pageNo, totalPages) {
   paginationEL.innerHTML = contentEL;
 }
 
+// eslint-disable-next-line no-unused-vars
 function toPage(page) {
   $.ajax({
     url: "/api/merchant",
@@ -150,11 +195,11 @@ function toPage(page) {
         console.log(res.data);
         renderPagination(res.data.pageNo, res.data.totalPages);
       } else {
-        M.toast({ html: res.message, classes: 'rounded', color });
+        M.toast({ html: res.message, classes: "rounded" });
       }
     },
     error: (xhr, status, error) => {
       console.error(error);
-    }
+    },
   });
 }

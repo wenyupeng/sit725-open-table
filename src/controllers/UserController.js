@@ -88,10 +88,16 @@ exports.forgotPassword = async (req, res) => {
     const { email } = req.body;
     const user = await UserModel.findOne({ email });
     if (!user) {
-      return apiResponse.notFoundResponse(res, "User with this email does not exist.");
+      return apiResponse.notFoundResponse(
+        res,
+        "User with this email does not exist.",
+      );
     }
     const resetToken = crypto.randomBytes(32).toString("hex");
-    const hashedToken = crypto.createHash("sha256").update(resetToken).digest("hex");
+    const hashedToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
     user.passwordResetToken = hashedToken;
     user.passwordResetExpires = Date.now() + 3600000; // Token valid for 1 hour
     await user.save();
@@ -100,7 +106,7 @@ exports.forgotPassword = async (req, res) => {
       service: "Gmail",
       auth: {
         user: envConfig.email.account,
-        pass: envConfig.email.password
+        pass: envConfig.email.password,
       },
     });
 
@@ -116,7 +122,9 @@ exports.forgotPassword = async (req, res) => {
     return apiResponse.successResponse(res, "Password reset email sent.");
   } catch (err) {
     console.error(err);
-    return apiResponse.ErrorResponse(res, "An error occurred while processing your request.");
+    return apiResponse.ErrorResponse(
+      res,
+      "An error occurred while processing your request.",
+    );
   }
 };
-

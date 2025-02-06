@@ -3,7 +3,6 @@ const router = express.Router();
 const MerchantService = require("../controllers/MerchantService");
 
 router.get("/", async function (req, res) {
-  const searchQuery = req.query.q;
   const popular_mer = await MerchantService.popularMerchants();
   const featured_col = await MerchantService.featuredColletions();
   const pagination = await MerchantService.queryPagenationForPage(req);

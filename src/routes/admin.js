@@ -7,7 +7,10 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/login", async (req, res) => {
-  res.render("./admin/login_admin", { pageTitle: "Admin Login", message: null });
+  res.render("./admin/login_admin", {
+    pageTitle: "Admin Login",
+    message: null,
+  });
 });
 
 module.exports = router;

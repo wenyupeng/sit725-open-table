@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-undef
 const Materialize = M;
 
 $(document).ready(() => {
@@ -23,8 +22,9 @@ $(document).ready(() => {
       window.location.href = "/admin";
     } else {
       // Show error message
-      Materialize.toast({ html: "Invalid email or password. Please try again." });
+      Materialize.toast({
+        html: "Invalid email or password. Please try again.",
+      });
     }
   });
 });
-

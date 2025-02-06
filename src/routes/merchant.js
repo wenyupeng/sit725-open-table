@@ -14,7 +14,6 @@ router.get("/:merchantId/menu", async function (req, res) {
 
   // categoryMap.keys().forEach((c) => console.log('>>> ', c))
 
-
   res.render("./menu/menu", {
     menu: categoryMap,
   });

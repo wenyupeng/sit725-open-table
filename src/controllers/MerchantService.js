@@ -68,7 +68,7 @@ exports.register = [
         if (existingMerchant) {
           return apiResponse.validationErrorWithData(
             res,
-            "Merchant already exists, use different contact phone to register"
+            "Merchant already exists, use different contact phone to register",
           );
         }
 
@@ -92,7 +92,7 @@ exports.register = [
 
         return apiResponse.successResponse(
           res,
-          "Merchant created successfully"
+          "Merchant created successfully",
         );
       }
     } catch (err) {
@@ -136,7 +136,7 @@ exports.login = [
       if (!isPass)
         return apiResponse.unauthorizedResponse(
           res,
-          "2: username or password is wrong"
+          "2: username or password is wrong",
         );
 
       let payload = {
@@ -155,7 +155,7 @@ exports.login = [
       return apiResponse.successResponseWithData(
         res,
         "Login Success",
-        merchant
+        merchant,
       );
     } catch (err) {
       console.log(err);
@@ -198,7 +198,7 @@ exports.delete = [
 
       let flag = await MerchantsModel.UpdateOne(
         { _id: merchantId },
-        { $set: { isDeleted: true } }
+        { $set: { isDeleted: true } },
       );
       if (!flag) {
         return apiResponse.ErrorResponse(res, "Internal Server Error");
@@ -257,7 +257,7 @@ exports.add = [
       return apiResponse.successResponseWithData(
         res,
         "Merchant added successfully",
-        merchant
+        merchant,
       );
     } catch (err) {
       console.log(err);
@@ -285,12 +285,12 @@ exports.update = [
       let updatedMerchant = await MerchantsModel.findByIdAndUpdate(
         merchantId,
         req.body,
-        { new: true }
+        { new: true },
       );
       return apiResponse.successResponseWithData(
         res,
         "Merchant updated successfully",
-        updatedMerchant
+        updatedMerchant,
       );
     } catch (err) {
       console.log(err);
@@ -317,7 +317,7 @@ exports.updateById = [
     let updatedMerchant = await MerchantsModel.findByIdAndUpdate(
       merchantId,
       req.body,
-      { new: true }
+      { new: true },
     );
     if (!updatedMerchant) {
       return apiResponse.ErrorResponse(res, "Internal Server Error");
@@ -325,7 +325,7 @@ exports.updateById = [
     return apiResponse.successResponseWithData(
       res,
       "Merchant updated successfully",
-      updatedMerchant
+      updatedMerchant,
     );
   },
 ];
@@ -430,7 +430,11 @@ exports.queryPagenation = async (req, res) => {
       pageSize: pageSize,
     };
 
-    return apiResponse.successResponseWithData(res, "queryPagenation success", result);
+    return apiResponse.successResponseWithData(
+      res,
+      "queryPagenation success",
+      result,
+    );
   } catch (err) {
     console.log(err);
     log.error(`queryPagenation error, ${JSON.stringify(err)}`);
@@ -480,27 +484,30 @@ exports.topMerchants = async (searchQuery) => {
 
 exports.updateOpenHours = async (req, res) => {
   try {
-      const { merchantId, openHours } = req.body;
+    const { merchantId, openHours } = req.body;
 
-      // Validate required fields
-      if (!merchantId || !openHours || !Array.isArray(openHours)) {
-          return res.status(400).json({ error: "Invalid request data" });
-      }
+    // Validate required fields
+    if (!merchantId || !openHours || !Array.isArray(openHours)) {
+      return res.status(400).json({ error: "Invalid request data" });
+    }
 
-      // Find and update merchant's open hours
-      const updatedMerchant = await MerchantsModel.findByIdAndUpdate(
-          merchantId,
-          { openHours: openHours },
-          { new: true, runValidators: true } // Return updated doc and validate schema
-      );
+    // Find and update merchant's open hours
+    const updatedMerchant = await MerchantsModel.findByIdAndUpdate(
+      merchantId,
+      { openHours: openHours },
+      { new: true, runValidators: true }, // Return updated doc and validate schema
+    );
 
-      if (!updatedMerchant) {
-          return res.status(404).json({ error: "Merchant not found" });
-      }
+    if (!updatedMerchant) {
+      return res.status(404).json({ error: "Merchant not found" });
+    }
 
-      res.json({ message: "Open hours updated successfully!", data: updatedMerchant.openHours });
+    res.json({
+      message: "Open hours updated successfully!",
+      data: updatedMerchant.openHours,
+    });
   } catch (error) {
-      console.error("Error updating open hours:", error);
-      res.status(500).json({ error: "Internal server error" });
+    console.error("Error updating open hours:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
-}
+};
