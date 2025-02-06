@@ -3,8 +3,10 @@ const {
   renderMerchantDashboardBookingsPage,
   renderMerchantDashboardSettingsPage,
   renderMerchantDashboardMenuPage,
-} = require("../controllers/BookingService");
-const { ensureMerchantAuthenticated } = require("../middlewares/session");
+} = require("../controllers/booking.controller");
+const {
+  ensureMerchantAuthenticated,
+} = require("../middlewares/session.middleware");
 
 const router = express.Router();
 

@@ -1,14 +1,14 @@
-const log = require("../utils/utils.logger");
-const authenticate = require("../middlewares/jwt");
-const apiResponse = require("../utils/utils.apiResponse");
-const permissions = require("../middlewares/permissions");
-const { ReviewsModel } = require("../models");
+const log = require("../utils/auth.util");
+const authenticate = require("../middlewares/jwt.middleware");
+const apiResponse = require("../utils/api-response.util");
+const permissions = require("../middlewares/permission.middleware");
+const { ReviewModel } = require("../models");
 const { ObjectId } = require("mongodb");
 
 exports.getReviews = async (req, res) => {
   let merchantId = req.params.merchantId;
   try {
-    let reviews = await ReviewsModel.aggregate([
+    let reviews = await ReviewModel.aggregate([
       { $match: { merchantId: new ObjectId(merchantId) } },
       { $sort: { createdAt: -1 } },
       { $limit: 2 },
@@ -34,7 +34,7 @@ exports.addReview = [
   authenticate,
   permissions,
   async (req, res) => {
-    let reviews = new ReviewsModel(req.body);
+    let reviews = new ReviewModel(req.body);
     try {
       await reviews.save();
       return apiResponse.successResponse(res, "Review added successfully");
@@ -51,7 +51,7 @@ exports.updateReview = [
   async (req, res) => {
     let reviewId = req.params.reviewId;
     try {
-      let review = await ReviewsModel.findByIdAndUpdate(reviewId, req.body, {
+      let review = await ReviewModel.findByIdAndUpdate(reviewId, req.body, {
         new: true,
       });
       if (!review) {
@@ -71,7 +71,7 @@ exports.deleteReview = [
   async (req, res) => {
     let merchantId = req.params.merchantId;
     try {
-      await ReviewsModel.deleteMany({ merchantId: merchantId });
+      await ReviewModel.deleteMany({ merchantId: merchantId });
       return apiResponse.successResponse(res, "Review deleted successfully");
     } catch (err) {
       log.error(err);

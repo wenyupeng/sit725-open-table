@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const BookingService = require("../../controllers/BookingService");
-const { ensureAuthenticated } = require("../../middlewares/session");
+const BookingController = require("../../controllers/booking.controller");
+const { ensureAuthenticated } = require("../../middlewares/session.middleware");
 /**
  * @swagger
  * /api/booking/{merchantId}:
@@ -42,27 +42,27 @@ const { ensureAuthenticated } = require("../../middlewares/session");
 router.post(
   "/:merchantId",
   ensureAuthenticated,
-  BookingService.handleCreateBooking,
+  BookingController.handleCreateBooking,
 );
 
 // Render create booking routes
 router.get(
   "/:merchantId",
   ensureAuthenticated,
-  BookingService.renderCreateBooking,
+  BookingController.renderCreateBooking,
 );
 
 // Render List of bookings for current user
 router.get(
   "/:userId/bookings",
   ensureAuthenticated,
-  BookingService.getLoggedInUserBookings,
+  BookingController.getLoggedInUserBookings,
 );
 
 router.post(
   "/:userId/bookings/:bookingId/delete",
   ensureAuthenticated,
-  BookingService.deleteBooking,
+  BookingController.deleteBooking,
 );
 
 module.exports = router;

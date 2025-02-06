@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 const { MenuModel } = require("../models");
-const log = require("../utils/utils.logger");
-const authenticate = require("../middlewares/jwt");
-const apiResponse = require("../utils/utils.apiResponse");
-const permissions = require("../middlewares/permissions");
+const log = require("../utils/auth.util");
+const authenticate = require("../middlewares/jwt.middleware");
+const apiResponse = require("../utils/api-response.util");
+const permissions = require("../middlewares/permission.middleware");
 
 /**
  * get menu by merchantId

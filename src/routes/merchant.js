@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const MerchantService = require("../controllers/MerchantService");
-const { getMenuByMerchantId } = require("../controllers/MenuService");
+const MerchantController = require("../controllers/merchant.controller");
+const { getMenuByMerchantId } = require("../controllers/menu.controller");
 
 // Render a merchant details routes
-router.get("/:merchantId", MerchantService.renderMerchantDetails);
+router.get("/:merchantId", MerchantController.renderMerchantDetails);
 
 router.get("/:merchantId/menu", async function (req, res) {
   let merchantId = req.params.merchantId;

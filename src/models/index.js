@@ -1,9 +1,9 @@
 module.exports = {
-  BookingModel: require("./mapping/BookingModel"),
-  FeaturedCollectionsModel: require("./mapping/FeaturedCollectionsModel"),
-  MenuModel: require("./mapping/MenuModel"),
-  MerchantsModel: require("./mapping/MerchantsModel"),
-  PopularMerModel: require("./mapping/PopularMerModel"),
-  ReviewsModel: require("./mapping/ReviewsModel"),
-  UserModel: require("./mapping/UserModel"),
+  BookingModel: require("./mapping/booking.model"),
+  FeaturedCollectionModel: require("./mapping/featured-collection.model"),
+  MenuModel: require("./mapping/menu.model"),
+  MerchantsModel: require("./mapping/merchant.model"),
+  PopularMerchantModel: require("./mapping/popular-merchant.model"),
+  ReviewModel: require("./mapping/review.model"),
+  UserModel: require("./mapping/user.model"),
 };

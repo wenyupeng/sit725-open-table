@@ -10,15 +10,18 @@ const mount = require("mount-routes");
 const { createServer } = require("http");
 const envConfig = require("./config/env.config");
 
-const apiResponse = require("./utils/utils.apiResponse");
+const apiResponse = require("./utils/api-response.util");
 const SocketIOService = require("./services/socket.service");
 
 const isDev = envConfig.nodeEnv === "development";
 
 require("express-async-errors");
-require("./db/index");
+require('./utils/db.util');
 
-const { sessionAuth, attachUserToLocals } = require("./middlewares/session");
+const {
+  sessionAuth,
+  attachUserToLocals,
+} = require("./middlewares/session.middleware");
 const app = express();
 const httpServer = createServer(app);
 

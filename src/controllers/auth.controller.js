@@ -1,9 +1,9 @@
 const { body, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const { UserModel } = require("../models");
-const apiResponse = require("../utils/utils.apiResponse");
-const { encryption, decryption } = require("../utils/utils.others");
-const log = require("../utils/utils.logger");
+const apiResponse = require("../utils/api-response.util");
+const { encryption, decryption } = require("../utils/auth.util");
+const log = require("../utils/auth.util");
 const envConfig = require("../config/env.config");
 
 /**
