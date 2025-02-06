@@ -10,7 +10,7 @@ const BookingSchema = new mongoose.Schema(
     },
     merchantId: {
       type: types.ObjectId,
-      ref: "Merchants",
+      ref: "Merchant",
       required: true,
     },
     menuItems: [
@@ -43,4 +43,4 @@ const BookingSchema = new mongoose.Schema(
   },
 );
 
-module.exports = mongoose.model("booking", BookingSchema);
+module.exports = mongoose.model("Booking", BookingSchema, "bookings");
