@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 let types = mongoose.SchemaTypes;
-const FeaturedCollectionsSchema = new mongoose.Schema(
+const FeaturedCollectionSchema = new mongoose.Schema(
   {
     backgroundImg: { type: types.String, required: true },
     type: { type: types.String, required: true },
@@ -14,6 +14,7 @@ const FeaturedCollectionsSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model(
+  "FeaturedCollection",
+  FeaturedCollectionSchema,
   "featured-collections",
-  FeaturedCollectionsSchema,
 );

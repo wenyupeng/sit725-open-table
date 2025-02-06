@@ -4,6 +4,7 @@ const { MerchantsModel, MenuModel, BookingModel } = require("../models");
 const apiResponse = require("../utils/api-response.util");
 const log = require("../utils/auth.util");
 const SocketIOService = require("../services/socket.service");
+const { validateTimeslot } = require("../services/booking.service");
 
 const {
   getUpcomingBookingsByMerchantId,
@@ -25,7 +26,7 @@ const {
  * @param {Int32}   totalPriceWithGST totalPriceWithGST
  * @returns {Object} common response
  */
-exports.handleCreateBooking = [
+const handleCreateBooking = [
   async (req, res) => {
     try {
       const { merchantId } = req.params;
@@ -160,7 +161,7 @@ exports.handleCreateBooking = [
  * [Features][Booking] Render Create Booking
  *
  * */
-exports.renderCreateBooking = async (req, res) => {
+const renderCreateBooking = async (req, res) => {
   const { merchantId } = req.params;
   const user = req.session.user;
   const merchant = await MerchantsModel.findById(merchantId);
@@ -191,7 +192,7 @@ exports.renderCreateBooking = async (req, res) => {
 };
 
 // Get all bookings for the logged-in user with pagination
-exports.getLoggedInUserBookings = async (req, res) => {
+const getLoggedInUserBookings = async (req, res) => {
   try {
     const { page = 1, limit = 3 } = req.query; // Pagination parameters
     const userId = req.session.user._id;
@@ -225,7 +226,7 @@ exports.getLoggedInUserBookings = async (req, res) => {
 };
 
 // Disable a booking (soft delete)
-exports.deleteBooking = async (req, res) => {
+const deleteBooking = async (req, res) => {
   const { bookingId } = req.params;
   try {
     const disabledBooking = await BookingModel.findByIdAndUpdate(
@@ -248,7 +249,7 @@ exports.deleteBooking = async (req, res) => {
   }
 };
 
-exports.renderMerchantDashboardBookingsPage = async (req, res) => {
+const renderMerchantDashboardBookingsPage = async (req, res) => {
   try {
     const merchantId = req.session.user.merchant?._id;
     const upcomingBookings = await getUpcomingBookingsByMerchantId(merchantId);
@@ -265,7 +266,7 @@ exports.renderMerchantDashboardBookingsPage = async (req, res) => {
   }
 };
 
-exports.renderMerchantDashboardSettingsPage = async (req, res) => {
+const renderMerchantDashboardSettingsPage = async (req, res) => {
   try {
     const merchantId = req.session.user.merchant?._id;
     const merchant = await MerchantsModel.findById(merchantId).lean();
@@ -281,7 +282,7 @@ exports.renderMerchantDashboardSettingsPage = async (req, res) => {
   }
 };
 
-exports.renderMerchantDashboardMenuPage = async (req, res) => {
+const renderMerchantDashboardMenuPage = async (req, res) => {
   try {
     const merchantId = req.session.user.merchant?._id;
     const merchant = await MerchantsModel.findById(merchantId).lean();
@@ -297,34 +298,12 @@ exports.renderMerchantDashboardMenuPage = async (req, res) => {
   }
 };
 
-//Validate Timeslot and Booking Availability
-const validateTimeslot = (merchant, datepicker, time) => {
-  const selectedDay = new Date(datepicker).toLocaleString("en-us", {
-    weekday: "long",
-  });
-
-  // Find the open hour for the selected day
-  const openHourDay = merchant.openHours.find(
-    (hour) => hour.day === selectedDay,
-  );
-
-  if (!openHourDay) {
-    console.log(`No available slots for ${selectedDay}.`);
-    return null;
-  }
-
-  // Find the matching time slot
-  const foundTime = openHourDay.time
-    .split(", ")
-    .find((ptime) => ptime === time.trim());
-
-  if (foundTime) {
-    console.log(
-      `Time slot ${foundTime} is available. Total ${openHourDay.availableSlots} seats.`,
-    );
-    return openHourDay.availableSlots;
-  } else {
-    console.log(`Time ${time} is not available.`);
-    return null;
-  }
+module.exports = {
+  handleCreateBooking,
+  renderCreateBooking,
+  getLoggedInUserBookings,
+  deleteBooking,
+  renderMerchantDashboardBookingsPage,
+  renderMerchantDashboardSettingsPage,
+  renderMerchantDashboardMenuPage,
 };

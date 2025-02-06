@@ -1,139 +1,225 @@
-<!DOCTYPE html>
-<html lang="zh"><head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-    <link href="https://ai-public.mastergo.com/gen_page/tailwind-custom.css" rel="stylesheet"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&amp;display=swap" rel="stylesheet"/>
-    
-    
-     <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13,aspect-ratio@0.4.2,container-queries@0.1.1"></script>
-    <script src="https://ai-public.mastergo.com/gen_page/tailwind-config.min.js" data-color="#000000" data-border-radius="small"></script>
-    </head>
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://ai-public.mastergo.com/gen_page/tailwind-custom.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13,aspect-ratio@0.4.2,container-queries@0.1.1"></script>
+    <script
+      src="https://ai-public.mastergo.com/gen_page/tailwind-config.min.js"
+      data-color="#000000"
+      data-border-radius="small"
+    ></script>
+  </head>
   <body>
-  <div class="min-h-screen bg-gray-50 p-8">
-    <div class="max-w-7xl mx-auto">
-      <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-        <div class="flex justify-between items-center mb-4">
-          <div>
-            <h2 class="text-xl font-semibold">Merchant Basic Information</h2>
-          </div>
-          <button class="!rounded-button bg-custom text-white px-4 py-2 flex items-center"><i class="fas fa-edit mr-2"></i>Edit Info</button>
-        </div>
-        <div class="grid grid-cols-2 gap-6">
-          <div>
-            <p class="text-gray-600 mb-2">Business Name: <span class="text-gray-900">Jiangnan Restaurant</span></p>
-            <p class="text-gray-600 mb-2">Phone: <span class="text-gray-900">0571-88889999</span></p>
-            <p class="text-gray-600">Address: <span class="text-gray-900">450 Wensan Road, Xihu District, Hangzhou</span></p>
-          </div>
-          <div>
-            <p class="text-gray-600 mb-2">Status: <span class="text-green-600">Open</span></p>
-            <p class="text-gray-600 mb-2">Business Hours: <span class="text-gray-900">10:00-22:00</span></p>
-            <p class="text-gray-600">Delivery Range: <span class="text-gray-900">3km</span></p>
-          </div>
-        </div>
-      </div>
-      <div class="bg-white rounded-lg shadow-sm p-6">
-        <div class="flex justify-between items-center mb-6">
-          <div class="flex items-center space-x-4">
-            <button class="!rounded-button bg-custom text-white px-4 py-2 flex items-center"><i class="fas fa-plus mr-2"></i>Add Dish</button>
-            <div class="relative">
-              <input type="text" placeholder="Search dish name" class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-custom"/>
-              <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+    <div class="min-h-screen bg-gray-50 p-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+          <div class="flex justify-between items-center mb-4">
+            <div>
+              <h2 class="text-xl font-semibold">Merchant Basic Information</h2>
             </div>
-            <div class="relative">
-              <button class="!rounded-button bg-white border border-gray-300 px-4 py-2 flex items-center">All Categories<i class="fas fa-chevron-down ml-2"></i></button>
+            <button
+              class="!rounded-button bg-custom text-white px-4 py-2 flex items-center"
+            >
+              <i class="fas fa-edit mr-2"></i>Edit Info
+            </button>
+          </div>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <p class="text-gray-600 mb-2">
+                Business Name:
+                <span class="text-gray-900">Jiangnan Restaurant</span>
+              </p>
+              <p class="text-gray-600 mb-2">
+                Phone: <span class="text-gray-900">0571-88889999</span>
+              </p>
+              <p class="text-gray-600">
+                Address:
+                <span class="text-gray-900"
+                  >450 Wensan Road, Xihu District, Hangzhou</span
+                >
+              </p>
+            </div>
+            <div>
+              <p class="text-gray-600 mb-2">
+                Status: <span class="text-green-600">Open</span>
+              </p>
+              <p class="text-gray-600 mb-2">
+                Business Hours: <span class="text-gray-900">10:00-22:00</span>
+              </p>
+              <p class="text-gray-600">
+                Delivery Range: <span class="text-gray-900">3km</span>
+              </p>
             </div>
           </div>
-          <div class="flex items-center space-x-4">
-            <button class="!rounded-button bg-red-600 text-white px-4 py-2 flex items-center"><i class="fas fa-trash-alt mr-2"></i>Batch Delete</button>
-          </div>
         </div>
-        <table class="w-full">
-          <thead class="bg-gray-50">
-            <tr>
-              <th class="px-4 py-3 text-left">
-                <input type="checkbox" class="rounded border-gray-300"/>
-              </th>
-              <th class="px-4 py-3 text-left">Dish Image</th>
-              <th class="px-4 py-3 text-left">Dish Name</th>
-              <th class="px-4 py-3 text-left">Price</th>
-              <th class="px-4 py-3 text-left">Category</th>
-              <th class="px-4 py-3 text-left">Status</th>
-              <th class="px-4 py-3 text-left">Stock</th>
-              <th class="px-4 py-3 text-left">Create Time</th>
-              <th class="px-4 py-3 text-left">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="border-b border-gray-200">
-              <td class="px-4 py-4">
-                <input type="checkbox" class="rounded border-gray-300"/>
-              </td>
-              <td class="px-4 py-4">
-                <img src="https://ai-public.mastergo.com/ai/img_res/73a3d7fecc3c32113e699a6eb99c3323.jpg" alt="红烧肉" class="w-16 h-16 object-cover rounded-lg"/>
-              </td>
-              <td class="px-4 py-4">Braised Pork</td>
-              <td class="px-4 py-4">¥38.00</td>
-              <td class="px-4 py-4">Hot Dishes</td>
-              <td class="px-4 py-4"><span class="text-green-600">Listed</span></td>
-              <td class="px-4 py-4">99</td>
-              <td class="px-4 py-4">2024-02-20</td>
-              <td class="px-4 py-4">
-                <div class="flex space-x-2">
-                  <button class="!rounded-button text-custom hover:bg-custom hover:bg-opacity-10 p-2">
-                    <i class="fas fa-edit"></i>
-                  </button>
-                  <button class="!rounded-button text-red-600 hover:bg-red-50 p-2">
-                    <i class="fas fa-trash-alt"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr class="border-b border-gray-200">
-              <td class="px-4 py-4">
-                <input type="checkbox" class="rounded border-gray-300"/>
-              </td>
-              <td class="px-4 py-4">
-                <img src="https://ai-public.mastergo.com/ai/img_res/349791c0206ced0a900c8a383c47dd00.jpg" alt="清蒸鲈鱼" class="w-16 h-16 object-cover rounded-lg"/>
-              </td>
-              <td class="px-4 py-4">Steamed Bass</td>
-              <td class="px-4 py-4">¥68.00</td>
-              <td class="px-4 py-4">Seafood</td>
-              <td class="px-4 py-4"><span class="text-green-600">Listed</span></td>
-              <td class="px-4 py-4">50</td>
-              <td class="px-4 py-4">2024-02-19</td>
-              <td class="px-4 py-4">
-                <div class="flex space-x-2">
-                  <button class="!rounded-button text-custom hover:bg-custom hover:bg-opacity-10 p-2">
-                    <i class="fas fa-edit"></i>
-                  </button>
-                  <button class="!rounded-button text-red-600 hover:bg-red-50 p-2">
-                    <i class="fas fa-trash-alt"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="flex justify-between items-center mt-6">
-          <div class="text-gray-600">Total 24 records</div>
-          <div class="flex items-center space-x-2">
-            <button class="!rounded-button bg-white border border-gray-300 px-3 py-1" disabled="">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="!rounded-button bg-custom text-white px-3 py-1">1</button>
-            <button class="!rounded-button bg-white border border-gray-300 px-3 py-1">2</button>
-            <button class="!rounded-button bg-white border border-gray-300 px-3 py-1">3</button>
-            <button class="!rounded-button bg-white border border-gray-300 px-3 py-1">
-              <i class="fas fa-chevron-right"></i>
-            </button>
+        <div class="bg-white rounded-lg shadow-sm p-6">
+          <div class="flex justify-between items-center mb-6">
+            <div class="flex items-center space-x-4">
+              <button
+                class="!rounded-button bg-custom text-white px-4 py-2 flex items-center"
+              >
+                <i class="fas fa-plus mr-2"></i>Add Dish
+              </button>
+              <div class="relative">
+                <input
+                  type="text"
+                  placeholder="Search dish name"
+                  class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-custom"
+                />
+                <i
+                  class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                ></i>
+              </div>
+              <div class="relative">
+                <button
+                  class="!rounded-button bg-white border border-gray-300 px-4 py-2 flex items-center"
+                >
+                  All Categories<i class="fas fa-chevron-down ml-2"></i>
+                </button>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <button
+                class="!rounded-button bg-red-600 text-white px-4 py-2 flex items-center"
+              >
+                <i class="fas fa-trash-alt mr-2"></i>Batch Delete
+              </button>
+            </div>
+          </div>
+          <table class="w-full">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-4 py-3 text-left">
+                  <input type="checkbox" class="rounded border-gray-300" />
+                </th>
+                <th class="px-4 py-3 text-left">Dish Image</th>
+                <th class="px-4 py-3 text-left">Dish Name</th>
+                <th class="px-4 py-3 text-left">Price</th>
+                <th class="px-4 py-3 text-left">Category</th>
+                <th class="px-4 py-3 text-left">Status</th>
+                <th class="px-4 py-3 text-left">Stock</th>
+                <th class="px-4 py-3 text-left">Create Time</th>
+                <th class="px-4 py-3 text-left">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-gray-200">
+                <td class="px-4 py-4">
+                  <input type="checkbox" class="rounded border-gray-300" />
+                </td>
+                <td class="px-4 py-4">
+                  <img
+                    src="https://ai-public.mastergo.com/ai/img_res/73a3d7fecc3c32113e699a6eb99c3323.jpg"
+                    alt="红烧肉"
+                    class="w-16 h-16 object-cover rounded-lg"
+                  />
+                </td>
+                <td class="px-4 py-4">Braised Pork</td>
+                <td class="px-4 py-4">¥38.00</td>
+                <td class="px-4 py-4">Hot Dishes</td>
+                <td class="px-4 py-4">
+                  <span class="text-green-600">Listed</span>
+                </td>
+                <td class="px-4 py-4">99</td>
+                <td class="px-4 py-4">2024-02-20</td>
+                <td class="px-4 py-4">
+                  <div class="flex space-x-2">
+                    <button
+                      class="!rounded-button text-custom hover:bg-custom hover:bg-opacity-10 p-2"
+                    >
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button
+                      class="!rounded-button text-red-600 hover:bg-red-50 p-2"
+                    >
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-b border-gray-200">
+                <td class="px-4 py-4">
+                  <input type="checkbox" class="rounded border-gray-300" />
+                </td>
+                <td class="px-4 py-4">
+                  <img
+                    src="https://ai-public.mastergo.com/ai/img_res/349791c0206ced0a900c8a383c47dd00.jpg"
+                    alt="清蒸鲈鱼"
+                    class="w-16 h-16 object-cover rounded-lg"
+                  />
+                </td>
+                <td class="px-4 py-4">Steamed Bass</td>
+                <td class="px-4 py-4">¥68.00</td>
+                <td class="px-4 py-4">Seafood</td>
+                <td class="px-4 py-4">
+                  <span class="text-green-600">Listed</span>
+                </td>
+                <td class="px-4 py-4">50</td>
+                <td class="px-4 py-4">2024-02-19</td>
+                <td class="px-4 py-4">
+                  <div class="flex space-x-2">
+                    <button
+                      class="!rounded-button text-custom hover:bg-custom hover:bg-opacity-10 p-2"
+                    >
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button
+                      class="!rounded-button text-red-600 hover:bg-red-50 p-2"
+                    >
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="flex justify-between items-center mt-6">
+            <div class="text-gray-600">Total 24 records</div>
+            <div class="flex items-center space-x-2">
+              <button
+                class="!rounded-button bg-white border border-gray-300 px-3 py-1"
+                disabled=""
+              >
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="!rounded-button bg-custom text-white px-3 py-1">
+                1
+              </button>
+              <button
+                class="!rounded-button bg-white border border-gray-300 px-3 py-1"
+              >
+                2
+              </button>
+              <button
+                class="!rounded-button bg-white border border-gray-300 px-3 py-1"
+              >
+                3
+              </button>
+              <button
+                class="!rounded-button bg-white border border-gray-300 px-3 py-1"
+              >
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  
-</body></html>
+  </body>
+</html>

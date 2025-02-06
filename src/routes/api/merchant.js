@@ -15,7 +15,7 @@ const MerchantController = require("../../controllers/merchant.controller");
  *       200:
  *         description: successful operation
  */
-router.get("/", MerchantController.queryPagenation);
+router.get("/", MerchantController.queryPagination);
 
 router.post("/register", MerchantController.register);
 /**
@@ -60,7 +60,7 @@ router.delete("/test", MerchantController.deleteByName);
  *       200:
  *         description: successful operation
  */
-router.delete("/:merchantId", MerchantController.delete);
+router.delete("/:merchantId", MerchantController.deleteMerchant);
 
 router.post("/update-open-hours", MerchantController.updateOpenHours);
 

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 let types = mongoose.SchemaTypes;
-const ReviewsSchema = new mongoose.Schema(
+const ReviewSchema = new mongoose.Schema(
   {
     merchantId: { type: types.ObjectId, required: true },
     menuId: { type: types.ObjectId, required: true },
@@ -16,4 +16,4 @@ const ReviewsSchema = new mongoose.Schema(
   },
 );
 
-module.exports = mongoose.model("reviews", ReviewsSchema);
+module.exports = mongoose.model("Review", ReviewSchema, "reviews");

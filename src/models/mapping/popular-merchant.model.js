@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 let types = mongoose.SchemaTypes;
-const PopularMerchantsSchema = new mongoose.Schema(
+const PopularMerchantSchema = new mongoose.Schema(
   {
     merchantId: { type: types.ObjectId, required: true },
     backgroundImg: { type: types.String, required: true },
@@ -16,4 +16,8 @@ const PopularMerchantsSchema = new mongoose.Schema(
   },
 );
 
-module.exports = mongoose.model("popular-merchants", PopularMerchantsSchema);
+module.exports = mongoose.model(
+  "PopularMerchant",
+  PopularMerchantSchema,
+  "popular-merchants",
+);

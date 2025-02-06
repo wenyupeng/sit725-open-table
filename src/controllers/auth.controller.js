@@ -14,7 +14,7 @@ const envConfig = require("../config/env.config");
  * @param {string}  password password
  * @returns {Object} common response
  */
-exports.register = [
+const register = [
   [
     body("username")
       .isLength({ min: 3 })
@@ -94,7 +94,7 @@ exports.register = [
  * @param {string}  password password
  * @returns {Object} common response
  */
-exports.login = [
+const login = [
   [
     body("username")
       .isLength({ min: 3 })
@@ -163,3 +163,8 @@ exports.login = [
     }
   },
 ];
+
+module.exports = {
+  register,
+  login,
+};

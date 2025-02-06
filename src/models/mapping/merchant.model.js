@@ -54,4 +54,4 @@ const MerchantsSchema = new mongoose.Schema(
   },
 );
 
-module.exports = mongoose.model("merchants", MerchantsSchema);
+module.exports = mongoose.model("Merchant", MerchantsSchema, "merchants");

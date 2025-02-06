@@ -1,24 +1,11 @@
 const express = require("express");
+const UserController = require("../controllers/user.controller");
+
 const router = express.Router();
 
-router.get("/register", async (req, res) => {
-  res.render("./login/register_user", { pageTitle: "Register", message: null });
-});
-
-router.get("/login", async (req, res) => {
-  res.render("./login/login_user", { pageTitle: "Login", message: null });
-});
-
-router.get("/logout", async (req, res) => {
-  req.session.destroy();
-  res.render("./login/logout_user", { pageTitle: "LogOut", message: null });
-});
-
-router.get("/forgot", async (req, res) => {
-  res.render("./login/forgot_password", {
-    pageTitle: "forgotpassword",
-    message: null,
-  });
-});
+router.get("/register", UserController.renderUserRegisterPage);
+router.get("/login", UserController.renderUserLoginPage);
+router.get("/logout", UserController.renderLogout);
+router.get("/forgot", UserController.renderForgotPasswordPage);
 
 module.exports = router;

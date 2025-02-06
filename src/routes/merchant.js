@@ -1,22 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const MerchantController = require("../controllers/merchant.controller");
-const { getMenuByMerchantId } = require("../controllers/menu.controller");
 
-// Render a merchant details routes
 router.get("/:merchantId", MerchantController.renderMerchantDetails);
-
-router.get("/:merchantId/menu", async function (req, res) {
-  let merchantId = req.params.merchantId;
-  let categoryMap = await getMenuByMerchantId(merchantId);
-
-  // console.log('>>> categoryMap', Object.values(categoryMap))
-
-  // categoryMap.keys().forEach((c) => console.log('>>> ', c))
-
-  res.render("./menu/menu", {
-    menu: categoryMap,
-  });
-});
+router.get("/:merchantId/menu", MerchantController.renderMerchantMenu);
 
 module.exports = router;

@@ -16,7 +16,7 @@ const SocketIOService = require("./services/socket.service");
 const isDev = envConfig.nodeEnv === "development";
 
 require("express-async-errors");
-require('./utils/db.util');
+require("./utils/db.util");
 
 const {
   sessionAuth,

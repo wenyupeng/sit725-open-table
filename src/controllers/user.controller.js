@@ -7,10 +7,30 @@ const permissions = require("../middlewares/permission.middleware");
 const nodemailer = require("nodemailer");
 const envConfig = require("../config/env.config");
 
+const renderUserRegisterPage = async (req, res) => {
+  res.render("./login/register_user", { pageTitle: "Register", message: null });
+};
+
+const renderUserLoginPage = async (req, res) => {
+  res.render("./login/login_user", { pageTitle: "Login", message: null });
+};
+
+const renderLogout = async (req, res) => {
+  req.session.destroy();
+  res.render("./login/logout_user", { pageTitle: "LogOut", message: null });
+};
+
+const renderForgotPasswordPage = async (req, res) => {
+  res.render("./login/forgot_password", {
+    pageTitle: "forgotpassword",
+    message: null,
+  });
+};
+
 /**
  * user list
  */
-exports.userlist = [
+const listUsers = [
   authenticate,
   permissions,
   async (req, res) => {
@@ -55,7 +75,7 @@ exports.userlist = [
 /**
  * user delete
  */
-exports.userDelete = [
+const deleteUser = [
   authenticate,
   permissions,
   async (req, res) => {
@@ -83,7 +103,7 @@ exports.userDelete = [
   },
 ];
 
-exports.forgotPassword = async (req, res) => {
+const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
     const user = await UserModel.findOne({ email });
@@ -127,4 +147,15 @@ exports.forgotPassword = async (req, res) => {
       "An error occurred while processing your request.",
     );
   }
+};
+
+module.exports = {
+  renderUserRegisterPage,
+  renderUserLoginPage,
+  renderLogout,
+  renderForgotPasswordPage,
+
+  listUsers,
+  deleteUser,
+  forgotPassword,
 };

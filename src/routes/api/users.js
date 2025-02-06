@@ -15,11 +15,11 @@ const UserController = require("../../controllers/user.controller");
  *       200:
  *         description: successful operation
  */
-router.get("/", UserController.userlist);
+router.get("/", UserController.listUsers);
 
 /**
  * user delete
  */
-router.delete("/", UserController.userDelete);
+router.delete("/", UserController.deleteUser);
 
 module.exports = router;
