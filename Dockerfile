@@ -23,4 +23,4 @@ RUN chown -R node /usr/src/app
 USER node
 
 # Command to run the application
-CMD ["node","server.js"]
+CMD ["node","app.js"]

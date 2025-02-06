@@ -14,7 +14,7 @@ services:
       - DB_NAME=sit725-skipy
     volumes:
       - ./my-web-app:/app
-    command: ["npm", "server.js"]
+    command: ["npm", "app.js"]
 
 volumes:
   my-web-app:

@@ -1,0 +1,103 @@
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f6f8;
+}
+
+nav {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero-banner {
+  background-image: url("../images/admin.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+  margin-bottom: 40px;
+}
+
+.hero-banner h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.hero-banner p {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+.stats-card {
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.stats-card span {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.trending-section {
+  margin-top: 40px;
+}
+
+.trending-item {
+  cursor: pointer;
+  padding: 10px;
+  background-color: #007bb6;
+  color: white;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.trending-item:hover {
+  background-color: #005f8c;
+}
+
+table {
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+table th,
+table td {
+  padding: 15px;
+  font-size: 1rem;
+}
+
+table th {
+  background-color: #007bb6;
+  color: #fff;
+}
+
+table td {
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+footer {
+  background: #007bb6;
+  color: rgb(255, 255, 255);
+  padding: 20px 0;
+  text-align: center;
+}
+
+footer a {
+  color: #ffcc00;
+  text-decoration: none;
+}
