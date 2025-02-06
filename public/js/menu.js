@@ -86,17 +86,30 @@ $(document).ready(function () {
   }
 
   $("#makeReservationBtn").click(() => {
-    let nextPage = `/api/booking/${merchant.merchantId}`;
+    let token = sessionStorage.getItem("token");
+    let nextPage = `/booking/${merchant.merchantId}`;
     sessionStorage.setItem("nextPage", nextPage);
 
-    let user = sessionStorage.getItem("user");
-    if (user) {
-      window.location.href = nextPage;
-    } else {
-      sessionStorage.removeItem("user");
-      sessionStorage.removeItem("token");
-      window.location.href = `/user/login`;
-    }
+    $.ajax({
+      url: `/api/users/status`,
+      type: "GET",
+      headers: {
+        Authorization: token,
+      },
+      success: (data) => {
+        console.log("data", data);
+        if (JSON.parse(data).status === 1) {
+          window.location.href = nextPage;
+        }
+
+      },
+      error: (err) => {
+        console.log("error", err);
+        sessionStorage.removeItem("user");
+        sessionStorage.removeItem("token");
+        window.location.href = `/user/login`;
+      },
+    });
   });
 
   console.log("ready");

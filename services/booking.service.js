@@ -6,7 +6,7 @@ const log = require("../utils/utils.logger");
 const SocketIOService = require("./socket.service");
 
 exports.test = async (req, res) => {
-  let userId = req.session.user._id;
+  let userId = req.query.userId;
   await BookingModel.deleteMany({ userId: userId });
   return apiResponse.successResponse(res, "Booking deleted successfully");
 };
@@ -80,7 +80,7 @@ exports.handleCreateBooking = [
           return apiResponse.ErrorResponse(res, `Booking exceeds available slots. Only ${bookingAvailability - totalGuests} seats left.`);
         }
 
-        const parsedMenuItems = JSON.parse(menuItems);
+        const parsedMenuItems = menuItems.length>0 ? JSON.parse(menuItems):[];
 
         const subTotal = parsedMenuItems.reduce(
           (sum, item) => sum + item.quantity * item.price,
@@ -109,14 +109,9 @@ exports.handleCreateBooking = [
 
         await booking.save();
 
-        SocketIOService.sendMessage(`merchant-${merchantId}`, 'new-booking', booking.toJSON())
+        SocketIOService.sendMessage(`merchant-${merchantId}`, 'new-booking', booking.toJSON());
 
-        res.redirect(`/api/booking/${booking.userId}/bookings`);
-        // return apiResponse.successResponseWithData(
-        //   res, "Booking created successfully",
-        //   res.redirect(`/api/booking/${booking.userId}/bookings`)
-        // );        
-        // return apiResponse.successResponseWithData(res, "Booking created successfully", booking);
+        return apiResponse.successResponseWithData(res, "Booking created successfully", `/booking/${booking.userId}/bookings`);
       }
     } catch (err) {
       console.log(err);
@@ -169,7 +164,7 @@ exports.getLoggedInUserBookings = [
   async (req, res) => {
     try {
       const { page = 1, limit = 3 } = req.query; // Pagination parameters
-      const userId = req.session.user._id;
+      const userId = req.params.userId;
       const totalCount = await BookingModel.countDocuments({
         userId: userId,
         isActive: true,
@@ -191,7 +186,7 @@ exports.getLoggedInUserBookings = [
         totalCount: totalCount,
       });
     } catch (err) {
-      log.error(`Get Bookings error, ${JSON.stringify(err)}`);
+      log.error(`Get Bookings error, ${err}`);
       return apiResponse.ErrorResponse(
         res,
         "Error creating booking" + err.message
@@ -214,7 +209,7 @@ exports.deleteBooking = [
         return apiResponse.notFoundResponse(res, "Booking not found");
       }
       const userId = req.session.user._id;
-      res.status(200).redirect(`/api/booking/${userId}/bookings`);
+      res.status(200).redirect(`/booking/${userId}/bookings`);
     } catch (err) {
       log.error(`Delete Bookings error, ${JSON.stringify(err)}`);
       return apiResponse.ErrorResponse(

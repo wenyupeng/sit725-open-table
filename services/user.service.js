@@ -37,11 +37,11 @@ exports.userlist = [
         "Success.",
         result.length > 0
           ? {
-              result,
-              current: 1,
-              pageSize: 20,
-              total,
-            }
+            result,
+            current: 1,
+            pageSize: 20,
+            total,
+          }
           : { result: [], total },
       );
     } catch (err) {
@@ -119,3 +119,12 @@ exports.forgotPassword = async (req, res) => {
   }
 };
 
+exports.checkStatus = [
+  authenticate, permissions,
+  async (req, res) => {
+    if (!req.session.user) {
+      return apiResponse.unauthorizedResponse(res, "User not logged in.");
+    } else {
+      return apiResponse.successResponse(res, "User is logged in.");
+    }
+  }];

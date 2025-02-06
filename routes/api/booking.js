@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const bookingService = require("../../services/booking.service");
-const { ensureAuthenticated } = require("../../middlewares/session");
+const authenticate = require("../../middlewares/jwt");
+const permissions = require("../../middlewares/permissions");
+
+router.get("/test", bookingService.test);
 /**
  * @swagger
  * /api/booking/{merchantId}:
@@ -38,14 +41,10 @@ const { ensureAuthenticated } = require("../../middlewares/session");
  *       500:
  *         description: Internal server error
  */
-router.post("/:merchantId", ensureAuthenticated, bookingService.handleCreateBooking);
-
-// Render create booking routes
-router.get("/:merchantId", ensureAuthenticated, bookingService.renderCreateBooking);
+router.post("/:merchantId", authenticate, permissions, bookingService.handleCreateBooking);
 
 // Render List of bookings for current user
-router.get("/:userId/bookings", ensureAuthenticated, bookingService.getLoggedInUserBookings);
 
-router.post("/:userId/bookings/:bookingId/delete", ensureAuthenticated, bookingService.deleteBooking);
+router.post("/:userId/bookings/:bookingId/delete", authenticate, permissions, bookingService.deleteBooking);
 
 module.exports = router;
