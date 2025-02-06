@@ -1,16 +1,9 @@
 const express = require("express");
+const AdminController = require("../controllers/admin.controller");
+
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  // todo
-  res.render("./admin/admin", { pageTitle: "adminManagement", message: null });
-});
-
-router.get("/login", async (req, res) => {
-  res.render("./admin/login_admin", {
-    pageTitle: "Admin Login",
-    message: null,
-  });
-});
+router.get("/", AdminController.renderAdminHomePage);
+router.get("/login", AdminController.renderAdminLoginPage);
 
 module.exports = router;

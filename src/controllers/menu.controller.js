@@ -5,55 +5,6 @@ const authenticate = require("../middlewares/jwt.middleware");
 const apiResponse = require("../utils/api-response.util");
 const permissions = require("../middlewares/permission.middleware");
 
-/**
- * get menu by merchantId
- * @returns {Object} menu info
- */
-const getMenuByMerchantId = async (merchantId) => {
-  try {
-    let options = {
-      merchantId: merchantId,
-      isActive: true,
-    };
-
-    let menu = await MenuModel.find(options);
-    if (!menu) {
-      return apiResponse.notFoundResponse("Menu not found");
-    }
-
-    let categoryMap = {};
-    menu.forEach((menuItem) => {
-      const categoryName = menuItem.categoryName;
-      let subMenu = categoryMap[categoryName];
-      if (!subMenu) {
-        subMenu = [];
-        categoryMap[categoryName] = subMenu;
-      }
-      subMenu.push(menuItem);
-    });
-
-    return categoryMap;
-  } catch (err) {
-    console.log(err);
-    log.err(`popularMerchants error, ${JSON.stringify(err)} `);
-    return [];
-  }
-};
-
-/**
- * add menu
- * @returns {Object}
- */
-const addMenu = [
-  authenticate,
-  permissions,
-  async (req) => {
-    let merchant = req.body;
-    let merchantName = merchant.name;
-    let phone = merchant.phone;
-  },
-];
-
 const queryPagination = [authenticate, permissions, async (req, res) => {}];
 
 const updateById = [authenticate, permissions, async (req, res) => {}];
@@ -140,8 +91,6 @@ const getMenuById = async (req, res) => {
 };
 
 module.exports = {
-  getMenuByMerchantId,
-  addMenu,
   queryPagination,
   updateById,
   listAllMenusByMerchantId,

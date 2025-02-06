@@ -7,10 +7,30 @@ const permissions = require("../middlewares/permission.middleware");
 const nodemailer = require("nodemailer");
 const envConfig = require("../config/env.config");
 
+const renderUserRegisterPage = async (req, res) => {
+  res.render("./login/register_user", { pageTitle: "Register", message: null });
+};
+
+const renderUserLoginPage = async (req, res) => {
+  res.render("./login/login_user", { pageTitle: "Login", message: null });
+};
+
+const renderLogout = async (req, res) => {
+  req.session.destroy();
+  res.render("./login/logout_user", { pageTitle: "LogOut", message: null });
+};
+
+const renderForgotPasswordPage = async (req, res) => {
+  res.render("./login/forgot_password", {
+    pageTitle: "forgotpassword",
+    message: null,
+  });
+};
+
 /**
  * user list
  */
-const userlist = [
+const listUsers = [
   authenticate,
   permissions,
   async (req, res) => {
@@ -55,7 +75,7 @@ const userlist = [
 /**
  * user delete
  */
-const userDelete = [
+const deleteUser = [
   authenticate,
   permissions,
   async (req, res) => {
@@ -130,7 +150,12 @@ const forgotPassword = async (req, res) => {
 };
 
 module.exports = {
-  userlist,
-  userDelete,
+  renderUserRegisterPage,
+  renderUserLoginPage,
+  renderLogout,
+  renderForgotPasswordPage,
+
+  listUsers,
+  deleteUser,
   forgotPassword,
 };

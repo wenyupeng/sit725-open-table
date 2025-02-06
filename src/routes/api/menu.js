@@ -64,39 +64,6 @@ router.delete("/:menuId", MenuController.deleteMenu);
 
 /**
  * @swagger
- * /api/menu:
- *   post:
- *     tags:
- *      - Menus
- *     description: Creates a new menu
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: menu
- *         in: body
- *         description: Menu object
- *         required: true
- *         schema:
- *           $ref: '#/definitions/Menu'
- *     responses:
- *       200:
- *         description: Menu created successfully
- *         schema:
- *           $ref: '#/definitions/Menu'
- *       400:
- *         description: Bad Request
- *       401:
- *         description: Unauthorized
- *       403:
- *         description: Forbidden
- *       404:
- *         description: Not Found
- *       500:
- *         description: Internal Server Error
- */
-router.post("/", MenuController.addMenu);
-/**
- * @swagger
  * /api/menu/{menuId}:
  *   put:
  *     tags:

@@ -22,6 +22,39 @@ const getUpcomingBookingsByMerchantId = async (merchantId) => {
   return bookings;
 };
 
+//Validate Timeslot and Booking Availability
+const validateTimeslot = (merchant, datepicker, time) => {
+  const selectedDay = new Date(datepicker).toLocaleString("en-us", {
+    weekday: "long",
+  });
+
+  // Find the open hour for the selected day
+  const openHourDay = merchant.openHours.find(
+    (hour) => hour.day === selectedDay,
+  );
+
+  if (!openHourDay) {
+    console.log(`No available slots for ${selectedDay}.`);
+    return null;
+  }
+
+  // Find the matching time slot
+  const foundTime = openHourDay.time
+    .split(", ")
+    .find((ptime) => ptime === time.trim());
+
+  if (foundTime) {
+    console.log(
+      `Time slot ${foundTime} is available. Total ${openHourDay.availableSlots} seats.`,
+    );
+    return openHourDay.availableSlots;
+  } else {
+    console.log(`Time ${time} is not available.`);
+    return null;
+  }
+};
+
 module.exports = {
   getUpcomingBookingsByMerchantId,
+  validateTimeslot,
 };

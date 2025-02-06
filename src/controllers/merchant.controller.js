@@ -1,8 +1,4 @@
-const {
-  PopularMerchantModel,
-  FeaturedCollectionModel,
-  MerchantsModel,
-} = require("../models");
+const { MerchantsModel } = require("../models");
 const jwt = require("jsonwebtoken");
 const log = require("../utils/logger.util");
 const authenticate = require("../middlewares/jwt.middleware");
@@ -11,34 +7,7 @@ const permissions = require("../middlewares/permission.middleware");
 const { body, validationResult } = require("express-validator");
 const { encryption, decryption } = require("../utils/auth.util");
 const envConfig = require("../config/env.config");
-
-/**
- * get popular merchants
- * @returns {Object} popular merchants
- */
-const popularMerchants = async () => {
-  try {
-    return await PopularMerchantModel.find({}).sort({ name: -1 });
-  } catch (err) {
-    console.log(err);
-    log.err(`popularMerchants error, ${JSON.stringify(err)} `);
-    return [];
-  }
-};
-
-/**
- * get featured collections
- * @returns {Object} featured collections
- */
-const featuredColletions = async () => {
-  try {
-    return await FeaturedCollectionModel.find({}).limit(Number(4));
-  } catch (err) {
-    console.log(err);
-    log.error(`featuredColletions error, ${JSON.stringify(err)}`);
-    return [];
-  }
-};
+const { getMenuByMerchantId } = require("../services/menu.service");
 
 /**
  * Create merchant
@@ -166,20 +135,6 @@ const login = [
     }
   },
 ];
-
-/**
- * get merchant info by merchantId
- * @returns {Object} merchant info
- */
-const getMerchantByMerchantId = async (merchantId) => {
-  try {
-    return await MerchantsModel.findById(merchantId);
-  } catch (err) {
-    console.log(err);
-    log.error(`featuredColletions error, ${JSON.stringify(err)}`);
-    return {};
-  }
-};
 
 /**
  * delete merchant by merchantId
@@ -442,46 +397,6 @@ const queryPagination = async (req, res) => {
   }
 };
 
-// Render a merchant details
-const renderMerchantDetails = [
-  async (req, res) => {
-    const { merchantId } = req.params;
-    const merchant = await MerchantsModel.findById(merchantId);
-
-    if (!merchant) {
-      return apiResponse.renderNotFoundPage(res);
-    }
-
-    res.render("./merchant/merchant", {
-      pageTitle: "Merchant Details",
-      merchant: merchant,
-      reviews: [],
-    });
-  },
-];
-
-/**
- * get top 6 Merchants
- * @returns {Object} top six merchants
- */
-const topMerchants = async (searchQuery) => {
-  try {
-    const filter = searchQuery
-      ? {
-          $or: [
-            { name: { $regex: searchQuery, $options: "i" } },
-            { location: { $regex: searchQuery, $options: "i" } },
-          ],
-        }
-      : {};
-    return await MerchantsModel.find(filter).limit(6).sort({ _id: -1 });
-  } catch (err) {
-    console.log(err);
-    log.error(`featuredMerchants error, ${JSON.stringify(err)}`);
-    return [];
-  }
-};
-
 const updateOpenHours = async (req, res) => {
   try {
     const { merchantId, openHours } = req.body;
@@ -512,12 +427,36 @@ const updateOpenHours = async (req, res) => {
   }
 };
 
+// Render a merchant details
+const renderMerchantDetails = [
+  async (req, res) => {
+    const { merchantId } = req.params;
+    const merchant = await MerchantsModel.findById(merchantId);
+
+    if (!merchant) {
+      return apiResponse.renderNotFoundPage(res);
+    }
+
+    res.render("./merchant/merchant", {
+      pageTitle: "Merchant Details",
+      merchant: merchant,
+      reviews: [],
+    });
+  },
+];
+
+const renderMerchantMenu = async (req, res) => {
+  let merchantId = req.params.merchantId;
+  let categoryMap = await getMenuByMerchantId(merchantId);
+
+  res.render("./menu/menu", {
+    menu: categoryMap,
+  });
+};
+
 module.exports = {
-  popularMerchants,
-  featuredColletions,
   register,
   login,
-  getMerchantByMerchantId,
   deleteMerchant,
   deleteByName,
   add,
@@ -525,7 +464,8 @@ module.exports = {
   updateById,
   queryPaginationForPage,
   queryPagination,
-  renderMerchantDetails,
-  topMerchants,
   updateOpenHours,
+
+  renderMerchantDetails,
+  renderMerchantMenu,
 };
