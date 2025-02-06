@@ -5,7 +5,7 @@ const permissions = require("../middlewares/permission.middleware");
 const { ReviewModel } = require("../models");
 const { ObjectId } = require("mongodb");
 
-exports.getReviews = async (req, res) => {
+const getReviews = async (req, res) => {
   let merchantId = req.params.merchantId;
   try {
     let reviews = await ReviewModel.aggregate([
@@ -30,7 +30,7 @@ exports.getReviews = async (req, res) => {
   }
 };
 
-exports.addReview = [
+const addReview = [
   authenticate,
   permissions,
   async (req, res) => {
@@ -45,7 +45,7 @@ exports.addReview = [
   },
 ];
 
-exports.updateReview = [
+const updateReview = [
   authenticate,
   permissions,
   async (req, res) => {
@@ -65,7 +65,7 @@ exports.updateReview = [
   },
 ];
 
-exports.deleteReview = [
+const deleteReview = [
   authenticate,
   permissions,
   async (req, res) => {
@@ -79,3 +79,10 @@ exports.deleteReview = [
     }
   },
 ];
+
+module.exports = {
+  getReviews,
+  addReview,
+  updateReview,
+  deleteReview,
+};

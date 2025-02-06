@@ -10,7 +10,7 @@ const envConfig = require("../config/env.config");
 /**
  * user list
  */
-exports.userlist = [
+const userlist = [
   authenticate,
   permissions,
   async (req, res) => {
@@ -55,7 +55,7 @@ exports.userlist = [
 /**
  * user delete
  */
-exports.userDelete = [
+const userDelete = [
   authenticate,
   permissions,
   async (req, res) => {
@@ -83,7 +83,7 @@ exports.userDelete = [
   },
 ];
 
-exports.forgotPassword = async (req, res) => {
+const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
     const user = await UserModel.findOne({ email });
@@ -127,4 +127,10 @@ exports.forgotPassword = async (req, res) => {
       "An error occurred while processing your request.",
     );
   }
+};
+
+module.exports = {
+  userlist,
+  userDelete,
+  forgotPassword,
 };

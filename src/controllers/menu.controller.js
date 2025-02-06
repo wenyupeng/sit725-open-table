@@ -9,7 +9,7 @@ const permissions = require("../middlewares/permission.middleware");
  * get menu by merchantId
  * @returns {Object} menu info
  */
-exports.getMenuByMerchantId = async (merchantId) => {
+const getMenuByMerchantId = async (merchantId) => {
   try {
     let options = {
       merchantId: merchantId,
@@ -44,7 +44,7 @@ exports.getMenuByMerchantId = async (merchantId) => {
  * add menu
  * @returns {Object}
  */
-exports.add = [
+const addMenu = [
   authenticate,
   permissions,
   async (req) => {
@@ -54,13 +54,11 @@ exports.add = [
   },
 ];
 
-exports.queryPagenation = [authenticate, permissions, async (req, res) => {}];
+const queryPagination = [authenticate, permissions, async (req, res) => {}];
 
-exports.delete = [authenticate, permissions, async (req, res) => {}];
+const updateById = [authenticate, permissions, async (req, res) => {}];
 
-exports.updateById = [authenticate, permissions, async (req, res) => {}];
-
-exports.listAllMenusByMerchantId = async (req, res) => {
+const listAllMenusByMerchantId = async (req, res) => {
   try {
     const menus = await MenuModel.find({ merchantId: req.params.merchantId });
     res.json(menus);
@@ -69,7 +67,7 @@ exports.listAllMenusByMerchantId = async (req, res) => {
   }
 };
 
-exports.createMenu = async (req, res) => {
+const createMenu = async (req, res) => {
   try {
     const {
       merchantId,
@@ -103,7 +101,7 @@ exports.createMenu = async (req, res) => {
   }
 };
 
-exports.editMenu = async (req, res) => {
+const editMenu = async (req, res) => {
   try {
     const updatedMenu = await MenuModel.findByIdAndUpdate(
       req.params.menuId,
@@ -119,7 +117,7 @@ exports.editMenu = async (req, res) => {
   }
 };
 
-exports.deleteMenu = async (req, res) => {
+const deleteMenu = async (req, res) => {
   try {
     const deletedMenu = await MenuModel.findByIdAndDelete(req.params.menuId);
     if (!deletedMenu)
@@ -131,7 +129,7 @@ exports.deleteMenu = async (req, res) => {
   }
 };
 
-exports.getMenuById = async (req, res) => {
+const getMenuById = async (req, res) => {
   try {
     const menu = await MenuModel.findById(req.params.menuId);
     if (!menu) return res.status(404).json({ error: "Menu item not found" });
@@ -139,4 +137,16 @@ exports.getMenuById = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Error fetching menu item" });
   }
+};
+
+module.exports = {
+  getMenuByMerchantId,
+  addMenu,
+  queryPagination,
+  updateById,
+  listAllMenusByMerchantId,
+  createMenu,
+  editMenu,
+  deleteMenu,
+  getMenuById,
 };

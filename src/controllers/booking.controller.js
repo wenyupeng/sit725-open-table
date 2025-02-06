@@ -25,7 +25,7 @@ const {
  * @param {Int32}   totalPriceWithGST totalPriceWithGST
  * @returns {Object} common response
  */
-exports.handleCreateBooking = [
+const handleCreateBooking = [
   async (req, res) => {
     try {
       const { merchantId } = req.params;
@@ -160,7 +160,7 @@ exports.handleCreateBooking = [
  * [Features][Booking] Render Create Booking
  *
  * */
-exports.renderCreateBooking = async (req, res) => {
+const renderCreateBooking = async (req, res) => {
   const { merchantId } = req.params;
   const user = req.session.user;
   const merchant = await MerchantsModel.findById(merchantId);
@@ -191,7 +191,7 @@ exports.renderCreateBooking = async (req, res) => {
 };
 
 // Get all bookings for the logged-in user with pagination
-exports.getLoggedInUserBookings = async (req, res) => {
+const getLoggedInUserBookings = async (req, res) => {
   try {
     const { page = 1, limit = 3 } = req.query; // Pagination parameters
     const userId = req.session.user._id;
@@ -225,7 +225,7 @@ exports.getLoggedInUserBookings = async (req, res) => {
 };
 
 // Disable a booking (soft delete)
-exports.deleteBooking = async (req, res) => {
+const deleteBooking = async (req, res) => {
   const { bookingId } = req.params;
   try {
     const disabledBooking = await BookingModel.findByIdAndUpdate(
@@ -248,7 +248,7 @@ exports.deleteBooking = async (req, res) => {
   }
 };
 
-exports.renderMerchantDashboardBookingsPage = async (req, res) => {
+const renderMerchantDashboardBookingsPage = async (req, res) => {
   try {
     const merchantId = req.session.user.merchant?._id;
     const upcomingBookings = await getUpcomingBookingsByMerchantId(merchantId);
@@ -265,7 +265,7 @@ exports.renderMerchantDashboardBookingsPage = async (req, res) => {
   }
 };
 
-exports.renderMerchantDashboardSettingsPage = async (req, res) => {
+const renderMerchantDashboardSettingsPage = async (req, res) => {
   try {
     const merchantId = req.session.user.merchant?._id;
     const merchant = await MerchantsModel.findById(merchantId).lean();
@@ -281,7 +281,7 @@ exports.renderMerchantDashboardSettingsPage = async (req, res) => {
   }
 };
 
-exports.renderMerchantDashboardMenuPage = async (req, res) => {
+const renderMerchantDashboardMenuPage = async (req, res) => {
   try {
     const merchantId = req.session.user.merchant?._id;
     const merchant = await MerchantsModel.findById(merchantId).lean();
@@ -327,4 +327,14 @@ const validateTimeslot = (merchant, datepicker, time) => {
     console.log(`Time ${time} is not available.`);
     return null;
   }
+};
+
+module.exports = {
+  handleCreateBooking,
+  renderCreateBooking,
+  getLoggedInUserBookings,
+  deleteBooking,
+  renderMerchantDashboardBookingsPage,
+  renderMerchantDashboardSettingsPage,
+  renderMerchantDashboardMenuPage,
 };

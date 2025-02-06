@@ -29,7 +29,7 @@ const MenuController = require("../../controllers/menu.controller");
  *       500:
  *         description: Internal Server Error
  */
-router.get("/", MenuController.queryPagenation);
+router.get("/", MenuController.queryPagination);
 
 /**
  * @swagger
@@ -60,7 +60,7 @@ router.get("/", MenuController.queryPagenation);
  *       500:
  *         description: Internal Server Error
  */
-router.delete("/:menuId", MenuController.delete);
+router.delete("/:menuId", MenuController.deleteMenu);
 
 /**
  * @swagger
@@ -94,7 +94,7 @@ router.delete("/:menuId", MenuController.delete);
  *       500:
  *         description: Internal Server Error
  */
-router.post("/", MenuController.add);
+router.post("/", MenuController.addMenu);
 /**
  * @swagger
  * /api/menu/{menuId}:

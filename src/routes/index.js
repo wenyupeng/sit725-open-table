@@ -5,7 +5,7 @@ const MerchantController = require("../controllers/merchant.controller");
 router.get("/", async function (req, res) {
   const popular_mer = await MerchantController.popularMerchants();
   const featured_col = await MerchantController.featuredColletions();
-  const pagination = await MerchantController.queryPagenationForPage(req);
+  const pagination = await MerchantController.queryPaginationForPage(req);
 
   res.render("./home/home", {
     popular_mer: popular_mer,

@@ -16,7 +16,7 @@ const envConfig = require("../config/env.config");
  * get popular merchants
  * @returns {Object} popular merchants
  */
-exports.popularMerchants = async () => {
+const popularMerchants = async () => {
   try {
     return await PopularMerchantModel.find({}).sort({ name: -1 });
   } catch (err) {
@@ -30,7 +30,7 @@ exports.popularMerchants = async () => {
  * get featured collections
  * @returns {Object} featured collections
  */
-exports.featuredColletions = async () => {
+const featuredColletions = async () => {
   try {
     return await FeaturedCollectionModel.find({}).limit(Number(4));
   } catch (err) {
@@ -43,7 +43,7 @@ exports.featuredColletions = async () => {
 /**
  * Create merchant
  */
-exports.register = [
+const register = [
   [
     body("name").notEmpty().withMessage("Name is required"),
     body("description").notEmpty().withMessage("Description is required"),
@@ -109,7 +109,7 @@ exports.register = [
  * merchant login
  * @returns {Object} if login success return token, else return error message
  */
-exports.login = [
+const login = [
   [
     body("phone")
       .isLength({ min: 9 })
@@ -171,7 +171,7 @@ exports.login = [
  * get merchant info by merchantId
  * @returns {Object} merchant info
  */
-exports.getMerchantByMerchantId = async (merchantId) => {
+const getMerchantByMerchantId = async (merchantId) => {
   try {
     return await MerchantsModel.findById(merchantId);
   } catch (err) {
@@ -185,7 +185,7 @@ exports.getMerchantByMerchantId = async (merchantId) => {
  * delete merchant by merchantId
  * @returns {Object} success message
  */
-exports.delete = [
+const deleteMerchant = [
   authenticate,
   permissions,
   async (req, res) => {
@@ -213,7 +213,7 @@ exports.delete = [
   },
 ];
 
-exports.deleteByName = async (req, res) => {
+const deleteByName = async (req, res) => {
   try {
     let name = "test";
     await MerchantsModel.deleteMany({ name: name });
@@ -229,7 +229,7 @@ exports.deleteByName = async (req, res) => {
  * add merchant
  * @returns {Object} success message
  */
-exports.add = [
+const add = [
   [
     body("name")
       .isLength({ min: 3 })
@@ -271,7 +271,7 @@ exports.add = [
  * update merchant
  * @returns {Object} common message
  */
-exports.update = [
+const update = [
   authenticate,
   permissions,
   async (req, res) => {
@@ -304,7 +304,7 @@ exports.update = [
  * update merchant info by merchantId
  * @returns {Object} common message
  */
-exports.updateById = [
+const updateById = [
   authenticate,
   permissions,
   async (req, res) => {
@@ -334,7 +334,7 @@ exports.updateById = [
  * get merchant list
  * @returns {Object} merchant list
  */
-exports.queryPagenationForPage = async (req) => {
+const queryPaginationForPage = async (req) => {
   let pageNo = req.query.pageNo || 1;
   let pageSize = req.query.pageSize || 6;
   let query = req.query.query || "";
@@ -382,12 +382,12 @@ exports.queryPagenationForPage = async (req) => {
     return result;
   } catch (err) {
     console.log(err);
-    log.error(`queryPagenation error, ${JSON.stringify(err)}`);
+    log.error(`queryPagination error, ${JSON.stringify(err)}`);
     return result;
   }
 };
 
-exports.queryPagenation = async (req, res) => {
+const queryPagination = async (req, res) => {
   let pageNo = req.query.pageNo || 1;
   let pageSize = req.query.pageSize || 6;
   let query = req.query.query || "";
@@ -432,18 +432,18 @@ exports.queryPagenation = async (req, res) => {
 
     return apiResponse.successResponseWithData(
       res,
-      "queryPagenation success",
+      "queryPagination success",
       result,
     );
   } catch (err) {
     console.log(err);
-    log.error(`queryPagenation error, ${JSON.stringify(err)}`);
+    log.error(`queryPagination error, ${JSON.stringify(err)}`);
     return apiResponse.ErrorResponse(res, { message: "Internal Server Error" });
   }
 };
 
 // Render a merchant details
-exports.renderMerchantDetails = [
+const renderMerchantDetails = [
   async (req, res) => {
     const { merchantId } = req.params;
     const merchant = await MerchantsModel.findById(merchantId);
@@ -464,7 +464,7 @@ exports.renderMerchantDetails = [
  * get top 6 Merchants
  * @returns {Object} top six merchants
  */
-exports.topMerchants = async (searchQuery) => {
+const topMerchants = async (searchQuery) => {
   try {
     const filter = searchQuery
       ? {
@@ -482,7 +482,7 @@ exports.topMerchants = async (searchQuery) => {
   }
 };
 
-exports.updateOpenHours = async (req, res) => {
+const updateOpenHours = async (req, res) => {
   try {
     const { merchantId, openHours } = req.body;
 
@@ -510,4 +510,22 @@ exports.updateOpenHours = async (req, res) => {
     console.error("Error updating open hours:", error);
     res.status(500).json({ error: "Internal server error" });
   }
+};
+
+module.exports = {
+  popularMerchants,
+  featuredColletions,
+  register,
+  login,
+  getMerchantByMerchantId,
+  deleteMerchant,
+  deleteByName,
+  add,
+  update,
+  updateById,
+  queryPaginationForPage,
+  queryPagination,
+  renderMerchantDetails,
+  topMerchants,
+  updateOpenHours,
 };
