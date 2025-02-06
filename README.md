@@ -24,7 +24,7 @@ npm run dev
 
 ```sh
 .
-|-- server.js           // project entry
+|-- app.js           // project entry
 |-- package.json        // dependency management
 |-- .env.example        // example for env
 |-- config              // configuration

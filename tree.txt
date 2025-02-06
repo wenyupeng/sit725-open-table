@@ -168,7 +168,7 @@ sit725-skipy
 │   ├── merchant-dashboard.js
 │   ├── merchant.js
 │   └── user.js
-├── server.js
+├── app.js
 ├── services
 │   ├── booking.service.js
 │   └── socket.service.js

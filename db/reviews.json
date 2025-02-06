@@ -1,4 +1,0 @@
-[
-{"_id":{"$oid":"67a0429daf7cf65aa6ba9924"},"merchantId":{"$oid":"67830cc1a9507d18e286c8fe"},"menuId":{"$oid":"678b039afaf7bc04e32bbf30"},"userId":{"$oid":"678b0185d1bffcb7c9aeaa59"},"photos":["photo1.jpg","photo2.jpg"],"descriptions":"Exceptional dining experience! The atmosphere was elegant yet welcoming, and the service was impeccable. The beef tenderloin was cooked to perfection.","star":5,"createdAt":{"$date":"2025-02-03T04:14:21.768Z"},"updatedAt":{"$date":"2025-02-03T04:14:21.768Z"}},
-{"_id":{"$oid":"67a04336af7cf65aa6ba9926"},"merchantId":{"$oid":"67830cc1a9507d18e286c8fe"},"menuId":{"$oid":"678b039afaf7bc04e32bbf30"},"userId":{"$oid":"678b0185d1bffcb7c9aeaa5a"},"photos":["photo1.jpg","photo2.jpg"],"descriptions":"A true culinary gem! The truffle risotto was outstanding, and the wine selection is extensive. Perfect for special occasions.","star":5,"createdAt":{"$date":"2025-02-03T04:16:54.753Z"},"updatedAt":{"$date":"2025-02-03T04:16:54.753Z"}}
-]

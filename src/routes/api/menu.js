@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const MenuService = require("../../controllers/MenuService");
-const { MenuModel } = require("../../models");
 
 /**
  * @swagger

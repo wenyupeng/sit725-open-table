@@ -10,8 +10,6 @@ const mount = require("mount-routes");
 const { createServer } = require("http");
 const envConfig = require('./config/env.config')
 
-console.log('ENV CONFIG ', envConfig)
-
 const apiResponse = require("./utils/utils.apiResponse");
 const SocketIOService = require("./services/socket.service");
 
@@ -34,7 +32,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-app.set("views", path.join(__dirname, "public/views"));
+app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.all("/api/*", function (req, res, next) {
@@ -80,7 +78,7 @@ var swaggerJson = function (req, res) {
 app.get("/swagger.json", swaggerJson);
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-mount(app, path.join(process.cwd(), "/routes"), isDev);
+mount(app, path.join(process.cwd(), "src/routes"), isDev);
 
 //  throw 404 if URL not found
 app.all("*", function (req, res) {

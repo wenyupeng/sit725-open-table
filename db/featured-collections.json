@@ -1,6 +1,0 @@
-[
-{"_id":{"$oid":"678b024409e4019037e0ef78"},"type":"Romantic Dining","description":"Perfect for date night","backgroundImg":"../../image/home/Outdoor-Dining-ad12dfa5120aedec19caaacececfed67.jpg"},
-{"_id":{"$oid":"678b024409e4019037e0ef79"},"type":"Chef's Table'","description":"Unique experiences","backgroundImg":"../../image/home/Romantic Dining-b3908f65073954273dedfc7b5db75d6e.jpg"},
-{"_id":{"$oid":"678b024409e4019037e0ef7a"},"type":"Outdoor Dining","description":"Best all fresco spots","backgroundImg":"../../image/home/Best Brunch-bb33baa494f153f2dc78fbfad0ed92b9.jpg"},
-{"_id":{"$oid":"678b024409e4019037e0ef7b"},"type":"Best Brunch","description":"Weekend favorites","backgroundImg":"../../image/home/Chefs table-e0981a413a5461b1ae818f27125425fb.jpg"}
-]

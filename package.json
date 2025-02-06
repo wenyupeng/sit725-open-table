@@ -2,11 +2,11 @@
   "name": "sit725-skipy",
   "version": "1.0.0",
   "description": "deakin unit sit725 team project",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=development mocha ./test/**/*.test.js",
-    "dev": "cross-env NODE_ENV=development nodemon server.js --mode development",
-    "start": "cross-env NODE_ENV=production node server.js --mode production",
+    "test": "cross-env NODE_ENV=development mocha ./tests/**/*.test.js",
+    "dev": "cross-env NODE_ENV=development nodemon src/app.js --mode development",
+    "start": "cross-env NODE_ENV=production node src/app.js --mode production",
     "lint": "cross-env eslint --fix && prettier . --write"
   },
   "repository": {

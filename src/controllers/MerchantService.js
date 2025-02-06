@@ -2,9 +2,7 @@ const {
   PopularMerModel,
   FeaturedCollectionsModel,
   MerchantsModel,
-  ReviewsModel,
 } = require("../models");
-const { ObjectId } = require("mongodb");
 const jwt = require("jsonwebtoken");
 const log = require("../utils/utils.logger");
 const authenticate = require("../middlewares/jwt");
@@ -394,7 +392,6 @@ exports.queryPagenation = async (req, res) => {
   let pageSize = req.query.pageSize || 6;
   let query = req.query.query || "";
   let sort = req.query.sort || "createdAt";
-  let order = req.query.order || "desc";
 
   let skip = (pageNo - 1) * pageSize;
   let limit = pageSize;

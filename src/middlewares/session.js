@@ -24,13 +24,12 @@ const sessionAuth = session({
   cookie: {
     maxAge: 60 * 60 * 1000, // expired time
   },
-  //...(redisStore ? { store: redisStore } : {}),
+  ...(redisStore ? { store: redisStore } : {}),
 });
 
 const attachUserToLocals = async (req, res, next) => {
   if (req.session.user) {
     const user = req.session.user;
-    // console.log("user from session:", user);
     res.locals.user = user ? user : null;
   } else {
     res.locals.user = null;
