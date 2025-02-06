@@ -1,7 +1,6 @@
 sit725-skipy
 ├── .dockerignore
-├── .env.development
-├── .env.production
+├── .env.example
 ├── .gitignore
 ├── .idea
 │   ├── .gitignore
@@ -16,7 +15,7 @@ sit725-skipy
 ├── README.md
 ├── backlog.md
 ├── config
-│   ├── db.config.js
+│   ├── env.config.js
 │   └── swagger.config.js
 ├── constant
 │   └── constant.js

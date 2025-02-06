@@ -5,6 +5,7 @@ const authenticate = require("../middlewares/jwt");
 const apiResponse = require("../utils/utils.apiResponse");
 const permissions = require("../middlewares/permissions");
 const nodemailer = require("nodemailer");
+const envConfig = require("../config/env.config");
 
 /**
  * user list
@@ -98,8 +99,8 @@ exports.forgotPassword = async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: "Gmail",
       auth: {
-        user: process.env.EMAIL, // Your email
-        pass: process.env.EMAIL_PASSWORD, // Your email password
+        user: envConfig.email.account,
+        pass: envConfig.email.password
       },
     });
 

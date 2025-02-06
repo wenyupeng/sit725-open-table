@@ -12,6 +12,7 @@ const apiResponse = require("../utils/utils.apiResponse");
 const permissions = require("../middlewares/permissions");
 const { body, validationResult } = require("express-validator");
 const { encryption, decryption } = require("../utils/utils.others");
+const envConfig = require("../config/env.config");
 
 /**
  * get popular merchants
@@ -150,7 +151,7 @@ exports.login = [
 
       merchant.token =
         "Bearer " +
-        jwt.sign(payload, process.env.SIGN_KEY, { expiresIn: 3600 * 2 });
+        jwt.sign(payload, envConfig.signKey, { expiresIn: 3600 * 2 });
 
       req.session.merchant = merchant;
       return apiResponse.successResponseWithData(
