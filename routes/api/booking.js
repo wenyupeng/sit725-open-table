@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const BookingService = require("../../controllers/BookingService");
+const bookingService = require("../../services/booking.service");
 const { ensureAuthenticated } = require("../../middlewares/session");
 /**
  * @swagger
@@ -38,31 +38,14 @@ const { ensureAuthenticated } = require("../../middlewares/session");
  *       500:
  *         description: Internal server error
  */
-
-router.post(
-  "/:merchantId",
-  ensureAuthenticated,
-  BookingService.handleCreateBooking,
-);
+router.post("/:merchantId", ensureAuthenticated, bookingService.handleCreateBooking);
 
 // Render create booking routes
-router.get(
-  "/:merchantId",
-  ensureAuthenticated,
-  BookingService.renderCreateBooking,
-);
+router.get("/:merchantId", ensureAuthenticated, bookingService.renderCreateBooking);
 
 // Render List of bookings for current user
-router.get(
-  "/:userId/bookings",
-  ensureAuthenticated,
-  BookingService.getLoggedInUserBookings,
-);
+router.get("/:userId/bookings", ensureAuthenticated, bookingService.getLoggedInUserBookings);
 
-router.post(
-  "/:userId/bookings/:bookingId/delete",
-  ensureAuthenticated,
-  BookingService.deleteBooking,
-);
+router.post("/:userId/bookings/:bookingId/delete", ensureAuthenticated, bookingService.deleteBooking);
 
 module.exports = router;

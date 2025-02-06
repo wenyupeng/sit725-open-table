@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const MerchantService = require("../controllers/MerchantService");
+const merchantService = require("../services/merchant.service");
 
 router.get("/", async function (req, res) {
   const searchQuery = req.query.q;
-  const popular_mer = await MerchantService.popularMerchants();
-  const featured_col = await MerchantService.featuredColletions();
-  const pagination = await MerchantService.queryPagenationForPage(req);
+  const popular_mer = await merchantService.popularMerchants();
+  const featured_col = await merchantService.featuredColletions();
+  const pagination = await merchantService.queryPagenationForPage(req);
 
   res.render("./home/home", {
     popular_mer: popular_mer,

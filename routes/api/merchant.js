@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const MerchantService = require("../../controllers/MerchantService");
+const merchantService = require("../../services/merchant.service");
 
 /**
  * @swagger
@@ -15,9 +15,9 @@ const MerchantService = require("../../controllers/MerchantService");
  *       200:
  *         description: successful operation
  */
-router.get("/", MerchantService.queryPagenation);
+router.get("/", merchantService.queryPagenation);
 
-router.post("/register", MerchantService.register);
+router.post("/register", merchantService.register);
 /**
  * @swagger
  * /api/merchant/login:
@@ -38,9 +38,9 @@ router.post("/register", MerchantService.register);
  *       200:
  *         description: successful operation
 */
-router.post("/login", MerchantService.login);
+router.post("/login", merchantService.login);
 
-router.delete("/test", MerchantService.deleteByName);
+router.delete("/test", merchantService.deleteByName);
 /**
  * @swagger
  * /api/merchant/:merchantId:
@@ -60,9 +60,9 @@ router.delete("/test", MerchantService.deleteByName);
  *       200:
  *         description: successful operation
  */
-router.delete("/:merchantId", MerchantService.delete);
+router.delete("/:merchantId", merchantService.delete);
 
 
-router.post("/update-open-hours", MerchantService.updateOpenHours);
+router.post("/update-open-hours", merchantService.updateOpenHours);
 
 module.exports = router;

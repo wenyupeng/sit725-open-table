@@ -48,7 +48,28 @@ describe('Reviews', function () {
         .send(newReview)
         .expect(200);
     });
+
+    it('should return an error if the user is not logined', function () {
+      let newReview = {
+        "merchantId": "67830cc1a9507d18e286c811",
+        "menuId": "678b039afaf7bc04e32bbf30",
+        "userId": "678b0185d1bffcb7c9aeaa59",
+        "photos": [
+          "photo1.jpg",
+          "photo2.jpg"
+        ],
+        "descriptions": "This is a good restaurant",
+        "star": 4.5
+      };
+
+      request(app)
+        .post('/api/reviews')
+        .set('Content-Type', 'application/json')
+        .send(newReview)
+        .expect(404);
+    });
   });
+
   describe('getReviews', function () {
     it('should return an empty array when no reviews are added', function () {
       request(app)
@@ -166,9 +187,74 @@ describe('Reviews', function () {
         .set('Content-Type', 'application/json')
         .expect(200);
     });
+
+    it('should return an error if the user is not logined', function () {
+      let newReview = {
+        "merchantId": "67830cc1a9507d18e286c811",
+        "menuId": "678b039afaf7bc04e32bbf30",
+        "userId": "678b0185d1bffcb7c9aeaa59",
+        "photos": [
+          "photo1.jpg",
+          "photo2.jpg"
+        ],
+        "descriptions": "This is a good restaurant",
+        "star": 4.5
+      };
+
+      request(app)
+        .post('/api/reviews')
+        .set('Authorization', token)
+        .set('Content-Type', 'application/json')
+        .send(newReview)
+        .expect(200);
+
+      request(app)
+        .delete('/api/reviews/67830cc1a9507d18e286c811')
+        .set('Content-Type', 'application/json')
+        .expect(200);
+    });
   });
 
-  describe('deleteReview', function () {
+  describe('updateReview', function () {
+    it('should update a review by the given id', function () {
+      let newReview = {
+        "merchantId": "67830cc1a9507d18e286c811",
+        "menuId": "678b039afaf7bc04e32bbf30",
+        "userId": "678b0185d1bffcb7c9aeaa59",
+        "photos": [
+          "photo1.jpg",
+          "photo2.jpg"
+        ],
+        "descriptions": "This is a good restaurant",
+        "star": 4.5
+      };
 
+      request(app)
+        .post('/api/reviews')
+        .set('Authorization', token)
+        .set('Content-Type', 'application/json')
+        .send(newReview)
+        .expect(200);
+    });
+
+    it('should return an error if the user is not logined', function () {
+      let newReview = {
+        "merchantId": "67830cc1a9507d18e286c811",
+        "menuId": "678b039afaf7bc04e32bbf30",
+        "userId": "678b0185d1bffcb7c9aeaa59",
+        "photos": [
+          "photo1.jpg",
+          "photo2.jpg"
+        ],
+        "descriptions": "This is a good restaurant",
+        "star": 4.5
+      };
+
+      request(app)
+        .post('/api/reviews')
+        .set('Content-Type', 'application/json')
+        .send(newReview)
+        .expect(200);
+    });
   });
 });

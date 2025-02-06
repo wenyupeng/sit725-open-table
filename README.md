@@ -31,7 +31,7 @@ npm run dev
 |-- config              // configuration
 |   |-- db.config.js
 |   |-- swagger.config.js
-|-- controllers         // control logic business
+|-- services         // control logic business
 |   |-- **.js
 |-- db
 |   |-- index.js        // db client

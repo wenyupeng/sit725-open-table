@@ -20,12 +20,12 @@ sit725-skipy
 │   └── swagger.config.js
 ├── constant
 │   └── constant.js
-├── controllers
-│   ├── AuthController.js
-│   ├── BookingController.js
-│   ├── MenuController.js
-│   ├── MerchantController.js
-│   └── UserController.js
+├── services
+│   ├── auth.service.js
+│   ├── booking.service.js
+│   ├── menu.service.js
+│   ├── merchant.service.js
+│   └── user.service.js
 ├── db
 │   ├── bookings.sql
 │   ├── featured-collections.sql
