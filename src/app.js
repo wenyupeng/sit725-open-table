@@ -10,7 +10,7 @@ const mount = require("mount-routes");
 const { createServer } = require("http");
 const envConfig = require("./config/env.config");
 
-const apiResponse = require("./utils/utils.apiResponse");
+const apiResponse = require("./utils/api-response.util");
 const SocketIOService = require("./services/socket.service");
 
 const isDev = envConfig.nodeEnv === "development";

@@ -4,12 +4,12 @@ const {
   MerchantsModel,
 } = require("../models");
 const jwt = require("jsonwebtoken");
-const log = require("../utils/utils.logger");
+const log = require("../utils/logger.util");
 const authenticate = require("../middlewares/jwt.middleware");
-const apiResponse = require("../utils/utils.apiResponse");
+const apiResponse = require("../utils/api-response.util");
 const permissions = require("../middlewares/permission.middleware");
 const { body, validationResult } = require("express-validator");
-const { encryption, decryption } = require("../utils/utils.others");
+const { encryption, decryption } = require("../utils/auth.util");
 const envConfig = require("../config/env.config");
 
 /**

@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 const { MenuModel } = require("../models");
-const log = require("../utils/utils.logger");
+const log = require("../utils/auth.util");
 const authenticate = require("../middlewares/jwt.middleware");
-const apiResponse = require("../utils/utils.apiResponse");
+const apiResponse = require("../utils/api-response.util");
 const permissions = require("../middlewares/permission.middleware");
 
 /**

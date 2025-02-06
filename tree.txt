@@ -176,7 +176,7 @@ sit725-skipy
 │   ├── booking.test.js
 │   └── merchant.test.js
 └── utils
-    ├── utils.apiResponse.js
-    ├── utils.logger.js
-    ├── utils.others.js
-    └── utils.roles.js
+    ├── api-response.util.js
+    ├── auth.util.js
+    ├── auth.util.js
+    └── role.util.js

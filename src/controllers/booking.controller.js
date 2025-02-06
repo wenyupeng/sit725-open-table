@@ -1,8 +1,8 @@
 const { ObjectId } = require("mongodb");
 const moment = require("moment");
 const { MerchantsModel, MenuModel, BookingModel } = require("../models");
-const apiResponse = require("../utils/utils.apiResponse");
-const log = require("../utils/utils.logger");
+const apiResponse = require("../utils/api-response.util");
+const log = require("../utils/auth.util");
 const SocketIOService = require("../services/socket.service");
 
 const {
