@@ -12,7 +12,7 @@ npm i
 ```
 
 3. install mongodb;
-   3.1. if you install on your local machine, replace the url in `config/db.config.js`;
+   3.1. if you install on your local machine, replace the url in `config/env.config.js`;
    3.2. if you use the atlas mongodb service, update the `.env.development`, replace the uri with your username and password;
 4. start
 
@@ -26,10 +26,9 @@ npm run dev
 .
 |-- server.js           // project entry
 |-- package.json        // dependency management
-|-- .env.development    // development env
-|-- .env.production     // production env
+|-- .env.example        // example for env
 |-- config              // configuration
-|   |-- db.config.js
+|   |-- env.config.js
 |   |-- swagger.config.js
 |-- controllers         // control logic business
 |   |-- **.js

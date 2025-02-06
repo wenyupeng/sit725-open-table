@@ -1,3 +1,4 @@
+require("dotenv").config()
 const chalk = require("chalk");
 const express = require("express");
 const path = require("path");
@@ -7,15 +8,15 @@ const logger = require("morgan");
 const cors = require("cors");
 const mount = require("mount-routes");
 const { createServer } = require("http");
+const envConfig = require('./config/env.config')
+
+console.log('ENV CONFIG ', envConfig)
 
 const apiResponse = require("./utils/utils.apiResponse");
 const SocketIOService = require("./services/socket.service");
 
-const isDev = process.env.NODE_ENV === "development";
+const isDev = envConfig.nodeEnv === "development";
 
-require("dotenv").config({
-  path: isDev ? "./.env.development" : "./.env.production",
-});
 require("express-async-errors");
 require("./db/index");
 
@@ -108,15 +109,15 @@ app.use(function (err, req, res, next) {
   next(err);
 });
 
-httpServer.listen(process.env.PORT, () => {
+httpServer.listen(envConfig.app.port, () => {
   console.log(
     chalk.bold.green(
-      `project start http://${process.env.URL}:${process.env.PORT}/api`,
+      `project start http://${envConfig.app.host}:${envConfig.app.port}`,
     ),
   );
   console.log(
     chalk.bold.green(
-      `swagger address http://${process.env.URL}:${process.env.PORT}/docs`,
+      `swagger address http://${envConfig.app.host}:${envConfig.app.port}/docs`,
     ),
   );
 });

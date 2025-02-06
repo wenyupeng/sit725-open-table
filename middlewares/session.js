@@ -2,7 +2,7 @@ const session = require("express-session");
 const { createClient } = require("redis");
 const { RedisStore } = require("connect-redis");
 
-const config = require("../config/db.config");
+const config = require("../config/env.config");
 
 let redisStore;
 if (config.redisUrl) {

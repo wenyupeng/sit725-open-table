@@ -1,5 +1,6 @@
 const { Server } = require("socket.io");
 const jwt = require("jsonwebtoken");
+const envConfig = require("../config/env.config");
 
 class SocketIOService {
   constructor() {
@@ -49,7 +50,7 @@ class SocketIOService {
 
     // @TODO: check jwt in handshake layer, not here.
     try {
-      user = jwt.verify(token, process.env.SIGN_KEY);
+      user = jwt.verify(token, envConfig.signKey);
     } catch {
       socket.disconnect();
       return;
