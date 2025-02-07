@@ -1,5 +1,5 @@
 # Use the official Node.js image as the base image
-FROM node:alpine
+FROM node:22-alpine
 
 ENV NODE_ENV=development
 
@@ -23,4 +23,4 @@ RUN chown -R node /usr/src/app
 USER node
 
 # Command to run the application
-CMD ["node","app.js"]
+CMD ["npm", "start"]

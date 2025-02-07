@@ -1,21 +1,73 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  web:
-    image: sit725-skipy-image:latest
-    container_name: sit725-skipy
+  nginx:
+    image: nginx:latest
+    container_name: skipy_nginx
+    restart: always
+    depends_on:
+      - app
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d
+      - /etc/letsencrypt/live/skipy.site/fullchain.pem:/etc/nginx/certificates/fullchain.pem
+      - /etc/letsencrypt/live/skipy.site/privkey.pem:/etc/nginx/certificates/privkey.pem
+    networks:
+      - app_network
+
+  app:
+    image: muthidp/skipy:latest
+    container_name: skipy_app
+    build: 
+      context: .
+      dockerfile: Dockerfile 
+    restart: always
+    depends_on:
+      - mongo
+      - redis
+    environment:
+      NODE_ENV: production
+      APP_HOST: localhost
+      APP_PORT: 3000
+      MONGO_URL: mongodb://mongo:27017/skipy
+      REDIS_URL: redis://:redispassword@redis:6379
+      SIGN_KEY: skipySecretK3y
+      EMAIL_ACCOUNT: your-email@example.com
+      EMAIL_PASSWORD: your-email-password
     ports:
       - "3000:3000"
-    environment:
-      - NODE_ENV=development
-      - DB_USERNAME= admin
-      - DB_PWD= rUjWflR5hDq8WquA
-      - DB_PORT=27017
-      - DB_NAME=sit725-skipy
+    networks:
+      - app_network
+
+  mongo:
+    image: mongo:latest
+    container_name: skipy_mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    networks:
+      - app_network
     volumes:
-      - ./my-web-app:/app
-    command: ["npm", "app.js"]
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:latest
+    container_name: skipy_redis
+    restart: always
+    command: redis-server --requirepass redispassword
+    environment:
+      REDIS_PASSWORD: redispassword
+    networks:
+      - app_network
+    volumes:
+      - redis_data:/data
+
+networks:
+  app_network:
+    driver: bridge
 
 volumes:
-  my-web-app:
-    driver: local
+  mongo_data:
+  redis_data:
