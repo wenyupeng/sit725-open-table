@@ -392,11 +392,10 @@ exports.updateBooking = async (req, res) => {
  *
  * */
 exports.renderUpdateBooking = async (req, res) => {
-  const { bookingId } = req.params;
-  const user = req.session.user;
+  const { userId,bookingId } = req.params;
 
   // Find the existing active booking for the user
-  const booking = await BookingModel.findById(bookingId).populate("merchantId").where({ isActive: true, user: user._id });
+  const booking = await BookingModel.findOne({ _id: bookingId, userId: userId, isActive: true }).populate();
   
   const timeSlots = [
     "09:00",
@@ -409,20 +408,21 @@ exports.renderUpdateBooking = async (req, res) => {
     "16:00",
     "17:00",
   ];
+
   const merchant = await MerchantsModel.findById(booking.merchantId);
-  
+
   const menus = await MenuModel.find({
     merchantId: { $eq: booking.merchantId },
     isActive: { $eq: true },
   });
 
-  res.render("./bookings/edit-user-bookings", {
+  res.render("./bookings/edit-user-booking", {
     pageTitle: `Update user bookings`,
     merchant: merchant,
     booking: booking,
     serviceFee: booking.subTotal*0.1,
     menus: menus,
-    user: user,
+    user: req.session.user,
     timeSlots: timeSlots,
     guestOptions: Array.from({ length: 10 }, (_, i) => i + 1),
   });
