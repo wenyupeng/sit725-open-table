@@ -50,7 +50,7 @@
                         <div class="row">
                             <div class="col s12">
 
-                                <form id="bookingForm" action="/api/booking/<%= merchant._id %>" method="POST"  >
+                                <form id="bookingForm" onsubmit="return false;">
 
                                     <div class="col s6">
 
@@ -315,7 +315,7 @@
 
                                                                                                 <div
                                                                                                     class="skipy_mt_16">
-                                                                                                    <button class="waves-effect waves-light btn btn-large bg-gray col s12 skipy_h_48"><strong>Confirm
+                                                                                                    <button class="waves-effect waves-light btn btn-large bg-gray col s12 skipy_h_48" id="confirmBookingBtn"><strong>Confirm
                                                                                                             Reservation
                                                                                                             &
                                                                                                             Order</strong></button>

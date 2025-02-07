@@ -22,6 +22,6 @@ router.get("/", userService.userlist);
  */
 router.delete("/", userService.userDelete);
 
-// router.checkStatus('/status', authenticate, permissions, userService.checkStatus);
+router.get('/status', userService.checkStatus);
 
 module.exports = router;

@@ -1,4 +1,10 @@
+const Materialize = M;
+
 $(document).ready(function () {
+  if (!sessionStorage.getItem("user") && !sessionStorage.getItem("token")) {
+    return window.location.href = "/user/login";
+  }
+
   $(".datepicker").datepicker({
     format: "yyyy-mm-dd",
     minDate: new Date(),
@@ -44,5 +50,57 @@ $(document).ready(function () {
     $("#serviceFee").text((subtotal * 0.1).toFixed(2));
     $("#totalPriceWithGST").text((subtotal * 1.1).toFixed(2));
     $("#menuItemsInput").val(JSON.stringify(menuItems));
+  });
+
+  $('#confirmBookingBtn').click(function () {
+    var form = document.getElementById("bookingForm");
+    var formData = new FormData(form);
+
+    let bookingData = {};
+    for (var [key, value] of formData.entries()) {
+      bookingData[key] = value;
+    }
+
+    console.log("bookingData: "+bookingData);
+    let merchantId = bookingData.merchantId;
+    $.ajax({
+      url: `/api/booking/${merchantId}`,
+      type: "POST",
+      headers: {
+        Authorization: sessionStorage.getItem("token"),
+      },
+      contentType: "application/json",
+      data: JSON.stringify(bookingData),
+      success: (res) => {
+        let resData = JSON.parse(res);
+        if (resData.status == "1") {
+          Materialize.toast({
+            html: "Booking successfully",
+            classes: "rounded",
+          });
+          console.log(resData);
+          window.location.href = resData.data;
+        } else {
+          Materialize.toast({
+            html: `Error creating booking: ${resData.message}`,
+            classes: "rounded",
+          });
+        }
+      },
+      error: (xhr) => {
+        if (xhr.status == 400) {
+          let msg = JSON.parse(xhr.responseText).message;
+          Materialize.toast({
+            html: `Error creating booking: ${msg}`,
+            classes: "rounded",
+          });
+        } else {
+          Materialize.toast({
+            html: `Error creating booking: ${xhr.responseText}`,
+            classes: "rounded",
+          });
+        }
+      },
+    });
   });
 });

@@ -118,16 +118,13 @@
                                                                 %>
                                                         </td>
                                                         <td>
-                                                            <form
-                                                                action="/api/booking/<%= user._id %>/bookings/<%= booking._id %>/delete"
-                                                                method="POST" style="display: inline;">
-                                                                <input type="hidden" name="<%= booking._id %>"
-                                                                    value="<%= booking._id %>">
-                                                                <input type="hidden" name="<%= booking.merchantName %>"
-                                                                    value="<%= booking.merchantName %>">
+                                                            <form style="display: inline;" onsubmit="return false;" id="deleteForm">
+                                                                <input type="hidden" name="bookingId" value="<%= booking._id %>">
+                                                                <input type="hidden" name="userId" value="<%= user._id %>">
+                                                                <input type="hidden" name="merchantName" value="<%= booking.merchantName %>">
 
                                                                 <button class="waves-effect waves-light btn red"
-                                                                    type="submit"><i
+                                                                    type="submit" id="deleteBtn"><i
                                                                         class="material-icons prefix">delete</i></button>
                                                             </form>
                                                         </td>
@@ -168,5 +165,5 @@
             </main>
             <%- include('../partials/bottom-a') -%>
 
-                <script src="/../../js/booking.js"></script>
+                <script src="../../js/user-booking.js"></script>
                 <%- include('../partials/bottom-b') -%>
