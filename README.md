@@ -1,81 +1,95 @@
-# sit725-skipy
+# Skipy - The Ultimate Booking Management Solution
 
-deakin unit sit725 team project
 
-# How to run this project
+## 🚀 Overview
+Skipy is a **powerful and flexible booking management system** that allows businesses such as **restaurants, barbers, spas, and other service-based industries** to manage their reservations efficiently. 
 
-1. install nodejs;
-2. install package;
+Unlike other solutions that focus on a single industry, Skipy provides a **unified booking platform** where merchants can manage **bookings, availability, and menus** all in one place.
 
-```
-npm i
-```
+---
 
-3. install mongodb;
-   3.1. if you install on your local machine, replace the url in `config/env.config.js`;
-   3.2. if you use the atlas mongodb service, update the `.env.development`, replace the uri with your username and password;
-4. start
+## 🎯 Features
+- ✅ **Merchant Dashboard** – Manage bookings, menus, and availability settings dynamically.
+- ✅ **Role-Based Authorization** – Secures API access, ensuring only **merchant users** can modify data.
+- ✅ **Real-Time Notifications (Socket.IO)** – Instantly updates merchant users on new or modified bookings.
+- ✅ **Menu Management** – Merchants can **add, update, delete** menu items and upload images.
+- ✅ **Dynamic Availability Settings** – Merchants can configure **open hours** dynamically.
+- ✅ **Docker Support** – Deploy easily using **Docker & Docker Compose**.
+- ✅ **Scalable & Secure** – Built with **Node.js, Express, MongoDB, Redis, and Socket.IO**.
 
-```
-npm run dev
-```
+---
 
-# project structure
+## 📦 Getting Started
 
+### 🔹 Clone the Repository
 ```sh
-.
-|-- app.js           // project entry
-|-- package.json        // dependency management
-|-- .env.example        // example for env
-|-- config              // configuration
-|   |-- env.config.js
-|   |-- swagger.config.js
-|-- controllers         // control logic business
-|   |-- **.js
-|-- db
-|   |-- index.js        // db client
-|-- middlewares         // auth relevant logic
-|   |-- jwt.js
-|   |-- permissions.js
-|   |-- session.js
-|-- models              // data model
-|   |-- mapping
-|       |-- **.js
-|   |-- index.js        // combine data model with db client
-|-- public              // static resources
-|   |-- css
-|   |-- image
-|   |-- js
-|   |-- xxx
-|       |-- xxx.html
-|-- routes
-|   |-- api
-|       |-- xxx.js
-|-- utils
-|   |-- xxx.xxx.js
+git clone https://github.com/wenyupeng/sit725-skipy
+cd sit725-skipy
 ```
 
-# branch management
-
-The base branch is main. All developers should create their development branches based on main. After completing their development, developers should raise a merge request to merge their updates into the main branch. Do not forget to update local branch before push your commits.
-
-## commit msg
-
-follow the format
-[initial] title: description or [i] title: description
-for example:
-
+### 🔹 Setup Environment Variables
+Copy `.env.example` and rename it to `.env`:
+```sh
+cp .env.example .env
 ```
-[i] README update: add commit msg format
+Edit the `.env` file and update the values accordingly.
+
+### 🔹 Install Dependencies
+```sh
+npm install
 ```
 
-[develop] title: content
-
+### 🔹 Run the Application
+```sh
+npm start
 ```
-[d] add register: finish the register functionality
+
+### 🔹 Run with Docker
+If you prefer using Docker, build and start the container:
+```sh
+docker-compose up --build -d
 ```
 
-# reference
+---
 
-- Mongodb: https://www.mongodb.com/docs/drivers/node/current/
-- swagger: https://editor.swagger.io/
+## ⚙️ Environment Variables
+
+The following environment variables are required for Skipy:
+
+| Variable        | Description |
+|----------------|-------------|
+| `NODE_ENV`     | Set to `production` or `development` |
+| `APP_HOST`     | Application host (default: `localhost`) |
+| `APP_PORT`     | Application port (default: `3000`) |
+| `MONGO_URL`    | MongoDB connection string |
+| `REDIS_URL`    | Redis connection string |
+| `SIGN_KEY`     | Secret key for authentication |
+| `EMAIL_ACCOUNT` | Email for notifications |
+| `EMAIL_PASSWORD` | Email password |
+
+---
+
+
+## 🛠️ Built With
+- **Backend:** Node.js, Express.js, MongoDB, Redis, Socket.IO
+- **Frontend:** EJS, Materialize CSS, jQuery
+- **Authentication:** JWT-based role-based authorization
+- **Deployment:** Docker, Docker Compose
+
+---
+
+## ✅ Running Tests
+To run unit tests using **Mocha & Chai**, execute:
+```sh
+npm test
+```
+
+To run tests inside **Docker**, use:
+```sh
+docker-compose run app npm test
+```
+
+---
+
+## 📜 License
+Skipy is released under the **MIT License**. Feel free to use and modify it as needed.
