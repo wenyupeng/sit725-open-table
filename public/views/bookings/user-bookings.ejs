@@ -1,8 +1,8 @@
 <%- include('../partials/top-a') -%>
-    <link rel="stylesheet" href="/../../css/base/header.css">
-    <link rel="stylesheet" href="/../../css/base/footer.css">
-    <link rel="stylesheet" href="/../../css/booking.css">
-    <link rel="stylesheet" href="/../../css/base/components.css">
+    <link rel="stylesheet" href="/css/base/header.css">
+    <link rel="stylesheet" href="/css/base/footer.css">
+    <link rel="stylesheet" href="/css/booking.css">
+    <link rel="stylesheet" href="/css/base/components.css">
     <%- include('../partials/top-b') -%>
         <%- include('../partials/header') -%>
             <main>
@@ -131,7 +131,7 @@
                                                         </td>
                                                         
                                                         <td>
-                                                        <a class="waves-effect waves-light btn green" href="/api/booking/<%= user._id %>/bookings/<%= booking._id %>/edit"><i
+                                                        <a class="waves-effect waves-light btn green" href="/booking/<%= user._id %>/bookings/<%= booking._id %>/edit"><i
                                                                 class="material-icons prefix">edit</i></a>
                                                         </td>
                                                     </tr>
@@ -170,5 +170,5 @@
             </main>
             <%- include('../partials/bottom-a') -%>
 
-                <script src="../../js/user-booking.js"></script>
+                <script src="/js/user-booking.js"></script>
                 <%- include('../partials/bottom-b') -%>

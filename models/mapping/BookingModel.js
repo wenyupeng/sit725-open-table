@@ -5,12 +5,12 @@ const BookingSchema = new mongoose.Schema(
   {
     userId: {
       type: types.ObjectId,
-      ref: "User",
+      ref: "users",
       required: true,
     },
     merchantId: {
       type: types.ObjectId,
-      ref: "Merchants",
+      ref: "merchants",
       required: true,
     },
     menuItems: [

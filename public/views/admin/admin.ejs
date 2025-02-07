@@ -82,8 +82,8 @@
     <table class="highlight responsive-table z-depth-2" id="comments-table">
       <thead>
         <tr>
-          <th>User</th>
-          <th>Merchant</th>
+          <th>UserId</th>
+          <th>MerchantId</th>
           <th>Comment</th>
           <th>Review Sentiment</th>
         </tr>
@@ -134,22 +134,18 @@
 <%- include('../partials/bottom-a') -%>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+    const commentsData = { };
     // Sample data for comments with sentiment classification
-    const commentsData = {
-      "Good": [
-        { user: "John Doe", merchant: "The Grand Bistro", comment: "Excellent service!", sentiment: "Good" },
-        { user: "Alice Brown", merchant: "Tech Hub", comment: "Amazing experience, highly recommend!", sentiment: "Good" }
-      ],
-      "Fair": [
-        { user: "Jane Smith", merchant: "Sakura Fusion", comment: "Delicious food but a bit pricey.", sentiment: "Fair" },
-        { user: "Bob White", merchant: "Eco Shop", comment: "Good selection, but the staff was a bit slow.", sentiment: "Fair" }
-      ],
-      "Bad": [
-        { user: "Charlie Black", merchant: "Cafe Mocha", comment: "The service was really bad, waited too long.", sentiment: "Bad" },
-        { user: "Dana Blue", merchant: "Pet Care", comment: "My pet was not treated well, I would not recommend.", sentiment: "Bad" }
-      ]
-    };
-
+    $.ajax({
+      url: '/api/reviews/demo',
+      type: 'GET',
+      success: function(data) {
+        commentsData.Good = JSON.parse(data).data.goodReviews;
+        commentsData.Fair = JSON.parse(data).data.fairReviews;
+        commentsData.Bad = JSON.parse(data).data.badReviews;
+      }
+    });
+    console.log(commentsData);
     // Function to filter comments based on selected review sentiment
     function filterComments(sentiment) {
       const tableBody = document.querySelector('#comments-table tbody');
@@ -160,10 +156,10 @@
       filteredComments.forEach(comment => {
         const row = document.createElement('tr');
         row.innerHTML = `
-          <td>${comment.user}</td>
-          <td>${comment.merchant}</td>
-          <td>${comment.comment}</td>
-          <td>${comment.sentiment}</td>
+          <td>${comment.userId}</td>
+          <td>${comment.merchantId}</td>
+          <td>${comment.descriptions}</td>
+          <td>${sentiment}</td>
         `;
         tableBody.appendChild(row);
       });
