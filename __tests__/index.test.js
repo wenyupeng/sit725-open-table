@@ -1,5 +1,5 @@
 let request = require("supertest");
-let app = require("../server");
+let app = require("../src/app");
 let expect = require("chai").expect;
 
 describe("home page", () => {
