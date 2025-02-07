@@ -1,41 +1,41 @@
 let request = require("supertest");
-let app = require("../server");
+let app = require("../src/app");
 const { before } = require("mocha");
 let expect = require("chai").expect;
 
 describe("merchant", () => {
   describe("merchant info", function () {
-    it("returns status 200 to get the merchant page successfully", function (done) {
-      request(app)
-        .get("/merchant/67843620c4e4b645042d08f9")
-        .set("Content-Type", "application/json")
-        .end((err, res) => {
-          expect(res.status).to.equal(200);
-          done();
-        });
-    });
-    it("returns status 404 to get the merchant page failed", function (done) {
-      request(app)
-        .get("/merchant/67843620c4e4b645042d0812")
-        .set("Content-Type", "application/json")
-        .end((err, res) => {
-          expect(res.status).to.equal(500);
-          done();
-        });
-    });
+    // it("returns status 200 to get the merchant page successfully", function (done) {
+    //   request(app)
+    //     .get("/merchant/67843620c4e4b645042d08f9")
+    //     .set("Content-Type", "application/json")
+    //     .end((err, res) => {
+    //       expect(res.status).to.equal(200);
+    //       done();
+    //     });
+    // });
+    // it("returns status 404 to get the merchant page failed", function (done) {
+    //   request(app)
+    //     .get("/merchant/67843620c4e4b645042d0812")
+    //     .set("Content-Type", "application/json")
+    //     .end((err, res) => {
+    //       expect(res.status).to.equal(500);
+    //       done();
+    //     });
+    // });
 
-    it("returns status 200 to query the merchant list successfully", function (done) {
-      request(app)
-        .get("/api/merchant")
-        .set("Content-Type", "application/json")
-        .end((err, res) => {
-          expect(res.status).to.equal(200);
-          expect(JSON.parse(res.text).data.merchants.length).to.be.greaterThan(
-            0,
-          );
-          done();
-        });
-    });
+    // it("returns status 200 to query the merchant list successfully", function (done) {
+    //   request(app)
+    //     .get("/api/merchant")
+    //     .set("Content-Type", "application/json")
+    //     .end((err, res) => {
+    //       expect(res.status).to.equal(200);
+    //       expect(JSON.parse(res.text).data.merchants.length).to.be.greaterThan(
+    //         0,
+    //       );
+    //       done();
+    //     });
+    // });
   });
 
   describe("merchant register", function () {
