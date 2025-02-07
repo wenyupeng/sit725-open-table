@@ -285,63 +285,6 @@ const updateById = [
   },
 ];
 
-/**
- * get merchant list
- * @returns {Object} merchant list
- */
-const queryPaginationForPage = async (req) => {
-  let pageNo = req.query.pageNo || 1;
-  let pageSize = req.query.pageSize || 6;
-  let query = req.query.query || "";
-  let sort = req.query.sort || "createdAt";
-  let order = req.query.order || "desc";
-
-  let skip = (pageNo - 1) * pageSize;
-  let limit = pageSize;
-
-  let queryObj = {};
-  if (query) {
-    queryObj = {
-      $or: [
-        { name: { $regex: query, $options: "i" } },
-        { description: { $regex: query, $options: "i" } },
-        { category: { $regex: query, $options: "i" } },
-        { address: { $regex: query, $options: "i" } },
-        { phone: { $regex: query, $options: "i" } },
-        { email: { $regex: query, $options: "i" } },
-      ],
-      isDeleted: { $ne: true },
-    };
-  }
-
-  let sortObj = {};
-  if (sort) {
-    sortObj = { [sort]: order };
-  }
-  let result = {};
-
-  try {
-    let merchants = await MerchantsModel.find(queryObj)
-      .sort(sortObj)
-      .skip(skip)
-      .limit(limit);
-    let totalCount = await MerchantsModel.countDocuments(queryObj);
-    result = {
-      merchants: merchants,
-      totalCount: totalCount,
-      totalPages: Math.ceil(totalCount / pageSize),
-      pageNo: pageNo,
-      pageSize: pageSize,
-    };
-
-    return result;
-  } catch (err) {
-    console.log(err);
-    log.error(`queryPagination error, ${JSON.stringify(err)}`);
-    return result;
-  }
-};
-
 const queryPagination = async (req, res) => {
   let pageNo = req.query.pageNo || 1;
   let pageSize = req.query.pageSize || 6;
@@ -462,7 +405,6 @@ module.exports = {
   add,
   update,
   updateById,
-  queryPaginationForPage,
   queryPagination,
   updateOpenHours,
 
