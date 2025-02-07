@@ -1,20 +1,21 @@
 <%- include('../partials/top-a') -%>
 <link rel="stylesheet" href="../../css/admin.css">
+<link rel="stylesheet" href="../../css/base/header.css">
+<link rel="stylesheet" href="../../css/base/footer.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <%- include('../partials/top-b') -%>
-
 
 <main>
 
-    <nav class="blue">
+    <nav class="blue darken-3">
         <div class="nav-wrapper">
           <a href="#" class="brand-logo center">Admin Dashboard</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="/">Home</a></li><!--Link to home.ejs-->
+            <li><a href="/">Home</a></li>
             <li><a href="#stats">Platform Usage</a></li>
             <li><a href="#comments">Comments</a></li>
             <li><a href="#manage">Manage Users</a></li>
           </ul>
-          <!-- Mobile Menu (Hamburger) -->
           <ul id="mobile-menu" class="sidenav">
             <li><a href="#stats">Platform Usage</a></li>
             <li><a href="#comments">Comments</a></li>
@@ -31,28 +32,33 @@
     <h4 class="center-align">Platform Usage</h4>
     <div class="row">
       <div class="col s12 m4">
-        <div class="stats-card" style="background-image: url('/image/user.png');">
-          <div>
-            <span>1,205</span>
-            <p>Active Users This Week</p>
+        <div class="stats-card z-depth-3 hoverable">
+          <div class="stats-content">
+            <span class="stats-number">1,205</span>
+            <p class="stats-text">Active Users This Week</p>
           </div>
         </div>
       </div>
       <div class="col s12 m4">
-        <div class="stats-card" style="background-image: url('/image/merchant.jpg');">
-          <div>
-            <span>347</span>
-            <p>Merchant Reservations</p>
+        <div class="stats-card z-depth-3 hoverable">
+          <div class="stats-content">
+            <span class="stats-number">347</span>
+            <p class="stats-text">Merchant Reservations</p>
           </div>
         </div>
       </div>
       <div class="col s12 m4">
-        <div class="stats-card" style="background-image: url('/image/user2.jpg');">
-          <div>
-            <span>756</span>
-            <p>User Comments This Week</p>
+        <div class="stats-card z-depth-3 hoverable">
+          <div class="stats-content">
+            <span class="stats-number">756</span>
+            <p class="stats-text">User Comments This Week</p>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <canvas id="platformUsageChart"></canvas>
       </div>
     </div>
   </div>
@@ -60,12 +66,20 @@
   <!-- Trending Items Section -->
   <div class="container section trending-section" id="comments">
     <h4 class="center-align">Filter by Review Sentiment</h4>
-    <div class="trending-item" onclick="filterComments('Good')">Good Reviews</div>
-    <div class="trending-item" onclick="filterComments('Fair')">Fair Reviews</div>
-    <div class="trending-item" onclick="filterComments('Bad')">Bad Reviews</div>
+    <div class="row">
+      <div class="col s4">
+        <div class="trending-item z-depth-2 hoverable" onclick="filterComments('Good')">Good Reviews</div>
+      </div>
+      <div class="col s4">
+        <div class="trending-item z-depth-2 hoverable" onclick="filterComments('Fair')">Fair Reviews</div>
+      </div>
+      <div class="col s4">
+        <div class="trending-item z-depth-2 hoverable" onclick="filterComments('Bad')">Bad Reviews</div>
+      </div>
+    </div>
     
     <h4 class="center-align">User Comments</h4>
-    <table class="highlight responsive-table" id="comments-table">
+    <table class="highlight responsive-table z-depth-2" id="comments-table">
       <thead>
         <tr>
           <th>User</th>
@@ -85,28 +99,40 @@
     <h4 class="center-align">Manage Platform</h4>
     <div class="row">
       <!-- Block User -->
-      <div id="blockUserSection">
-        <h5>Block a User</h5>
-        <form id="blockUserForm">
-          <label for="userId">Enter User ID</label>
-          <input type="text" id="userId" placeholder="User ID" required />
-          <button type="submit" class="btn red darken-1">Block User</button>
-        </form>
+      <div class="col s12 m6" id="blockUserSection">
+        <div class="card z-depth-3 hoverable">
+          <div class="card-content">
+            <h5>Block a User</h5>
+            <form id="blockUserForm">
+              <div class="input-field">
+                <input type="text" id="userId" placeholder="User ID" required />
+                <label for="userId">Enter User ID</label>
+              </div>
+              <button type="submit" class="btn red darken-1 waves-effect waves-light">Block User</button>
+            </form>
+          </div>
+        </div>
       </div>
-      
   
       <!-- Manage Merchant -->
-      <div id="manageMerchantSection">
-        <h5>Manage a Merchant</h5>
-        <form id="manageMerchantForm">
-          <label for="merchantId">Enter Merchant ID</label>
-          <input type="text" id="merchantId" placeholder="Merchant ID" required />
-          <button type="submit" class="btn blue darken-2">Manage Merchant</button>
-        </form>
+      <div class="col s12 m6" id="manageMerchantSection">
+        <div class="card z-depth-3 hoverable">
+          <div class="card-content">
+            <h5>Manage a Merchant</h5>
+            <form id="manageMerchantForm">
+              <div class="input-field">
+                <input type="text" id="merchantId" placeholder="Merchant ID" required />
+                <label for="merchantId">Enter Merchant ID</label>
+              </div>
+              <button type="submit" class="btn blue darken-2 waves-effect waves-light">Manage Merchant</button>
+            </form>
+          </div>
+        </div>
       </div>
-      
+    </div>
 </main>
 <%- include('../partials/bottom-a') -%>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     // Sample data for comments with sentiment classification
     const commentsData = {
@@ -142,6 +168,28 @@
         tableBody.appendChild(row);
       });
     }
+
+    // Chart.js for platform usage
+    const ctx = document.getElementById('platformUsageChart').getContext('2d');
+    const platformUsageChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+          label: 'Active Users',
+          data: [1205, 1300, 1400, 1500, 1600, 1700, 1800],
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
   </script>
 <script src="../../js/admin.js"></script>
 
