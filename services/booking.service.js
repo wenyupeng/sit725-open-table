@@ -58,21 +58,12 @@ exports.handleCreateBooking = [
           return apiResponse.validationErrorWithData(res, "All fields are required.");
         }
 
-        const bookingAvailability = validateTimeslot(merchant, datepicker, time);
-        console.log("bookingAvailability:", bookingAvailability);
+        const bookingAvailability = validateTimeslot(merchant, datepicker, time);        
 
         // Get total number of guests already booked for this timeslot
         const existingBookings = await BookingModel.find({ merchantId, bookingDate: datepicker, isActive: true, bookingTime: time.trim() });
-
-        console.log("existingBookings", existingBookings);
-
-        const totalGuests = existingBookings.reduce((sum, booking) => sum + booking.numberOfGuests, 0);
-
-        console.log("totalGuests:", totalGuests);
-
-        console.log("totalGuests + parseInt(req.body.guests):", totalGuests + parseInt(req.body.guests));
-
-        console.log("result:", parseInt(bookingAvailability));
+        
+        const totalGuests = existingBookings.reduce((sum, booking) => sum + booking.numberOfGuests, 0);       
 
         // Check if adding the new booking would exceed available slots
         if (totalGuests + parseInt(req.body.guests) > parseInt(bookingAvailability)) {
@@ -91,8 +82,7 @@ exports.handleCreateBooking = [
           `${moment(req.body.datepicker).format("YYYY-MM-DD")} ${req.body.time}`,
           "YYYY-MM-DD HH:mm A"
         );
-
-        console.log("create new booking");
+      
         const booking = new BookingModel({
           userId: new ObjectId(req.session.user._id),
           merchantId: new ObjectId(merchantId),
@@ -313,4 +303,127 @@ const getUpcomingBookingsByMerchantId = async (merchantId) => {
     return booking;
   });
   return bookings;
+};
+
+// Update an active booking
+exports.updateBooking = async (req, res) => {
+  try {
+    const userId = req.session.user._id;
+    const { bookingId } = req.params;
+    const { datepicker, time, menuItems, guests } = req.body;  
+
+    // Validate inputs
+    if (!datepicker || !time || !guests ) {
+      return apiResponse.validationErrorWithData(res,"All fields are required.");         
+    }
+    // Convert the date string to a Date object
+    const bookingDate = new Date(datepicker);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set time to midnight for comparison
+
+    // Check if the booking date is in the past
+    if (bookingDate < today) {        
+        return apiResponse.validationErrorWithData(res,"Booking date cannot be in the past.");;
+    }
+    // Find the existing active booking for the user
+    const booking = await BookingModel.findById(bookingId).populate("merchantId menuItems").where({ isActive: true, user: user.id });
+
+    if (!booking) {
+      return apiResponse.notFoundResponse(res, "Booking not found");
+    }
+
+    if (booking.status === "Cancelled") {
+      return apiResponse.notFoundResponse(res, "Cancelled bookings cannot be edited.");
+    }
+
+    const bookingAvailability = validateTimeslot(merchant, datepicker, time);
+
+    // Get total number of guests already booked for this timeslot
+    const existingBookings = await BookingModel.find({ merchantId, bookingDate: datepicker, isActive: true, bookingTime: time.trim() });
+    const totalGuests = existingBookings.reduce((sum, booking) => sum + booking.numberOfGuests, 0);
+    // Check if adding the new booking would exceed available slots
+    if (totalGuests + parseInt(req.body.guests) > parseInt(bookingAvailability)) {
+      console.log(`Booking exceeds available slots. Only ${bookingAvailability - totalGuests} seats left.`);
+      return apiResponse.ErrorResponse(res, `Booking exceeds available slots. Only ${bookingAvailability - totalGuests} seats left.` );
+    }
+
+    const parsedMenuItems = JSON.parse(menuItems);
+
+    const subTotal = parsedMenuItems.reduce(
+      (sum, item) => sum + item.quantity * item.price,
+      0
+    );
+
+    const bookingDateTime = moment(
+      `${moment(req.body.datepicker).format("YYYY-MM-DD")} ${req.body.time}`,
+      "YYYY-MM-DD HH:mm A"
+    );
+
+    await BookingModel.findByIdAndUpdate(
+      bookingId,
+      { $push:
+        {
+          menuItems: parsedMenuItems,
+          subTotal: subTotal,
+          totalPriceWithGST: subTotal * 1.1,
+          bookingDate: req.body.datepicker,
+          bookingTime: req.body.time.trim(),
+          bookingDateTime: bookingDateTime,
+          specialRequest: req.body.specialRequest.replace(/[<>]/g, ""),
+          numberOfGuests: parseInt(req.body.guests, 10),
+      } 
+    },
+      {new: false}          
+    );
+
+    res.status(200).redirect(`/api/booking/${userId}/bookings`);
+
+  } catch (err) {
+    log.error(`Delete Bookings error, ${JSON.stringify(err)}`);
+    return apiResponse.ErrorResponse(
+      res,
+      "Error deleting booking" + err.message
+    );
+  }
+};
+
+/**
+ * [Features][Booking] Render update Booking
+ *
+ * */
+exports.renderUpdateBooking = async (req, res) => {
+  const { bookingId } = req.params;
+  const user = req.session.user;
+
+  // Find the existing active booking for the user
+  const booking = await BookingModel.findById(bookingId).populate("merchantId").where({ isActive: true, user: user._id });
+  
+  const timeSlots = [
+    "09:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00",
+  ];
+  const merchant = await MerchantsModel.findById(booking.merchantId);
+  
+  const menus = await MenuModel.find({
+    merchantId: { $eq: booking.merchantId },
+    isActive: { $eq: true },
+  });
+
+  res.render("./bookings/edit-user-bookings", {
+    pageTitle: `Update user bookings`,
+    merchant: merchant,
+    booking: booking,
+    serviceFee: booking.subTotal*0.1,
+    menus: menus,
+    user: user,
+    timeSlots: timeSlots,
+    guestOptions: Array.from({ length: 10 }, (_, i) => i + 1),
+  });
 };

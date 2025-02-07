@@ -47,4 +47,11 @@ router.post("/:merchantId", authenticate, permissions, bookingService.handleCrea
 
 router.post("/:userId/bookings/:bookingId/delete", authenticate, permissions, bookingService.deleteBooking);
 
+router.get(
+    "/:userId/bookings/:bookingId/edit",
+    authenticate,permissions,
+    bookingService.renderUpdateBooking,
+  );
+
+
 module.exports = router;

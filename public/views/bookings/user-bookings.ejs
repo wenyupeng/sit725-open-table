@@ -72,7 +72,8 @@
                                                     <th class="px-4 py-3 text-left">Time</th>
                                                     <th class="px-4 py-3 text-left">Order Date</th>
                                                     <th class="px-4 py-3 text-left">Total Amount</th>
-                                                    <th class="px-4 py-3 text-left">Cancel</th>                                                    
+                                                    <th class="px-4 py-3 text-left">Cancel</th> 
+                                                    <th class="px-4 py-3 text-left">Update</th>                                                   
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -129,6 +130,10 @@
                                                             </form>
                                                         </td>
                                                         
+                                                        <td>
+                                                        <a class="waves-effect waves-light btn green" href="/api/booking/<%= user._id %>/bookings/<%= booking._id %>/edit"><i
+                                                                class="material-icons prefix">edit</i></a>
+                                                        </td>
                                                     </tr>
                                                     <% }); %>
 
