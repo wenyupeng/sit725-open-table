@@ -53,4 +53,55 @@ $(document).ready(function() {
         $("#menuItemsInput").val(JSON.stringify(menuItems));
       });
     
+      $('#updateBookingBtn').click(function () {
+        var form = document.getElementById("bookingForm");
+        var formData = new FormData(form);
+    
+        let bookingData = {};
+        for (var [key, value] of formData.entries()) {
+          bookingData[key] = value;
+        }
+        
+        console.log("bookingData: "+bookingData);
+        let merchantId = bookingData.merchantId;
+        $.ajax({
+          url: `/api/booking/${merchantId}`,
+          type: "POST",
+          headers: {
+            Authorization: sessionStorage.getItem("token"),
+          },
+          contentType: "application/json",
+          data: JSON.stringify(bookingData),
+          success: (res) => {
+            let resData = JSON.parse(res);
+            if (resData.status == "1") {
+              Materialize.toast({
+                html: "Booking update successfully",
+                classes: "rounded",
+              });
+              console.log(resData);
+              window.location.href = resData.data;
+            } else {
+              Materialize.toast({
+                html: `Error updatingbooking: ${resData.message}`,
+                classes: "rounded",
+              });
+            }
+          },
+          error: (xhr) => {
+            if (xhr.status == 400) {
+              let msg = JSON.parse(xhr.responseText).message;
+              Materialize.toast({
+                html: `Error creating booking: ${msg}`,
+                classes: "rounded",
+              });
+            } else {
+              Materialize.toast({
+                html: `Error creating booking: ${xhr.responseText}`,
+                classes: "rounded",
+              });
+            }
+          },
+        });
+      });
 });
