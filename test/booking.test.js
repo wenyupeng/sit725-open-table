@@ -32,7 +32,7 @@ describe('booking routes', async function () {
 
   describe('create booking', function () {
     it('returns status 200 to create booking successfully', function (done) {
-      let booking = { "merchantId": "67843620c4e4b645042d08f9", "datepicker": "2025-02-07", "time": " 14:00", "guests": "5", "specialRequest": "", "menuItems": "[{\"id\":\"678b039afaf7bc04e32bbf33\",\"quantity\":1,\"price\":5,\"name\":\"Grant Burge\",\"img\":\"https://images.freeimages.com/images/large-previews/cc4/desserts-1323145.jpg\"}]" };
+      let booking = { "merchantId": "67843620c4e4b645042d08f9", "datepicker": "2025-02-07", "time": " 14:00", "guests": "1", "specialRequest": "spicy", "menuItems": "[{\"id\":\"678b039afaf7bc04e32bbf33\",\"quantity\":1,\"price\":5,\"name\":\"Grant Burge\",\"img\":\"https://images.freeimages.com/images/large-previews/cc4/desserts-1323145.jpg\"}]" };
 
       request(app)
         .post("/api/booking/67830cc1a9507d18e286c8fe")
@@ -40,13 +40,14 @@ describe('booking routes', async function () {
         .set("Authorization", token)
         .send(booking)
         .end((err, res) => {
+          if(err) console.error(err);
           expect(res.status).to.equal(200);
           done();
         });
     });
 
     it('returns status 404 to create booking with invalid data', function (done) {
-      let booking = { "merchantId": "67843620c4e4b645042d08f9", "datepicker": "2025-02-07", "time": " 14:00", "guests": "5", "specialRequest": "", "menuItems": "[{\"id\":\"678b039afaf7bc04e32bbf33\",\"quantity\":1,\"price\":5,\"name\":\"Grant Burge\",\"img\":\"https://images.freeimages.com/images/large-previews/cc4/desserts-1323145.jpg\"}]" };
+      let booking = { "merchantId": "67843620c4e4b645042d08f9", "datepicker": "2025-02-07", "time": " 14:00", "guests": "5", "specialRequest": "spicy", "menuItems": "[{\"id\":\"678b039afaf7bc04e32bbf33\",\"quantity\":1,\"price\":5,\"name\":\"Grant Burge\",\"img\":\"https://images.freeimages.com/images/large-previews/cc4/desserts-1323145.jpg\"}]" };
 
       request(app)
         .post("/api/booking/67830cc1a9507d18e286c8fe/list")

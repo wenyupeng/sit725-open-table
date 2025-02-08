@@ -48,6 +48,8 @@ const reviewService = require("../../services/review.service");
  *         description: Review added successfully
  */
 router.post("/", reviewService.addReview);
+
+router.get("/demo", reviewService.getReviewsForDemo);
 /**
  * @swagger
  * /api/reviews/{merchantId}:

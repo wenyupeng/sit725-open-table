@@ -28,6 +28,18 @@ exports.getReviews = async (req, res) => {
     }
 };
 
+exports.getReviewsForDemo = async (req, res) => {
+    let goodReviews = await ReviewsModel.find({ star: { $gte: 4 } }).limit(2);
+    let fairReviews = await ReviewsModel.find({ star: { $gte: 3 }, star: { $lte: 3.9} }).limit(2);
+    let badReviews = await ReviewsModel.find({ star: { $lte: 3 } }).limit(2);
+
+    return apiResponse.successResponseWithData(res, "Reviews found", {
+        goodReviews: goodReviews,
+        fairReviews : fairReviews,
+        badReviews: badReviews
+    });
+}
+
 exports.addReview = [
     authenticate,
     permissions,
